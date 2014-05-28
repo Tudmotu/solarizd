@@ -1,0 +1,103 @@
+@import "fonts";
+@import "measure";
+
+// Transition mixins
+.transition (@duration: 0.3s, @prop: all, @easing: linear, @delay: 0s) {
+    transition: @prop @duration @easing @delay;
+}
+
+// Flexbox
+.flexbox (@dir: row, @justify: center, @align: stretch, @align-content: stretch, @wrap: nowrap) {
+    display: flex;
+    align-items: @align;
+    align-content: @align-content;
+    justify-content: @justify;
+    flex-direction: @dir;
+    flex-wrap: @wrap;
+}
+.flexed (@flex: 1, @order: 0) {
+    flex: @flex @flex auto;
+    display:block;
+    position: relative;
+    /*order:@order;*/
+}
+.flexed (complex, @grow: 0, @shrink: 0, @base: auto, @order: 0) {
+    flex: @grow @shrink @base;
+    display:block;
+    position: relative;
+    /*order:@order;*/
+}
+
+// General
+.no_appearance () {
+    appearance:none;
+    outline:none;
+    list-style:none;
+}
+.text-outline (@color; @size: 1px) {
+    text-shadow:@size 0px @color,
+                -@size 0px @color,
+                0px @size @color,
+                0px -@size @color;
+}
+.inset-text (@color: #000; @light: #fff) {
+    color:transparent;
+    text-shadow:1px 1px 2px fadeout(@light, 50%), 0px 0px 0px @color;
+}
+.no-scrollbar {
+    &::-webkit-scrollbar, scrollbar {
+        display:none;
+    }
+}
+
+// Font-Awesome
+.icon(@content) {
+    content:"@{content}";
+    font-family:FontAwesome;
+}
+
+// UI
+.ui-hseparator(@color: @white) {
+    &:after {
+        content:"";
+        position:absolute;
+        bottom:0;
+        left:0; right:0;
+        width:100%;
+        height:@thin-border;
+        background:linear-gradient(to right, transparent, @color, transparent);
+
+        @media (max-device-width:960px) {
+            height:(2 * @thin-border);
+        }
+    }
+}
+.ui-list-item(@odd-bg:lighten(@base02, 25%);@even-bg:lighten(@base02, 15%)) {
+    color:@white;
+    .ui-hseparator;
+
+    &:active {
+        text-shadow:0px 0px @thick-border @white;
+    }
+    /*@even-border:darken(@odd-bg,10%);*/
+    /*@odd-border:darken(@even-bg,10%);*/
+    /*background:@even-border;*/
+    /*box-shadow:0px -1px 0px 0px @odd-bg,*/
+                /*0px -2px 0px 0px darken(@odd-border, 5%);*/
+    /*color:fadeout(@base2, 25%);*/
+    /*.text-outline(@base02);*/
+
+    /*&:nth-child(odd) {*/
+        /*background:@odd-border;*/
+    /*}*/
+
+    /*&:active {*/
+        /*color:@base00;*/
+        /*text-shadow:none;*/
+        /*background:@odd-bg;*/
+
+        /*&:nth-child(even) {*/
+            /*background:@even-bg;*/
+        /*}*/
+    /*}*/
+}

@@ -1,0 +1,8 @@
+<div class="volume-slider">
+    <button type="button" ng-click="toggleMute()" class="toggle-mute" ng-class="{muted: isMuted}">
+    </button>
+    <span class="slider">
+        <span class="thumb" ng-style="{ width: value + '%' }"></span>
+    </span>
+    <span>{{volume}}</span>
+</div>

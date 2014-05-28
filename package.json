@@ -1,0 +1,37 @@
+{
+  "name": "solarizd",
+  "version": "1.0.0",
+  "description": "An app for playlist composition and content recommendation",
+  "main": "src/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Tudmotu/solarizd.git"
+  },
+  "keywords": [
+    "stream",
+    "playlist",
+    "music"
+  ],
+  "author": "Tudmotu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Tudmotu/solarizd/issues"
+  },
+  "homepage": "https://github.com/Tudmotu/solarizd",
+  "devDependencies": {
+    "grunt": "^0.4.4",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-cssmin": "^0.9.0",
+    "grunt-contrib-less": "^0.11.0",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-contrib-requirejs": "^0.4.4",
+    "grunt-autoprefixer": "^0.7.3",
+    "grunt-contrib-copy": "^0.5.0",
+    "grunt-targethtml": "^0.2.6",
+    "grunt-contrib-connect": "^0.7.1"
+  }
+}

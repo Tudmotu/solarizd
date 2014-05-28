@@ -1,0 +1,6 @@
+<li ng-class="{'now-playing': nowPlaying, 'active': isActive, 'loading': isBuffering}">
+    <span class="mover"></span>
+    <span class="toggler" ng-click="togglePlay()"></span>
+    <span class="title" data-index="{{index}}">{{title}}</span>
+    <span class="remover" ng-click="removeItem()"></span>
+</li>

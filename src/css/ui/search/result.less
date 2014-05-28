@@ -1,0 +1,71 @@
+@import "../../vars/all";
+
+.mixin-search-result () {
+    cursor:pointer;
+    height:@row;
+    .flexbox;
+
+
+    .thumb {
+        width:(@column / 2);
+        height:100%;
+        padding:@thick-border;
+        .flexed(0);
+        .flexbox(@align:center);
+
+        img {
+            max-width:100%;
+            max-height:100%
+        }
+    }
+
+    .title-and-actions {
+        .flexed(1);
+        .flexbox(@align:center;);
+
+        .title {
+            padding:@row-pad @column-pad;
+            max-width:100%;
+            .flexed(1);
+            .flexbox(@justify:flex-start; @align:center);
+        }
+
+        .duration {
+            font-size:@medium-text;
+            padding:0 @column-pad;
+            .flexed(0);
+            .flexbox(@align:center;);
+        }
+
+        .actions {
+            overflow:hidden;
+            font-size:@normal-text;
+            .no_appearance;
+            .flexed(0);
+            .flexbox;
+            display:none; // for now
+
+            .list-item {
+                text-transform:uppercase;
+                padding:@thick-border;
+                font-weight:bold;
+                color:fadeout(@white,50%);
+                .flexed(1);
+                .flexbox(@align:flex-end);
+
+                &:before {
+                    padding-right:(@column-pad / 2);
+                }
+
+                &:hover {
+                    color:@black;
+                    text-shadow:none;
+                }
+
+                &.add { &:before { .icon(@fa-var-plus);  } } 
+                &.add-next { &:before { .icon(@fa-var-indent); } } 
+                &.play { &:before { .icon(@fa-var-play); } } 
+            }
+        }
+    }
+}

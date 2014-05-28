@@ -1,0 +1,10 @@
+<ul class="result-list">
+    <search-result-item ng-repeat="item in items" class="result-item"
+                        data-video-id="{{item.id}}"
+                        data-title="{{item.snippet.title}}"
+                        data-thumbnail="{{item.snippet.thumbnails.default.url}}"
+                        data-description="{{item.snippet.description}}"
+                        data-duration="{{item.duration}}"
+                        >
+    </search-result-item>
+</ul>

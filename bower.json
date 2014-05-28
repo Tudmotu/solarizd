@@ -1,0 +1,35 @@
+{
+  "name": "solarizd",
+  "version": "1.0.0",
+  "authors": [
+    "Yotam Bar-On <tudmotu@gmail.com>"
+  ],
+  "description": "An app for playlist composition and content recommendation",
+  "main": "src/index.html",
+  "keywords": [
+    "playlist",
+    "stream",
+    "music"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Tudmotu/solarizd",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "~2.1.11"
+  },
+  "devDependencies": {
+    "less.js": "~1.7.0",
+    "ng-resource": "~0.0.2",
+    "prefixfree": "*",
+    "requirejs-text": "~2.0.12",
+    "fontawesome": "~4.0.3",
+    "mobile-detect": "hgoebl/mobile-detect.js#~0.2.0"
+  }
+}

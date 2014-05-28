@@ -1,0 +1,222 @@
+@import "./css/lib/normalize";
+@import "./css/vars/all";
+@import "./css/ui/search/pane";
+@import "./css/ui/media-panel/panel";
+@import "./css/ui/playlist/pane";
+@import "./css/ui/topbar/bar";
+@import "./css/ui/footer/bar";
+@fa-font-path:"vendor/fontawesome/fonts";
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    position:relative;
+    user-select:none;
+    -webkit-overflow-scrolling: touch;
+}
+
+a {
+    text-decoration:none;
+    color:inherit;
+}
+
+menu {
+    list-style:none;
+}
+
+html, body {
+    position:absolute;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    font-family:Ubuntu, sans-serif;
+    font-size:@root-font-size;
+    z-index:0;
+    overflow:hidden;
+
+    @media (max-device-width: 1280px) {
+        font-size:(@root-font-size * 2);
+    }
+}
+
+body {
+    overflow:hidden;
+    background:url('css/assets/background.svg');
+    .transition(@prop:opacity);
+}
+
+body {
+    .flexbox(@dir:column);
+}
+
+#topbar {
+    .flexed(0);
+    .mixin-topbar;
+    .transition(@prop:transform; @easing:ease-in; @duration:.3s);
+
+    .loading & {
+        transform:translateY(-100%);
+    }
+}
+
+#main-view {
+    .flexed(1);
+    .flexbox(@justify:flex-start);
+}
+
+#search-pane {
+    width:(@column * 3);
+    max-width:50%;
+    .flexed(0);
+    .mixin-search-pane;
+    .transition(@prop:transform; @easing:ease-in; @duration:.3s;
+    @delay:.4s);
+
+    .loading & {
+        transform:translateX(-100%);
+    }
+}
+
+#media-panel {
+    width:(@column * 3);
+    .flexed(0);
+    .mixin-media-panel;
+
+    &:not(.active) {
+        transform:translateX(100%);
+    }
+}
+
+#playlist-pane {
+    .flexed(1);
+    .mixin-playlist-pane;
+    .transition(@easing:ease-out; @duration:.4s);
+
+    &:not(.active) {
+        opacity:0;
+        transform:translateX(-100%);
+    }
+}
+
+#footer {
+    .flexed(0);
+    .mixin-footer;
+    .transition(@prop:transform; @easing:ease-out; @duration:.3s);
+
+    .loading & {
+        transform:translateY(100%);
+    }
+}
+
+.panel-switcher {
+    background:fadeout(@black, 25%);
+    .flexbox;
+    display:none;
+    .transition(@easing:ease-in; @duration: .2s; @delay:.2s);
+    transition-property:transform, opacity;
+
+    .loading & {
+        transform:translateY(-100%);
+        opacity:0;
+    }
+
+    .item {
+        font-size:(@huge-text);
+        text-align:center;
+        padding:@row-pad @column-pad;
+        cursor:pointer;
+        color:@white;
+        /*border-top:solid @thick-border @base02;*/
+        .flexed(1);
+
+        .title {
+            .flexbox(@dir:column);
+            &.active {
+                background:fadeout(@white,75%);
+            }
+        }
+
+        .title:before {
+            padding:@row-pad @column-pad;
+        }
+
+        &[data-name="search"] .title:before {
+            .icon(@fa-var-search);
+        }
+
+        &[data-name="playlist"] .title:before {
+            .icon(@fa-var-bars);
+        }
+
+        &[data-name="media"] .title:before {
+            .icon(@fa-var-file-text-o);
+        }
+    }
+}
+
+@media (max-width: 1280px), (max-device-width: 1280px) {
+    .panel-switcher {
+        display:flex;
+    }
+    .media-mixin () {
+        width:100%;
+        max-width:100%;
+        position:absolute;
+        height:100%;
+        top:0;
+        left:0;
+        .transition;
+
+        &:not(.current-panel) {
+            /*transform:rotateZ(-25deg) translateX(-50%);*/
+            /*opacity:0;*/
+            transform:translateX(-100%) !important;
+        }
+    }
+    #search-pane {
+        z-index:2;
+        .media-mixin;
+    }
+    #playlist-pane {
+        z-index:1;
+        .media-mixin;
+    }
+    #media-panel {
+        z-index:0;
+        .media-mixin;
+        transform:translateX(0) !important;
+
+        &.cued {
+            z-index:10;
+            width:70%;
+            height:50%;
+            top:0; bottom:0;
+            left:0; right:0;
+            margin:auto;
+            /*background:@base00;*/
+            transform:none !important;
+
+            .toggle-video, .lyrics {
+                display:none;
+            }
+            .media {
+                height:100% !important;
+                max-height:100% !important;
+                border:solid (4 * @row-pad) fadeout(@white,50%);
+                border-radius:(2 * @row-pad);
+                .flexbox(@dir:column);
+
+                &:before {
+                    content:"If the video does not automatically play, please play it manually.";
+                    font-size:@large-text;
+                    font-weight:bold;
+                    text-shadow:1px 1px @black;
+                    color:@white;
+                    padding:@row-pad @column-pad;
+                    background:@base02;
+                }
+            }
+        }
+    }
+}

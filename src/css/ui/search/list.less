@@ -1,0 +1,17 @@
+@import "../../vars/all";
+@import "result";
+
+.mixin-search-list () {
+    box-shadow:inset 0px @thick-border @thick-border -@thick-border @black;
+    overflow-y:scroll;
+    .no-scrollbar;
+
+    @media (max-width:960px), (max-device-width:960px) {
+        box-shadow:none;
+    }
+
+    .result-item {
+        .ui-list-item;
+        .mixin-search-result;
+    }
+}

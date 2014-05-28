@@ -1,0 +1,22 @@
+<section class="playlist-pane" ng-class="{ 'active': !!items.length && ready }">
+    <playlist-progress></playlist-progress>
+    <section class="playlist-wrapper">
+        <ul class="indices">
+            <li class="index" ng-repeat="item in items track by $index"
+                ng-class="{active: $index === nowPlayingIdx}">{{$index + 1}}</li>
+        </ul>
+        <ul class="playlist">
+            <playlist-item ng-repeat="item in items track by $index" class="playlist-item"
+                                data-index="{{$index}}"
+                                data-video-id="{{item.id}}"
+                                data-title="{{item.snippet.title}}"
+                                data-thumbnail="{{item.snippet.thumbnails.default.url}}"
+                                data-description="{{item.snippet.description}}"
+                                data-now-playing="item.nowPlaying"
+                                data-autoplay="{{item.autoplay}}"
+                                >
+            </playlist-item>
+        </ul>
+    </section>
+    <playlist-related></playlist-related>
+</section>

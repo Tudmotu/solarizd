@@ -1,0 +1,22 @@
+@import 'colors';
+@import 'measure';
+
+@keyframes glow-red {
+    0% {
+        text-shadow:none;
+    }
+    50% {
+        text-shadow:0px 0px @thick-border @red;
+    }
+    100% {
+        text-shadow:none;
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(359deg); }
+}
+.spinner(@duration:2s; @easing:linear) {
+    animation: spin @duration infinite @easing;
+}

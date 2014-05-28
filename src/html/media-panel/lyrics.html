@@ -1,0 +1,10 @@
+<article class="lyrics" ng-if="lyrics">
+    <h2 class="title">
+        <span class="artist" ng-if="artist">{{artist}} - </span>
+        <span class="song-name">{{songName}}</span>
+        <a class="link" ng-if="lyrics" 
+            href="{{url}}" target="_blank" 
+            title="External link to lyrics"></a>
+    </h2>
+    <p class="lyrics-text" ng-bind-html="lyrics"></p>
+</article>

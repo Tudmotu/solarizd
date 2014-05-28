@@ -1,0 +1,89 @@
+@import "../../vars/all";
+
+.mixin-media-panel () {
+    .flexbox(@dir:column; @justify:flex-start);
+    .transition;
+
+    .media {
+        height:240px;
+        max-height:50%;
+        .flexed(0);
+        .flexbox;
+        .transition(@easing:ease-out);
+
+        iframe {
+            width:100%;
+            max-height:100%;
+        }
+    }
+    &:not(.show-video) .media {
+        height:0;
+        max-height:0;
+    }
+
+    .toggle-video {
+        color:@base1;
+        background:@base01;
+        text-align:center;
+        height:@row;
+        cursor:pointer;
+        .flexed(0);
+        .flexbox(@dir:column);
+        &:before {
+            content:"Hide Video";
+            font-size:@large-text;
+            font-weight:bold;
+        }
+    }
+
+    &:not(.show-video) .toggle-video:before {
+        content:"Show Video";
+    }
+
+    .lyrics {
+        padding:@row-pad @column-pad;
+        .flexed(1);
+        .flexbox(@dir:column);
+
+        .title {
+            color:@black;
+            padding:@row-pad 0;
+            border-bottom:solid @medium-border @red;
+            .flexed(0);
+
+            .song-name {
+                font-style:italic;
+            }
+
+            .link {
+                position:absolute;
+                top:0;
+                right:0;
+                height:100%;
+                .flexbox(@dir:column);
+                .inset-text(@base01, @base00);
+
+                &:before {
+                    .icon(@fa-var-external-link);
+                    .transition;
+                    margin-top:.5em; // magic number
+                }
+
+                &:active:before, &:hover:before {
+                    color:@base01;
+                }
+            }
+        }
+
+        .lyrics-text {
+            background:@base2;
+            padding:@row-pad @column-pad;
+            overflow:auto;
+            color:@base02;
+            box-shadow:3px 3px 5px fadeout(@black, 50%);
+            .flexed(1);
+            .no-scrollbar;
+        }
+    }
+}
+

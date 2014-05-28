@@ -1,0 +1,14 @@
+<li ng-click="emitAddLast()">
+    <div class="thumb">
+        <img ng-src="{{thumbnail}}" />
+    </div>
+    <section class="title-and-actions">
+        <h3 class="title">{{title}}</h3>
+        <span class="duration">{{duration | youtubeTime}}</span>
+        <menu type="toolbar" class="actions">
+            <li class="list-item add" ng-click="emitAddLast()">Add To Playlist</li>
+            <li class="list-item add-next" ng-click="emitAddNext()">Add Next</li>
+            <li class="list-item play" ng-click="emitAddNow()">Play Now</li>
+        </menu>
+    </section>
+</li>

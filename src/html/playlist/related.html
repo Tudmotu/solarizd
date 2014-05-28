@@ -1,0 +1,13 @@
+<ul class="related-videos" ng-class="{ active: !!items.length }">
+    <li ng-repeat="item in items track by $index" class="list-item" 
+    ng-click="addItem(item.id)">
+        <span class="content thumbnail">
+            <img ng-src="{{item.snippet.thumbnails.default.url}}" />
+        </span>
+        <span class="content meta">
+            <span class="content title">{{item.snippet.title}}</span>
+            <span class="content views">{{item.statistics.viewCount | commaNum}}</span>
+            <span class="content duration">{{item.duration | youtubeTime}}</span>
+        </span>
+    </li>
+</ul>

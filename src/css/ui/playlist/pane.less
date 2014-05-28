@@ -1,0 +1,192 @@
+@import "../../vars/all";
+@import "./related";
+
+.mixin-playlist-pane () {
+    background:fadeout(@black, 25%); // @base2;
+    overflow:auto;
+    border-right:solid @thick-border darken(@base00, 15%);
+    box-shadow:0px 0px @thick-border @black;
+    .flexbox(@dir:column);
+    .no-scrollbar;
+
+    @media (max-width:960px), (max-device-width:960px) {
+        box-shadow:none;
+    }
+
+    .list-item() {
+        padding:@row-pad @column-pad;
+        font-size:1.5em;
+        height:(@row * 0.667);
+        color:@white;
+    }
+
+    .playlist-progress {
+        width:100%;
+        height:@row;
+        background:transparent;
+        color:@base1;
+        font-size:@large-text;
+        .flexed(0);
+        .flexbox(@align:center);
+        .ui-hseparator;
+
+        .time, .progress {
+            padding:0 @column-pad;
+        }
+
+        .time {
+            .flexed(0);
+        }
+
+        .progress {
+            .flexed(1);
+        }
+    }
+
+    .playlist-wrapper {
+        overflow:auto;
+        /*box-shadow:0px 0px @row-pad @thin-border @black;*/
+        z-index:1;
+        /*border-bottom:solid @thick-border @red;*/
+        .flexed(1);
+        .flexbox(@justify:flex-end);
+        .no-scrollbar;
+    }
+
+    .indices {
+        width:(@column / 3);
+        list-style:none;
+        user-select:none;
+        .flexed(0);
+
+        .index {
+            text-align:center;
+            /*border-right:solid @thin-border @base02;*/
+            font-weight:bold;
+            /*.ui-list-item;*/
+            .list-item;
+            .flexbox(@align:center);
+
+            &.active {
+                border-left:solid (@column-pad * 3 / 4) @cyan;
+                padding-left:(@column-pad / 4);
+            }
+        }
+    }
+
+    .playlist {
+        .flexed(1);
+    }
+
+    .playlist-item {
+        cursor:pointer;
+        .ui-list-item;
+        .list-item;
+        .flexbox(@justify:flex-start; @align:center);
+
+        .action(@icon) {
+            user-select:none;
+            padding:0 @column-pad;
+            .flexed(0);
+            &:before {
+                .icon(@icon);
+            }
+        }
+
+        .title {
+            overflow:hidden;
+            white-space:nowrap;
+            text-overflow:ellipsis;
+            padding-left:@column-pad;
+            .flexed(1);
+        }
+
+        .mover {
+            .action(@fa-var-arrows);
+        }
+        .toggler {
+            color:@green;
+            .action(@fa-var-play);
+        }
+        &.loading .toggler {
+            color:@base00;
+            .spinner;
+
+            &:before {
+                .icon(@fa-var-spinner);
+            }
+        }
+        &.active.now-playing .toggler {
+            color:@red;
+            &:before {
+                .icon(@fa-var-pause);
+            }
+        }
+        &.now-playing .title {
+            color:#fff;
+                text-shadow:0px 0px @thick-border @red; 
+        }
+        &.active.now-playing .title {
+            animation:glow-red 2s infinite ease-out;
+        }
+        .remover {
+            .action(@fa-var-times);
+        }
+
+        &:before {
+            content:""; 
+            position:absolute;
+            top:0;
+            right:0;
+            width:(@thick-border * 3);
+            height:100%;
+            background:@blue;
+            .transition;
+        }
+
+        &:not(.playing-now):before {
+            height:0;
+        }
+    }
+
+    &.slide-to-bottom :not(.active):before,
+    &:not(.slide-to-bottom) .active:before {
+        bottom:0;
+        top:auto;
+    }
+
+    .related-videos {
+        height:(4 * @row);
+        box-shadow:inset 0px @thick-border @thick-border -@thick-border @black;
+        overflow-y:auto;
+        .mixin-related-videos;
+        .transition(@prop:height;@easing:ease-in);
+        .flexed(0);
+
+        @media only screen and (max-height:680px),
+            (max-width:960px), (max-device-width:960px) {
+            height:(2 * @row);
+            overflow-x:auto;
+            white-space:nowrap;
+            .no-scrollbar;
+        }
+
+        .list-item {
+            @media only screen and (max-width: 1700px) { width:33%; }
+            @media only screen and (max-width: 1600px),
+                (max-width: 1280px), (max-device-width: 1280px) { width:50%; }
+
+            @media only screen and (max-height:680px),
+                (max-width:960px), (max-device-width:960px) {
+                white-space:normal;
+                float:none;
+                display:inline-flex;
+                
+            }
+        }
+
+        &:not(.active) {
+            height:0;
+        }
+    }
+}
