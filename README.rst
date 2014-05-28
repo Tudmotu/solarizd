@@ -22,8 +22,7 @@ the relevant services used by this app, make sure to read `API Keys`_ section.
 Installation
 ---------------------
 
-Installation of *Solarizd* is simple and straightforward.
-| First, you need to clone this repository (or clone your own fork of the
+Installation of *Solarizd* is simple and straightforward. First, you need to clone this repository (or clone your own fork of the
 repository)::
 
     $ git clone https://github.com/Tudmotu/solarizd.git
