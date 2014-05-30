@@ -247,12 +247,20 @@ define([
                         that.playerInfo = e.info;
                     }
                     if (data.event === 'onStateChange' &&
-                    data.info === YT.PlayerState.PLAYING) {
+                        data.info === YT.PlayerState.PLAYING) {
                         playedOnce = true;
                     }
                     $rootScope.$broadcast('youtubePlayer:' + data.event, data);
                     //console.debug('MESSAGE', data);
                 });
+
+                // Display warning if leaving app while song is playing
+                window.onbeforeunload = function (e) {
+                    if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+                        e.preventDefault();
+                        return 'A song is currently playing.';
+                    }
+                };
             }
             onYouTubeIframeAPIReady = null;
         }
