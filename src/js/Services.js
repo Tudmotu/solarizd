@@ -349,11 +349,17 @@ define([
                 BUFFERING: 4
             },
             state       = st.INITIAL,
+            currentTime = 0,
             that        = this;
 
         this.playlist  = getSavedList();
         this.st        = st;
 
+        $rootScope.$on('youtubePlayer:infoDelivery', function (e, data) {
+            if (data.info.hasOwnProperty('currentTime')) {
+                currentTime = data.info.currentTime;
+            }
+        });
         $rootScope.$on('youtubePlayer:onStateChange', function (e, data) {
             if (data.info === YT.PlayerState.PLAYING) {
                 state = st.PLAYING;
@@ -376,6 +382,32 @@ define([
             $rootScope.$broadcast('playList:stateChanged', state);
         });
 
+        // Register keyboard sortcuts
+        document.addEventListener('keyup', function (e) {
+            var actions = {
+                // Space
+                32: function () {
+                    that.togglePlay();
+                },
+                // Left Arrow
+                37: function () {
+                    var seekTo = currentTime - 5 >= 0 ?
+                                    currentTime - 5 :
+                                    0;
+                    ytPlayer.seek(seekTo);
+                },
+                // Right Arrow
+                39: function () {
+                    ytPlayer.seek(currentTime + 5);
+                }
+            };
+
+            if (e.target.tagName.toLowerCase() !== 'input' &&
+                actions.hasOwnProperty(e.keyCode)) {
+                e.preventDefault();
+                actions[e.keyCode]();
+            }
+        });
 
         function getSavedList () {
             var list = [],
