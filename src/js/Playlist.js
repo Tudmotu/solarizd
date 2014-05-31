@@ -111,6 +111,13 @@ define([
                             'index': '@index'
                         },
                         controller: function ($scope, $element, $attrs, $transclude) {
+                            $rootScope.$on('youtubePlayer:infoDelivery', function (e, state) {
+                                $scope.nowPlaying = playList.getNowPlayingIdx() === $scope.getIndex();
+                                $scope.isActive = ($scope.nowPlaying &&
+                                    playList.getState() === playList.st.PLAYING);
+
+                                if (!$scope.$$phase) $scope.$digest();
+                            });
                             $rootScope.$on('playList:stateChanged', function (e, state) {
                                 $scope.nowPlaying = playList.getNowPlayingIdx() === $scope.getIndex();
                                 $scope.isActive = ($scope.nowPlaying && state === playList.st.PLAYING);

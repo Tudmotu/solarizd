@@ -288,6 +288,11 @@ define([
             player.stopVideo();
         };
 
+        this.clear = function () {
+            // FIXME: Doesn't seem to really work... =\
+            player.clearVideo();
+        };
+
         this.loadVideo = function (vid) {
             this.nowPlaying.id = vid;
             playerDfrd = $q.defer();
@@ -392,6 +397,8 @@ define([
         function setNowPlaying (idx) {
             if (typeof idx === 'number')
                 nowPlaying = idx;
+            else if (idx === null)
+                nowPlaying = null;
         }
 
         function addItem (idx, item) {
@@ -401,8 +408,18 @@ define([
 
         function removeItem (idx) {
             that.playlist.splice(idx,1);
+
+            // Fix the 'nowPlaying' var, if necessary
+            if (idx < nowPlaying) {
+                nowPlaying -= 1;
+            }
+
             saveList();
         }
+
+        this.getState = function () {
+            return state;
+        };
 
         this.getNowPlaying = function () {
             return that.playlist[nowPlaying];
@@ -432,13 +449,21 @@ define([
         };
 
         this.remove = function (idx) {
+            var fixPlay = (idx === nowPlaying),
+                isLast  = (idx === this.playlist.length - 1);
             removeItem(idx);
 
-            // Fix the 'nowPlaying' var
-            if (idx < nowPlaying)
-                nowPlaying -= 1;
-            else if (idx === nowPlaying)
-                this.stop();
+            if (fixPlay) {
+                if (isLast) {
+                    this.stop();
+                    this.clear();
+                }
+                else {
+                    this.play(idx, true);
+                }
+            }
+            else
+                this.play();
         };
 
         this.togglePlay = function () {
@@ -446,11 +471,11 @@ define([
             else this.play();
         };
 
-        this.play = function (index) {
+        this.play = function (index, force) {
             var idx = typeof index === 'number' ? index : (nowPlaying || 0),
                 videoId = this.playlist[idx].id;
 
-            if (idx === nowPlaying) {
+            if (idx === nowPlaying && !force) {
                 return ytPlayer.play();
             }
             else {
@@ -467,8 +492,13 @@ define([
         };
 
         this.stop = function () {
+            ytPlayer.seek(0);
             ytPlayer.stop();
             setNowPlaying(null);
+        };
+
+        this.clear = function () {
+            ytPlayer.clear();
         };
 
         this.next = function () {
