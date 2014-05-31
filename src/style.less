@@ -150,7 +150,7 @@ body {
         }
 
         &[data-name="media"] .title:before {
-            .icon(@fa-var-file-text-o);
+            .icon(@fa-var-film);
         }
     }
 }
@@ -189,33 +189,16 @@ body {
 
         &.cued {
             z-index:10;
-            width:70%;
-            height:50%;
-            top:0; bottom:0;
-            left:0; right:0;
-            margin:auto;
-            /*background:@base00;*/
             transform:none !important;
 
-            .toggle-video, .lyrics {
-                display:none;
-            }
-            .media {
-                height:100% !important;
-                max-height:100% !important;
-                border:solid (4 * @row-pad) fadeout(@white,50%);
-                border-radius:(2 * @row-pad);
-                .flexbox(@dir:column);
-
-                &:before {
-                    content:"If the video does not automatically play, please play it manually.";
-                    font-size:@large-text;
-                    font-weight:bold;
-                    text-shadow:1px 1px @black;
-                    color:@white;
-                    padding:@row-pad @column-pad;
-                    background:@base02;
-                }
+            &:before {
+                content:"If the video does not automatically play, please play it manually.";
+                font-size:@large-text;
+                font-weight:bold;
+                text-shadow:1px 1px @black;
+                color:@white;
+                padding:@row-pad @column-pad;
+                text-align:center;
             }
         }
     }

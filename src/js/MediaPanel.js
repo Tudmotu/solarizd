@@ -36,7 +36,7 @@ define([
 
                 return definitions;
             }])
-            .directive('lyricsPane', ['$sce', 'playList', 'lyricsAPI', function ($sce, playList, lyricsAPI) {
+            /**.directive('lyricsPane', ['$sce', 'playList', 'lyricsAPI', function ($sce, playList, lyricsAPI) {
                 var definitions = {
                         restrict: 'E',
                         template: LyricsTemplate,
@@ -68,7 +68,7 @@ define([
                     };
 
                 return definitions;
-            }])
+            }])*/
             .directive('mediaPlayer', ['$sce', 'youtubeResource', 'youtubePlayer', 'playList', function ($sce, ytResource, ytPlayer, playList) {
                 var definitions = {
                         restrict: 'E',
