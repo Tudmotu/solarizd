@@ -80,15 +80,19 @@ module.exports = function (grunt) {
         connect: {
             src: {
                 options: {
+                    hostname: '*',
                     port: 9000,
                     base: 'src',
+                    debug: true,
                     keepalive: true
                 }
             },
             target: {
                 options: {
+                    hostname: '*',
                     port: 9000,
                     base: 'target',
+                    debug: true,
                     keepalive: true
                 }
             }
