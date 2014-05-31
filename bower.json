@@ -30,6 +30,8 @@
     "prefixfree": "*",
     "requirejs-text": "~2.0.12",
     "fontawesome": "~4.0.3",
-    "mobile-detect": "hgoebl/mobile-detect.js#~0.2.0"
+    "mobile-detect": "hgoebl/mobile-detect.js#~0.2.0",
+    "angular-ui-sortable": "~0.12.6",
+    "jquery-ui-touch-punch": "furf/jquery-ui-touch-punch"
   }
 }

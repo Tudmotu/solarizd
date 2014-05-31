@@ -421,6 +421,14 @@ define([
             return state;
         };
 
+        this.save = function () {
+            saveList();
+        };
+
+        this.setNowPlaying = function (idx) {
+            return setNowPlaying(idx);
+        };
+
         this.getNowPlaying = function () {
             return that.playlist[nowPlaying];
         };

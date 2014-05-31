@@ -5,7 +5,8 @@
             <li class="index" ng-repeat="item in items track by $index"
                 ng-class="{active: $index === nowPlayingIdx}">{{$index + 1}}</li>
         </ul>
-        <ul class="playlist">
+        <ul class="playlist" ui-sortable="sortableOpts"
+                    ui-sortable-on-change="onSortChange" ng-model="items">
             <playlist-item ng-repeat="item in items track by $index" class="playlist-item"
                                 data-index="{{$index}}"
                                 data-video-id="{{item.id}}"

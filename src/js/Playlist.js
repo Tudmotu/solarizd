@@ -3,6 +3,7 @@ define([
     'text!template_dir/playlist/progress.html',
     'text!template_dir/playlist/item.html',
     'text!template_dir/playlist/related.html',
+    'ui-sortable',
     './Services',
     'angular'
 ], function (PaneTemplate, ProgressTemplate, ItemTemplate, RelatedTemplate) {
@@ -24,12 +25,12 @@ define([
         canvasY = event.pageY - totalOffsetY;
 
         return {
-            x: canvasX, 
+            x: canvasX,
             y: canvasY
         };
     }
 
-    return angular.module('ui.playlist', ['services', 'filters'])
+    return angular.module('ui.playlist', ['services', 'filters', 'ui.sortable'])
             .directive('playlistPane', ['$rootScope', '$http', 'youtubeAPI', 'playList', function ($rootScope, $http, youtubeAPI, playList) {
                 var definitions = {
                         restrict: 'E',
@@ -38,6 +39,7 @@ define([
                         scope: true,
                         link: function ($scope, $element, $attrs) {
                             var media = window.matchMedia('(max-width:960px),(max-device-width:960px)');
+
                             if (media.matches) {
                                 $scope.ready = true;
                             }
@@ -56,6 +58,32 @@ define([
                                 $scope.nowPlayingIdx = playList.getNowPlayingIdx();
                                 if (!$scope.$$phase) $scope.$digest();
                             });
+
+                            $scope.sortableOpts = {
+                                axis: 'y',
+                                stop: function (e, ui) {
+                                    // Fix the playlist's currently playing track
+                                    var fromIdx     = ui.item.sortable.index,
+                                        toIdx       = ui.item.sortable.dropindex,
+                                        nowPlaying  = playList.getNowPlayingIdx();
+
+                                    if (typeof nowPlaying === 'number') {
+                                        if (fromIdx < nowPlaying &&
+                                            toIdx >= nowPlaying) {
+                                            playList.setNowPlaying(nowPlaying - 1);
+                                        }
+                                        else if (fromIdx > nowPlaying &&
+                                            toIdx <= nowPlaying) {
+                                            playList.setNowPlaying(nowPlaying + 1);
+                                        }
+                                        else if (fromIdx === nowPlaying) {
+                                            playList.setNowPlaying(toIdx);
+                                        }
+                                    }
+
+                                    playList.save();
+                                }
+                            };
                         },
                         controller: function ($scope, $element, $attrs, $transclude) {
                             $scope.items = playList.playlist;
@@ -125,14 +153,14 @@ define([
                                     playList.st.PLAYING,
                                     playList.st.PAUSING,
                                     playList.st.STOPPED
-                                ].indexOf(state) < 0; 
+                                ].indexOf(state) < 0;
 
                                 if (!$scope.$$phase) $scope.$digest();
                             });
 
                             $scope.getIndex = function () {
                                 return parseInt($scope.index, 10);
-                            }; 
+                            };
 
                             $scope.pause = function () {
                                 playList.pause();
@@ -161,7 +189,6 @@ define([
                         },
                         controller: function ($scope, $element, $attrs, $transclude) {
                             $scope.addItem = function (videoId) {
-                                console.debug(videoId);
                                 playList.addLast(videoId);
                             };
                             $scope.$watch(playList.getNowPlaying, function (item) {
