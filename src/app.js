@@ -33,6 +33,7 @@ requirejs.config({
 
 requirejs([
     'modules/Application',
+    'vendor/mobile-detect/mobile-detect',
     'angular'
 ], function (Appliction) {
     function bootstrapAngular () {
@@ -40,6 +41,12 @@ requirejs([
             contentElem = document.getElementById('content');
         
         angular.bootstrap(htmlElem, ['Application']);
+    }
+
+    // Hack preventing virtual keyboard from screwing styling
+    var md = new MobileDetect(window.navigator.userAgent);
+    if (md.mobile() !== null) {
+        document.body.style.minHeight = document.body.clientHeight + 'px';
     }
 
     if (document.readyState === 'complete') {

@@ -72,18 +72,21 @@ define([
                         controller: function ($scope, $element, $attrs, $transclude) {
                             var lastSearch = null,
                                 search = function () {
+                                    $scope.$parent.searching = true;
                                     youtubeAPI.search($scope.query)
-                                    .then(function (items) {
+                                        .then(function (items) {
                                         $scope.$emit('items-fetched', items);
+                                        $scope.$parent.searching = false;
                                     });
                                 };
+
                             $scope.query = '';
                             $scope.search = function () {
                                 if (lastSearch) clearTimeout(lastSearch);
                                 lastSearch = setTimeout(function () {
                                     search();
                                     lastSearch = null;
-                                }, 160);
+                                }, 640);
                             };
                         },
                         link: function ($scope, $element, $attrs) {
