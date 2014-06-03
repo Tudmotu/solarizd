@@ -155,6 +155,11 @@ define([
                                     playList.st.STOPPED
                                 ].indexOf(state) < 0;
 
+                                // Scroll element into view if it is currently
+                                // playing
+                                if ($scope.getIndex() === playList.getNowPlayingIdx())
+                                    $element[0].scrollIntoView();
+
                                 if (!$scope.$$phase) $scope.$digest();
                             });
 
