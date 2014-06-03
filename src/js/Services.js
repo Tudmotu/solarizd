@@ -476,7 +476,9 @@ define([
                 var item = resp.data.items[0];
 
                 addItem(idx, item);
-                if (that.playlist.length === 1) that.play();
+                if (that.playlist.length === 1 || 
+                    (idx === that.playlist.length - 1 && state === st.STOPPED))
+                        that.play(idx);
             });
         };
 
