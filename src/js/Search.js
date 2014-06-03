@@ -88,6 +88,13 @@ define([
                                     lastSearch = null;
                                 }, 640);
                             };
+
+                            // Hack so virtual kb will disappear when hitting 'go' on search
+                            $element.on('keyup', function (e) {
+                                if (e.keyCode === 13) {
+                                    e.target.blur();
+                                }
+                            });
                         },
                         link: function ($scope, $element, $attrs) {
                             $scope.$watch('query', function (value) {
