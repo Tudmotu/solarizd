@@ -96,6 +96,28 @@ module.exports = function (grunt) {
                     keepalive: true
                 }
             }
+        },
+        manifest: {
+            build: {
+                options: {
+                    basePath     : 'target/',
+                    cache        : [
+                        'vendor/fontawesome/fonts/fontawesome-webfont.eot?v=',
+                        'vendor/fontawesome/fonts/fontawesome-webfont.svg?v=',
+                        'vendor/fontawesome/fonts/fontawesome-webfont.ttf?v=',
+                        'vendor/fontawesome/fonts/fontawesome-webfont.woff?v='
+                    ],
+                    exclude      : ['manifest.appcache'],
+                    preferOnline : true,
+                    verbose      : false,
+                    timestamp    : false,
+                    hash         : true
+                },
+                src: [
+                    '**/*'
+                ],
+                dest: 'target/manifest.appcache'
+            }
         }
     });
 
@@ -108,7 +130,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-manifest-ext');
 
     grunt.registerTask('build', [
         'copy:build',
@@ -117,6 +139,7 @@ module.exports = function (grunt) {
         'autoprefixer:build',
         'cssmin:build',
         'requirejs:build',
-        'clean:build'
+        'clean:build',
+        'manifest:build'
     ]);
 };
