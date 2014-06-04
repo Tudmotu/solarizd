@@ -473,12 +473,22 @@ define([
             var that = this;
 
             ytAPI.getVideo(videoId).then(function (resp) {
-                var item = resp.data.items[0];
+                var item = resp.data.items[0],
+                    thumb = item.snippet.thumbnails.default.url,
+                    title = item.snippet.title,
+                    trimmed = title.length >= 30 ? title.substr(0,27) + '...' :
+                                title,
+                    text = 'Track "' + trimmed + '" has been added to playlist';
 
                 addItem(idx, item);
                 if (that.playlist.length === 1 || 
                     (idx === that.playlist.length - 1 && state === st.STOPPED))
                         that.play(idx);
+
+                $rootScope.$broadcast('notify', {
+                    thumb: thumb,
+                    text: text
+                });
             });
         };
 

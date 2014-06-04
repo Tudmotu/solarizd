@@ -2,8 +2,9 @@ define([
     'text!template_dir/topbar/bar.html',
     'text!template_dir/topbar/controls.html',
     'text!template_dir/topbar/volume.html',
+    'text!template_dir/topbar/notification.html',
     'angular'
-], function (TopbarTemplate, ControlsTemplate, VolumeTemplate) {
+], function (TopbarTemplate, ControlsTemplate, VolumeTemplate, NotificationTemplate) {
     // duplication of code from Playlist.js with minor change
     function mouseCoords (event, targetElement) {
         var totalOffsetX = 0,
@@ -154,6 +155,28 @@ define([
                     };
 
                 return definitions;
+            }])
+            .directive('notifPopup', ['$rootScope', function ($rootScope) {
+                return {
+                    restrict: 'E',
+                    template: NotificationTemplate,
+                    replace: true,
+                    scope: true,
+                    controller: function ($scope, $element, $attrs, $transclude) {
+                        $rootScope.$on('notify', function (e, data) {
+                            $scope.isActive = true;
+                            $scope.thumb = data.thumb;
+                            $scope.text = data.text;
+
+                            setTimeout(function (e) {
+                                $scope.isActive = false;
+                                if (!$scope.$$phase) $scope.$digest();
+                            }, 3000);
+
+                            if (!$scope.$$phase) $scope.$digest();
+                        });
+                    }
+                };
             }]);
 });
 
