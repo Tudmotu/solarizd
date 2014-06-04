@@ -105,7 +105,8 @@ module.exports = function (grunt) {
                         'vendor/fontawesome/fonts/fontawesome-webfont.eot?v=',
                         'vendor/fontawesome/fonts/fontawesome-webfont.svg?v=',
                         'vendor/fontawesome/fonts/fontawesome-webfont.ttf?v=',
-                        'vendor/fontawesome/fonts/fontawesome-webfont.woff?v='
+                        'vendor/fontawesome/fonts/fontawesome-webfont.woff?v=',
+                        'apikeys.json'
                     ],
                     exclude      : ['manifest.appcache'],
                     preferOnline : true,
