@@ -15,8 +15,8 @@
 
     .list-item() {
         padding:@row-pad @column-pad;
-        font-size:1.5em;
-        height:(@row * 0.667);
+        font-size:@large-text;
+        height:(@row);
         color:@white;
     }
 
@@ -84,9 +84,14 @@
         .list-item;
         .flexbox(@justify:flex-start; @align:center);
 
+        &.ui-sortable-helper {
+            background:fadeout(@white,75%);
+        }
+
         .action(@icon) {
             user-select:none;
             padding:0 @column-pad;
+            font-size:(1 * @huge-text);
             .flexed(0);
             &:before {
                 .icon(@icon);
@@ -98,10 +103,12 @@
             white-space:nowrap;
             text-overflow:ellipsis;
             padding-left:@column-pad;
+            font-size:@large-text;
             .flexed(1);
         }
 
         .mover {
+            font-size:(1.5 * @huge-text);
             .action(@fa-var-arrows);
         }
         .toggler {

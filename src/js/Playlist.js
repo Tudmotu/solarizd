@@ -61,6 +61,7 @@ define([
 
                             $scope.sortableOpts = {
                                 axis: 'y',
+                                handle: '.mover',
                                 stop: function (e, ui) {
                                     // Fix the playlist's currently playing track
                                     var fromIdx     = ui.item.sortable.index,
