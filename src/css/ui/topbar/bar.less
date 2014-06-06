@@ -224,6 +224,7 @@
     left:(2 * @column-pad);
     right:(2 * @column-pad);
     margin:auto;
+    max-width:50%;
     /*height:(2 * @row);*/
     background:@base02;
     border-radius:@medium-border;
@@ -234,6 +235,10 @@
     overflow:hidden;
     z-index:9999;
     .flexbox(@align:center);
+
+    @media (max-width:960px), (max-device-width:960px) {
+        max-width:100%;
+    }
 
     &:not(.active) {
         /*display:none;*/
