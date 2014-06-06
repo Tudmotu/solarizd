@@ -38,7 +38,7 @@ define([
                         replace: true,
                         scope: true,
                         link: function ($scope, $element, $attrs) {
-                            var media = window.matchMedia('(max-width:960px),(max-device-width:960px)');
+                            var media = window.matchMedia('(max-width:1280px),(max-device-width:1280px)');
 
                             if (media.matches) {
                                 $scope.ready = true;
