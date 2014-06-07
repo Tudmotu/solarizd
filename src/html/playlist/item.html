@@ -7,7 +7,15 @@
         <span class="remover" ng-click="removeItem()"></span>
         <span class="mover"></span>
     </div>
-    <div class="actions-bar bar">
-    
-    </div>
+    <menu type="toolbar" class="actions-bar bar">
+        <li class="action" ng-click="playNext()">
+            <span class="text">Play Next</span>
+        </li>
+        <li class="action" ng-click="stopHere()">
+            <span class="text">Stop Here</span>
+        </li>
+        <li class="action" ng-click="repeatTrack()">
+            <span class="text">Repeat</span>
+        </li>
+    </menu>
 </li>

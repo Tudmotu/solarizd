@@ -83,6 +83,7 @@
     }
 
     .playlist-item {
+        overflow:hidden;
         cursor:pointer;
         .ui-list-item;
         .list-item;
@@ -100,19 +101,45 @@
 
         .bar {
             height:(@row - 2 * @row-pad);
-            max-height:(@row - 2 * @row-pad);
             .flexed(0);
             .flexbox(@justify:flex-start; @align:center);
         }
 
         .actions-bar {
-            margin-top:(2 * @row-pad);
-            .transition(@prop:height; @easing:ease-in; @duration:.2s);
-        }
+            background:fadeout(@white,90%);
+            border-radius:@medium-border;
+            margin-top:(@row-pad);
+            font-size:@large-text;
+            .flexbox(@justify:flex-start);
 
-        &:not(.actions-open) .actions-bar {
-            max-height:0;
-            /*transition-timing-function:ease-out;*/
+            .action {
+                padding:@row-pad @column-pad;
+                margin:@row-pad @column-pad;
+                /*background:linear-gradient(fadeout(@white,50%),*/
+                            /*fadeout(@white,75%));*/
+                background:fadeout(@white,50%);
+                border-radius:@medium-border;
+                .flexed(0);
+                .flexbox(@align:center);
+
+                .text {
+                    .flexbox(@align:center);
+                }
+                .text:before {
+                    padding-right:@column-pad;
+                    color:darken(desaturate(@white,100%), 25%);
+                    font-size:.75em;
+                    .text-outline(fadeout(@white,50%));
+                    .icon(@fa-var-circle);
+                }
+
+                &.active {
+                    background:fadeout(@white,50%);
+                    .text:before{
+                        color:@green;
+                    }
+                }
+            }
         }
 
         .action(@icon) {
