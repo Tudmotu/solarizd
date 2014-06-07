@@ -613,6 +613,8 @@ define([
             });
             if (typeof idx === 'number')
                 that.playlist[idx].playNext = true;
+
+            saveList();
         };
 
         this.stopAt = function (idx) {
@@ -622,6 +624,8 @@ define([
             });
             if (typeof idx === 'number')
                 that.playlist[idx].stopHere = true;
+
+            saveList();
         };
 
         this.repeatTrack = function (idx) {
@@ -631,6 +635,8 @@ define([
             });
             if (typeof idx === 'number')
                 that.playlist[idx].repeatTrack = true;
+
+            saveList();
         };
     }]);
 });
