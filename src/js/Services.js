@@ -361,7 +361,9 @@ define([
             }
         });
         $rootScope.$on('youtubePlayer:onStateChange', function (e, data) {
-            var currentItem;
+            var currentItem,
+                stopAt,
+                playNext;
             if (data.info === YT.PlayerState.PLAYING) {
                 state = st.PLAYING;
                 setNowPlaying(nowPlaying);
@@ -373,9 +375,21 @@ define([
             if (data.info === YT.PlayerState.ENDED) {
                 state = st.STOPPED;
                 currentItem = that.getNowPlaying();
+                stopAt = getStopAt();
+                playNext = getPlayNext();
 
                 if (currentItem.repeatTrack)
                     that.play(nowPlaying);
+
+                else if (typeof playNext === 'number') {
+                    that.play(playNext);
+                    that.playlist[playNext].playNext = false;
+                }
+
+                else if (stopAt === nowPlaying) {
+                    setNowPlaying(null);
+                    currentItem.stopHere = false;
+                }
 
                 else if (that.hasNext())
                     that.next();
@@ -454,6 +468,24 @@ define([
             }
 
             saveList();
+        }
+
+        function getPlayNext () {
+            var idx;
+            that.playlist.forEach(function (item, i) {
+                if (item.playNext)
+                    idx = i;
+            });
+            return idx;
+        }
+
+        function getStopAt () {
+            var idx;
+            that.playlist.forEach(function (item, i) {
+                if (item.stopHere)
+                    idx = i;
+            });
+            return idx;
         }
 
         this.getState = function () {
