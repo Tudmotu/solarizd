@@ -361,6 +361,7 @@ define([
             }
         });
         $rootScope.$on('youtubePlayer:onStateChange', function (e, data) {
+            var currentItem;
             if (data.info === YT.PlayerState.PLAYING) {
                 state = st.PLAYING;
                 setNowPlaying(nowPlaying);
@@ -371,8 +372,14 @@ define([
             }
             if (data.info === YT.PlayerState.ENDED) {
                 state = st.STOPPED;
-                if (that.hasNext())
+                currentItem = that.getNowPlaying();
+
+                if (currentItem.repeatTrack)
+                    that.play(nowPlaying);
+
+                else if (that.hasNext())
                     that.next();
+
                 else
                     setNowPlaying(null);
             }
