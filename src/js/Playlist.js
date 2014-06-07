@@ -59,6 +59,13 @@ define([
                                 if (!$scope.$$phase) $scope.$digest();
                             });
 
+                            $rootScope.$on('itemActionsToggled', function (e, idx) {
+                                $scope.currentlyOpenIdx = $scope.currentlyOpenIdx === idx ?
+                                                            null :
+                                                            idx;
+                                //if (!$scope.$$phase) $scope.$digest();
+                            });
+
                             $scope.sortableOpts = {
                                 axis: 'y',
                                 handle: '.mover',
@@ -181,6 +188,17 @@ define([
 
                             $scope.removeItem = function () {
                                 playList.remove($scope.getIndex());
+                            };
+
+                            $rootScope.$on('itemActionsToggled', function (e, idx) {
+                                if ($scope.getIndex() !== idx)
+                                    $scope.displayActions = false;
+
+                                //if (!$scope.$$phase) $scope.$digest();
+                            });
+                            $scope.toggleActions = function () {
+                                $rootScope.$broadcast('itemActionsToggled', $scope.getIndex());
+                                $scope.displayActions = !$scope.displayActions;
                             };
                         }
                     };

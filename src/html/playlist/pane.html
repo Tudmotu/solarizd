@@ -3,7 +3,10 @@
     <section class="playlist-wrapper">
         <ul class="indices">
             <li class="index" ng-repeat="item in items track by $index"
-                ng-class="{active: $index === nowPlayingIdx}">{{$index + 1}}</li>
+            ng-class="{'active': $index === nowPlayingIdx,
+                        'actions-open': $index === currentlyOpenIdx}">
+                {{$index + 1}}
+            </li>
         </ul>
         <ul class="playlist" ui-sortable="sortableOpts"
                     ui-sortable-on-change="onSortChange" ng-model="items">

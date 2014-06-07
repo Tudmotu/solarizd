@@ -60,11 +60,16 @@
 
         .index {
             text-align:center;
-            /*border-right:solid @thin-border @base02;*/
             font-weight:bold;
-            /*.ui-list-item;*/
+            margin-bottom:0;
             .list-item;
             .flexbox(@align:center);
+            .transition(@prop:margin-bottom; @easing:ease-in; @duration:.2s);
+
+            &.actions-open {
+                margin-bottom:@row;
+                /*transition-timing-function:ease-in;*/
+            }
 
             &.active {
                 border-left:solid (@column-pad * 3 / 4) @cyan;
@@ -81,10 +86,33 @@
         cursor:pointer;
         .ui-list-item;
         .list-item;
-        .flexbox(@justify:flex-start; @align:center);
+        .flexbox(@dir:column;@justify:flex-start;);
+        .transition(@prop:height; @easing:ease-in; @duration:.2s);
+
+        &.actions-open {
+            height:(2 * @row);
+            /*transition-timing-function:ease-in;*/
+        }
 
         &.ui-sortable-helper {
             background:fadeout(@white,75%);
+        }
+
+        .bar {
+            height:(@row - 2 * @row-pad);
+            max-height:(@row - 2 * @row-pad);
+            .flexed(0);
+            .flexbox(@justify:flex-start; @align:center);
+        }
+
+        .actions-bar {
+            margin-top:(2 * @row-pad);
+            .transition(@prop:height; @easing:ease-in; @duration:.2s);
+        }
+
+        &:not(.actions-open) .actions-bar {
+            max-height:0;
+            /*transition-timing-function:ease-out;*/
         }
 
         .action(@icon) {
@@ -99,11 +127,13 @@
 
         .title {
             overflow:hidden;
+            height:100%;
             white-space:nowrap;
             text-overflow:ellipsis;
             padding-left:@column-pad;
             font-size:@large-text;
             .flexed(1);
+            .flexbox(@dir:column);
         }
 
         .mover {
