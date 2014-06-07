@@ -59,16 +59,22 @@ define([
                                 if (!$scope.$$phase) $scope.$digest();
                             });
 
+                            $rootScope.$on('closeTrackActions', function (e, idx) {
+                                $scope.currentlyOpenIdx = null;
+                            });
+
                             $rootScope.$on('itemActionsToggled', function (e, idx) {
                                 $scope.currentlyOpenIdx = $scope.currentlyOpenIdx === idx ?
                                                             null :
                                                             idx;
-                                //if (!$scope.$$phase) $scope.$digest();
                             });
 
                             $scope.sortableOpts = {
                                 axis: 'y',
                                 handle: '.mover',
+                                start: function (e, ui) {
+                                    $rootScope.$broadcast('closeTrackActions');
+                                },
                                 stop: function (e, ui) {
                                     // Fix the playlist's currently playing track
                                     var fromIdx     = ui.item.sortable.index,
@@ -193,11 +199,12 @@ define([
                                 playList.remove($scope.getIndex());
                             };
 
+                            $rootScope.$on('closeTrackActions', function (e, idx) {
+                                $scope.displayActions = false;
+                            });
                             $rootScope.$on('itemActionsToggled', function (e, idx) {
                                 if ($scope.getIndex() !== idx)
                                     $scope.displayActions = false;
-
-                                //if (!$scope.$$phase) $scope.$digest();
                             });
                             $scope.toggleActions = function () {
                                 $rootScope.$broadcast('itemActionsToggled', $scope.getIndex());
