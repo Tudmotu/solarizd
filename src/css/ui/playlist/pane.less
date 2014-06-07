@@ -167,6 +167,30 @@
             font-size:(1.5 * @huge-text);
             .action(@fa-var-arrows);
         }
+        .flags {
+            margin-left:@column-pad;
+            .flexed(0);
+            .flexbox;
+        }
+        .flag {
+            font-size:(@normal-text);
+            border:solid (0.5 * @medium-border) @white;
+            border-radius:50%;
+            width:(0.25 * @column);
+            height:(0.25 * @column);
+            margin-left:@column-pad;
+            .flexed(0);
+            .flexbox(@align:center);
+        }
+        .play-next:before {
+            .icon(@fa-var-play);
+        }
+        .stop-here:before {
+            .icon(@fa-var-stop);
+        }
+        .repeat:before {
+            .icon(@fa-var-repeat);
+        }
         .toggler {
             color:@green;
             .action(@fa-var-play);

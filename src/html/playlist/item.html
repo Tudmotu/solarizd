@@ -4,6 +4,11 @@
     <div class="bar">
         <span class="toggler" ng-click="togglePlay()"></span>
         <span class="title" data-index="{{index}}" ng-click="toggleActions()">{{title}}</span>
+        <span class="flags">
+            <span class="flag play-next" ng-if="playNext"></span>
+            <span class="flag stop-here" ng-if="stopHere"></span>
+            <span class="flag repeat" ng-if="repeatTrack"></span>
+        </span>
         <span class="remover" ng-click="removeItem()"></span>
         <span class="mover"></span>
     </div>
