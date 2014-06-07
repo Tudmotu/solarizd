@@ -8,13 +8,13 @@
         <span class="mover"></span>
     </div>
     <menu type="toolbar" class="actions-bar bar">
-        <li class="action" ng-click="playNext()">
+        <li class="action" ng-click="fnPlayNext()" ng-class="{'active': playNext}">
             <span class="text">Play Next</span>
         </li>
-        <li class="action" ng-click="stopHere()">
+        <li class="action" ng-click="fnStopHere()" ng-class="{'active': stopHere}">
             <span class="text">Stop Here</span>
         </li>
-        <li class="action" ng-click="repeatTrack()">
+        <li class="action" ng-click="fnRepeatTrack()" ng-class="{'active': repeatTrack}">
             <span class="text">Repeat</span>
         </li>
     </menu>

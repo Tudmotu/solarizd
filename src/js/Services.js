@@ -566,5 +566,32 @@ define([
             if (nowPlaying !== 0)
                 this.play(nowPlaying - 1);
         };
+
+        this.playNext = function (idx) {
+            var that = this;
+            that.playlist.forEach(function (item) {
+                item.playNext = false;
+            });
+            if (typeof idx === 'number')
+                that.playlist[idx].playNext = true;
+        };
+
+        this.stopAt = function (idx) {
+            var that = this;
+            that.playlist.forEach(function (item) {
+                item.stopHere = false;
+            });
+            if (typeof idx === 'number')
+                that.playlist[idx].stopHere = true;
+        };
+
+        this.repeatTrack = function (idx) {
+            var that = this;
+            that.playlist.forEach(function (item) {
+                item.repeatTrack = false;
+            });
+            if (typeof idx === 'number')
+                that.playlist[idx].repeatTrack = true;
+        };
     }]);
 });

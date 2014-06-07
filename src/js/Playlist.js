@@ -140,11 +140,14 @@ define([
                         template: ItemTemplate,
                         replace: true,
                         scope: {
-                            'videoId': '@videoId',
-                            'title': '@title',
-                            'thumbnail': '@thumbnail',
-                            'autoplay': '@autoplay',
-                            'index': '@index'
+                            'videoId'     : '@videoId',
+                            'title'       : '@title',
+                            'thumbnail'   : '@thumbnail',
+                            'autoplay'    : '@autoplay',
+                            'playNext'    : '=playNext',
+                            'stopHere'    : '=stopHere',
+                            'repeatTrack' : '=repeatTrack',
+                            'index'       : '@index'
                         },
                         controller: function ($scope, $element, $attrs, $transclude) {
                             $rootScope.$on('youtubePlayer:infoDelivery', function (e, state) {
@@ -199,6 +202,25 @@ define([
                             $scope.toggleActions = function () {
                                 $rootScope.$broadcast('itemActionsToggled', $scope.getIndex());
                                 $scope.displayActions = !$scope.displayActions;
+                            };
+
+                            $scope.fnPlayNext = function () {
+                                if ($scope.playNext)
+                                    playList.playNext(null);
+                                else
+                                    playList.playNext($scope.getIndex());
+                            };
+                            $scope.fnStopHere = function () {
+                                if ($scope.stopHere)
+                                    playList.stopAt(null);
+                                else
+                                    playList.stopAt($scope.getIndex());
+                            };
+                            $scope.fnRepeatTrack = function () {
+                                if ($scope.repeatTrack)
+                                    playList.repeatTrack(null);
+                                else
+                                    playList.repeatTrack($scope.getIndex());
                             };
                         }
                     };
