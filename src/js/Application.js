@@ -22,7 +22,6 @@ define([
             'ApiKey',
             'youtubeAPI',
             'echoNestAPI',
-            'lyricsAPI',
             function ($rootScope, ApiKey) {
             ApiKey.fetchKeys().then(function () {
                 document.body.classList.remove('loading');

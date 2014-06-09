@@ -1,10 +1,9 @@
 define([
     'text!template_dir/media-panel/panel.html',
     'text!template_dir/media-panel/youtube.html',
-    'text!template_dir/media-panel/lyrics.html',
     './Services',
     'angular'
-], function (PanelTemplate, YoutubeTemplate, LyricsTemplate) {
+], function (PanelTemplate, YoutubeTemplate) {
     return angular.module('ui.media-panel', [])
             .directive('mediaPanel', ['playList', function (playList) {
                 var definitions = {
@@ -36,40 +35,7 @@ define([
 
                 return definitions;
             }])
-            /**.directive('lyricsPane', ['$sce', 'playList', 'lyricsAPI', function ($sce, playList, lyricsAPI) {
-                var definitions = {
-                        restrict: 'E',
-                        template: LyricsTemplate,
-                        replace: true,
-                        scope: true,
-                        controller: function ($scope, $element, $attrs, $transclude) {
-                            var currentlyPlaying = null;
-
-                            $scope.$watch(playList.getNowPlaying, function (newVal, oldVal) {
-                                var data = newVal ? newVal.snippet : null;
-
-                                if (data && data.title && newVal.id !== currentlyPlaying) {
-                                    console.debug('Fetching lyrics for "' + data.title  + '"...');
-                                    currentlyPlaying = newVal.id;
-
-                                    lyricsAPI.fetchByTitle(data.title).then(function (songData) {
-                                        $scope.artist    = songData.artist;
-                                        $scope.songName  = songData.songName;
-                                        $scope.lyrics    = $sce.trustAsHtml(songData.lyrics);
-                                        $scope.url       = songData.url;
-                                    }, function (err) {
-                                        $scope.artist    = '';
-                                        $scope.songName  = data.title;
-                                        $scope.lyrics    = $sce.trustAsHtml('No lyrics found  =\\');
-                                    });
-                                }
-                            });
-                        }
-                    };
-
-                return definitions;
-            }])*/
-            .directive('mediaPlayer', ['$sce', 'youtubeResource', 'youtubePlayer', 'playList', function ($sce, ytResource, ytPlayer, playList) {
+            .directive('mediaPlayer', ['$sce', 'youtubePlayer', 'playList', function ($sce, ytPlayer, playList) {
                 var definitions = {
                         restrict: 'E',
                         template: YoutubeTemplate,
