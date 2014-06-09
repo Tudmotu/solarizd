@@ -147,6 +147,11 @@
             padding:0 @column-pad;
             font-size:(1 * @huge-text);
             .flexed(0);
+
+            @media (max-device-width:960px) {
+                font-size:(1.5 * @huge-text);
+            }
+
             &:before {
                 .icon(@icon);
             }
@@ -163,12 +168,14 @@
             .flexbox(@dir:column);
         }
 
+        .remover {
+            .action(@fa-var-times);
+        }
         .mover {
-            font-size:(1.5 * @huge-text);
             .action(@fa-var-arrows);
         }
         .flags {
-            margin-left:@column-pad;
+            margin:0 @column-pad;
             .flexed(0);
             .flexbox;
         }
@@ -215,9 +222,6 @@
         }
         &.active.now-playing .title {
             animation:glow-red 2s infinite ease-out;
-        }
-        .remover {
-            .action(@fa-var-times);
         }
 
         &:before {
