@@ -42,7 +42,7 @@ define([
                 currentItem = that.getNowPlaying();
                 stopAt = getStopAt();
                 playNext = getPlayNext();
-
+                
                 if (currentItem.repeatTrack)
                     that.play(nowPlaying);
 
@@ -115,8 +115,13 @@ define([
         function setNowPlaying (idx) {
             if (typeof idx === 'number')
                 nowPlaying = idx;
-            else if (idx === null)
+            else if (idx === null) {
                 nowPlaying = null;
+                $rootScope.$broadcast('notify', {
+					text: 'The playlist has ended.'
+				});
+			}
+            
         }
 
         function addItem (idx, item) {
