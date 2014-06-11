@@ -42,7 +42,7 @@ define([
                 currentItem = that.getNowPlaying();
                 stopAt = getStopAt();
                 playNext = getPlayNext();
-                
+
                 if (currentItem.repeatTrack)
                     that.play(nowPlaying);
 
@@ -118,10 +118,10 @@ define([
             else if (idx === null) {
                 nowPlaying = null;
                 $rootScope.$broadcast('notify', {
-					text: 'The playlist has ended.'
-				});
-			}
-            
+                    text: 'The playlist has ended.'
+                });
+            }
+
         }
 
         function addItem (idx, item) {
@@ -190,7 +190,7 @@ define([
                     text = 'Track "' + trimmed + '" has been added to playlist';
 
                 addItem(idx, item);
-                if (that.playlist.length === 1 || 
+                if (that.playlist.length === 1 ||
                     (idx === that.playlist.length - 1 && state === st.STOPPED))
                         that.play(idx);
 
