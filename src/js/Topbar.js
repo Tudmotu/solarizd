@@ -3,6 +3,7 @@ define([
     'text!template_dir/topbar/controls.html',
     'text!template_dir/topbar/volume.html',
     'text!template_dir/topbar/notification.html',
+    './directives/sol-vibrate',
     'angular'
 ], function (TopbarTemplate, ControlsTemplate, VolumeTemplate, NotificationTemplate) {
     // duplication of code from Playlist.js with minor change
@@ -30,7 +31,7 @@ define([
     }
 
 
-    return angular.module('ui.topbar', ['services'])
+    return angular.module('ui.topbar', ['services', 'solVibrate'])
             .directive('appTopbar', ['playList', 'youtubeAPI', function (playList, youtubeAPI) {
                 var definitions = {
                         restrict: 'E',

@@ -1,8 +1,9 @@
 define([
     'text!template_dir/panel-switcher/bar.html',
+    './directives/sol-vibrate',
     'angular'
 ], function (BarTemplate) {
-    return angular.module('ui.panel-switcher', ['services'])
+    return angular.module('ui.panel-switcher', ['services', 'solVibrate'])
             .directive('panelSwitcher', ['playList', function (playList) {
                 var definitions = {
                         restrict: 'E',

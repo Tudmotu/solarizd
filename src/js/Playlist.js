@@ -3,6 +3,7 @@ define([
     'text!template_dir/playlist/progress.html',
     'text!template_dir/playlist/item.html',
     'text!template_dir/playlist/related.html',
+    './directives/sol-vibrate',
     'ui-sortable',
     './Services',
     'angular'
@@ -30,7 +31,7 @@ define([
         };
     }
 
-    return angular.module('ui.playlist', ['services', 'filters', 'ui.sortable'])
+    return angular.module('ui.playlist', ['services', 'filters', 'ui.sortable', 'solVibrate'])
             .directive('playlistPane', ['$rootScope', '$http', 'youtubeAPI', 'playList', function ($rootScope, $http, youtubeAPI, playList) {
                 var definitions = {
                         restrict: 'E',
@@ -74,6 +75,8 @@ define([
                                 handle: '.mover',
                                 start: function (e, ui) {
                                     $rootScope.$broadcast('closeTrackActions');
+                                    $scope.currentlyDragging = true;
+                                    if (!$scope.$$phase) $scope.$digest();
                                 },
                                 stop: function (e, ui) {
                                     // Fix the playlist's currently playing track
@@ -96,6 +99,8 @@ define([
                                     }
 
                                     playList.save();
+                                    $scope.currentlyDragging = false;
+                                    if (!$scope.$$phase) $scope.$digest();
                                 }
                             };
                         },
