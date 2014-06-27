@@ -14,23 +14,6 @@
         box-shadow:none;
     }
 
-    .topbar-button () {
-        width:@row;
-        height:@row;
-        border-radius:50%;
-        border:solid @medium-border @white;
-        background:transparent;
-        color:@white;
-        text-align:center;
-        padding:@row-pad @column-pad;
-        margin:0 @column-pad;
-        cursor:pointer;
-
-        &:active {
-            background:@base1;
-        }
-    }
-
     .now-playing {
         height:@row;
         width:33%;
@@ -91,7 +74,8 @@
 
         .control {
             font-size:0.75em;
-            .topbar-button;
+            margin:0 @column-pad;
+            .ui-topbar-button;
             .flexed(0);
             .flexbox(@dir:column);
 
@@ -112,7 +96,6 @@
                     .icon(@fa-var-step-forward);
                 }
             }
-
         }
     }
 
@@ -139,7 +122,8 @@
         }
 
         .toggle-mute {
-            .topbar-button;
+            margin:0 @column-pad;
+            .ui-topbar-button;
             .flexed(0);
 
             &:before {

@@ -5,6 +5,31 @@
     .flexbox(@dir:column);
     .transition;
 
+    &.cued {
+        z-index:10;
+
+        &:before {
+            content:"If the video does not automatically play, please play it manually.";
+            font-size:@large-text;
+            font-weight:bold;
+            text-shadow:1px 1px @black;
+            color:@white;
+            padding:@row-pad @column-pad;
+            text-align:center;
+        }
+
+        .close-cue {
+            position:absolute;
+            top:@row-pad;
+            right:@column-pad;
+            .ui-topbar-button;
+
+            &:before {
+                .icon(@fa-var-times);
+            }
+        }
+    }
+
     .media {
         width:100%;
         .flexed(0);

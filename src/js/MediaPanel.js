@@ -1,10 +1,11 @@
 define([
     'text!template_dir/media-panel/panel.html',
     'text!template_dir/media-panel/youtube.html',
+    './directives/sol-vibrate',
     './Services',
     'angular'
 ], function (PanelTemplate, YoutubeTemplate) {
-    return angular.module('ui.media-panel', [])
+    return angular.module('ui.media-panel', ['solVibrate'])
             .directive('mediaPanel', ['playList', function (playList) {
                 var definitions = {
                         restrict: 'E',
@@ -12,6 +13,11 @@ define([
                         replace: true,
                         scope: true,
                         controller: function ($scope, $element, $attrs, $transclude) {
+                            $scope.setIsCued = function (val) {
+                                val = typeof val === 'boolean' ? val : true;
+                                $scope.isCued = val;
+                            };
+
                             $scope.toggleVideo = function () {
                                 $element.toggleClass('show-video');
                             };

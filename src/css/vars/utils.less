@@ -72,6 +72,24 @@
         }
     }
 }
+
+.ui-topbar-button (@size: @row) {
+    width:@size;
+    height:@size;
+    background:transparent;
+    color:@white;
+    font-size:(@huge-text * 1.5);
+    text-align:center;
+    padding:@row-pad @column-pad;
+    border-radius:50%;
+    border:solid @medium-border @white;
+    cursor:pointer;
+
+    &:active {
+        background:@base1;
+    }
+}
+
 .ui-list-item(@odd-bg:lighten(@base02, 25%);@even-bg:lighten(@base02, 15%)) {
     color:@white;
     .ui-hseparator;
