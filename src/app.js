@@ -1,19 +1,16 @@
 requirejs.config({
     baseUrl : '.',
     paths   : {
-        'lib'               : 'vendor',
-        'modules'           : 'js',
-        'template_dir'      : 'html',
-        'angular'           : 'vendor/angular/angular',
-        'ng-resource'       : 'vendor/ng-resource/dist/ng-resource',
-        'ui-sortable'       : 'vendor/angular-ui-sortable/sortable.min',
-        'jquery-ui-core'    : 'vendor/jquery-ui/ui/minified/jquery.ui.core.min',
-        'jquery-ui-widget'  : 'vendor/jquery-ui/ui/minified/jquery.ui.widget.min',
-        'jquery-ui-mouse'   : 'vendor/jquery-ui/ui/minified/jquery.ui.mouse.min',
-        'jquery-ui-sortable': 'vendor/jquery-ui/ui/minified/jquery.ui.sortable.min',
-        'jquery'            : 'vendor/jquery/dist/jquery.min',
-        'jqui-touch-punch'  : 'vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.min',
-        'text'              : 'vendor/requirejs-text/text'
+        'lib'              : 'vendor',
+        'modules'          : 'js',
+        'template_dir'     : 'html',
+        'angular'          : 'vendor/angular/angular',
+        'ng-resource'      : 'vendor/ng-resource/dist/ng-resource',
+        'ui-sortable'      : 'vendor/angular-ui-sortable/sortable.min',
+        'jquery-ui'        : 'vendor/jquery-ui/jquery-ui.min',
+        'jquery'           : 'vendor/jquery/dist/jquery.min',
+        'jqui-touch-punch' : 'vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.min',
+        'text'             : 'vendor/requirejs-text/text'
     },
     shim    : {
         'angular': {
@@ -23,13 +20,13 @@ requirejs.config({
             deps: ['angular']
         },
         'ui-sortable': {
-            deps: ['angular', 'jqui-touch-punch', 'jquery-ui-core', 'jquery-ui-widget', 'jquery-ui-mouse', 'jquery-ui-sortable']
+            deps: ['angular', 'jquery-ui']
         },
         'jquery-ui-core': {
             deps: ['jquery']
         },
         'jqui-touch-punch': {
-            deps: ['jquery-ui-widget', 'jquery-ui-mouse']
+            deps: ['jquery-ui']
         }
     }
 });
@@ -37,6 +34,7 @@ requirejs.config({
 requirejs([
     'modules/Application',
     'vendor/mobile-detect/mobile-detect',
+    'jqui-touch-punch',
     'angular'
 ], function (Appliction) {
     function bootstrapAngular () {
