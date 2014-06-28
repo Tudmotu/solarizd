@@ -12,6 +12,9 @@
         <ul class="playlist" ui-sortable="sortableOpts"
                     ui-sortable-on-change="onSortChange" ng-model="items">
             <playlist-item ng-repeat="item in items track by $index" class="playlist-item"
+                                sol-slide-rm="items"
+                                sol-slide-rm-handle=".title"
+                                sol-slide-rm-after="savePlaylist(); $emit('closeTrackActions')"
                                 data-index="{{$index}}"
                                 data-video-id="{{item.id}}"
                                 data-title="{{item.snippet.title}}"

@@ -4,6 +4,7 @@ define([
     'text!template_dir/playlist/item.html',
     'text!template_dir/playlist/related.html',
     './directives/sol-vibrate',
+    './directives/sol-slide-rm',
     'ui-sortable',
     './Services',
     'angular'
@@ -31,7 +32,7 @@ define([
         };
     }
 
-    return angular.module('ui.playlist', ['services', 'filters', 'ui.sortable', 'solVibrate'])
+    return angular.module('ui.playlist', ['services', 'filters', 'ui.sortable', 'solVibrate', 'solSlideRm'])
             .directive('playlistPane', ['$rootScope', '$http', 'youtubeAPI', 'playList', function ($rootScope, $http, youtubeAPI, playList) {
                 var definitions = {
                         restrict: 'E',
@@ -106,6 +107,9 @@ define([
                         },
                         controller: function ($scope, $element, $attrs, $transclude) {
                             $scope.items = playList.playlist;
+                            $scope.savePlaylist = function () {
+                                playList.save();
+                            };
                         }
                     };
 
