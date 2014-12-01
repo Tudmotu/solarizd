@@ -3,6 +3,7 @@
 .mixin-related-videos () {
     background:fadeout(@white, 75%);
     color:@white;
+    position:relative;
     .no-scrollbar;
 
     .list-item {
@@ -10,7 +11,6 @@
         width:25%;
         float:left;
         display:inline-block;
-        padding:@row-pad @column-pad;
         cursor:pointer;
         overflow:hidden;
         .transition(@prop:background-color;@duration:.1s);
@@ -21,30 +21,47 @@
         }
 
         .thumbnail {
-            width:@column;
             .flexed(0);
-            .flexbox;
+            width:100%;
+            position:absolute;
+            top:0; bottom:0;
+            left:0;
+            height:100%;
 
             @media only screen and (max-device-width: 1280px) {
                 width:auto;
             }
 
             img {
-                border:solid @thin-border @base01;
+                width:100%;
+                position:absolute;
+                top:0; bottom:0;
+                left:0;
+                margin:auto;
             }
         }
 
         .meta {
-            height:100%;
-            padding:0 @column-pad;
             .flexed(1);
             .flexbox(@justify:space-between;@align:center;@wrap:wrap);
+            height:100%;
+            padding:0 @column-pad;
 
             .title {
                 width:100%;
                 font-size:@large-text;
                 .flexed(0);
             }
+
+            & > * {
+                .transition(@prop:background);
+                background:fadeout(@base01, 40%);
+                padding:@row-pad @column-pad;
+            }
+        }
+
+        &:hover .meta > * {
+            background:@base00;
         }
     }
 }
