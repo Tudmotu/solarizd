@@ -10,6 +10,9 @@
             <span class="flag stop-here" ng-if="stopHere"></span>
             <span class="flag repeat" ng-if="repeatTrack"></span>
         </span>
+        <span class="time">
+            <span class="duration">{{duration | youtubeTime}}</span>
+        </span>
         <span class="remover" ng-click="removeItem()" sol-vibrate></span>
     </div>
     <menu type="toolbar" class="actions-bar bar">

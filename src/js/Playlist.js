@@ -162,6 +162,7 @@ define([
                             'playNext'    : '=playNext',
                             'stopHere'    : '=stopHere',
                             'repeatTrack' : '=repeatTrack',
+                            'duration'    : '@duration',
                             'index'       : '@index'
                         },
                         controller: function ($scope, $element, $attrs, $transclude) {
