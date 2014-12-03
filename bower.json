@@ -25,6 +25,7 @@
     "requirejs": "~2.1.11"
   },
   "devDependencies": {
+    "angular": "~1.2.x",
     "less.js": "~1.7.0",
     "ng-resource": "~0.0.2",
     "prefixfree": "*",
@@ -34,5 +35,8 @@
     "jquery-ui": "~1.10.4",
     "angular-ui-sortable": "~0.12.6",
     "jquery-ui-touch-punch": "furf/jquery-ui-touch-punch"
+  },
+  "resolutions": {
+    "angular": "~1.2.x"
   }
 }
