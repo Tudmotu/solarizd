@@ -21,6 +21,7 @@ define([
     })
     .filter('formatTime', function () {
         return function (input) {
+            if (isNaN(input)) return '--:--';
             var time = Math.floor(input),
                 minutes = Math.floor(time / 60),
                 hours = Math.floor(minutes / 60),
