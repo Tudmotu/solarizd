@@ -1,6 +1,6 @@
 <section class="playlist-pane" ng-class="{ 'active': !!items.length && ready }"
     sol-vibrate="currentlyDragging">
-    <playlist-progress></playlist-progress>
+    <playlist-progress data-progress="progress"></playlist-progress>
     <section class="playlist-wrapper">
         <ul class="indices">
             <li class="index" ng-repeat="item in items track by $index"
@@ -24,6 +24,7 @@
                                 data-play-next="item.playNext"
                                 data-stop-here="item.stopHere"
                                 data-repeat-track="item.repeatTrack"
+                                data-progress="progress"
                                 data-duration="{{item.contentDetails.duration}}"
                                 data-autoplay="{{item.autoplay}}"
                                 >

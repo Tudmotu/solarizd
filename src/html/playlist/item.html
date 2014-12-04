@@ -11,6 +11,10 @@
             <span class="flag repeat" ng-if="repeatTrack"></span>
         </span>
         <span class="time">
+            <span class="elapsed" ng-if="nowPlaying">
+                {{progress | formatTime}}
+            </span>
+            <span ng-if="nowPlaying" class="separator">/</span>
             <span class="duration">{{duration | youtubeTime}}</span>
         </span>
         <span class="remover" ng-click="removeItem()" sol-vibrate></span>

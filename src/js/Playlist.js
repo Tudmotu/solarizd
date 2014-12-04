@@ -42,6 +42,8 @@ define([
                         link: function ($scope, $element, $attrs) {
                             var media = window.matchMedia('(max-width:1280px),(max-device-width:1280px)');
 
+                            $scope.progress = 0;
+
                             if (media.matches) {
                                 $scope.ready = true;
                             }
@@ -119,7 +121,9 @@ define([
                         restrict: 'E',
                         template: ProgressTemplate,
                         replace: true,
-                        scope: true,
+                        scope: {
+                            progress: '=progress'
+                        },
                         link: function ($scope, $element, $attrs) {
                             $element.on('click', function (e) {
                                 var coords, time;
@@ -159,9 +163,11 @@ define([
                             'title'       : '@title',
                             'thumbnail'   : '@thumbnail',
                             'autoplay'    : '@autoplay',
+                            'nowPlaying'  : '=nowPlaying',
                             'playNext'    : '=playNext',
                             'stopHere'    : '=stopHere',
                             'repeatTrack' : '=repeatTrack',
+                            'progress'    : '=progress',
                             'duration'    : '@duration',
                             'index'       : '@index'
                         },
