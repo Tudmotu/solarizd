@@ -1,14 +1,15 @@
 @import "../../vars/all";
 
 .mixin-topbar () {
-    @bg:fadeout(@black, 25%); // @base02; // linear-gradient(darken(@base01, 15%), @base02);
-    @title:fadeout(@base2, 30%);
+    .flexbox(@justify:space-between;@wrap:wrap);
+    @bg:@theme-background-dark;
+    @title:@white;
     background:@bg;
     padding:@row-pad 0;
     font-size:(@huge-text * 1.5);
     z-index:1000;
     box-sizing:content-box;
-    .flexbox(@justify:space-between;@wrap:wrap);
+    border-bottom:solid 1px fadeout(@base02, 50%);
 
     @media (max-width:960px), (max-device-width:960px) {
         box-shadow:none;

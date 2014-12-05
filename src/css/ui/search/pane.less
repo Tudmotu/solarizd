@@ -2,11 +2,10 @@
 @import "list";
 
 .mixin-search-pane () {
-    @bg:fadeout(@black, 25%); // @base01; // darken(@base00, 15%);
+    @bg:@theme-background; // @base01; // darken(@base00, 15%);
     background:@bg;
     background:;
-    /*border-right:solid @thick-border @red; */
-    box-shadow:0px 0px @thick-border @black;
+    border-right:solid 1px fadeout(@base02, 50%);
     z-index:1;
     .flexbox(@dir:column; @justify:flex-start);
 
@@ -69,14 +68,14 @@
             font-size:@huge-text;
             border:none;
             border-bottom:solid @thick-border @red;
-            box-shadow:inset @medium-border 0px 0px darken(@red, 7.5%);
+            /*box-shadow:inset @medium-border 0px 0px darken(@red, 7.5%);*/
             .flexed(1);
             .no_appearance;
             .transition(@duration:0.2s);
 
-            &:focus {
-                box-shadow:inset 0px 0px @thick-border @blue;
-            }
+            /*&:focus {*/
+                /*box-shadow:inset 0px 0px @thick-border @blue;*/
+            /*}*/
 
         }
 

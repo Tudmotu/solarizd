@@ -2,8 +2,8 @@
 @import "./related";
 
 .mixin-playlist-pane () {
-    background:fadeout(@black, 25%); // @base2;
-    border-right:solid @thick-border darken(@base00, 15%);
+    background:@theme-background;
+    border-right:solid 1px fadeout(@base02, 50%);
     .flexbox(@dir:column);
     .no-scrollbar;
 
@@ -23,7 +23,7 @@
         width:100%;
         height:@row;
         background:transparent;
-        color:@base1;
+        color:@white;
         font-size:@large-text;
         .flexed(0);
         .flexbox(@align:center);
@@ -45,9 +45,7 @@
     .playlist-wrapper {
         overflow-y:auto;
         overflow-x:hidden;
-        /*box-shadow:0px 0px @row-pad @thin-border @black;*/
         z-index:1;
-        /*border-bottom:solid @thick-border @red;*/
         .flexed(1);
         .flexbox(@justify:flex-end);
         .no-scrollbar;
@@ -292,6 +290,7 @@
 
         &:not(.active) {
             height:0;
+            border:0;
         }
     }
 }

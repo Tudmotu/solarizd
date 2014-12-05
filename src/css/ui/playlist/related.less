@@ -1,9 +1,10 @@
 @import "../../vars/all";
 
 .mixin-related-videos () {
+    position:relative;
+    border-top:solid 1px fadeout(@base02, 50%);
     background:fadeout(@white, 75%);
     color:@white;
-    position:relative;
     .no-scrollbar;
 
     .list-item {

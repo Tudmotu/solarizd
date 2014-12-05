@@ -1,17 +1,19 @@
 @import "../../vars/all";
 
 .mixin-search-result () {
+    .flexbox;
+    text-shadow:1px 1px 2px fadeout(@base01, 50%);
     cursor:pointer;
     height:@row;
-    .flexbox;
+    overflow:hidden;
 
 
     .thumb {
+        .flexed(0);
+        .flexbox(@align:center);
         width:(@column / 2);
         height:100%;
         padding:@thick-border;
-        .flexed(0);
-        .flexbox(@align:center);
 
         img {
             max-width:100%;
@@ -24,17 +26,18 @@
         .flexbox(@align:center;);
 
         .title {
-            padding:@row-pad @column-pad;
-            max-width:100%;
             .flexed(1);
             .flexbox(@justify:flex-start; @align:center);
+            padding:@row-pad @column-pad;
+            max-width:100%;
+            font-size:1.25em;
         }
 
         .duration {
-            font-size:@medium-text;
-            padding:0 @column-pad;
             .flexed(0);
             .flexbox(@align:center;);
+            font-size:@medium-text;
+            padding:0 @column-pad;
         }
 
         .actions {
@@ -46,12 +49,12 @@
             display:none; // for now
 
             .list-item {
+                .flexed(1);
+                .flexbox(@align:flex-end);
                 text-transform:uppercase;
                 padding:@thick-border;
                 font-weight:bold;
                 color:fadeout(@white,50%);
-                .flexed(1);
-                .flexbox(@align:flex-end);
 
                 &:before {
                     padding-right:(@column-pad / 2);

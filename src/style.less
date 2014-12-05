@@ -63,6 +63,7 @@ body {
 #main-view {
     .flexed(1);
     .flexbox(@justify:flex-start);
+    overflow:hidden;
 }
 
 #search-pane {
@@ -110,10 +111,11 @@ body {
 }
 
 .panel-switcher {
-    background:fadeout(@black, 25%);
     .flexbox;
-    display:none;
     .transition(@easing:ease-in; @duration: .2s; @delay:.2s);
+    background:@theme-background;
+    border-bottom:solid 1px fadeout(@base02, 50%);
+    display:none;
     transition-property:transform, opacity;
 
     .loading & {
