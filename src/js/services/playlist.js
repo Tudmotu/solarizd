@@ -106,12 +106,6 @@ define([
             return list;
         }
 
-        function saveList () {
-            var lsVal;
-            if (hasLS)
-                localStorage.playlist = JSON.stringify(that.playlist);
-        }
-
         function setNowPlaying (idx) {
             if (typeof idx === 'number')
                 nowPlaying = idx;
@@ -122,22 +116,6 @@ define([
                 });
             }
 
-        }
-
-        function addItem (idx, item) {
-            that.playlist.splice(idx, 0, item);
-            saveList();
-        }
-
-        function removeItem (idx) {
-            that.playlist.splice(idx,1);
-
-            // Fix the 'nowPlaying' var, if necessary
-            if (idx < nowPlaying) {
-                nowPlaying -= 1;
-            }
-
-            saveList();
         }
 
         function getPlayNext () {
@@ -158,12 +136,36 @@ define([
             return idx;
         }
 
+        this.saveList = function (name) {
+            if (hasLS) {
+                if (typeof name !== 'string')
+                    name = 'playlist';
+                localStorage[name] = JSON.stringify(that.playlist);
+            }
+        }
+
+        this.addItem = function (idx, item) {
+            that.playlist.splice(idx, 0, item);
+            this.saveList();
+        }
+
+        this.removeItem = function (idx) {
+            that.playlist.splice(idx,1);
+
+            // Fix the 'nowPlaying' var, if necessary
+            if (idx < nowPlaying) {
+                nowPlaying -= 1;
+            }
+
+            this.saveList();
+        }
+
         this.getState = function () {
             return state;
         };
 
         this.save = function () {
-            saveList();
+            this.saveList();
         };
 
         this.setNowPlaying = function (idx) {
@@ -189,7 +191,7 @@ define([
                                 title,
                     text = 'Track "' + trimmed + '" has been added to playlist';
 
-                addItem(idx, item);
+                that.addItem(idx, item);
                 if (that.playlist.length === 1 ||
                     (idx === that.playlist.length - 1 && state === st.STOPPED))
                         that.play(idx);
@@ -212,7 +214,7 @@ define([
         this.remove = function (idx) {
             var fixPlay = (idx === nowPlaying),
                 isLast  = (idx === this.playlist.length - 1);
-            removeItem(idx);
+            this.removeItem(idx);
 
             if (fixPlay) {
                 if (isLast) {
@@ -284,7 +286,7 @@ define([
             if (typeof idx === 'number')
                 that.playlist[idx].playNext = true;
 
-            saveList();
+            this.saveList();
         };
 
         this.stopAt = function (idx) {
@@ -295,7 +297,7 @@ define([
             if (typeof idx === 'number')
                 that.playlist[idx].stopHere = true;
 
-            saveList();
+            this.saveList();
         };
 
         this.repeatTrack = function (idx) {
@@ -306,7 +308,7 @@ define([
             if (typeof idx === 'number')
                 that.playlist[idx].repeatTrack = true;
 
-            saveList();
+            this.saveList();
         };
     }];
 });
