@@ -1,4 +1,4 @@
-<ul class="related-videos" ng-class="{ active: !!items.length }">
+<ul class="related-videos" ng-class="{ active: !!items.length }" sol-scroll2top="items">
     <li ng-repeat="item in items track by $index" class="list-item" 
     ng-click="addItem(item.id)">
         <span class="content thumbnail">

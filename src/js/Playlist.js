@@ -5,6 +5,7 @@ define([
     'text!template_dir/playlist/related.html',
     './directives/sol-vibrate',
     './directives/sol-slide-rm',
+    './directives/sol-scroll2top',
     'ui-sortable',
     './Services',
     'angular'
@@ -32,7 +33,7 @@ define([
         };
     }
 
-    return angular.module('ui.playlist', ['services', 'filters', 'ui.sortable', 'solVibrate', 'solSlideRm'])
+    return angular.module('ui.playlist', ['services', 'filters', 'ui.sortable', 'solVibrate', 'solSlideRm', 'solScroll2top'])
             .directive('playlistPane', ['$rootScope', '$http', 'youtubeAPI', 'playList', function ($rootScope, $http, youtubeAPI, playList) {
                 var definitions = {
                         restrict: 'E',

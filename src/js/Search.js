@@ -3,11 +3,12 @@ define([
     'text!template_dir/search/result-list.html',
     'text!template_dir/search/result.html',
     'text!template_dir/search/input.html',
+    './directives/sol-scroll2top',
     './Services',
     './Filters',
     'angular'
 ], function (PaneTemplate, ResultListTemplate, ResultTemplate, InputTemplate) {
-    return angular.module('ui.search', ['services', 'filters'])
+    return angular.module('ui.search', ['services', 'filters', 'solScroll2top'])
             .directive('searchPane', ['$rootScope', '$http', function ($rootScope, $http) {
                 var definitions = {
                         restrict: 'E',
