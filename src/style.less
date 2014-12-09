@@ -25,29 +25,28 @@ menu {
     list-style:none;
 }
 
-html, body {
-    position:absolute;
-    top:0; left:0;
-    width:100%;
-    height:100%;
+html {
     font-family:Ubuntu, sans-serif;
     font-size:@root-font-size;
-    z-index:0;
-    overflow:hidden;
 
     @media (max-device-width: 1280px) {
         font-size:(@root-font-size * 2);
     }
 }
 
-body {
+html, body {
+    position:fixed;
+    top:0; left:0;
+    z-index:0;
+    width:100vw;
+    height:100vh;
     overflow:hidden;
-    background:url('css/assets/background.svg');
-    .transition(@prop:opacity);
 }
 
 body {
+    .transition(@prop:opacity);
     .flexbox(@dir:column);
+    background:url('css/assets/background.svg');
 }
 
 #topbar {
