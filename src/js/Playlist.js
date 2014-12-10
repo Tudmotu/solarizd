@@ -55,6 +55,10 @@ define([
                                 });
                             }
 
+                            $scope.clearPlaylist = function () {
+                                playList.clearList();
+                            };
+
                             if (playList.playlist.length) {
                                 $rootScope.$broadcast('setCurrentView', 'playlist');
                             }

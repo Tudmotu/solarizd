@@ -42,6 +42,32 @@
         }
     }
 
+    @indices-width:@column / 3;
+
+    .playlist-actions {
+        .flexed(0);
+        .flexbox(@justify:flex-start;@align:stretch);
+        .ui-hseparator;
+        height:@row;
+        padding:@row-pad 0;
+        font-size:@large-text;
+        color:@white;
+
+        &> .action {
+            .flexed(0);
+            .flexbox(@align:center);
+            cursor:pointer;
+
+            &:before {
+                .icon(@fa-var-times);
+                width:@indices-width;
+                padding:0 @column-pad;
+                font-size:@huge-text;
+                text-align:right;
+            }
+        }
+    }
+
     .playlist-wrapper {
         overflow-y:auto;
         overflow-x:hidden;
@@ -52,7 +78,7 @@
     }
 
     .indices {
-        width:(@column / 3);
+        width:@indices-width;
         list-style:none;
         user-select:none;
         .flexed(0);

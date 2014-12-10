@@ -142,12 +142,17 @@ define([
                     name = 'playlist';
                 localStorage[name] = JSON.stringify(that.playlist);
             }
-        }
+        };
+
+        this.clearList = function () {
+            this.playlist.length = 0;
+            this.saveList();
+        };
 
         this.addItem = function (idx, item) {
             that.playlist.splice(idx, 0, item);
             this.saveList();
-        }
+        };
 
         this.removeItem = function (idx) {
             that.playlist.splice(idx,1);
@@ -158,7 +163,7 @@ define([
             }
 
             this.saveList();
-        }
+        };
 
         this.getState = function () {
             return state;

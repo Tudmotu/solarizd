@@ -1,6 +1,9 @@
 <section class="playlist-pane" ng-class="{ 'active': !!items.length && ready }"
     sol-vibrate="currentlyDragging">
     <playlist-progress data-progress="progress"></playlist-progress>
+    <header class="playlist-actions">
+        <span class="action" ng-click="clearPlaylist()">Clear All</span>
+    </header>
     <section class="playlist-wrapper">
         <ul class="indices">
             <li class="index" ng-repeat="item in items track by $index"
