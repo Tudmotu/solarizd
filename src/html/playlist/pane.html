@@ -7,7 +7,7 @@
     <section class="playlist-wrapper">
         <ul class="indices">
             <li class="index" ng-repeat="item in items track by $index"
-            ng-class="{'active': $index === nowPlayingIdx,
+            ng-class="{'active': item.nowPlaying,
                         'actions-open': $index === currentlyOpenIdx}">
                 {{$index + 1}}
             </li>
