@@ -1,5 +1,5 @@
 @import "../../vars/all";
-@import "./related";
+
 
 .mixin-playlist-pane () {
     background:@theme-background;
@@ -284,39 +284,5 @@
         top:auto;
     }
 
-    .related-videos {
-        height:(4 * @row);
-        box-shadow:inset 0px @thick-border @thick-border -@thick-border @black;
-        overflow-y:auto;
-        .mixin-related-videos;
-        .transition(@prop:height;@easing:ease-in);
-        .flexed(0);
-
-        @media only screen and (max-height:680px),
-            (max-width:960px), (max-device-width:960px) {
-            height:(2 * @row);
-            overflow-x:auto;
-            white-space:nowrap;
-            .no-scrollbar;
-        }
-
-        .list-item {
-            @media only screen and (max-width: 1700px) { width:33%; }
-            @media only screen and (max-width: 1600px),
-                (max-width: 1280px), (max-device-width: 1280px) { width:50%; }
-
-            @media only screen and (max-height:680px),
-                (max-width:960px), (max-device-width:960px) {
-                white-space:normal;
-                float:none;
-                display:inline-flex;
-                
-            }
-        }
-
-        &:not(.active) {
-            height:0;
-            border:0;
-        }
-    }
+    
 }

@@ -1,10 +1,11 @@
 define([
     'text!template_dir/media-panel/panel.html',
     'text!template_dir/media-panel/youtube.html',
+	'text!template_dir/media-panel/related.html',
     './directives/sol-vibrate',
     './Services',
     'angular'
-], function (PanelTemplate, YoutubeTemplate) {
+], function (PanelTemplate, YoutubeTemplate, RelatedTemplate) {
     return angular.module('ui.media-panel', ['solVibrate'])
             .directive('mediaPanel', ['playList', function (playList) {
                 var definitions = {
@@ -55,6 +56,27 @@ define([
                         }
                     };
 
+                return definitions;
+            }]).directive('playlistRelated', ['$rootScope', 'youtubePlayer', 'youtubeAPI', 'playList', function ($rootScope, youtubePlayer, youtubeAPI, playList) {
+                var definitions = {
+                        restrict: 'E',
+                        template: RelatedTemplate,
+                        replace: true,
+                        scope: {
+                        },
+                        controller: function ($scope, $element, $attrs, $transclude) {
+                            $scope.addItem = function (videoId) {
+                                playList.addLast(videoId);
+                            };
+                            $scope.$watch(playList.getNowPlaying, function (item) {
+                                if (item) {
+                                    youtubeAPI.getRelated(item.id).then(function (items) {
+                                        $scope.items = items;
+                                    });
+                                }
+                            });
+                        }
+                    };
                 return definitions;
             }]);
 });

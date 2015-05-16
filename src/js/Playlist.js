@@ -2,14 +2,13 @@ define([
     'text!template_dir/playlist/pane.html',
     'text!template_dir/playlist/progress.html',
     'text!template_dir/playlist/item.html',
-    'text!template_dir/playlist/related.html',
     './directives/sol-vibrate',
     './directives/sol-slide-rm',
     './directives/sol-scroll2top',
     'ui-sortable',
     './Services',
     'angular'
-], function (PaneTemplate, ProgressTemplate, ItemTemplate, RelatedTemplate) {
+], function (PaneTemplate, ProgressTemplate, ItemTemplate) {
     function mouseCoords (event) {
         var totalOffsetX = 0,
             totalOffsetY = 0,
@@ -253,27 +252,6 @@ define([
                         }
                     };
 
-                return definitions;
-            }]).directive('playlistRelated', ['$rootScope', 'youtubePlayer', 'youtubeAPI', 'playList', function ($rootScope, youtubePlayer, youtubeAPI, playList) {
-                var definitions = {
-                        restrict: 'E',
-                        template: RelatedTemplate,
-                        replace: true,
-                        scope: {
-                        },
-                        controller: function ($scope, $element, $attrs, $transclude) {
-                            $scope.addItem = function (videoId) {
-                                playList.addLast(videoId);
-                            };
-                            $scope.$watch(playList.getNowPlaying, function (item) {
-                                if (item) {
-                                    youtubeAPI.getRelated(item.id).then(function (items) {
-                                        $scope.items = items;
-                                    });
-                                }
-                            });
-                        }
-                    };
                 return definitions;
             }]);
 });
