@@ -62,6 +62,13 @@ module.exports = function (grunt) {
                         filter : 'isFile'
                     },
                     {
+                        expand : true,
+                        cwd    : 'src/',
+                        src    : ['js/assets/**'],
+                        dest   : 'target/',
+                        filter : 'isFile'
+                    },
+                    {
                         src: 'src/vendor/requirejs/require.js',
                         dest: 'target/vendor/requirejs/require.js'
                     }
