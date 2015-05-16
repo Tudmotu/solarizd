@@ -25,7 +25,7 @@ define([
         canvasY = event.pageY - totalOffsetY;
 
         return {
-            x: canvasX, 
+            x: canvasX,
             y: canvasY
         };
     }
@@ -81,7 +81,7 @@ define([
                                     playList.st.PLAYING,
                                     playList.st.PAUSING,
                                     playList.st.STOPPED
-                                ].indexOf(state) < 0; 
+                                ].indexOf(state) < 0;
 
                                 if (!$scope.$$phase) $scope.$digest();
                             });
@@ -109,7 +109,7 @@ define([
                                     return percent >= 100 ? 100 :
                                             percent <= 0 ? 0 :
                                              percent;
-								
+
                                 },
                                 setWidth = function (e) {
                                     var p = getCoordsPercent(e, _slider);
@@ -118,28 +118,30 @@ define([
 
                                     if (!$scope.$$phase) $scope.$digest();
                                 },
-								setRelativeVolume = function (delta) {
-									var currentVolume = $scope.value;
-									var newVolume = currentVolume + delta;
-									if (currentVolume === undefined) {
+                                setRelativeVolume = function (delta) {
+                                    var currentVolume = $scope.value;
+                                    var newVolume = currentVolume + delta;
+
+                                    if (currentVolume === undefined) {
                                         return;
                                     }
-                                    if (newVolume > 100) {
-                                        newVolume = 100
-                                    }
-                                    
-                                    if (newVolume < 0) {
-                                        newVolume = 0
-                                    }
-                                    
-                                    if (-100 < delta && delta < 100) {
-										$scope.value = newVolume;
-										youtubePlayer.setVolume(newVolume);
 
-										if (!$scope.$$phase) $scope.$digest();
-									}
-										
-								};
+                                    if (newVolume > 100) {
+                                        newVolume = 100;
+                                    }
+
+                                    if (newVolume < 0) {
+                                        newVolume = 0;
+                                    }
+
+                                    if (-100 < delta && delta < 100) {
+                                        $scope.value = newVolume;
+                                        youtubePlayer.setVolume(newVolume);
+
+                                        if (!$scope.$$phase) $scope.$digest();
+                                    }
+
+                                };
 
                             $rootScope.$on('youtubePlayer:infoDelivery', function (e, data) {
                                 var changed = false;
@@ -155,7 +157,7 @@ define([
 
                                 if (changed && !$scope.$$phase) $scope.$digest();
                             });
-                            
+
                             _slider.addEventListener('mousewheel', function (e) {
                                 var deltaY = e.wheelDeltaY
                                 if (deltaY > 0) {
