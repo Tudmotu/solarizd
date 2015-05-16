@@ -107,6 +107,7 @@ define([
         }
 
         function setNowPlaying (idx) {
+            var mySound;
             if (typeof idx === 'number')
                 nowPlaying = idx;
             else if (idx === null) {
@@ -114,6 +115,9 @@ define([
                 $rootScope.$broadcast('notify', {
                     text: 'The playlist has ended.'
                 });
+                // http://soundbible.com/2062-Metal-Gong-1.html
+                mySound = new Audio('js/assets/gong.mp3');
+                mySound.play();
             }
 
         }
@@ -317,4 +321,3 @@ define([
         };
     }];
 });
-
