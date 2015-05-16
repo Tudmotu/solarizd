@@ -4,49 +4,46 @@
     position:relative;
     border-top:solid 1px fadeout(@base02, 50%);
     background:fadeout(@white, 75%);
-    color:@white;
+    padding:@row-pad @column-pad;
+    color:@blue;
     .no-scrollbar;
+    .flexbox(@dir:row;@wrap:wrap;);
 
     .list-item {
+        .flexbox(@justify:flex-start;@align:center;);
         height:(2 * @row);
-        width:25%;
-        float:left;
-        display:inline-block;
+        width:100%;
         cursor:pointer;
         overflow:hidden;
-        .transition(@prop:background-color;@duration:.1s);
-        .flexbox(@justify:flex-start;@align:center;);
+        background-color:@white;
+        background:fadeout(@white, 75%);
+        padding:@row-pad @column-pad;
 
         &:hover {
+            .transition(@duration:.2s);
+            transition-property:background-color, color;
             background-color:fadeout(@red,75%);
+            color:@white;
+        }
+
+        &:not(:last-child) {
+            margin-bottom:@row-pad;
         }
 
         .thumbnail {
             .flexed(0);
-            width:100%;
-            position:absolute;
-            top:0; bottom:0;
-            left:0;
-            height:100%;
-
-            @media only screen and (max-device-width: 1280px) {
-                width:auto;
-            }
+            width:(@column);
 
             img {
                 width:100%;
-                position:absolute;
-                top:0; bottom:0;
-                left:0;
-                margin:auto;
+                box-shadow:2px 2px @thick-border fadeout(@black,40%);
             }
         }
 
         .meta {
             .flexed(1);
-            .flexbox(@justify:space-between;@align:center;@wrap:wrap);
+            .flexbox(@dir:column;@justify:space-between;);
             height:100%;
-            padding:0 @column-pad;
 
             .title {
                 width:100%;
@@ -54,15 +51,14 @@
                 .flexed(0);
             }
 
+            .info-bar {
+                .flexbox(@dir:row;@justify:space-between;);
+            }
+
             & > * {
                 .transition(@prop:background);
-                background:fadeout(@base01, 40%);
                 padding:@row-pad @column-pad;
             }
-        }
-
-        &:hover .meta > * {
-            background:@base00;
         }
     }
 }
