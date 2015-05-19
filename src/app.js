@@ -13,6 +13,7 @@ requirejs.config({
         'jquery-ui-sortable': 'vendor/jquery-ui/ui/minified/jquery.ui.sortable.min',
         'jquery'            : 'vendor/jquery/dist/jquery.min',
         'jqui-touch-punch'  : 'vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.min',
+        'google-plus-signin': 'vendor/angular-directive.g-signin/google-plus-signin',
         'text'              : 'vendor/requirejs-text/text'
     },
     shim    : {
@@ -22,8 +23,17 @@ requirejs.config({
         'ng-resource': {
             deps: ['angular']
         },
+        'google-plus-signin': {
+            deps: ['angular']
+        },
         'ui-sortable': {
             deps: ['angular', 'jqui-touch-punch', 'jquery-ui-core', 'jquery-ui-widget', 'jquery-ui-mouse', 'jquery-ui-sortable']
+        },
+        'jquery-ui-sortable': {
+            deps: ['jquery-ui-mouse']
+        },
+        'jquery-ui-mouse': {
+            deps: ['jquery-ui-widget']
         },
         'jquery-ui-core': {
             deps: ['jquery']
