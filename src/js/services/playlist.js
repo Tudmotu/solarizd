@@ -107,7 +107,7 @@ define([
         }
 
         function setNowPlaying (idx) {
-            var mySound;
+            var endingSound;
             if (typeof idx === 'number')
                 nowPlaying = idx;
             else if (idx === null) {
@@ -116,8 +116,8 @@ define([
                     text: 'The playlist has ended.'
                 });
                 // http://soundbible.com/2062-Metal-Gong-1.html
-                mySound = new Audio('js/assets/gong.mp3');
-                mySound.play();
+                endingSound = new Audio('js/assets/gong.mp3');
+                endingSound.play();
             }
 
         }
