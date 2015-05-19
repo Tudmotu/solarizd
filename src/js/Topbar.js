@@ -90,7 +90,7 @@ define([
 
                 return definitions;
             }])
-            .directive('volume', ['$rootScope', 'youtubePlayer', function ($rootScope, youtubePlayer) {
+            .directive('volume', ['$rootScope', 'youtubePlayer', 'playListVolume', function ($rootScope, youtubePlayer, playListVolume) {
                 var definitions = {
                         restrict: 'E',
                         template: VolumeTemplate,
@@ -113,50 +113,30 @@ define([
                                 },
                                 setWidth = function (e) {
                                     var p = getCoordsPercent(e, _slider);
-                                    $scope.value = p;
-                                    youtubePlayer.setVolume(p);
 
-                                    if (!$scope.$$phase) $scope.$digest();
+                                    playListVolume.set(p);
                                 },
                                 setRelativeVolume = function (delta) {
-                                    var currentVolume = $scope.value;
-                                    var newVolume = currentVolume + delta;
-
-                                    if (currentVolume === undefined) {
-                                        return;
-                                    }
-
-                                    if (newVolume > 100) {
-                                        newVolume = 100;
-                                    }
-
-                                    if (newVolume < 0) {
-                                        newVolume = 0;
-                                    }
-
-                                    if (-100 < delta && delta < 100) {
-                                        $scope.value = newVolume;
-                                        youtubePlayer.setVolume(newVolume);
-
-                                        if (!$scope.$$phase) $scope.$digest();
-                                    }
-
+                                    playListVolume.setRelative(delta);
                                 };
 
+
                             $rootScope.$on('youtubePlayer:infoDelivery', function (e, data) {
-                                var changed = false;
-                                if (data.info.hasOwnProperty('muted')) {
-                                    $scope.isMuted = data.info.muted;
-                                    changed = true;
-                                }
-
-                                if (data.info.hasOwnProperty('volume')) {
-                                    $scope.value = data.info.volume;
-                                    changed = true;
-                                }
-
-                                if (changed && !$scope.$$phase) $scope.$digest();
+                                if (!$scope.$$phase) $scope.$digest();
                             });
+
+                            $scope.$watch(playListVolume.get, function (value) {
+                                $scope.value = value;
+                            });
+
+                            $scope.$watch(playListVolume.isMuted, function (value) {
+                                $scope.isMuted = value;
+                            });
+
+                            // Toggle mute
+                            $scope.toggleMute = function () {
+                                playListVolume.toggleMute();
+                            };
 
                             _slider.addEventListener('mousewheel', function (e) {
                                 var deltaY = e.wheelDeltaY
@@ -183,11 +163,6 @@ define([
                             document.addEventListener('mouseup', function (e) {
                                 active = false;
                             });
-
-                            // Toggle mute
-                            $scope.toggleMute = function () {
-                                youtubePlayer.toggleMute();
-                            };
                         }
                     };
 

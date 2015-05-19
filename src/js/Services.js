@@ -2,10 +2,11 @@ define([
     './services/apikey',
     './services/echo-nest',
     './services/playlist',
+    './services/playlistVolume',
     './services/youtube-api',
     './services/youtube-player',
     'angular'
-], function (Apikey, EchoNest, Playlist, YoutubeAPI, YoutubePlayer) {
+], function (Apikey, EchoNest, Playlist, PlaylistVolume, YoutubeAPI, YoutubePlayer) {
     return angular.module('services', [])
                     .constant('ApiKeysConf', {
                         services: [
@@ -20,5 +21,6 @@ define([
                     .service('echoNestAPI'   , EchoNest)
                     .service('youtubeAPI'    , YoutubeAPI)
                     .service('youtubePlayer' , YoutubePlayer)
+                    .service('playListVolume', PlaylistVolume)
                     .service('playList'      , Playlist);
 });
