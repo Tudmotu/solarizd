@@ -8,7 +8,13 @@ define([
 ], function (Apikey, EchoNest, Playlist, YoutubeAPI, YoutubePlayer) {
     return angular.module('services', [])
                     .constant('ApiKeysConf', {
-                        services: ['youtube', 'soundcloud', 'echonest']
+                        services: [
+                            'youtube',
+                            'youtube-oauth2',
+                            'google-client-id',
+                            'soundcloud',
+                            'echonest'
+                        ]
                     })
                     .service('ApiKey'        , Apikey)
                     .service('echoNestAPI'   , EchoNest)
