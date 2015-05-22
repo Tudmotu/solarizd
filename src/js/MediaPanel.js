@@ -1,12 +1,13 @@
 define([
     'text!template_dir/media-panel/panel.html',
     'text!template_dir/media-panel/youtube.html',
-	'text!template_dir/media-panel/related.html',
+    'text!template_dir/media-panel/related.html',
     './directives/sol-vibrate',
+    './MediaBar',
     './Services',
     'angular'
 ], function (PanelTemplate, YoutubeTemplate, RelatedTemplate) {
-    return angular.module('ui.media-panel', ['solVibrate'])
+    return angular.module('ui.media-panel', ['solVibrate', 'ui.mediaBar'])
             .directive('mediaPanel', ['playList', function (playList) {
                 var definitions = {
                         restrict: 'E',

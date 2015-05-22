@@ -31,20 +31,22 @@
         }
     }
 
+    .tab:not(.current-panel) {
+      display:none;
+    }
     .media {
         width:100%;
-        .flexed(0);
-        .flexbox(@align:center);
+        .flexed(1);
+        .flexbox(@align:center; @dir:column; @justify:center);
         .transition(@easing:ease-out);
 
         iframe {
+            .flexed(1);
             max-width:100%;
-            max-height:100%;
-            .flexed(0);
         }
     }
 	.related-videos {
-        height:(4 * @row);
+        height:(2 * @row);
         box-shadow:inset 0px @thick-border @thick-border -@thick-border @black;
         overflow-y:auto;
         .mixin-related-videos;
@@ -73,4 +75,3 @@
         }
     }
 }
-
