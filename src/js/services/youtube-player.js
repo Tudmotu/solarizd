@@ -126,19 +126,24 @@ define([
         };
 
         this.mute = function () {
-            player.mute();
+            if (player)
+                player.mute();
         };
         this.unmute = function () {
-            player.unMute();
+            if (player)
+                player.unMute();
         };
         this.isMuted = function () {
-            player.isMuted();
+            if (player)
+                player.isMuted();
         };
         this.setVolume = function (val) {
-            player.setVolume(val);
+            if (player)
+                player.setVolume(val);
         };
         this.getVolume = function () {
-            player.getVolume();
+            if (player)
+                player.getVolume();
         };
     }];
 });

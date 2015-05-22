@@ -3,7 +3,7 @@ define([
 ], function () {
     var hasLS = !!window.localStorage;
 
-    return ['youtubePlayer', 'youtubeAPI', '$rootScope', function (ytPlayer, ytAPI, $rootScope) {
+    return ['youtubePlayer', 'youtubeAPI', 'playListVolume', '$rootScope', function (ytPlayer, ytAPI, playListVolume, $rootScope) {
         var nowPlaying  = null,
             st          = {
                 UNKNOWN: -1,
@@ -107,17 +107,18 @@ define([
         }
 
         function setNowPlaying (idx) {
-            var mySound;
+            var endingSound;
             if (typeof idx === 'number')
                 nowPlaying = idx;
             else if (idx === null) {
-                nowPlaying = null;
+                //nowPlaying = null;
                 $rootScope.$broadcast('notify', {
                     text: 'The playlist has ended.'
                 });
                 // http://soundbible.com/2062-Metal-Gong-1.html
-                mySound = new Audio('js/assets/gong.mp3');
-                mySound.play();
+                endingSound = new Audio('js/assets/gong.mp3');
+                endingSound.volume = playListVolume.get() / 100;
+                endingSound.play();
             }
 
         }
