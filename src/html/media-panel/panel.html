@@ -1,7 +1,9 @@
 <section class="media-panel" ng-class="{ cued: isCued }">
     <div class="close-cue" ng-click="setIsCued(false)" sol-vibrate></div>
-    <div class="media">
+    <media-bar></media-bar>
+    <div id="media-panel-video" class="media tab">
         <media-player id="media-player"></media-player>
-    </div> 
-	<playlist-related></playlist-related>
-</section>  
+    </div>
+
+	 <playlist-related id="media-panel-related" class="tab"></playlist-related>
+</section>

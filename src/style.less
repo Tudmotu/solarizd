@@ -108,13 +108,15 @@ body {
         transform:translateY(100%);
     }
 }
+#main-tabs {
+  display:none
+}
 
 .panel-switcher {
     .flexbox;
     .transition(@easing:ease-in; @duration: .2s; @delay:.2s);
     background:@theme-background;
     border-bottom:solid 1px fadeout(@base02, 50%);
-    display:none;
     transition-property:transform, opacity;
 
     .loading & {
@@ -156,8 +158,9 @@ body {
     }
 }
 
+
 @media (max-width: 1280px), (max-device-width: 1280px) {
-    .panel-switcher {
+    #main-tabs {
         display:flex;
     }
     .media-mixin () {
