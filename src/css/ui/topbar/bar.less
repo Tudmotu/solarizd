@@ -57,8 +57,8 @@
     .media-controls {
         .flexed(1);
         .flexbox;
-        
-        
+
+
         @media (max-device-width: 960px),(max-width: 960px) {
             .flexed(0);
             display:flex;
@@ -112,7 +112,7 @@
         width:33%;
         .flexed(0);
         .flexbox(@align:center);
-        
+
         @media (max-device-width: 960px),(max-width: 960px) {
             .flexed(1);
             display:flex;
@@ -126,6 +126,7 @@
             margin:0 @column-pad;
             .ui-topbar-button;
             .flexed(0);
+            .flexbox(@align:center);
 
             &:before {
                 .icon(@fa-var-volume-up);
