@@ -36,47 +36,30 @@
 
     .input-wrap {
         height:@row;
+        padding:(2 * @row-pad) (2 * @column-pad);
+        .ui-hseparator;
         .flexed(0);
         .flexbox;
 
         &:before {
             .icon(@fa-var-search);
-            width:(@column / 2);
-            line-height:@row;
-            font-size:@huge-text;
-            background:@red;
-            cursor:pointer;
-            padding:@thick-border;
-            .inset-text(darken(@red, 25%), lighten(@red, 15%));
+            font-size:@large-text;
+            background:@base2;
+            color:@base01;
+            padding:0 (2 * @column-pad);
+            border-radius:5px 0px 0px 5px;
+            border:solid 1px @gray;
+            border-right:none;
             .flexed(0);
             .flexbox(@align:center);
         }
 
-        &:after {
-            content:"";
-            border:solid @column-pad transparent;
-            border-right-color:@red;
-            border-bottom-color:@red;
-            position:absolute;
-            bottom:0;
-            right:0;
-        }
-
         .input {
             padding-left:@column-pad;
-            line-height:@row;
-            font-size:@huge-text;
-            border:none;
-            border-bottom:solid @thick-border @red;
-            /*box-shadow:inset @medium-border 0px 0px darken(@red, 7.5%);*/
+            border-radius:0px 5px 5px 0px;
+            border:solid 1px @gray;
             .flexed(1);
             .no_appearance;
-            .transition(@duration:0.2s);
-
-            /*&:focus {*/
-                /*box-shadow:inset 0px 0px @thick-border @blue;*/
-            /*}*/
-
         }
 
     }
