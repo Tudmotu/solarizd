@@ -202,8 +202,6 @@
         .mover {
             .action(@fa-var-arrows);
             @media (max-device-width:960px) {
-                padding-left:0;
-                /*padding-right:0;*/
                 order:1;
             }
         }
@@ -212,6 +210,14 @@
             .flexed(0);
             .flexbox;
         }
+
+        .time {
+            .flexed(0);
+            @media (max-device-width:960px) {
+                display:none;
+            }
+        }
+
         .flag {
             font-size:(@normal-text);
             border:solid (0.5 * @medium-border) @white;
