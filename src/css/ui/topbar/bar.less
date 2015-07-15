@@ -2,7 +2,7 @@
 
 .mixin-topbar () {
     .flexbox(@justify:space-between;@wrap:wrap);
-    @bg:@theme-background-dark;
+    @bg:@theme-topbar-bg;
     @title:@white;
     background:@bg;
     padding:@row-pad 0;
@@ -57,8 +57,8 @@
     .media-controls {
         .flexed(1);
         .flexbox;
-        
-        
+
+
         @media (max-device-width: 960px),(max-width: 960px) {
             .flexed(0);
             display:flex;
@@ -112,7 +112,7 @@
         width:33%;
         .flexed(0);
         .flexbox(@align:center);
-        
+
         @media (max-device-width: 960px),(max-width: 960px) {
             .flexed(1);
             display:flex;
@@ -126,6 +126,7 @@
             margin:0 @column-pad;
             .ui-topbar-button;
             .flexed(0);
+            .flexbox(@align:center);
 
             &:before {
                 .icon(@fa-var-volume-up);
@@ -161,11 +162,10 @@
         }
 
         .slider {
-            background:@base00;
-            height:@row-pad;
-            margin:0 @column-pad;
-            cursor:pointer;
+            .ui-slider(@color:@cyan;@thumb:@base00);
             .flexed(1);
+            height:(2*@row-pad);
+            margin:0 @column-pad;
 
             .thumb {
                 position:absolute;
@@ -175,26 +175,7 @@
                 margin:auto;
                 width:50%;
                 height:100%;
-                background:linear-gradient(to bottom, @blue, @cyan);
-                border: solid @thin-border @base01;
                 box-sizing:content-box;
-
-                &:after {
-                    @dia:@huge-text;
-                    content:"";
-                    width:@dia;
-                    height:@dia;
-                    border:solid @medium-border @base1;
-                    border-radius:50%;
-                    background:@base01;
-                    display:block;
-                    box-sizing:border-box;
-                    position:absolute;
-                    right:-(@dia / 2);
-                    top:0;
-                    bottom:0;
-                    margin:auto;
-                }
             }
         }
     }

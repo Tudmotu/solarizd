@@ -26,7 +26,7 @@ menu {
 }
 
 html {
-    font-family:Ubuntu, sans-serif;
+    font-family:"Open Sans", sans-serif;
     font-size:@root-font-size;
 
     @media (max-device-width: 1280px) {
@@ -118,6 +118,7 @@ body {
     background:@theme-background;
     border-bottom:solid 1px fadeout(@base02, 50%);
     transition-property:transform, opacity;
+    height:@row;
 
     .loading & {
         transform:translateY(-100%);
@@ -125,18 +126,37 @@ body {
     }
 
     .item {
+        .flexed(1);
+        .flexbox;
         font-size:(@huge-text);
         text-align:center;
-        padding:@row-pad @column-pad;
         cursor:pointer;
         color:@white;
-        /*border-top:solid @thick-border @base02;*/
-        .flexed(1);
 
         .title {
-            .flexbox(@dir:column);
+            .flexed(1);
+            .flexbox(@align:center);
+            position:static;
+
             &.active {
                 background:fadeout(@white,75%);
+
+                &:after {
+                    width:100%;
+                }
+            }
+
+            &:after {
+                .transition(@duration:.2s; @prop:width);
+                content:"";
+                position:absolute;
+                bottom:0;
+                left:0;
+                right:0;
+                margin:auto;
+                height:@thick-border;
+                background:@base2;
+                width:0;
             }
         }
 
