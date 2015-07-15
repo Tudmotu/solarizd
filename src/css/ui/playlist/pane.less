@@ -22,7 +22,6 @@
     .playlist-progress {
         width:100%;
         height:@row;
-        background:transparent;
         color:@white;
         font-size:@large-text;
         .flexed(0);
@@ -39,6 +38,7 @@
 
         .progress {
             .flexed(1);
+            .ui-progressbar(@color:@theme-progressbar-color);
         }
     }
 
