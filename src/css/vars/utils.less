@@ -93,29 +93,45 @@
 .ui-list-item(@odd-bg:lighten(@base02, 25%);@even-bg:lighten(@base02, 15%)) {
     color:@white;
     .ui-hseparator;
+}
 
-    /*&:active {*/
-        /*text-shadow:0px 0px @thick-border @white;*/
-    /*}*/
-    /*@even-border:darken(@odd-bg,10%);*/
-    /*@odd-border:darken(@even-bg,10%);*/
-    /*background:@even-border;*/
-    /*box-shadow:0px -1px 0px 0px @odd-bg,*/
-                /*0px -2px 0px 0px darken(@odd-border, 5%);*/
-    /*color:fadeout(@base2, 25%);*/
-    /*.text-outline(@base02);*/
+.ui-slider(@color:@base02, @background:@base00, @border:@base01, @thumb:'') {
+    @radius:@column-pad;
+    background:@background;
+    border-radius:@radius;
+    cursor:pointer;
 
-    /*&:nth-child(odd) {*/
-        /*background:@odd-border;*/
-    /*}*/
+    .thumb {
+        background:@color;
+        background-image:linear-gradient(to bottom,
+                         transparent @thin-border,
+                         fadeout(@black, 75%) @thin-border,
+                         transparent);
+        border: solid @thin-border @border;
+        border-radius:@radius;
 
-    /*&:active {*/
-        /*color:@base00;*/
-        /*text-shadow:none;*/
-        /*background:@odd-bg;*/
 
-        /*&:nth-child(even) {*/
-            /*background:@even-bg;*/
-        /*}*/
-    /*}*/
+        & when (iscolor(@thumb)) {
+            &:after {
+                @dia:@huge-text;
+                content:"";
+                width:@dia;
+                height:@dia;
+                border:solid @thin-border lighten(@thumb,25%);
+                border-left-width:0;
+                border-top-width:0;
+                border-radius:50%;
+                background:radial-gradient(circle at (-@thick-border * 2) -@thick-border,
+                    lighten(@thumb, 50%), @thumb);
+                box-shadow:@thin-border (2 * @thin-border) @thick-border fadeout(@black, 75%);
+                display:block;
+                box-sizing:border-box;
+                position:absolute;
+                right:-(@dia / 2);
+                top:0;
+                bottom:0;
+                margin:auto;
+            }
+        }
+    }
 }
