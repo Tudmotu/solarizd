@@ -111,7 +111,7 @@ define([
             if (typeof idx === 'number')
                 nowPlaying = idx;
             else if (idx === null) {
-                //nowPlaying = null;
+                nowPlaying = null;
                 $rootScope.$broadcast('notify', {
                     text: 'The playlist has ended.'
                 });
@@ -150,6 +150,7 @@ define([
         };
 
         this.clearList = function () {
+            this.stop();
             this.playlist.length = 0;
             this.saveList();
         };
