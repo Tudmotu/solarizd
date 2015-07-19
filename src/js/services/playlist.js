@@ -229,7 +229,6 @@ define([
             if (fixPlay) {
                 if (isLast) {
                     this.stop();
-                    this.clear();
                 }
                 else {
                     this.play(idx, true);
@@ -268,10 +267,6 @@ define([
             ytPlayer.seek(0);
             ytPlayer.stop();
             setNowPlaying(null);
-        };
-
-        this.clear = function () {
-            ytPlayer.clear();
         };
 
         this.next = function () {

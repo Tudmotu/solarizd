@@ -91,11 +91,6 @@ define([
             player.stopVideo();
         };
 
-        this.clear = function () {
-            // FIXME: Doesn't seem to really work... =\
-            player.clearVideo();
-        };
-
         this.loadVideo = function (vid) {
             this.nowPlaying.id = vid;
             playerDfrd = $q.defer();
