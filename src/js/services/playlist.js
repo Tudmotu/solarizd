@@ -261,7 +261,7 @@ define([
 
         this.pause = function () {
             ytPlayer.pause();
-            setNowPlaying(false);
+            //setNowPlaying(false);
         };
 
         this.stop = function () {
