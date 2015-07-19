@@ -115,8 +115,7 @@ define([
                 $rootScope.$broadcast('notify', {
                     text: 'The playlist has ended.'
                 });
-                // http://soundbible.com/2062-Metal-Gong-1.html
-                endingSound = new Audio('js/assets/gong.mp3');
+                endingSound = new Audio('js/assets/indian-bell-chime.wav');
                 endingSound.volume = playListVolume.get() / 100;
                 endingSound.play();
             }
