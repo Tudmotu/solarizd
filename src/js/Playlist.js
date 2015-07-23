@@ -58,6 +58,17 @@ define([
                                 playList.clearList();
                             };
 
+                            $scope.itemMatch = function (item, query) {
+                                var matches;
+                                if (!query) return true;
+
+                                matches = item.snippet
+                                    .title.toLowerCase()
+                                    .indexOf(query.toLowerCase()) >= 0;
+
+                                return matches || undefined;
+                            };
+
                             if (playList.playlist.length) {
                                 $rootScope.$broadcast('setCurrentView', 'playlist');
                             }

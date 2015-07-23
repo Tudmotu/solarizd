@@ -1,4 +1,5 @@
 @import "../../vars/all";
+@import "../kit/search-input";
 @import "list";
 
 .mixin-search-pane () {
@@ -23,7 +24,7 @@
             left: 0;
             right: 0;
             margin: auto;
-            font-size:(3 * @row);
+            font-size:(2 * @row);
             width: 1em;
             height: 1em;
             text-align:center;
@@ -34,34 +35,11 @@
         }
     }
 
-    .input-wrap {
+    .search-input {
         height:@row;
         padding:(2 * @row-pad) (2 * @column-pad);
         .ui-hseparator;
         .flexed(0);
-        .flexbox;
-
-        &:before {
-            .icon(@fa-var-search);
-            font-size:@large-text;
-            background:@base2;
-            color:@base01;
-            padding:0 (2 * @column-pad);
-            border-radius:5px 0px 0px 5px;
-            border:solid 1px @gray;
-            border-right:none;
-            .flexed(0);
-            .flexbox(@align:center);
-        }
-
-        .input {
-            padding-left:@column-pad;
-            border-radius:0px 5px 5px 0px;
-            border:solid 1px @gray;
-            .flexed(1);
-            .no_appearance;
-        }
-
     }
 
     .result-list {

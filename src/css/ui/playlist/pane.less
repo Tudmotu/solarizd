@@ -1,5 +1,5 @@
 @import "../../vars/all";
-
+@import "../kit/search-input";
 
 .mixin-playlist-pane () {
     background:@theme-background;
@@ -17,6 +17,10 @@
         font-size:@large-text;
         height:(@row);
         color:@white;
+
+        &:not([visible="true"]) {
+            display:none;
+        }
     }
 
     .playlist-progress {
@@ -46,7 +50,7 @@
 
     .playlist-actions {
         .flexed(0);
-        .flexbox(@justify:flex-start;@align:stretch);
+        .flexbox(@justify:space-between;@align:stretch);
         .ui-hseparator;
         height:@row;
         padding:@row-pad 0;
@@ -65,6 +69,10 @@
                 font-size:@huge-text;
                 text-align:right;
             }
+        }
+
+        &> .search-input {
+            margin:0 @column-pad;
         }
     }
 
