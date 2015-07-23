@@ -17,14 +17,11 @@
         flex-shrink:0;
         .flexbox(@align:center; @justify:flex-start);
 
-        &:before {
-            content:"";
+        .app-logo {
+            .flexed(0);
             width:@row;
             height:@row;
-            background:url('css/assets/logo.svg');
-            padding:0 @column-pad;
-            background-size:100% 100%;
-            .flexed(0);
+            margin-right:@column-pad;
             flex-shrink:1;
         }
 
