@@ -28,7 +28,7 @@
                 sol-slide-rm-after="savePlaylist(); $emit('closeTrackActions')"
                 data-index="{{$index}}"
                 data-video-id="{{item.id}}"
-                data-title="{{itemMatch(item, query) + ' - ' + item.snippet.title}}"
+                data-title="{{item.snippet.title}}"
                 data-thumbnail="{{item.snippet.thumbnails.default.url}}"
                 data-description="{{item.snippet.description}}"
                 data-now-playing="item.nowPlaying"
