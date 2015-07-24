@@ -1,6 +1,6 @@
 {
   "name": "solarizd",
-  "version": "4.4.0",
+  "version": "1.0.0",
   "authors": [
     "Yotam Bar-On <tudmotu@gmail.com>"
   ],
@@ -25,19 +25,19 @@
     "requirejs": "~2.1.11"
   },
   "devDependencies": {
-    "angular": "~1.2.x",
-    "less.js": "~1.7.0",
+    "angular": "~1.4.x",
+    "less.js": "~2.5.x",
     "ng-resource": "~0.0.2",
     "prefixfree": "*",
     "requirejs-text": "~2.0.12",
-    "fontawesome": "4.2.0",
-    "mobile-detect": "hgoebl/mobile-detect.js#~0.2.0",
-    "jquery-ui": "~1.10.4",
-    "angular-ui-sortable": "~0.12.6",
+    "fontawesome": "4.3.0",
+    "mobile-detect": "hgoebl/mobile-detect.js#~1.2.x",
+    "jquery-ui": "~1.10.x",
+    "angular-ui-sortable": "~0.13.x",
     "jquery-ui-touch-punch": "furf/jquery-ui-touch-punch",
     "angular-directive.g-signin": "~0.1.1"
   },
   "resolutions": {
-    "angular": "~1.2.x"
+    "angular": "~1.4.x"
   }
 }

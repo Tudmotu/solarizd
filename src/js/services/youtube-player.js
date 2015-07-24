@@ -1,7 +1,7 @@
 define([
     'vendor/mobile-detect/mobile-detect',
     'angular'
-], function () {
+], function (MobileDetect) {
     return ['$sce', '$q', '$rootScope', function ($sce, $q, $rootScope) {
         var that         = this,
             playerDfrd   = $q.defer(),

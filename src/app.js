@@ -48,7 +48,7 @@ requirejs([
     'modules/Application',
     'vendor/mobile-detect/mobile-detect',
     'angular'
-], function (Appliction) {
+], function (Appliction, MobileDetect) {
     function bootstrapAngular () {
         var htmlElem = document.getElementsByTagName('html')[0],
             contentElem = document.getElementById('content');
