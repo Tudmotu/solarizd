@@ -28,7 +28,7 @@ define([
                             };
 
                           setTimeout(function (){
-                            $scope.switch('media-panel-related', 'related')
+                            $scope.switch('media-panel-related', 'related');
                           }, 10);
                         }
 

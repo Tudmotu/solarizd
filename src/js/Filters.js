@@ -5,16 +5,20 @@ define([
     .filter('youtubeTime', function () {
         return function (input) {
             var parts = [],
-                seconds = input.match(/\d+S/),
-                minutes = input.match(/\d+M/),
-                hours = input.match(/\d+H/);
+                seconds = input.match(/(\d+)S/),
+                minutes = input.match(/(\d+)M/),
+                hours = input.match(/(\d+)H/);
 
-            if (hours) parts.push(hours[0].replace('H', ''));
-            if (minutes) parts.push(minutes[0].replace('M', ''));
+            if (hours) parts.push(hours[1]);
+
             if (!minutes) parts.push('00');
+            else if (minutes[1].length === 1 && hours)
+                parts.push('0' + minutes[1]);
+            else parts.push(minutes[1]);
+
             if (!seconds) parts.push('00');
-            else if (seconds[0].length === 2) parts.push('0' + seconds[0].replace('S', ''));
-            else parts.push(seconds[0].replace('S', ''));
+            else if (seconds[1].length === 1) parts.push('0' + seconds[1]);
+            else parts.push(seconds[1]);
 
             return parts.join(':');
         };
@@ -27,7 +31,7 @@ define([
                 hours = Math.floor(minutes / 60),
                 seconds = (time % 60),
                 timestr = '';
-            
+
             minutes -= hours * 60;
             if (hours >= 1)
                 timestr += hours + ':';
@@ -38,7 +42,7 @@ define([
             seconds = seconds.toString().length === 1 ?
                         '0' + seconds :
                         seconds;
-                            
+
             timestr += minutes + ':';
             timestr += seconds;
             return timestr;
@@ -63,7 +67,7 @@ define([
             var str = input.toString(),
                 lc = str.toLowerCase();
                 output = lc.replace(/\s+/g, '-');
-            
+
             return output;
         };
     });

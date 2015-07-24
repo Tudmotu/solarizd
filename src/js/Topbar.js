@@ -139,7 +139,7 @@ define([
                             };
 
                             _slider.addEventListener('mousewheel', function (e) {
-                                var deltaY = e.wheelDeltaY
+                                var deltaY = e.wheelDeltaY;
                                 if (deltaY > 0) {
                                     setRelativeVolume(5);
                                 }

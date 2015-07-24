@@ -126,6 +126,28 @@ module.exports = function (grunt) {
                 ],
                 dest: 'target/manifest.appcache'
             }
+        },
+        karma: {
+            dev: {
+                configFile: 'karma.conf.js',
+                browsers: ['Chrome']
+            },
+            test: {
+                configFile: 'karma.conf.js',
+                singleRun: true,
+                browsers: ['Chrome']
+            },
+            continuous: {
+                configFile: 'karma.conf.js',
+                singleRun: true,
+                browsers: ['PhantomJS']
+            }
+        },
+        jshint: {
+            all: [
+                'src/js/**/*.js',
+                'src/ui/**/*.js'
+            ]
         }
     });
 
@@ -139,6 +161,12 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-manifest-ext');
+    grunt.loadNpmTasks('grunt-karma');
+
+    grunt.registerTask('test', [
+        'jshint:all',
+        'karma:continuous'
+    ]);
 
     grunt.registerTask('build', [
         'copy:build',
@@ -149,5 +177,10 @@ module.exports = function (grunt) {
         'requirejs:build',
         'clean:build',
         'manifest:build'
+    ]);
+
+    grunt.registerTask('release', [
+        'test',
+        'build'
     ]);
 };
