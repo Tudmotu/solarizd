@@ -1,5 +1,6 @@
 node_modules/*
 src/vendor/*
 target/*
+test-reports/*
 src/apikeys.json
 target/apikeys.json

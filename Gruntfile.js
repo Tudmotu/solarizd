@@ -137,9 +137,14 @@ module.exports = function (grunt) {
                 singleRun: true,
                 browsers: ['Chrome']
             },
-            continuous: {
+            ci: {
                 configFile: 'karma.conf.js',
                 singleRun: true,
+                reporters: ['dots', 'junit'],
+                junitReporter: {
+                    outputDir: 'test-reports',
+                    outputFile: 'test-results.xml'
+                },
                 browsers: ['PhantomJS']
             }
         },
@@ -165,7 +170,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('test', [
         'jshint:all',
-        'karma:continuous'
+        'karma:ci'
     ]);
 
     grunt.registerTask('build', [
