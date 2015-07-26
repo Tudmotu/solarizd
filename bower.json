@@ -34,8 +34,7 @@
     "mobile-detect": "hgoebl/mobile-detect.js#~1.2.x",
     "jquery-ui": "~1.10.x",
     "angular-ui-sortable": "~0.13.x",
-    "jquery-ui-touch-punch": "furf/jquery-ui-touch-punch",
-    "angular-directive.g-signin": "~0.1.1"
+    "jquery-ui-touch-punch": "furf/jquery-ui-touch-punch"
   },
   "resolutions": {
     "angular": "~1.4.x"
