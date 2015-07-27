@@ -16,14 +16,17 @@ define([
         'ui.panel-switcher', 
         'ui.playlist',
         'services'
-        ]).run([
-            '$rootScope', 
-            'ApiKey',
-            'youtubeAPI',
-            'echoNestAPI',
-            function ($rootScope, ApiKey) {
-            ApiKey.fetchKeys().then(function () {
-                document.body.classList.remove('loading');
-            });
+        ]).directive('solarizdApp', ['ApiKey', function (ApiKey) {
+            return {
+                restrict: 'E',
+                templateUrl: '/html/app.html',
+                replace: true,
+                scope: true,
+                link: function ($scope, $element) {
+                    ApiKey.fetchKeys().then(function () {
+                        $element[0].classList.add('loaded');
+                    });
+                }
+            };
         }]);
 });
