@@ -1,7 +1,7 @@
 define([
     'text!template_dir/panel-switcher/media-bar.html',
     './directives/sol-vibrate',
-    'angular'
+    '../vendor/angular/angular'
 ], function (MediaBar) {
     return angular.module('ui.mediaBar', ['services', 'solVibrate'])
             .directive('mediaBar', [ function () {

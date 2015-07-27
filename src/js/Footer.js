@@ -3,7 +3,7 @@ define([
     'text!template_dir/footer/bar.html',
     'text!template_dir/footer/apikey.html',
     './Services',
-    'angular'
+    '../vendor/angular/angular'
 ], function (TopbarTemplate, FooterTemplate, ApikeyInputTemplate) {
     return angular.module('ui.footer', ['services', 'filters'])
             .directive('appFooter', ['$rootScope', '$http', function ($rootScope, $http) {

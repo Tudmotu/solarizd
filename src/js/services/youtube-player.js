@@ -1,6 +1,5 @@
 define([
-    'vendor/mobile-detect/mobile-detect',
-    'angular'
+    'vendor/mobile-detect/mobile-detect'
 ], function (MobileDetect) {
     return ['$sce', '$q', '$rootScope', function ($sce, $q, $rootScope) {
         var that         = this,

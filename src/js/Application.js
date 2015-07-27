@@ -5,8 +5,7 @@ define([
     './Playlist',
     './MediaPanel',
     './PanelSwitcher',
-    'angular',
-    'ng-resource'
+    '../vendor/angular/angular'
 ], function () {
     return angular.module('Application', [
         'ngResource', 

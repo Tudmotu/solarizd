@@ -1,6 +1,6 @@
 define([
     '../lib/css-prefix',
-    'angular'
+    '../../vendor/angular/angular'
 ], function (cssPrefix) {
     function translateElement (el, movement) {
         var prefixedProp = cssPrefix('transform'),

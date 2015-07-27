@@ -1,5 +1,4 @@
 define([
-    'angular'
 ], function () {
     return ['$rootScope', '$http', 'ApiKeysConf', function ($rootScope, $http, Conf) {
         var KEYS = {};

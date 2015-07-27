@@ -1,5 +1,4 @@
 define([
-    'angular'
 ], function () {
     return ['$rootScope', 'youtubePlayer', function ($rootScope, youtubePlayer) {
         var isMuted = false;

@@ -1,50 +1,47 @@
 requirejs.config({
     baseUrl : '.',
     paths   : {
-        'lib'               : 'vendor',
-        'modules'           : 'js',
         'template_dir'      : 'html',
-        'angular'           : 'vendor/angular/angular',
-        'ng-resource'       : 'vendor/ng-resource/dist/ng-resource',
-        'ui-sortable'       : 'vendor/angular-ui-sortable/sortable.min',
-        'jquery-ui-core'    : 'vendor/jquery-ui/ui/minified/jquery.ui.core.min',
-        'jquery-ui-widget'  : 'vendor/jquery-ui/ui/minified/jquery.ui.widget.min',
-        'jquery-ui-mouse'   : 'vendor/jquery-ui/ui/minified/jquery.ui.mouse.min',
-        'jquery-ui-sortable': 'vendor/jquery-ui/ui/minified/jquery.ui.sortable.min',
-        'jquery'            : 'vendor/jquery/dist/jquery.min',
-        'jqui-touch-punch'  : 'vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.min',
-        'text'              : 'vendor/requirejs-text/text'
+        'text'              : './vendor/requirejs-text/text'
     },
     shim    : {
-        'angular': {
-            deps: ['jquery']
+        'vendor/angular/angular': {
+            deps: ['vendor/jquery/dist/jquery']
         },
-        'ng-resource': {
-            deps: ['angular']
+        'vendor/ng-resource/dist/ng-resource': {
+            deps: ['vendor/angular/angular']
         },
-        'ui-sortable': {
-            deps: ['angular', 'jqui-touch-punch', 'jquery-ui-core', 'jquery-ui-widget', 'jquery-ui-mouse', 'jquery-ui-sortable']
+        'vendor/angular-ui-sortable/sortable': {
+            deps: [
+                'vendor/angular/angular',
+                'vendor/jquery-ui-touch-punch/jquery.ui.touch-punch',
+                'vendor/jquery-ui/ui/jquery.ui.sortable']
         },
-        'jquery-ui-sortable': {
-            deps: ['jquery-ui-mouse']
+        'vendor/jquery-ui/ui/jquery.ui.sortable': {
+            deps: ['vendor/jquery-ui/ui/jquery.ui.mouse']
         },
-        'jquery-ui-mouse': {
-            deps: ['jquery-ui-widget']
+        'vendor/jquery-ui/ui/jquery.ui.mouse': {
+            deps: ['vendor/jquery-ui/ui/jquery.ui.widget']
         },
-        'jquery-ui-core': {
-            deps: ['jquery']
+        'vendor/jquery-ui/ui/jquery.ui.widget': {
+            deps: ['vendor/jquery-ui/ui/jquery.ui.core']
         },
-        'jqui-touch-punch': {
-            deps: ['jquery-ui-widget', 'jquery-ui-mouse']
+        'vendor/jquery-ui/ui/jquery.ui.core': {
+            deps: ['vendor/jquery/dist/jquery']
+        },
+        'vendor/jquery-ui-touch-punch/jquery.ui.touch-punch': {
+            deps: ['vendor/jquery-ui/ui/jquery.ui.widget', 'vendor/jquery-ui/ui/jquery.ui.mouse']
         }
     }
 });
 
 requirejs([
-    'modules/Application',
-    'vendor/mobile-detect/mobile-detect',
-    'angular'
+    './js/Application',
+    './vendor/mobile-detect/mobile-detect',
+    './vendor/ng-resource/dist/ng-resource',
+    './vendor/angular/angular'
 ], function (Appliction, MobileDetect) {
+    console.debug(Appliction);
     function bootstrapAngular () {
         var htmlElem = document.getElementsByTagName('html')[0],
             contentElem = document.getElementById('content');

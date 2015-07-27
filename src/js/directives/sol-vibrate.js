@@ -1,5 +1,5 @@
 define([
-    'angular'
+    '../../vendor/angular/angular'
 ], function () {
     var hasVibrate = typeof window.navigator.vibrate === 'function';
     var VIBE_LENGTH = 100;

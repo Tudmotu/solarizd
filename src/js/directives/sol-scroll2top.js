@@ -1,5 +1,5 @@
 define([
-    'angular'
+    '../../vendor/angular/angular'
 ], function () {
     return angular.module('solScroll2top', [])
     .directive('solScroll2top', [function () {

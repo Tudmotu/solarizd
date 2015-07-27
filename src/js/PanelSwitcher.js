@@ -1,7 +1,7 @@
 define([
     'text!template_dir/panel-switcher/bar.html',
     './directives/sol-vibrate',
-    'angular'
+    '../vendor/angular/angular'
 ], function (BarTemplate) {
     return angular.module('ui.panel-switcher', ['services', 'solVibrate'])
             .directive('panelSwitcher', ['playList', function (playList) {

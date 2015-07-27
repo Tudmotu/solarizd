@@ -5,7 +5,7 @@ define([
     './services/playlistVolume',
     './services/youtube-api',
     './services/youtube-player',
-    'angular'
+    '../vendor/angular/angular'
 ], function (Apikey, EchoNest, Playlist, PlaylistVolume, YoutubeAPI, YoutubePlayer) {
     return angular.module('services', [])
                     .constant('ApiKeysConf', {

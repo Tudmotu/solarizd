@@ -4,7 +4,7 @@ define([
     'text!template_dir/topbar/volume.html',
     'text!template_dir/topbar/notification.html',
     './directives/sol-vibrate',
-    'angular'
+    '../vendor/angular/angular'
 ], function (TopbarTemplate, ControlsTemplate, VolumeTemplate, NotificationTemplate) {
     // duplication of code from Playlist.js with minor change
     function mouseCoords (event, targetElement) {

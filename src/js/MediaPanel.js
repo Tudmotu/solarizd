@@ -5,7 +5,7 @@ define([
     './directives/sol-vibrate',
     './MediaBar',
     './Services',
-    'angular'
+    '../vendor/angular/angular'
 ], function (PanelTemplate, YoutubeTemplate, RelatedTemplate) {
     return angular.module('ui.media-panel', ['solVibrate', 'ui.mediaBar'])
             .directive('mediaPanel', ['playList', function (playList) {

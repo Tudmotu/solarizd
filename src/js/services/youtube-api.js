@@ -1,5 +1,4 @@
 define([
-    'angular'
 ], function () {
     var basePath =  'https://www.googleapis.com/youtube/v3',
         maxResults = 50;

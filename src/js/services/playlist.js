@@ -1,5 +1,4 @@
 define([
-    'angular'
 ], function () {
     var hasLS = !!window.localStorage;
 

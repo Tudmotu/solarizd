@@ -1,5 +1,4 @@
 define([
-    'angular'
 ], function () {
     var baseUrl =  'http://developer.echonest.com/api/v4/:type/:method';
 

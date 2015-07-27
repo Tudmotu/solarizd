@@ -1,5 +1,4 @@
 define([
-    'angular'
 ], function () {
     return ['$rootScope', '$http', '$q', 'echoNestAPI', function ($rootScope, $http, $q, echoNest) {
         this.fetch = function (title, artist) {

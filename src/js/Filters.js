@@ -1,5 +1,5 @@
 define([
-    'angular'
+    '../vendor/angular/angular'
 ], function () {
     return angular.module('filters', [])
     .filter('youtubeTime', function () {

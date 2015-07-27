@@ -5,9 +5,9 @@ define([
     './directives/sol-vibrate',
     './directives/sol-slide-rm',
     './directives/sol-scroll2top',
-    'ui-sortable',
+    '../vendor/angular-ui-sortable/sortable',
     './Services',
-    'angular'
+    '../vendor/angular/angular'
 ], function (PaneTemplate, ProgressTemplate, ItemTemplate) {
     function mouseCoords (event) {
         var totalOffsetX = 0,
