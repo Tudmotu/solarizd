@@ -53,10 +53,6 @@ body {
     .flexed(0);
     .mixin-topbar;
     .transition(@prop:transform; @easing:ease-in; @duration:.3s);
-
-    .loading & {
-        transform:translateY(-100%);
-    }
 }
 
 #main-view {
@@ -72,41 +68,24 @@ body {
     .mixin-search-pane;
     .transition(@prop:transform; @easing:ease-in; @duration:.3s;
     @delay:.4s);
-
-    .loading & {
-        transform:translateX(-100%);
-    }
 }
 
 #media-panel {
     width:(@column * 3);
     .flexed(0);
     .mixin-media-panel;
-
-    &:not(.active) {
-        transform:translateX(100%);
-    }
 }
 
 #playlist-pane {
     .flexed(1);
     .mixin-playlist-pane;
     .transition(@easing:ease-out; @duration:.4s);
-
-    &:not(.active) {
-        opacity:0;
-        transform:translateX(-100%);
-    }
 }
 
 #footer {
     .flexed(0);
     .mixin-footer;
     .transition(@prop:transform; @easing:ease-out; @duration:.3s);
-
-    .loading & {
-        transform:translateY(100%);
-    }
 }
 #main-tabs {
   display:none
