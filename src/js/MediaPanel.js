@@ -1,17 +1,14 @@
 define([
-    'text!template_dir/media-panel/panel.html',
-    'text!template_dir/media-panel/youtube.html',
-    'text!template_dir/media-panel/related.html',
     './directives/sol-vibrate',
     './MediaBar',
     './Services',
     '../vendor/angular/angular'
-], function (PanelTemplate, YoutubeTemplate, RelatedTemplate) {
+], function () {
     return angular.module('ui.media-panel', ['solVibrate', 'ui.mediaBar'])
             .directive('mediaPanel', ['playList', function (playList) {
                 var definitions = {
                         restrict: 'E',
-                        template: PanelTemplate,
+                        templateUrl: '/html/media-panel/panel.html',
                         replace: true,
                         scope: true,
                         controller: function ($scope, $element, $attrs, $transclude) {
@@ -46,7 +43,7 @@ define([
             .directive('mediaPlayer', ['$sce', 'youtubePlayer', 'playList', function ($sce, ytPlayer, playList) {
                 var definitions = {
                         restrict: 'E',
-                        template: YoutubeTemplate,
+                        templateUrl: '/html/media-panel/youtube.html',
                         replace: true,
                         scope: true,
                         link: function ($scope, $element) {
@@ -61,7 +58,7 @@ define([
             }]).directive('playlistRelated', ['$rootScope', 'youtubePlayer', 'youtubeAPI', 'playList', function ($rootScope, youtubePlayer, youtubeAPI, playList) {
                 var definitions = {
                         restrict: 'E',
-                        template: RelatedTemplate,
+                        templateUrl: '/html/media-panel/related.html',
                         replace: true,
                         scope: {
                         },

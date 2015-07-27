@@ -1,9 +1,5 @@
 requirejs.config({
     baseUrl : '.',
-    paths   : {
-        'template_dir'      : 'html',
-        'text'              : './vendor/requirejs-text/text'
-    },
     shim    : {
         'vendor/angular/angular': {
             deps: ['vendor/jquery/dist/jquery']
@@ -41,7 +37,6 @@ requirejs([
     './vendor/ng-resource/dist/ng-resource',
     './vendor/angular/angular'
 ], function (Appliction, MobileDetect) {
-    console.debug(Appliction);
     function bootstrapAngular () {
         var htmlElem = document.getElementsByTagName('html')[0],
             contentElem = document.getElementById('content');

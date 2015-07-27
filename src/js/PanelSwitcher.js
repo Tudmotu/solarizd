@@ -1,13 +1,12 @@
 define([
-    'text!template_dir/panel-switcher/bar.html',
     './directives/sol-vibrate',
     '../vendor/angular/angular'
-], function (BarTemplate) {
+], function () {
     return angular.module('ui.panel-switcher', ['services', 'solVibrate'])
             .directive('panelSwitcher', ['playList', function (playList) {
                 var definitions = {
                         restrict: 'E',
-                        template: BarTemplate,
+                        templateUrl: '/html/panel-switcher/bar.html',
                         replace: true,
                         scope: true,
                         controller: function ($scope, $element, $attrs, $transclude) {

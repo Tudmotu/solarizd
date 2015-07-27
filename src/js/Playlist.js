@@ -1,14 +1,11 @@
 define([
-    'text!template_dir/playlist/pane.html',
-    'text!template_dir/playlist/progress.html',
-    'text!template_dir/playlist/item.html',
     './directives/sol-vibrate',
     './directives/sol-slide-rm',
     './directives/sol-scroll2top',
     '../vendor/angular-ui-sortable/sortable',
     './Services',
     '../vendor/angular/angular'
-], function (PaneTemplate, ProgressTemplate, ItemTemplate) {
+], function () {
     function mouseCoords (event) {
         var totalOffsetX = 0,
             totalOffsetY = 0,
@@ -36,7 +33,7 @@ define([
             .directive('playlistPane', ['$rootScope', '$http', 'youtubeAPI', 'playList', function ($rootScope, $http, youtubeAPI, playList) {
                 var definitions = {
                         restrict: 'E',
-                        template: PaneTemplate,
+                        templateUrl: '/html/playlist/pane.html',
                         replace: true,
                         scope: true,
                         link: function ($scope, $element, $attrs) {
@@ -134,7 +131,7 @@ define([
             }]).directive('playlistProgress', ['$rootScope', 'youtubePlayer', function ($rootScope, youtubePlayer) {
                 var definitions = {
                         restrict: 'E',
-                        template: ProgressTemplate,
+                        templateUrl: '/html/playlist/progress.html',
                         replace: true,
                         scope: {
                             progress: '=progress'
@@ -171,7 +168,7 @@ define([
             }]).directive('playlistItem', ['$rootScope', '$http', 'playList', function ($rootScope, $http, playList) {
                 var definitions = {
                         restrict: 'E',
-                        template: ItemTemplate,
+                        templateUrl: '/html/playlist/item.html',
                         replace: true,
                         scope: {
                             'videoId'     : '@videoId',

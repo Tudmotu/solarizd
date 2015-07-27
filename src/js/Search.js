@@ -1,18 +1,14 @@
 define([
-    'text!template_dir/search/pane.html',
-    'text!template_dir/search/result-list.html',
-    'text!template_dir/search/result.html',
-    'text!template_dir/search/input.html',
     './directives/sol-scroll2top',
     './Services',
     './Filters',
     '../vendor/angular/angular'
-], function (PaneTemplate, ResultListTemplate, ResultTemplate, InputTemplate) {
+], function () {
     return angular.module('ui.search', ['services', 'filters', 'solScroll2top'])
             .directive('searchPane', ['$rootScope', '$http', function ($rootScope, $http) {
                 var definitions = {
                         restrict: 'E',
-                        template: PaneTemplate,
+                        templateUrl: '/html/search/pane.html',
                         replace: true,
                         scope: {
 
@@ -29,7 +25,7 @@ define([
             }]).directive('searchResultList', ['$rootScope', '$http', 'youtubeAPI', function ($rootScope, $httpi, youtubeAPI) {
                 var definitions = {
                         restrict: 'E',
-                        template: ResultListTemplate,
+                        templateUrl: '/html/search/result-list.html',
                         replace: true,
                         scope: {
 
@@ -45,7 +41,7 @@ define([
             }]).directive('searchResultItem', ['$rootScope', '$http', 'playList', function ($rootScope, $http, playList) {
                 var definitions = {
                         restrict: 'E',
-                        template: ResultTemplate,
+                        templateUrl: '/html/search/result.html',
                         replace: true,
                         scope: {
                             videoId: '@videoId',
@@ -65,7 +61,7 @@ define([
             }]).directive('searchInput', ['$rootScope', 'youtubeAPI', function ($rootScope, youtubeAPI) {
                 var definitions = {
                         restrict: 'E',
-                        template: InputTemplate,
+                        templateUrl: '/html/search/input.html',
                         replace: true,
                         scope: {
 

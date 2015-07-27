@@ -1,11 +1,7 @@
 define([
-    'text!template_dir/topbar/bar.html',
-    'text!template_dir/topbar/controls.html',
-    'text!template_dir/topbar/volume.html',
-    'text!template_dir/topbar/notification.html',
     './directives/sol-vibrate',
     '../vendor/angular/angular'
-], function (TopbarTemplate, ControlsTemplate, VolumeTemplate, NotificationTemplate) {
+], function () {
     // duplication of code from Playlist.js with minor change
     function mouseCoords (event, targetElement) {
         var totalOffsetX = 0,
@@ -35,7 +31,7 @@ define([
             .directive('appTopbar', ['playList', 'youtubeAPI', function (playList, youtubeAPI) {
                 var definitions = {
                         restrict: 'E',
-                        template: TopbarTemplate,
+                        templateUrl: '/html/topbar/bar.html',
                         replace: true,
                         scope: {
 
@@ -58,7 +54,7 @@ define([
             .directive('mediaControls', ['playList', 'youtubeAPI', function (playList, youtubeAPI) {
                 var definitions = {
                         restrict: 'E',
-                        template: ControlsTemplate,
+                        templateUrl: '/html/topbar/controls.html',
                         replace: true,
                         controller: function ($scope, $element, $attrs, $transclude) {
                             $scope.playPrev = function () {
@@ -93,7 +89,7 @@ define([
             .directive('volume', ['$rootScope', 'youtubePlayer', 'playListVolume', function ($rootScope, youtubePlayer, playListVolume) {
                 var definitions = {
                         restrict: 'E',
-                        template: VolumeTemplate,
+                        templateUrl: '/html/topbar/volume.html',
                         replace: true,
                         scope: {
 
@@ -171,7 +167,7 @@ define([
             .directive('notifPopup', ['$rootScope', function ($rootScope) {
                 return {
                     restrict: 'E',
-                    template: NotificationTemplate,
+                    templateUrl: '/html/topbar/notification.html',
                     replace: true,
                     scope: true,
                     controller: function ($scope, $element, $attrs, $transclude) {

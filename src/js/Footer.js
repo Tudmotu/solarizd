@@ -1,7 +1,4 @@
 define([
-    'text!template_dir/topbar/bar.html',
-    'text!template_dir/footer/bar.html',
-    'text!template_dir/footer/apikey.html',
     './Services',
     '../vendor/angular/angular'
 ], function (TopbarTemplate, FooterTemplate, ApikeyInputTemplate) {
@@ -9,7 +6,7 @@ define([
             .directive('appFooter', ['$rootScope', '$http', function ($rootScope, $http) {
                 var definitions = {
                         restrict: 'E',
-                        template: FooterTemplate,
+                        templateUrl: '/html/footer/bar.html',
                         replace: true,
                         scope: true,
                         controller: function ($scope, $element, $attrs, $transclude) {
