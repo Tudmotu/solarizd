@@ -69,8 +69,15 @@ define([
         }
 
         this.init = function () {
-            require(['https://www.youtube.com/iframe_api']);
+            var apiUrl = 'https://www.youtube.com/iframe_api';
+            var script = document.createElement('script');
+
             onYouTubeIframeAPIReady = initPlayer;
+
+            script.type = 'text/javascript';
+            script.async = true;
+            script.src = apiUrl;
+            document.getElementsByTagName('head')[0].appendChild(script);
         };
 
         this.setElement = function (el) {
