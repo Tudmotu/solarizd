@@ -1,0 +1,12 @@
+{
+    "name": "ng-resource",
+    "version": "0.0.2",
+    "authors": [
+        "Terrence Howard <chemisus@gmail.com>"
+    ],
+    "license": "MIT",
+    "dependencies": {
+        "angular": "*",
+        "angular-mocks": "*"
+    }
+}

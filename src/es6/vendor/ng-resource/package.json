@@ -1,0 +1,17 @@
+{
+    "name": "ng-resource",
+    "version": "0.0.2",
+    "devDependencies": {
+        "grunt": "*",
+        "grunt-contrib-jshint": "*",
+        "grunt-contrib-nodeunit": "*",
+        "grunt-contrib-uglify": "*",
+        "grunt-contrib-qunit": "*",
+        "grunt-contrib-watch": "*",
+        "grunt-contrib-concat": "*",
+        "grunt-karma": "*",
+        "karma-coverage": "*",
+        "karma-jasmine": "*",
+        "karma-chrome-launcher": "*"
+    }
+}
