@@ -1,9 +1,7 @@
-define([
-    '../vendor/angular/angular'
-], function () {
-    return angular.module('filters', [])
-    .filter('youtubeTime', function () {
-        return function (input) {
+import '../vendor/angular/angular';
+export default angular.module('filters', [])
+    .filter('youtubeTime', function() {
+        return function(input) {
             var parts = [],
                 seconds = input.match(/(\d+)S/),
                 minutes = input.match(/(\d+)M/),
@@ -23,8 +21,8 @@ define([
             return parts.join(':');
         };
     })
-    .filter('formatTime', function () {
-        return function (input) {
+    .filter('formatTime', function() {
+        return function(input) {
             if (isNaN(input)) return '--:--';
             var time = Math.floor(input),
                 minutes = Math.floor(time / 60),
@@ -37,19 +35,19 @@ define([
                 timestr += hours + ':';
 
             minutes = minutes.toString().length === 1 ?
-                        '0' + minutes :
-                        minutes;
+                '0' + minutes :
+                minutes;
             seconds = seconds.toString().length === 1 ?
-                        '0' + seconds :
-                        seconds;
+                '0' + seconds :
+                seconds;
 
             timestr += minutes + ':';
             timestr += seconds;
             return timestr;
         };
     })
-    .filter('commaNum', function () {
-        return function (input) {
+    .filter('commaNum', function() {
+        return function(input) {
             var str = [],
                 i;
             for (i = input.length - 1; i >= 0; i--) {
@@ -62,13 +60,12 @@ define([
             return input.replace(/(\d)(?=(\d{3})+$)/g, '$1,');
         };
     })
-    .filter('machineRead', function () {
-        return function (input) {
+    .filter('machineRead', function() {
+        return function(input) {
             var str = input.toString(),
                 lc = str.toLowerCase();
-                output = lc.replace(/\s+/g, '-');
+            output = lc.replace(/\s+/g, '-');
 
             return output;
         };
     });
-});

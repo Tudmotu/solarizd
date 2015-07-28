@@ -129,7 +129,7 @@ module.exports = function (grunt) {
                     transform: [["babelify", { "stage": 0 }]]
                 },
                 files: {
-                    "target/app.js": "src/es6/app.js"
+                    "target/app.js": "src/app.js"
                 }
             }
         },
@@ -155,6 +155,9 @@ module.exports = function (grunt) {
             }
         },
         jshint: {
+            options: {
+                esnext: true
+            },
             all: [
                 'src/js/**/*.js',
                 'src/ui/**/*.js'

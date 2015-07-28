@@ -1,4 +1,4 @@
-import Application from '../../es6/js/Application';
+import Application from '../../js/Application';
 import {module, inject} from '../mocks';
 
 describe("youtubeTime filter", function () {

@@ -1,33 +1,30 @@
-define([
-    './js/Application',
-    './vendor/mobile-detect/mobile-detect',
-    './vendor/ng-resource/dist/ng-resource',
-    './vendor/angular/angular'
-], function (Appliction, MobileDetect) {
-    function bootstrapAngular () {
-        var htmlElem = document.getElementsByTagName('html')[0],
-            contentElem = document.getElementById('content');
+import Appliction from './js/Application';
+import MobileDetect from './vendor/mobile-detect/mobile-detect';
+import './vendor/ng-resource/dist/ng-resource';
+import './vendor/angular/angular';
 
-        angular.bootstrap(htmlElem, ['Application']);
-    }
+function bootstrapAngular() {
+    var htmlElem = document.getElementsByTagName('html')[0],
+        contentElem = document.getElementById('content');
 
-    // Hack preventing virtual keyboard from screwing styling
-    var md = new MobileDetect(window.navigator.userAgent);
-    if (md.mobile() !== null) {
-        document.body.style.minHeight = document.body.clientHeight + 'px';
-    }
+    angular.bootstrap(htmlElem, ['Application']);
+}
 
-    // Auto-reload when appcache updates
-    if (window.hasOwnProperty('applicationCache')) {
-        window.applicationCache.addEventListener('updateready', function () {
-            window.location.reload();
-        });
-    }
+// Hack preventing virtual keyboard from screwing styling
+var md = new MobileDetect(window.navigator.userAgent);
+if (md.mobile() !== null) {
+    document.body.style.minHeight = document.body.clientHeight + 'px';
+}
 
-    if (document.readyState === 'complete') {
-        bootstrapAngular();
-    }
-    else {
-        window.addEventListener('load', bootstrapAngular, false);
-    }
-});
+// Auto-reload when appcache updates
+if (window.hasOwnProperty('applicationCache')) {
+    window.applicationCache.addEventListener('updateready', function() {
+        window.location.reload();
+    });
+}
+
+if (document.readyState === 'complete') {
+    bootstrapAngular();
+} else {
+    window.addEventListener('load', bootstrapAngular, false);
+}
