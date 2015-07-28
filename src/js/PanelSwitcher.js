@@ -1,5 +1,5 @@
 import './directives/sol-vibrate';
-import '../vendor/angular/angular';
+import 'angular';
 export default angular.module('ui.panel-switcher', ['services', 'solVibrate'])
     .directive('panelSwitcher', ['playList', function(playList) {
         var definitions = {

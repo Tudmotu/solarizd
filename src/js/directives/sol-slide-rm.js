@@ -1,5 +1,5 @@
 import cssPrefix from '../lib/css-prefix';
-import '../../vendor/angular/angular';
+import 'angular';
 
 function translateElement(el, movement) {
     var prefixedProp = cssPrefix('transform'),

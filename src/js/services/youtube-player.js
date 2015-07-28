@@ -35,7 +35,7 @@ export default ['$sce', '$q', '$rootScope', function($sce, $q, $rootScope) {
                     },
                     onReady: function(e) {
                         apiReady.resolve();
-                        this.ready = true;
+                        that.ready = true;
                     },
                     onStateChange: function(e) {}
                 }

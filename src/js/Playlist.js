@@ -1,9 +1,9 @@
 import './directives/sol-vibrate';
 import './directives/sol-slide-rm';
 import './directives/sol-scroll2top';
-import '../vendor/angular-ui-sortable/sortable';
+import 'ui-sortable';
 import './Services';
-import '../vendor/angular/angular';
+import 'angular';
 
 function mouseCoords(event) {
     var totalOffsetX = 0,

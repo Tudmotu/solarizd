@@ -4,7 +4,7 @@ import Playlist from './services/playlist';
 import PlaylistVolume from './services/playlistVolume';
 import YoutubeAPI from './services/youtube-api';
 import YoutubePlayer from './services/youtube-player';
-import '../vendor/angular/angular';
+import 'angular';
 export default angular.module('services', [])
     .constant('ApiKeysConf', {
         services: ['youtube', 'soundcloud', 'echonest']

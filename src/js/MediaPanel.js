@@ -1,7 +1,7 @@
 import './directives/sol-vibrate';
 import './MediaBar';
 import './Services';
-import '../vendor/angular/angular';
+import 'angular';
 export default angular.module('ui.media-panel', ['solVibrate', 'ui.mediaBar'])
     .directive('mediaPanel', ['playList', function(playList) {
         var definitions = {

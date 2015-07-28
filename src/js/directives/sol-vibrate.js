@@ -1,4 +1,4 @@
-import '../../vendor/angular/angular';
+import 'angular';
 var hasVibrate = typeof window.navigator.vibrate === 'function';
 var VIBE_LENGTH = 100;
 

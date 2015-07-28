@@ -1,4 +1,4 @@
-import '../../vendor/angular/angular';
+import 'angular';
 export default angular.module('solScroll2top', [])
     .directive('solScroll2top', [function() {
         var definitions = {

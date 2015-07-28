@@ -126,7 +126,10 @@ module.exports = function (grunt) {
         browserify: {
             build: {
                 options: {
-                    transform: [["babelify", { "stage": 0 }]]
+                    transform: [
+                        ["babelify", { "stage": 0 }],
+                        "browserify-shim"
+                    ]
                 },
                 files: {
                     "target/app.js": "src/app.js"

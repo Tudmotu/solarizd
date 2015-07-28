@@ -1,5 +1,5 @@
 import './directives/sol-vibrate';
-import '../vendor/angular/angular';
+import 'angular';
 export default angular.module('ui.mediaBar', ['services', 'solVibrate'])
     .directive('mediaBar', [function() {
         var definitions = {

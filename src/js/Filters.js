@@ -1,4 +1,4 @@
-import '../vendor/angular/angular';
+import 'angular';
 export default angular.module('filters', [])
     .filter('youtubeTime', function() {
         return function(input) {
@@ -64,7 +64,7 @@ export default angular.module('filters', [])
         return function(input) {
             var str = input.toString(),
                 lc = str.toLowerCase();
-            output = lc.replace(/\s+/g, '-');
+            let output = lc.replace(/\s+/g, '-');
 
             return output;
         };

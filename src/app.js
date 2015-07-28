@@ -1,7 +1,7 @@
 import Appliction from './js/Application';
 import MobileDetect from './vendor/mobile-detect/mobile-detect';
-import './vendor/ng-resource/dist/ng-resource';
-import './vendor/angular/angular';
+import 'ng-resource';
+import 'angular';
 
 function bootstrapAngular() {
     var htmlElem = document.getElementsByTagName('html')[0],

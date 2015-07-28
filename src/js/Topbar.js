@@ -1,5 +1,5 @@
 import './directives/sol-vibrate';
-import '../vendor/angular/angular';
+import 'angular';
 // duplication of code from Playlist.js with minor change
 function mouseCoords(event, targetElement) {
     var totalOffsetX = 0,

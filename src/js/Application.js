@@ -4,7 +4,7 @@ import './Search';
 import './Playlist';
 import './MediaPanel';
 import './PanelSwitcher';
-import '../vendor/angular/angular';
+import 'angular';
 export default angular.module('Application', [
     'ngResource',
     'ui.footer',

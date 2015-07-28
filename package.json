@@ -1,51 +1,90 @@
 {
-  "name": "solarizd",
-  "version": "1.0.0",
-  "description": "An app for playlist composition and content recommendation",
-  "main": "src/index.html",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Tudmotu/solarizd.git"
-  },
-  "keywords": [
-    "stream",
-    "playlist",
-    "music"
-  ],
-  "author": "Tudmotu",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Tudmotu/solarizd/issues"
-  },
-  "homepage": "https://github.com/Tudmotu/solarizd",
-  "devDependencies": {
-    "babelify": "^6.1.3",
-    "grunt": "^0.4.4",
-    "grunt-autoprefixer": "^0.7.3",
-    "grunt-browserify": "^3.8.0",
-    "grunt-contrib-clean": "^0.5.0",
-    "grunt-contrib-connect": "^0.7.1",
-    "grunt-contrib-copy": "^0.5.0",
-    "grunt-contrib-cssmin": "^0.9.0",
-    "grunt-contrib-jshint": "^0.10.0",
-    "grunt-contrib-less": "^0.11.0",
-    "grunt-karma": "^0.12.0",
-    "grunt-manifest-ext": "^0.4.1",
-    "grunt-targethtml": "^0.2.6",
-    "jasmine-core": "^2.3.4",
-    "karma": "^0.13.3",
-    "karma-babel-preprocessor": "^5.2.1",
-    "karma-browserify": "^4.2.1",
-    "karma-chrome-launcher": "^0.2.0",
-    "karma-jasmine": "^0.3.6",
-    "karma-junit-reporter": "^0.3.3",
-    "karma-phantomjs-launcher": "^0.2.0",
-    "phantomjs": "^1.9.17"
-  },
-  "jshintConfig": {
-    "esnext": true
-  }
+    "name": "solarizd",
+    "version": "1.0.0",
+    "description": "An app for playlist composition and content recommendation",
+    "main": "src/index.html",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Tudmotu/solarizd.git"
+    },
+    "keywords": [
+        "stream",
+        "playlist",
+        "music"
+    ],
+    "author": "Tudmotu",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Tudmotu/solarizd/issues"
+    },
+    "homepage": "https://github.com/Tudmotu/solarizd",
+    "devDependencies": {
+        "babelify": "^6.1.3",
+        "browserify": "^11.0.0",
+        "browserify-shim": "^3.8.10",
+        "grunt": "^0.4.4",
+        "grunt-autoprefixer": "^0.7.3",
+        "grunt-browserify": "^3.8.0",
+        "grunt-contrib-clean": "^0.5.0",
+        "grunt-contrib-connect": "^0.7.1",
+        "grunt-contrib-copy": "^0.5.0",
+        "grunt-contrib-cssmin": "^0.9.0",
+        "grunt-contrib-jshint": "^0.10.0",
+        "grunt-contrib-less": "^0.11.0",
+        "grunt-karma": "^0.12.0",
+        "grunt-manifest-ext": "^0.4.1",
+        "grunt-targethtml": "^0.2.6",
+        "jasmine-core": "^2.3.4",
+        "karma": "^0.13.3",
+        "karma-babel-preprocessor": "^5.2.1",
+        "karma-browserify": "^4.2.1",
+        "karma-chrome-launcher": "^0.2.0",
+        "karma-jasmine": "^0.3.6",
+        "karma-junit-reporter": "^0.3.3",
+        "karma-phantomjs-launcher": "^0.2.0",
+        "phantomjs": "^1.9.17"
+    },
+    "jshintConfig": {
+        "esnext": true
+    },
+    "browser": {
+        "angular"           : "./src/vendor/angular/angular.js",
+        "ng-resource"       : "./src/vendor/ng-resource/dist/ng-resource.js",
+        "ui-sortable"       : "./src/vendor/angular-ui-sortable/sortable.min.js",
+        "jquery-ui-core"    : "./src/vendor/jquery-ui/ui/minified/jquery.ui.core.min.js",
+        "jquery-ui-widget"  : "./src/vendor/jquery-ui/ui/minified/jquery.ui.widget.min.js",
+        "jquery-ui-mouse"   : "./src/vendor/jquery-ui/ui/minified/jquery.ui.mouse.min.js",
+        "jquery-ui-sortable": "./src/vendor/jquery-ui/ui/minified/jquery.ui.sortable.min.js",
+        "jquery"            : "./src/vendor/jquery/dist/jquery.min.js",
+        "jqui-touch-punch"  : "./src/vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"
+    },
+    "browserify-shim": {
+        "angular": {
+            "depends": ["jquery:jQuery"]
+        },
+        "ng-resource": {
+            "depends": ["angular"]
+        },
+        "ui-sortable": {
+            "depends": ["angular", "jquery-ui-sortable", "jquery:jQuery"]
+        },
+        "jquery-ui-sortable": {
+            "depends": ["jquery-ui-mouse", "jquery:jQuery"]
+        },
+        "jquery-ui-mouse": {
+            "depends": ["jquery-ui-widget", "jquery:jQuery"]
+        },
+        "jquery-ui-widget": {
+            "depends": ["jquery-ui-core", "jquery:jQuery"]
+        },
+        "jquery-ui-core": {
+            "depends": ["jquery:jQuery"]
+        },
+        "jqui-touch-punch": {
+            "depends": ["jquery-ui-mouse", "jquery:jQuery"]
+        }
+    }
 }

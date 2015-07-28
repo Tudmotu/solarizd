@@ -1,7 +1,7 @@
 import './directives/sol-scroll2top';
 import './Services';
 import './Filters';
-import '../vendor/angular/angular';
+import 'angular';
 export default angular.module('ui.search', ['services', 'filters', 'solScroll2top'])
     .directive('searchPane', ['$rootScope', '$http', function($rootScope, $http) {
         var definitions = {
