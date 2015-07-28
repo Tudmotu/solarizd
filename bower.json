@@ -21,15 +21,11 @@
     "test",
     "tests"
   ],
-  "dependencies": {
-    "requirejs": "~2.1.11"
-  },
   "devDependencies": {
     "angular": "~1.4.x",
     "less.js": "~2.5.x",
     "ng-resource": "~0.0.2",
     "prefixfree": "*",
-    "requirejs-text": "~2.0.12",
     "fontawesome": "4.3.0",
     "mobile-detect": "hgoebl/mobile-detect.js#~1.2.x",
     "jquery-ui": "~1.10.x",

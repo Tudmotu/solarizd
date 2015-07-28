@@ -1,37 +1,4 @@
-requirejs.config({
-    baseUrl : '.',
-    shim    : {
-        'vendor/angular/angular': {
-            deps: ['vendor/jquery/dist/jquery']
-        },
-        'vendor/ng-resource/dist/ng-resource': {
-            deps: ['vendor/angular/angular']
-        },
-        'vendor/angular-ui-sortable/sortable': {
-            deps: [
-                'vendor/angular/angular',
-                'vendor/jquery-ui-touch-punch/jquery.ui.touch-punch',
-                'vendor/jquery-ui/ui/jquery.ui.sortable']
-        },
-        'vendor/jquery-ui/ui/jquery.ui.sortable': {
-            deps: ['vendor/jquery-ui/ui/jquery.ui.mouse']
-        },
-        'vendor/jquery-ui/ui/jquery.ui.mouse': {
-            deps: ['vendor/jquery-ui/ui/jquery.ui.widget']
-        },
-        'vendor/jquery-ui/ui/jquery.ui.widget': {
-            deps: ['vendor/jquery-ui/ui/jquery.ui.core']
-        },
-        'vendor/jquery-ui/ui/jquery.ui.core': {
-            deps: ['vendor/jquery/dist/jquery']
-        },
-        'vendor/jquery-ui-touch-punch/jquery.ui.touch-punch': {
-            deps: ['vendor/jquery-ui/ui/jquery.ui.widget', 'vendor/jquery-ui/ui/jquery.ui.mouse']
-        }
-    }
-});
-
-requirejs([
+define([
     './js/Application',
     './vendor/mobile-detect/mobile-detect',
     './vendor/ng-resource/dist/ng-resource',
