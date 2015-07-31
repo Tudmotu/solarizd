@@ -1,30 +1,29 @@
-define([
-    './Footer',
-    './Topbar',
-    './Search',
-    './Playlist',
-    './MediaPanel',
-    './PanelSwitcher',
-    'angular',
-    'ng-resource'
-], function () {
-    return angular.module('Application', [
-        'ngResource', 
-        'ui.footer', 
-        'ui.topbar', 
-        'ui.search', 
-        'ui.media-panel', 
-        'ui.panel-switcher', 
-        'ui.playlist',
-        'services'
-        ]).run([
-            '$rootScope', 
-            'ApiKey',
-            'youtubeAPI',
-            'echoNestAPI',
-            function ($rootScope, ApiKey) {
-            ApiKey.fetchKeys().then(function () {
-                document.body.classList.remove('loading');
+import './Footer';
+import './Topbar';
+import './Search';
+import './Playlist';
+import './MediaPanel';
+import './PanelSwitcher';
+import 'angular';
+export default angular.module('Application', [
+    'ngResource',
+    'ui.footer',
+    'ui.topbar',
+    'ui.search',
+    'ui.media-panel',
+    'ui.panel-switcher',
+    'ui.playlist',
+    'services'
+]).directive('solarizdApp', ['ApiKey', function(ApiKey) {
+    return {
+        restrict: 'E',
+        templateUrl: '/html/app.html',
+        replace: true,
+        scope: true,
+        link: function($scope, $element) {
+            ApiKey.fetchKeys().then(function() {
+                $element[0].classList.add('loaded');
             });
-        }]);
-});
+        }
+    };
+}]);

@@ -30,16 +30,8 @@
         <link rel="stylesheet" type="text/css" href="style.css" >
         <!(endif)-->
     </head>
-    <body class="loading">
-        <app-topbar id="topbar"></app-topbar>
-        <panel-switcher id='main-tabs'></panel-switcher>
-        <main id="main-view">
-            <search-pane id="search-pane" class="current-panel"></search-pane>
-            <playlist-pane id="playlist-pane"></playlist-pane>
-            <media-panel id="media-panel"></media-panel>
-        </main>
-        <app-footer id="footer"></app-footer>
-        <notif-popup></notif-popup>
+    <body>
+        <solarizd-app></solarizd-app>
 
         <!--(if target dev)><!-->
         <script type="text/javascript">
@@ -51,6 +43,6 @@
         <script src="vendor/less.js/dist/less.js"></script>
         <!--<!(endif)-->
 
-        <script data-main="app.js" src="vendor/requirejs/require.js"></script>
+        <script src="app.browser.js"></script>
     </body>
 </html>

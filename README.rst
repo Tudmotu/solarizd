@@ -46,15 +46,28 @@ dependencies can be installed in two simple steps::
 After running these commands, you will be able to use the grunt tasks.
 
 
-Build Process
----------------------
+Development Workflow
+--------------------
+Solarizd is written with es6 syntax. This requires a simple build step for
+changes take effect. There's a grunt task that instantiates a Watchify
+instance::
 
-There's a grunt-task that will concatenate and minify the JS and CSS files,
-and dump the result in ``target/``::
+    $ grunt browserify:dev
 
-    $ grunt build
+Running this command will spawn a Watchify instance that will automatically
+recompile your es6 code into browser-supported code.
 
-This will generate the minified app under the ``target/`` directory.
+
+Karma Tests
+-----------
+There are some (currently very little) tests that are ran using Karma (Jasmine
+as testing framework), and can be instatiated from a grunt task::
+
+    $ grunt karma:test
+
+This command will run the tests once. If you like a high-pace workflow, there's
+a karma watch task, which watches files and automatically runs the tests each
+time anything changes.
 
 
 Running a Development Static Server
@@ -71,6 +84,17 @@ In order to run a static server pointed at ``target/``::
     $ grunt connect:target
 
 The ``connect`` server will listen to ``localhost:9000``.
+
+
+Build Process
+---------------------
+
+There's a grunt-task that will concatenate and minify the JS and CSS files,
+and dump the result in ``target/``::
+
+    $ grunt build
+
+This will generate the minified app under the ``target/`` directory.
 
 
 API Keys
@@ -94,7 +118,7 @@ You should add this file to both the ``src/`` and the ``target/`` directories.
 Credits
 ----------
 
-Developed by Yotam Bar-On (Tudmotu), 2014.
+Developed by Yotam Bar-On (Tudmotu), 2014-2015.
 
 
 License

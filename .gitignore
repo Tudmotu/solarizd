@@ -1,5 +1,6 @@
 node_modules/*
 src/vendor/*
+src/app.browser.js
 target/*
 test-reports/*
 src/apikeys.json

@@ -26,51 +26,24 @@ module.exports = function (grunt) {
                 dest: 'target/<%= fileNames.css %>' 
             }
         },
-        requirejs: {
-            build: {
-                options: {
-                    baseUrl: 'src/',
-                    mainConfigFile: 'src/<%= fileNames.js %>',
-                    name: 'app',
-                    out: 'target/<%= fileNames.js %>',
-                    optimize: 'none' // FIXME: something with angular's DI
-                }
-            }
-        },
         copy: {
             build: {
                 files: [
                     {
                         expand : true,
-                        cwd    : 'src/',
-                        src    : ['css/assets/**'],
+                        src    : [
+                            'src/css/assets/**',
+                            'src/css/fonts/**',
+                            'src/vendor/fontawesome/fonts/**',
+                            'src/html/**',
+                            'src/js/assets/**'
+                        ],
                         dest   : 'target/',
-                        filter : 'isFile'
+                        filter: 'isFile'
                     },
                     {
-                        expand : true,
-                        cwd    : 'src/',
-                        src    : ['css/fonts/**'],
-                        dest   : 'target/',
-                        filter : 'isFile'
-                    },
-                    {
-                        expand : true,
-                        cwd    : 'src/',
-                        src    : ['vendor/fontawesome/fonts/**'],
-                        dest   : 'target/',
-                        filter : 'isFile'
-                    },
-                    {
-                        expand : true,
-                        cwd    : 'src/',
-                        src    : ['js/assets/**'],
-                        dest   : 'target/',
-                        filter : 'isFile'
-                    },
-                    {
-                        src: 'src/vendor/requirejs/require.js',
-                        dest: 'target/vendor/requirejs/require.js'
+                        src    : 'src/apikeys.json',
+                        dest   : 'target/apikeys.json'
                     }
                 ]
             }
@@ -127,6 +100,28 @@ module.exports = function (grunt) {
                 dest: 'target/manifest.appcache'
             }
         },
+        browserify: {
+            options: {
+                transform: [
+                    ['babelify', { 'compact': 'none' }],
+                    'browserify-shim'
+                ]
+            },
+            build: {
+                files: {
+                    "target/app.browser.js": "src/app.js"
+                }
+            },
+            dev: {
+                options: {
+                    watch: true,
+                    keepAlive: true
+                },
+                files: {
+                    "src/app.browser.js": "src/app.js"
+                }
+            }
+        },
         karma: {
             dev: {
                 configFile: 'karma.conf.js',
@@ -149,6 +144,9 @@ module.exports = function (grunt) {
             }
         },
         jshint: {
+            options: {
+                esnext: true
+            },
             all: [
                 'src/js/**/*.js',
                 'src/ui/**/*.js'
@@ -162,11 +160,11 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-manifest-ext');
     grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-browserify');
 
     grunt.registerTask('test', [
         'jshint:all',
@@ -179,7 +177,7 @@ module.exports = function (grunt) {
         'less:build',
         'autoprefixer:build',
         'cssmin:build',
-        'requirejs:build',
+        'browserify:build',
         'clean:build',
         'manifest:build'
     ]);
