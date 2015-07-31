@@ -31,38 +31,15 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand : true,
-                        cwd    : 'src/',
-                        src    : ['css/assets/**'],
+                        src    : [
+                            'src/css/assets/**',
+                            'src/css/fonts/**',
+                            'src/vendor/fontawesome/fonts/**',
+                            'src/html/**',
+                            'src/js/assets/**'
+                        ],
                         dest   : 'target/',
-                        filter : 'isFile'
-                    },
-                    {
-                        expand : true,
-                        cwd    : 'src/',
-                        src    : ['css/fonts/**'],
-                        dest   : 'target/',
-                        filter : 'isFile'
-                    },
-                    {
-                        expand : true,
-                        cwd    : 'src/',
-                        src    : ['vendor/fontawesome/fonts/**'],
-                        dest   : 'target/',
-                        filter : 'isFile'
-                    },
-                    {
-                        expand : true,
-                        cwd    : 'src/',
-                        src    : ['html/**'],
-                        dest   : 'target/',
-                        filter : 'isFile'
-                    },
-                    {
-                        expand : true,
-                        cwd    : 'src/',
-                        src    : ['js/assets/**'],
-                        dest   : 'target/',
-                        filter : 'isFile'
+                        filter: 'isFile'
                     },
                     {
                         src    : 'src/apikeys.json',
@@ -124,15 +101,24 @@ module.exports = function (grunt) {
             }
         },
         browserify: {
+            options: {
+                transform: [
+                    ['babelify', { 'compact': 'none' }],
+                    'browserify-shim'
+                ]
+            },
             build: {
+                files: {
+                    "target/app.browser.js": "src/app.js"
+                }
+            },
+            dev: {
                 options: {
-                    transform: [
-                        ["babelify", { "stage": 0 }],
-                        "browserify-shim"
-                    ]
+                    watch: true,
+                    keepAlive: true
                 },
                 files: {
-                    "target/app.js": "src/app.js"
+                    "src/app.browser.js": "src/app.js"
                 }
             }
         },

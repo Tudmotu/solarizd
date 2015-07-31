@@ -18,7 +18,7 @@ module.exports = function(config) {
         browserify: {
             debug: true,
             transform: [
-                ['babelify', {stage: 0}],
+                ['babelify', { compact: 'none' }],
                 ['browserify-shim']
             ]
         },
