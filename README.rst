@@ -65,10 +65,10 @@ You can also compile the bundle once, by running the following task::
 
 Karma Tests
 -----------
-There are some (currently only a few) tests that are ran using Karma (Jasmine
+There are some (currently only a few) tests that are run using Karma (Jasmine
 as testing framework).
 
-These tests can be ran in two ways:
+These tests can be run in two ways:
 
 - Run the tests once::
 
