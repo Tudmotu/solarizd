@@ -48,26 +48,36 @@ After running these commands, you will be able to use the grunt tasks.
 
 Development Workflow
 --------------------
-Solarizd is written with es6 syntax. This requires a simple build step for
-changes take effect. There's a grunt task that instantiates a Watchify
-instance::
+Solarizd is written with es6 syntax. This requires running Babel + Browserify
+before changes take effect. There's a grunt task that instantiates a Watchify
+instance, that will recompile the es6 code each time anything changes::
 
     $ grunt browserify:dev
 
 Running this command will spawn a Watchify instance that will automatically
 recompile your es6 code into browser-supported code.
 
+You can also compile the bundle once, by running the following task::
+
+    $ grunt browserify:build
+
+*Note*: It is recommended to use the ``browserify:dev`` task while developing.
 
 Karma Tests
 -----------
-There are some (currently very little) tests that are ran using Karma (Jasmine
-as testing framework), and can be instatiated from a grunt task::
+There are some (currently only a few) tests that are ran using Karma (Jasmine
+as testing framework).
+
+These tests can be ran in two ways:
+
+- Run the tests once::
 
     $ grunt karma:test
 
-This command will run the tests once. If you like a high-pace workflow, there's
-a karma watch task, which watches files and automatically runs the tests each
-time anything changes.
+- Run a karma watch task, that will automatically run the
+  tests whenever you make changes to code::
+
+    $ grunt karma:dev
 
 
 Running a Development Static Server
