@@ -2,24 +2,22 @@
 
 .search-input {
     .flexbox;
+    -webkit-filter:drop-shadow(2px 3px 4px fadeout(@black, 75%));
 
     &:before {
         .icon(@fa-var-search);
         font-size:@large-text;
-        background:@base2;
-        color:@base01;
-        padding:0 (2 * @column-pad);
-        border-radius:5px 0px 0px 5px;
-        border:solid 1px @gray;
-        border-right:none;
+        background:@white;
+        color:@base02;
+        padding:0 @column-pad;
         .flexed(0);
         .flexbox(@align:center);
     }
 
     .input {
+        background:@white;
         padding-left:@column-pad;
-        border-radius:0px 5px 5px 0px;
-        border:solid 1px @gray;
+        border:none;
         .flexed(1);
         .no_appearance;
     }
