@@ -31,12 +31,13 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand : true,
+                        cwd    : 'src/',
                         src    : [
-                            'src/css/assets/**',
-                            'src/css/fonts/**',
-                            'src/vendor/fontawesome/fonts/**',
-                            'src/html/**',
-                            'src/js/assets/**'
+                            'css/assets/**',
+                            'css/fonts/**',
+                            'vendor/fontawesome/fonts/**',
+                            'html/**',
+                            'js/assets/**'
                         ],
                         dest   : 'target/',
                         filter: 'isFile'
@@ -49,7 +50,8 @@ module.exports = function (grunt) {
             }
         },
         clean: {
-            build: ['target/style.*.css']
+            build: ['target/style.*.css'],
+            target: ['target/']
         },
         targethtml: {
             build: {
@@ -172,6 +174,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('build', [
+        'clean:target',
         'copy:build',
         'targethtml:build',
         'less:build',
