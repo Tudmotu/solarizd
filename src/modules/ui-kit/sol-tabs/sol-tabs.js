@@ -11,16 +11,15 @@ export default [function () {
             selected: '@'
         },
         link: function ($scope, $element, $attrs) {
-            $scope.getSelected = function () {
-                return parseInt($scope.selected, 10) || 0;
-            };
+            $scope.select = function (selected) {
+                selected = parseInt(selected, 10) || 0;
 
-            $scope.applySelection = function () {
                 if ($scope.tabs.length) {
                     $scope.tabs.forEach((tab) => {
                         tab.$el.removeAttribute('selected');
                     });
-                    $scope.tabs[$scope.getSelected()].$el.setAttribute('selected', '');
+
+                    $scope.tabs[selected].$el.setAttribute('selected', '');
                 }
             };
 
@@ -32,9 +31,9 @@ export default [function () {
                 };
             });
 
-            $scope.applySelection();
+            $scope.select($scope.selected);
             $scope.$watch('selected', () => {
-                $scope.applySelection();
+                $scope.select($scope.selected);
             });
         }
     };
