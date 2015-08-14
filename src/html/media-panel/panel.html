@@ -1,8 +1,9 @@
 <section class="media-panel" ng-class="{ cued: isCued }">
-    <media-bar></media-bar>
-    <div id="media-panel-video" class="media tab">
-        <media-player id="media-player"></media-player>
-    </div>
+    <sol-tabs selected="1">
+        <div tab-id="video" tab-title="Video" class="media tab">
+            <media-player id="media-player"></media-player>
+        </div>
 
-	 <playlist-related id="media-panel-related" class="tab current-panel"></playlist-related>
+        <playlist-related tab-id="related" tab-title="Related" class="tab"></playlist-related>
+    </sol-tabs>
 </section>
