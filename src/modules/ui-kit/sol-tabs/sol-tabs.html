@@ -1,0 +1,10 @@
+<div class="sol-tabs">
+    <header class="tabs">
+        <span class="tab" tab-ref="{{tab.id}}" ng-repeat="tab in tabs">
+            {{tab.title || tab.id}}
+        </span>
+    </header>
+    <section class="wrapper">
+        <ng-transclude></ng-transclude>
+    </section>
+</div>
