@@ -12,15 +12,7 @@ export default [function () {
         },
         link: function ($scope, $element, $attrs) {
             $scope.select = function (selected) {
-                selected = parseInt(selected, 10) || 0;
-
-                if ($scope.tabs.length) {
-                    $scope.tabs.forEach((tab) => {
-                        tab.$el.removeAttribute('selected');
-                    });
-
-                    $scope.tabs[selected].$el.setAttribute('selected', '');
-                }
+                $scope.selected = selected;
             };
 
             $scope.tabs = $element.find('[tab-id]').toArray().map((o) => {
@@ -31,9 +23,16 @@ export default [function () {
                 };
             });
 
-            $scope.select($scope.selected);
-            $scope.$watch('selected', () => {
-                $scope.select($scope.selected);
+            $scope.$watch('selected', (selected) => {
+                selected = parseInt(selected, 10) || 0;
+
+                if ($scope.tabs.length) {
+                    $scope.tabs.forEach((tab) => {
+                        tab.$el.removeAttribute('selected');
+                    });
+
+                    $scope.tabs[selected].$el.setAttribute('selected', '');
+                }
             });
         }
     };

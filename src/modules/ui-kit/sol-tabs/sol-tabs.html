@@ -1,7 +1,8 @@
 <div class="sol-tabs">
     <header class="tabs">
         <span class="tab" tab-ref="{{tab.id}}"
-            ng-click="select($index)" ng-repeat="tab in tabs">
+                ng-attr-active="{{selected == $index ? '' : undefined}}"
+                ng-click="select($index)" ng-repeat="tab in tabs">
             {{tab.title || tab.id}}
         </span>
     </header>

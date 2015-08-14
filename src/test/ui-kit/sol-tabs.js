@@ -21,6 +21,46 @@ describe('solTabs directive', function () {
         $rootScope = _$rootScope_;
     }));
 
+    it('has [active] attr on entry and [selected] attr on tab in sync', () => {
+        let html = '<div><sol-tabs selected="1">' +
+                        '<div tab-id="one"></div>' +
+                        '<div tab-id="two"></div>' +
+                    '</sol-tabs></div>';
+        let element = getElement(html, $rootScope);
+
+        expect(element.find('[tab-ref="two"]')).toHaveAttr('active');
+        expect(element.find('[tab-id="two"]')).toHaveAttr('selected');
+
+        element.find('[tab-ref="one"]').click();
+
+        expect(element.find('[tab-ref="one"]')).toHaveAttr('active');
+        expect(element.find('[tab-id="one"]')).toHaveAttr('selected');
+    });
+
+    it('changes "active" attribute according to clicked tab-entry', () => {
+        let html = '<div><sol-tabs selected="0">' +
+                        '<div tab-id="one"></div>' +
+                        '<div tab-id="two"></div>' +
+                    '</sol-tabs></div>';
+        let element = getElement(html, $rootScope);
+        expect(element.find('[tab-ref="one"]')).toHaveAttr('active');
+
+        element.find('[tab-ref="two"]').click();
+        expect(element.find('[tab-ref="one"]')).not.toHaveAttr('active');
+        expect(element.find('[tab-ref="two"]')).toHaveAttr('active');
+    });
+
+    it('adds "active" attribute to currently selected tab-entry', () => {
+        let html = '<div><sol-tabs selected="0">' +
+                        '<div tab-id="one"></div>' +
+                        '<div tab-id="two"></div>' +
+                    '</sol-tabs></div>';
+        let element = getElement(html, $rootScope);
+
+        expect(element.find('[tab-ref="one"]')).toHaveAttr('active');
+        expect(element.find('[tab-ref="two"]')).not.toHaveAttr('active');
+    });
+
     it('changes selected tab when appropriate entry is clicked', () => {
         let html = '<div><sol-tabs selected="0">' +
                         '<div tab-id="one"></div>' +
