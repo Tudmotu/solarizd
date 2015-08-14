@@ -21,6 +21,18 @@ describe('solTabs directive', function () {
         $rootScope = _$rootScope_;
     }));
 
+    it('adds appropriate font-awesome classes when [tab-icon] present', () => {
+        let html = '<div><sol-tabs selected="1">' +
+                        '<div tab-id="one" tab-icon="search"></div>' +
+                        '<div tab-id="two"></div>' +
+                    '</sol-tabs></div>';
+        let element = getElement(html, $rootScope);
+
+        expect(element.find('[tab-ref="one"]')).toHaveClass('fa');
+        expect(element.find('[tab-ref="two"]')).not.toHaveClass('fa');
+        expect(element.find('[tab-ref="one"]')).toHaveClass('fa-search');
+    });
+
     it('has [active] attr on entry and [selected] attr on tab in sync', () => {
         let html = '<div><sol-tabs selected="1">' +
                         '<div tab-id="one"></div>' +

@@ -19,9 +19,17 @@ export default [function () {
                 return {
                     id: o.getAttribute('tab-id'),
                     title: o.getAttribute('tab-title'),
+                    icon: o.getAttribute('tab-icon'),
                     $el: o
                 };
             });
+
+            $scope.getIconClass = function (icon) {
+                if (!!icon)
+                    return 'fa fa-' + icon;
+
+                return '';
+            };
 
             $scope.$watch('selected', (selected) => {
                 selected = parseInt(selected, 10) || 0;
