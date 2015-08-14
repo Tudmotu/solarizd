@@ -21,6 +21,19 @@ describe('solTabs directive', function () {
         $rootScope = _$rootScope_;
     }));
 
+    it('changes selected tab when appropriate entry is clicked', () => {
+        let html = '<div><sol-tabs selected="0">' +
+                        '<div tab-id="one"></div>' +
+                        '<div tab-id="two"></div>' +
+                    '</sol-tabs></div>';
+        let element = getElement(html, $rootScope);
+        let scope = element.find('.sol-tabs').isolateScope();
+        expect(element.find('[tab-id="one"]')).toHaveAttr('selected');
+
+        element.find('[tab-ref="two"]').click();
+        expect(element.find('[tab-id="two"]')).toHaveAttr('selected');
+    });
+
     it('contains tab entries with fallback text as appears in tab-id attr', () => {
         let html = '<div><sol-tabs>' +
                         '<div tab-id="one"></div>' +
