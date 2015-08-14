@@ -5,7 +5,7 @@ module.exports = function(config) {
         files: [
             'src/vendor/jquery/dist/jquery.js',
             'src/vendor/angular/angular.js',
-            'src/modules/**/*.*',
+            'src/modules/**/*.{html,js}',
             'src/test/**/*.js'
         ],
 
