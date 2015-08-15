@@ -104,6 +104,9 @@ module.exports = function (grunt) {
         },
         browserify: {
             options: {
+                browserifyOptions: {
+                    debug: true
+                },
                 transform: [
                     ['babelify', { 'compact': 'none' }],
                     'browserify-shim'
@@ -112,6 +115,11 @@ module.exports = function (grunt) {
             build: {
                 files: {
                     "target/app.browser.js": "src/app.js"
+                }
+            },
+            src: {
+                files: {
+                    "src/app.browser.js": "src/app.js"
                 }
             },
             dev: {
