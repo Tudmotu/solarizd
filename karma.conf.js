@@ -1,11 +1,12 @@
 module.exports = function(config) {
     config.set({
-        frameworks: ['jasmine', 'browserify'],
+        frameworks: ['jasmine', 'browserify', 'source-map-support'],
 
         files: [
             'src/vendor/jquery/dist/jquery.js',
             'src/vendor/angular/angular.js',
             'src/modules/**/*.{html,js}',
+            'src/html/**/*.html',
             'src/test/**/*.js'
         ],
 
@@ -17,6 +18,7 @@ module.exports = function(config) {
 
         preprocessors: {
             'src/modules/**/*.html': ['ng-html2js'],
+            'src/html/**/*.html': ['ng-html2js'],
             'src/test/**/*.js': ['browserify']
         },
 
@@ -24,8 +26,7 @@ module.exports = function(config) {
             // strip this from the file path
             cacheIdFromPath: function (path) {
                 var newPath = path.replace(/^src/, '');
-                console.log('path', path);
-                console.log('new path', newPath);
+                console.log('Processing template', newPath);
                 return newPath;
             },
 
