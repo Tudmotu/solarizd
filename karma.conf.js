@@ -4,6 +4,10 @@ module.exports = function(config) {
 
         files: [
             'src/vendor/jquery/dist/jquery.js',
+            'src/vendor/jquery-ui/ui/core.js',
+            'src/vendor/jquery-ui/ui/widget.js',
+            'src/vendor/jquery-ui/ui/mouse.js',
+            'src/vendor/jquery-ui/ui/sortable.js',
             'src/vendor/angular/angular.js',
             'src/modules/**/*.{html,js}',
             'src/html/**/*.html',

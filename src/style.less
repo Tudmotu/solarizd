@@ -75,11 +75,10 @@ body:before {
 
 #main-view {
     .flexed(1);
-    .flexbox(@justify:flex-start);
     overflow:hidden;
 }
 
-#search-pane {
+[tab-id="search-pane"] {
     width:(@column * 3);
     max-width:50%;
     .flexed(0);
@@ -88,13 +87,13 @@ body:before {
     @delay:.4s);
 }
 
-#media-panel {
+[tab-id="media-panel"] {
     width:(@column * 3);
     .flexed(0);
     .mixin-media-panel;
 }
 
-#playlist-pane {
+[tab-id="playlist-pane"] {
     .flexed(1);
     .mixin-playlist-pane;
     .transition(@easing:ease-out; @duration:.4s);
