@@ -3,26 +3,21 @@ module.exports = function(config) {
         frameworks: ['jasmine', 'browserify', 'source-map-support'],
 
         files: [
-            'src/vendor/jquery/dist/jquery.js',
-            'src/vendor/jquery-ui/ui/core.js',
-            'src/vendor/jquery-ui/ui/widget.js',
-            'src/vendor/jquery-ui/ui/mouse.js',
-            'src/vendor/jquery-ui/ui/sortable.js',
-            'src/vendor/angular/angular.js',
-            'src/modules/**/*.{html,js}',
+            'src/js/Application.js',
+            'src/modules/**/*.html',
             'src/html/**/*.html',
             'src/test/**/*.js'
         ],
 
         exclude: [
             'src/test/mocks.js',
-            'src/modules/**/*.js',
             'src/test/test-main.js'
         ],
 
         preprocessors: {
             'src/modules/**/*.html': ['ng-html2js'],
             'src/html/**/*.html': ['ng-html2js'],
+            'src/js/Application.js': ['browserify'],
             'src/test/**/*.js': ['browserify']
         },
 

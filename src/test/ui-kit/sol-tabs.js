@@ -1,4 +1,3 @@
-import UIKit from '../../modules/ui-kit/ui-kit.js';
 import JasmineMatchers from '../../vendor/jasmine-expect/dist/jasmine-matchers';
 import JasmineJQuery from '../../vendor/jasmine-jquery/lib/jasmine-jquery.js';
 import $ from '../../vendor/jquery/dist/jquery.js';

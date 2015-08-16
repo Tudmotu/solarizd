@@ -1,8 +1,6 @@
-import jqUI from '../../vendor/jquery-ui/jquery-ui';
-import Application from '../../js/Application';
 import JasmineMatchers from '../../vendor/jasmine-expect/dist/jasmine-matchers';
 import JasmineJQuery from '../../vendor/jasmine-jquery/lib/jasmine-jquery';
-import $ from '../../vendor/jquery/dist/jquery';
+import $ from 'jquery';
 import {module, inject} from '../mocks';
 
 describe('solarizdApp directive', function () {

@@ -1,4 +1,3 @@
-import Application from '../../js/Application';
 import {module, inject} from '../mocks';
 
 describe("youtubeTime filter", function () {
