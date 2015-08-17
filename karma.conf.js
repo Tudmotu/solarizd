@@ -34,11 +34,11 @@ module.exports = function(config) {
         },
 
         browserify: {
-            debug: true,
-            transform: [
-                ['babelify', { compact: 'none' }],
-                ['browserify-shim']
-            ]
+            //debug: true,
+            //transform: [
+                //['babelify', { compact: 'none' }],
+                //['browserify-shim']
+            //]
         },
 
         browsers: ['Chrome']

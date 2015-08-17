@@ -4,7 +4,9 @@
   "description": "An app for playlist composition and content recommendation",
   "main": "src/index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "browserify": "browserify src/app.js -o src/app.browser.js",
+    "watchify": "watchify src/app.js -d -o src/app.browser.js -v"
   },
   "repository": {
     "type": "git",
@@ -47,7 +49,8 @@
     "karma-ng-html2js-preprocessor": "^0.1.2",
     "karma-phantomjs-launcher": "^0.2.0",
     "karma-source-map-support": "^1.1.0",
-    "phantomjs": "^1.9.17"
+    "phantomjs": "^1.9.17",
+    "watchify": "^3.3.1"
   },
   "jshintConfig": {
     "esnext": true
@@ -62,6 +65,13 @@
     "jquery-ui-sortable": "./src/vendor/jquery-ui/ui/sortable.js",
     "jquery": "./src/vendor/jquery/dist/jquery.min.js",
     "jqui-touch-punch": "./src/vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"
+  },
+  "browserify": {
+    "debug": true,
+    "transform": [
+      ["babelify", { "compact": "none" }],
+      "browserify-shim"
+    ]
   },
   "browserify-shim": {
     "angular": {
