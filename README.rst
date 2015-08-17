@@ -19,11 +19,10 @@ environment. You are required to supply a json file containing API keys for
 the relevant services used by this app, make sure to read `API Keys`_ section.
 
 
-Installation
+Setup
 ---------------------
-
-Installation of *Solarizd* is simple and straightforward. First, you need to clone this repository (or clone your own fork of the
-repository)::
+The setup of *Solarizd* is pretty simple. First, you need to clone this
+repository (or clone your own fork of the repository)::
 
     $ git clone https://github.com/Tudmotu/solarizd.git
 
@@ -43,29 +42,35 @@ dependencies can be installed in two simple steps::
     $ npm install
     $ bower install
 
-After running these commands, you will be able to use the grunt tasks.
+After running these commands, you will be able to compile the source and run a
+static server that will serve *Solarizd* on ``localhost:9000``.
 
 
-Development Workflow
+Compiling ES6 Source
 --------------------
 Solarizd is written with es6 syntax. This requires running Babel + Browserify
-before changes take effect. There's a grunt task that instantiates a Watchify
-instance, that will recompile the es6 code each time anything changes::
+before changes can take effect in the browser.
 
-    $ grunt browserify:dev
+For fast development cycles, you can run a watchify command that will watch and
+automatically re-bundle you source. This command is ran using npm scripts::
+
+    $ npm run watchify
 
 Running this command will spawn a Watchify instance that will automatically
-recompile your es6 code into browser-supported code.
+recompile your es6 code into browser-supported code. After running the command,
+you should start seeing an output similar to the following::
 
-You can also compile the bundle once, by running the following task::
+    > solarizd@1.0.0 watchify /path/to/solarizd-app
+    > watchify src/app.js -d -o src/app.browser.js -v
 
-    $ grunt browserify:build
+    4065363 bytes written to src/app.browser.js (9.94 seconds)
+    4065340 bytes written to src/app.browser.js (1.45 seconds)
+    4065363 bytes written to src/app.browser.js (1.34 seconds)
 
-*Note*: It is recommended to use the ``browserify:dev`` task while developing.
 
 Karma Tests
 -----------
-There are some (currently only a few) tests that are run using Karma (Jasmine
+Some features are covered by tests that are run using Karma (Jasmine
 as testing framework).
 
 These tests can be run in two ways:
@@ -75,13 +80,13 @@ These tests can be run in two ways:
     $ grunt karma:test
 
 - Run a karma watch task, that will automatically run the
-  tests whenever you make changes to code::
+  tests whenever you make changes to code (works really well with TDD)::
 
     $ grunt karma:dev
 
 
-Running a Development Static Server
-------------------------------------
+Running a Development Server
+----------------------------
 
 We can run two instances of a development static server using
 ``grunt-contrib-connect``. In order to run static server that is pointed at
