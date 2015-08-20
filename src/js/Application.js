@@ -1,3 +1,4 @@
+import 'babel/polyfill';
 import './Footer';
 import './Topbar';
 import './Search';
