@@ -6,6 +6,7 @@ import {module, inject} from '../mocks';
 describe('solTabs directive', function () {
     let $compile;
     let $rootScope;
+    let $httpBackend;
 
     function getElement (html, scope) {
         let el = $compile(html)(scope);
@@ -13,12 +14,44 @@ describe('solTabs directive', function () {
         return el;
     }
 
+    angular.module('test-module', [])
+        .directive('testDir', function () {
+            return {
+                restrict: 'E',
+                replace: true,
+                templateUrl: 'test.html'
+            };
+        });
+    beforeEach(module('test-module'));
+
     beforeEach(module('karma.templates'));
     beforeEach(module('ui-kit'));
-    beforeEach(inject((_$compile_, _$rootScope_) => {
+    beforeEach(inject((_$compile_, _$httpBackend_, _$rootScope_) => {
         $compile = _$compile_;
         $rootScope = _$rootScope_;
+        $httpBackend = _$httpBackend_;
+        $httpBackend.when('GET', 'test.html')
+            .respond('<div class="test-dir"></div>');
     }));
+
+    it('handles transcluded directives with templateUrl and replace:true', () => {
+        let html = '<div><sol-tabs selected="1">' +
+                        '<test-dir tab-id="one"></test-dir>' +
+                        '<test-dir tab-id="two"></test-dir>' +
+                    '</sol-tabs></div>';
+        let element = getElement(html, $rootScope);
+
+        expect(element.find('[tab-ref="two"]')).toHaveAttr('active');
+        expect(element.find('[tab-id="two"]')).toHaveAttr('selected');
+
+        $httpBackend.flush();
+
+        expect(element.find('test-dir')).toHaveLength(0);
+
+        element.find('[tab-ref="one"]').click();
+        expect(element.find('[tab-ref="one"]')).toHaveAttr('active');
+        expect(element.find('[tab-id="one"]')).toHaveAttr('selected');
+    });
 
     it('adds appropriate font-awesome classes when [tab-icon] present', () => {
         let html = '<div><sol-tabs selected="1">' +

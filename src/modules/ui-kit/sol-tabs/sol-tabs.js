@@ -37,10 +37,11 @@ export default [function () {
 
                 if ($scope.tabs.length) {
                     $scope.tabs.forEach((tab) => {
-                        tab.$el.removeAttribute('selected');
+                        $element.find(`[tab-id="${tab.id}"]`)[0].removeAttribute('selected');
                     });
 
-                    $scope.tabs[selected].$el.setAttribute('selected', '');
+                    let selectedId = $scope.tabs[selected].id;
+                    $element.find(`[tab-id="${selectedId}"]`)[0].setAttribute('selected', '');
                 }
             });
         }
