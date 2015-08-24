@@ -1,4 +1,4 @@
-import 'babel/polyfill';
+import 'babel-core/polyfill';
 import './Footer';
 import './Topbar';
 import './Search';

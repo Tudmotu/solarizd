@@ -37,6 +37,7 @@ module.exports = function (grunt) {
                             'css/fonts/**',
                             'vendor/fontawesome/fonts/**',
                             'html/**',
+                            'modules/**/*.html',
                             'js/assets/**'
                         ],
                         dest   : 'target/',
@@ -103,15 +104,6 @@ module.exports = function (grunt) {
             }
         },
         browserify: {
-            options: {
-                browserifyOptions: {
-                    debug: true
-                },
-                transform: [
-                    ['babelify', { 'compact': 'none' }],
-                    'browserify-shim'
-                ]
-            },
             build: {
                 files: {
                     "target/app.browser.js": "src/app.js"
@@ -178,7 +170,8 @@ module.exports = function (grunt) {
 
     grunt.registerTask('test', [
         'jshint:all',
-        'karma:ci'
+        'karma:test'
+        //'karma:ci'
     ]);
 
     grunt.registerTask('build', [
