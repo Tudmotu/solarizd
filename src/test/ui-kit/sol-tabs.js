@@ -34,6 +34,29 @@ describe('solTabs directive', function () {
             .respond('<div class="test-dir"></div>');
     }));
 
+    it('auto-selects correct tab when nesting directives with templateUrl and replace:true', (done) => {
+        let html = '<div><sol-tabs selected="1">' +
+                        '<test-dir tab-id="one"></test-dir>' +
+                        '<test-dir tab-id="two"></test-dir>' +
+                    '</sol-tabs></div>';
+        let element = getElement(html, $rootScope);
+        let mutationCount = 0;
+
+        let observer = new MutationObserver(function () {
+            expect(element.find('[tab-id="two"]')).toHaveAttr('selected');
+            done();
+        });
+
+        observer.observe(element.find('[ng-transclude]')[0], {
+            childList: true
+        });
+
+        $httpBackend.flush();
+
+        expect(element.find('test-dir')).toHaveLength(0);
+        expect(element.find('[tab-ref="two"]')).toHaveAttr('active');
+    });
+
     it('handles transcluded directives with templateUrl and replace:true', () => {
         let html = '<div><sol-tabs selected="1">' +
                         '<test-dir tab-id="one"></test-dir>' +

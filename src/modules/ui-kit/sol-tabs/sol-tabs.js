@@ -44,6 +44,11 @@ export default [function () {
                 }
             });
 
+            new MutationObserver($scope.applySelection)
+                    .observe($element.find('[ng-transclude]')[0], {
+                childList: true
+            });
+
             $scope.$watch('selected', $scope.applySelection);
         }
     };
