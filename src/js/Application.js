@@ -4,7 +4,6 @@ import './Topbar';
 import './Search';
 import './Playlist';
 import './MediaPanel';
-import './PanelSwitcher';
 import '../modules/ui-kit/ui-kit';
 import 'ng-resource';
 import 'angular';
@@ -15,7 +14,6 @@ export default angular.module('Application', [
     'ui.topbar',
     'ui.search',
     'ui.media-panel',
-    'ui.panel-switcher',
     'ui.playlist',
     'ui-kit',
     'services'
