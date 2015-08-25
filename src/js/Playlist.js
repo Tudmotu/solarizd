@@ -157,7 +157,7 @@ export default angular.module('ui.playlist', ['services', 'filters', 'ui.sortabl
         };
 
         return definitions;
-    }]).directive('playlistItem', ['$rootScope', '$http', 'playList', function($rootScope, $http, playList) {
+    }]).directive('playlistItem2', ['$rootScope', '$http', 'playList', function($rootScope, $http, playList) {
         var definitions = {
             restrict: 'E',
             templateUrl: '/html/playlist/item.html',
