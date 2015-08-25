@@ -64,10 +64,6 @@ export default angular.module('ui.playlist', ['services', 'filters', 'ui.sortabl
                     return matches || undefined;
                 };
 
-                if (playList.playlist.length) {
-                    $rootScope.$broadcast('setCurrentView', 'playlist');
-                }
-
                 $rootScope.$on('playList:stateChanged', function(e, state) {
                     $scope.nowPlayingIdx = playList.getNowPlayingIdx();
                     if (!$scope.$$phase) $scope.$digest();

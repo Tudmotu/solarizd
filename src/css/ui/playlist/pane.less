@@ -101,7 +101,6 @@
 
             &.actions-open {
                 margin-bottom:@row;
-                /*transition-timing-function:ease-in;*/
             }
 
             &.active {
@@ -125,7 +124,6 @@
 
         &.actions-open {
             height:(2 * @row);
-            /*transition-timing-function:ease-in;*/
         }
 
         &.ui-sortable-helper {
@@ -148,8 +146,6 @@
             .action {
                 padding:@row-pad @column-pad;
                 margin:@row-pad @column-pad;
-                /*background:linear-gradient(fadeout(@white,50%),*/
-                            /*fadeout(@white,75%));*/
                 background:fadeout(@white,50%);
                 border-radius:@medium-border;
                 .flexed(0);
@@ -193,7 +189,6 @@
         .title {
             overflow:hidden;
             height:100%;
-            white-space:nowrap;
             text-overflow:ellipsis;
             padding-left:@column-pad;
             font-size:@large-text;
@@ -251,7 +246,6 @@
             @media (max-device-width:960px) {
                 padding-left:0;
                 padding-right:0;
-                /*order:1;*/
             }
         }
         &.loading .toggler {

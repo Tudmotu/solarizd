@@ -5,6 +5,7 @@
 @import "./css/ui/playlist/pane";
 @import "./css/ui/topbar/bar";
 @import "./css/ui/footer/bar";
+@import "./modules/ui-kit/ui-kit";
 @fa-font-path:"vendor/fontawesome/fonts";
 
 *, *:before, *:after {
@@ -74,26 +75,22 @@ body:before {
 
 #main-view {
     .flexed(1);
-    .flexbox(@justify:flex-start);
     overflow:hidden;
 }
 
-#search-pane {
-    width:(@column * 3);
-    max-width:50%;
+[tab-id="search-pane"] {
     .flexed(0);
     .mixin-search-pane;
     .transition(@prop:transform; @easing:ease-in; @duration:.3s;
     @delay:.4s);
 }
 
-#media-panel {
-    width:(@column * 3);
+[tab-id="media-panel"] {
     .flexed(0);
     .mixin-media-panel;
 }
 
-#playlist-pane {
+[tab-id="playlist-pane"] {
     .flexed(1);
     .mixin-playlist-pane;
     .transition(@easing:ease-out; @duration:.4s);
@@ -104,112 +101,37 @@ body:before {
     .mixin-footer;
     .transition(@prop:transform; @easing:ease-out; @duration:.3s);
 }
-#main-tabs {
-  display:none
-}
 
-.panel-switcher {
-    .flexbox;
-    .transition(@easing:ease-in; @duration: .2s; @delay:.2s);
-    background:@theme-background;
-    border-bottom:solid 1px fadeout(@base02, 50%);
-    transition-property:transform, opacity;
-    height:@row;
+@media (min-width: 1280px) {
+    #main-view.sol-tabs {
+        &> .tabs {
+            .flexbox;
+            display:none;
+        }
 
-    .loading & {
-        transform:translateY(-100%);
-        opacity:0;
-    }
+        &> .wrapper {
+            .flexbox;
+            overflow:hidden;
 
-    .item {
-        .flexed(1);
-        .flexbox;
-        font-size:(@huge-text);
-        text-align:center;
-        cursor:pointer;
-        color:@white;
-
-        .title {
-            .flexed(1);
-            .flexbox(@align:center);
-            position:static;
-
-            &.active {
-                background:fadeout(@white,75%);
-
-                &:after {
-                    width:100%;
+            &> [tab-id] {
+                @width: 3 * @column;
+                &[tab-id="search-pane"] {
+                    width:@width;
+                    max-width:50%;
                 }
+                &[tab-id="media-panel"] {
+                    width:@width;
+                }
+
+                position:relative;
+                top:initial;
+                bottom:initial;
+                left:initial;
+                right:initial;
+                height:auto;
+                width:auto;
+                display:flex !important;
             }
-
-            &:after {
-                .transition(@duration:.2s; @prop:width);
-                content:"";
-                position:absolute;
-                bottom:0;
-                left:0;
-                right:0;
-                margin:auto;
-                height:@thick-border;
-                background:@base2;
-                width:0;
-            }
-        }
-
-        .title:before {
-            padding:@row-pad @column-pad;
-        }
-
-        &[data-name="search"] .title:before {
-            .icon(@fa-var-search);
-        }
-
-        &[data-name="playlist"] .title:before {
-            .icon(@fa-var-bars);
-        }
-
-        &[data-name="media"] .title:before {
-            .icon(@fa-var-film);
-        }
-    }
-}
-
-
-@media (max-width: 1280px), (max-device-width: 1280px) {
-    #main-tabs {
-        display:flex;
-    }
-    .media-mixin () {
-        width:100%;
-        max-width:100%;
-        position:absolute;
-        height:100%;
-        top:0;
-        left:0;
-        .transition;
-
-        &:not(.current-panel) {
-            /*transform:rotateZ(-25deg) translateX(-50%);*/
-            /*opacity:0;*/
-            transform:translateX(-100%) !important;
-        }
-    }
-    #search-pane {
-        z-index:2;
-        .media-mixin;
-    }
-    #playlist-pane {
-        z-index:1;
-        .media-mixin;
-    }
-    #media-panel {
-        z-index:0;
-        .media-mixin;
-        transform:translateX(0) !important;
-
-        &.cued {
-            z-index:10;
-            transform:none !important;
         }
     }
 }

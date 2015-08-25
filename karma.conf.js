@@ -1,9 +1,12 @@
 module.exports = function(config) {
     config.set({
-        frameworks: ['jasmine', 'browserify'],
+        frameworks: ['jasmine', 'browserify', 'source-map-support'],
 
         files: [
-            'src/test/**/*.js',
+            'src/js/Application.js',
+            'src/modules/**/*.html',
+            'src/html/**/*.html',
+            'src/test/**/*.js'
         ],
 
         exclude: [
@@ -12,15 +15,30 @@ module.exports = function(config) {
         ],
 
         preprocessors: {
-            "src/test/**/*.js": ["browserify"]
+            'src/modules/**/*.html': ['ng-html2js'],
+            'src/html/**/*.html': ['ng-html2js'],
+            'src/js/Application.js': ['browserify'],
+            'src/test/**/*.js': ['browserify']
+        },
+
+        ngHtml2JsPreprocessor: {
+            // strip this from the file path
+            cacheIdFromPath: function (path) {
+                var newPath = path.replace(/^src/, '');
+                console.log('Processing template', newPath);
+                return newPath;
+            },
+
+            // the name of the Angular module to create
+            moduleName: "karma.templates"
         },
 
         browserify: {
-            debug: true,
-            transform: [
-                ['babelify', { compact: 'none' }],
-                ['browserify-shim']
-            ]
+            //debug: true,
+            //transform: [
+                //['babelify', { compact: 'none' }],
+                //['browserify-shim']
+            //]
         },
 
         browsers: ['Chrome']

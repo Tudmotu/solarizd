@@ -1,0 +1,64 @@
+@import '../../../css/vars/all';
+
+.sol-tabs {
+    .flexbox(@dir:column);
+
+    & > .tabs {
+        .flexed(0);
+        .flexbox;
+        background:@theme-background;
+        border-bottom:solid 1px fadeout(@base02, 50%);
+        height:@row;
+        font-size:(@huge-text);
+        text-align:center;
+        color:@white;
+
+        & > .tab {
+            .flexed(1);
+            .flexbox(@align:center);
+            cursor:pointer;
+
+            &[active] {
+                background:fadeout(@white,75%);
+
+                &:after {
+                    width:100%;
+                }
+            }
+
+            &.fa:before {
+                margin:@row-pad @column-pad;
+            }
+
+            &:after {
+                .transition(@duration:.2s; @prop:width);
+                content:"";
+                position:absolute;
+                bottom:0;
+                left:0;
+                right:0;
+                margin:auto;
+                height:@thick-border;
+                background:@base2;
+                width:0;
+            }
+        }
+    }
+
+    & > .wrapper {
+        .flexed(1);
+        position:relative;
+
+        & > [tab-id] {
+            position:absolute;
+            top:0; left:0;
+            bottom:0; right:0;
+            width:100%;
+            height:100%;
+
+            &:not([selected]) {
+                display:none !important;
+            }
+        }
+    }
+}

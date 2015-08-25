@@ -28,9 +28,11 @@
     "prefixfree": "*",
     "fontawesome": "4.3.0",
     "mobile-detect": "hgoebl/mobile-detect.js#~1.2.x",
-    "jquery-ui": "~1.10.x",
+    "jquery-ui": "~1.11.x",
     "angular-ui-sortable": "~0.13.x",
-    "jquery-ui-touch-punch": "furf/jquery-ui-touch-punch"
+    "jquery-ui-touch-punch": "furf/jquery-ui-touch-punch",
+    "jasmine-jquery": "~2.1.0",
+    "jasmine-expect": "~1.22.3"
   },
   "resolutions": {
     "angular": "~1.4.x"
