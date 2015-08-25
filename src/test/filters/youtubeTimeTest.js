@@ -10,6 +10,14 @@ describe("youtubeTime filter", function () {
         youtubeTime = $filter('youtubeTime');
     }));
 
+    it("corretly formats an empty string as '--:--'", function () {
+        expect(youtubeTime('')).toBe('--:--');
+    });
+
+    it("corretly parses PT22S", function () {
+        expect(youtubeTime('PT22S')).toBe('00:22');
+    });
+
     it("corretly parses PT1M", function () {
         expect(youtubeTime('PT1M')).toBe('1:00');
     });

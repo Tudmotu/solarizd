@@ -18,6 +18,9 @@ export default angular.module('filters', [])
             else if (seconds[1].length === 1) parts.push('0' + seconds[1]);
             else parts.push(seconds[1]);
 
+            if (!hours && !minutes && !seconds)
+                return '--:--';
+
             return parts.join(':');
         };
     })
