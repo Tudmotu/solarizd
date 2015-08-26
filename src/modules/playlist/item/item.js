@@ -11,6 +11,7 @@ export default [
         scope: {
             'title': '@',
             'duration': '@',
+            'progress': '@',
             //'videoId': '@videoId',
             //'thumbnail': '@thumbnail',
             //'autoplay': '@autoplay',
@@ -22,6 +23,11 @@ export default [
             //'index': '@index'
         },
         link: function($scope, $element, $attrs, $transclude) {
+            Object.assign($scope, {
+                get nowPlaying () {
+                    return parseInt($scope.progress, 10) > 0;
+                }
+            });
             /*$rootScope.$on('youtubePlayer:infoDelivery', function(e, state) {
                 $scope.nowPlaying = playList.getNowPlayingIdx() === $scope.getIndex();
                 $scope.isActive = ($scope.nowPlaying &&
