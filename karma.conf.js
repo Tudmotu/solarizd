@@ -2,6 +2,8 @@ module.exports = function(config) {
     config.set({
         frameworks: ['jasmine', 'browserify', 'source-map-support'],
 
+        reporters: ['dots'],
+
         files: [
             'src/js/Application.js',
             'src/modules/**/*.html',
