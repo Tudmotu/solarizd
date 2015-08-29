@@ -1,7 +1,6 @@
 <li class="playlist-item">
-        <div>
-            <span class="title">{{title}}</span>
-        </div>
+    <div class="bar">
+        <span class="title">{{title}}</span>
         <span class="time">
             <span class="elapsed" ng-if="getNowPlaying()">
                 {{progress | formatTime}}
@@ -9,6 +8,7 @@
             <span class="separator" ng-if="getNowPlaying()">/</span>
             <span class="duration">{{duration || '' | youtubeTime}}</span>
         </span>
+    </div>
 <!--<li ng-class="{'now-playing': nowPlaying, 'active': isActive, 'loading':
                 isBuffering, 'actions-open': displayActions}">
 

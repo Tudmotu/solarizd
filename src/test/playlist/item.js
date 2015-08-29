@@ -91,6 +91,13 @@ describe('playlistItem directive', function () {
     });
 
     describe('general markup', () => {
+        it('contains .bar element as a direct child of .playlist-item', () => {
+            let html = '<div><playlist-item title="test bla"></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            expect(root.find('.playlist-item > .bar')).toHaveLength(1);
+        });
+
         it('contains item title inside the .title element', () => {
             let html = '<div><playlist-item title="test bla"></playlist-item></div>';
             let root = createRoot(html, $rootScope);
