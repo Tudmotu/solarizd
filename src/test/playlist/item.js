@@ -29,6 +29,7 @@ describe('playlistItem directive', function () {
         beforeEach(() => {
             spyOn(playList, 'play');
             spyOn(playList, 'pause');
+            spyOn(playList, 'remove');
         });
 
         it('should call playList.play(idx) when .toggler is clicked and progress > 0', () => {
