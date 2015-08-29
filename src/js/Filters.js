@@ -26,27 +26,28 @@ export default angular.module('filters', [])
     })
     .filter('formatTime', function() {
         return function(input) {
-            if (isNaN(input)) return '--:--';
-            var time = Math.floor(input),
-                minutes = Math.floor(time / 60),
-                hours = Math.floor(minutes / 60),
-                seconds = (time % 60),
-                timestr = '';
+            if (isNaN(input) || input === '') return '--:--';
+            let time = Math.floor(input);
+            let hours = Math.floor(time / 3600);
+            let minutes = Math.floor((time % 3600) / 60);
+            let seconds = Math.floor((time % 3600) % 60);
+            let parts = [];
 
-            minutes -= hours * 60;
-            if (hours >= 1)
-                timestr += hours + ':';
+            if (hours) parts.push(hours);
 
-            minutes = minutes.toString().length === 1 ?
-                '0' + minutes :
-                minutes;
-            seconds = seconds.toString().length === 1 ?
-                '0' + seconds :
-                seconds;
+            if (!minutes) parts.push('00');
+            else if (minutes < 10 && hours)
+                parts.push('0' + minutes);
+            else parts.push(minutes);
 
-            timestr += minutes + ':';
-            timestr += seconds;
-            return timestr;
+            if (!seconds) parts.push('00');
+            else if (seconds < 10) parts.push('0' + seconds);
+            else parts.push(seconds);
+
+            if (!hours && !minutes && !seconds)
+                return '--:--';
+
+            return parts.join(':');
         };
     })
     .filter('commaNum', function() {
