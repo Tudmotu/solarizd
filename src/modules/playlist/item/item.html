@@ -1,7 +1,7 @@
 <li class="playlist-item">
     <div class="bar">
         <span class="mover"></span>
-        <span class="toggler"></span>
+        <span class="toggler" ng-click="toggle()"></span>
         <span class="title">{{title}}</span>
         <span class="flags">
             <span class="flag play-next" ng-if="playNext"></span>
@@ -15,7 +15,7 @@
             <span class="separator" ng-if="getNowPlaying()">/</span>
             <span class="duration">{{duration || '' | youtubeTime}}</span>
         </span>
-        <span class="remover"></span>
+        <span class="remover" ng-click="remove()"></span>
     </div>
 <!--<li ng-class="{'now-playing': nowPlaying, 'active': isActive, 'loading':
                 isBuffering, 'actions-open': displayActions}">

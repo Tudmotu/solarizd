@@ -15,6 +15,7 @@ export default [
             'playNext': '@',
             'stopHere': '@',
             'repeat': '@',
+            'index': '@index',
             //'videoId': '@videoId',
             //'thumbnail': '@thumbnail',
             //'autoplay': '@autoplay',
@@ -30,6 +31,16 @@ export default [
                     let progress = parseInt($scope.progress, 10);
 
                     return progress > 0;
+                },
+                toggle: () => {
+                    if ($scope.progress > 0)
+                        playList.play();
+                    else
+                        playList.pause();
+                },
+                remove: () => {
+                    let idx = parseInt($scope.index, 10);
+                    playList.remove(idx);
                 }
             });
             /*$rootScope.$on('youtubePlayer:infoDelivery', function(e, state) {

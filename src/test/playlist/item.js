@@ -25,6 +25,46 @@ describe('playlistItem directive', function () {
         playList = _playList_;
     }));
 
+    describe('playList service integration', () => {
+        beforeEach(() => {
+            spyOn(playList, 'play');
+            spyOn(playList, 'pause');
+        });
+
+        it('should call playList.play(idx) when .toggler is clicked and progress > 0', () => {
+            let html = '<div><playlist-item ' +
+                            'progress="10" ' +
+                            'index="1" ' +
+                        '></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            root.find('.toggler').click();
+
+            expect(playList.play).toHaveBeenCalled();
+        });
+
+        it('should call playList.pause when .toggler is clicked', () => {
+            let html = '<div><playlist-item ' +
+                        '></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            root.find('.toggler').click();
+
+            expect(playList.pause).toHaveBeenCalled();
+        });
+
+        it('should call playList.remove(idx) when .remover is clicked', () => {
+            let html = '<div><playlist-item ' +
+                            'index="1" ' +
+                        '></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            root.find('.remover').click();
+
+            expect(playList.remove).toHaveBeenCalledWith(1);
+        });
+    });
+
     describe('action flags', () => {
         it('displays repeat flag when repeat attr is true', () => {
             let html = '<div><playlist-item ' +
