@@ -24,8 +24,10 @@ export default [
         },
         link: function($scope, $element, $attrs, $transclude) {
             Object.assign($scope, {
-                get nowPlaying () {
-                    return parseInt($scope.progress, 10) > 0;
+                getNowPlaying: () => {
+                    let progress = parseInt($scope.progress, 10);
+
+                    return progress > 0;
                 }
             });
             /*$rootScope.$on('youtubePlayer:infoDelivery', function(e, state) {

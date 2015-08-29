@@ -3,10 +3,10 @@
             <span class="title">{{title}}</span>
         </div>
         <span class="time">
-            <span class="elapsed" ng-if="nowPlaying">
+            <span class="elapsed" ng-if="getNowPlaying()">
                 {{progress | formatTime}}
             </span>
-            <span class="separator" ng-if="nowPlaying">/</span>
+            <span class="separator" ng-if="getNowPlaying()">/</span>
             <span class="duration">{{duration || '' | youtubeTime}}</span>
         </span>
 <!--<li ng-class="{'now-playing': nowPlaying, 'active': isActive, 'loading':

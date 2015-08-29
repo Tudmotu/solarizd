@@ -26,6 +26,25 @@ describe('playlistItem directive', function () {
     }));
 
     describe('elapsed time', () => {
+        it('"progress" part of .time updates when scope changes', () => {
+            let html = '<div><playlist-item ' +
+                           'title="test bla"' +
+                           'duration="PT3M21S"' +
+                           'progress="{{progress}}"' +
+                       '></playlist-item></div>';
+            $rootScope.progress = 0;
+            let root = createRoot(html, $rootScope);
+
+            expect(root.find('.time')).toHaveText(/^\s*3:21\s*$/);
+
+            $rootScope.progress = 60;
+            $rootScope.$apply();
+
+            expect(root.find('.time')).toHaveText(/^\s*1:00\s*\/\s*3:21\s*$/);
+            expect(root.find('.playlist-item').isolateScope().progress).toBe('60');
+            expect(root.find('.playlist-item').isolateScope().getNowPlaying()).toBe(true);
+        });
+
         it('does not display "progress" part of .time when progress is 0', () => {
             let html = '<div><playlist-item ' +
                            'title="test bla"' +
