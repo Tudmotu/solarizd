@@ -1,4 +1,5 @@
 node_modules/*
+src/plugins/**/*
 src/vendor/*
 src/app.browser.js
 target/*
