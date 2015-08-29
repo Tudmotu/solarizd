@@ -91,6 +91,34 @@ describe('playlistItem directive', function () {
     });
 
     describe('general markup', () => {
+        it('contains .remover element', () => {
+            let html = '<div><playlist-item title="test bla"></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            expect(root.find('.playlist-item .remover')).toHaveLength(1);
+        });
+
+        it('contains .flags element', () => {
+            let html = '<div><playlist-item title="test bla"></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            expect(root.find('.playlist-item .flags')).toHaveLength(1);
+        });
+
+        it('contains .toggler element', () => {
+            let html = '<div><playlist-item title="test bla"></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            expect(root.find('.playlist-item .toggler')).toHaveLength(1);
+        });
+
+        it('contains .mover element', () => {
+            let html = '<div><playlist-item title="test bla"></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            expect(root.find('.playlist-item .mover')).toHaveLength(1);
+        });
+
         it('contains .bar element as a direct child of .playlist-item', () => {
             let html = '<div><playlist-item title="test bla"></playlist-item></div>';
             let root = createRoot(html, $rootScope);
