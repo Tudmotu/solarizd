@@ -4,6 +4,9 @@
         <span class="toggler"></span>
         <span class="title">{{title}}</span>
         <span class="flags">
+            <span class="flag play-next" ng-if="playNext"></span>
+            <span class="flag stop-here" ng-if="stopHere"></span>
+            <span class="flag repeat" ng-if="repeat"></span>
         </span>
         <span class="time">
             <span class="elapsed" ng-if="getNowPlaying()">

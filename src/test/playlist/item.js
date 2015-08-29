@@ -25,6 +25,44 @@ describe('playlistItem directive', function () {
         playList = _playList_;
     }));
 
+    describe('action flags', () => {
+        it('displays repeat flag when repeat attr is true', () => {
+            let html = '<div><playlist-item ' +
+                            'ng-attr-repeat="{{repeat}}">' +
+                        '</playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            $rootScope.repeat = true;
+            $rootScope.$digest();
+
+            expect(root).toContainElement('.flags > .flag.repeat');
+        });
+
+        it('displays stop-here flag when stopHere attr is true', () => {
+            let html = '<div><playlist-item ' +
+                            'ng-attr-stop-here="{{stopHere}}">' +
+                        '</playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            $rootScope.stopHere = true;
+            $rootScope.$digest();
+
+            expect(root).toContainElement('.flags > .flag.stop-here');
+        });
+
+        it('displays play-next flag when playNext attr is true', () => {
+            let html = '<div><playlist-item ' +
+                            'ng-attr-play-next="{{playNext}}">' +
+                        '</playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            $rootScope.playNext = true;
+            $rootScope.$digest();
+
+            expect(root).toContainElement('.flags > .flag.play-next');
+        });
+    });
+
     describe('elapsed time', () => {
         it('"progress" part of .time updates when scope changes', () => {
             let html = '<div><playlist-item ' +
