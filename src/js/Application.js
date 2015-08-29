@@ -1,4 +1,5 @@
 import 'babel-core/polyfill';
+import '../plugins/plugins';
 import './Footer';
 import './Topbar';
 import './Search';
