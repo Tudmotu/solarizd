@@ -17,8 +17,7 @@ describe('playlistItem directive', function () {
 
     beforeEach(module('karma.templates'));
     beforeEach(module('Application'));
-    beforeEach(inject((
-            _$compile_, _$rootScope_,_$httpBackend_, _playList_) => {
+    beforeEach(inject((_$compile_, _$rootScope_, _$httpBackend_, _playList_) => {
         $compile = _$compile_;
         $rootScope = _$rootScope_;
         $httpBackend = _$httpBackend_;
@@ -67,6 +66,16 @@ describe('playlistItem directive', function () {
     });
 
     describe('action flags', () => {
+        it('sets .actions-open class on .playlist-item when .actions-menu is clicked', () => {
+            let html = '<div><playlist-item ' +
+                            '></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            root.find('.actions-menu').click();
+
+            expect(root.find('.playlist-item')).toHaveClass('actions-open');
+        });
+
         it('displays repeat flag when repeat attr is true', () => {
             let html = '<div><playlist-item ' +
                             'ng-attr-repeat="{{repeat}}">' +
@@ -170,6 +179,20 @@ describe('playlistItem directive', function () {
     });
 
     describe('general markup', () => {
+        it('contains .actions-bar.bar element', () => {
+            let html = '<div><playlist-item title="test bla"></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            expect(root.find('.playlist-item .actions-bar.bar')).toHaveLength(1);
+        });
+
+        it('contains .actions-menu element', () => {
+            let html = '<div><playlist-item title="test bla"></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            expect(root.find('.playlist-item .actions-menu')).toHaveLength(1);
+        });
+
         it('contains .remover element', () => {
             let html = '<div><playlist-item title="test bla"></playlist-item></div>';
             let root = createRoot(html, $rootScope);
@@ -198,11 +221,11 @@ describe('playlistItem directive', function () {
             expect(root.find('.playlist-item .mover')).toHaveLength(1);
         });
 
-        it('contains .bar element as a direct child of .playlist-item', () => {
+        it('contains 2 .bar elements as a direct child of .playlist-item', () => {
             let html = '<div><playlist-item title="test bla"></playlist-item></div>';
             let root = createRoot(html, $rootScope);
 
-            expect(root.find('.playlist-item > .bar')).toHaveLength(1);
+            expect(root.find('.playlist-item > .bar')).toHaveLength(2);
         });
 
         it('contains item title inside the .title element', () => {

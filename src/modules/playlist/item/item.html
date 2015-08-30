@@ -1,7 +1,8 @@
-<li class="playlist-item">
+<li ng-class="{ 'actions-open': !!actionsOpen }" class="playlist-item">
     <div class="bar">
         <span class="mover"></span>
         <span class="toggler" ng-click="toggle()"></span>
+        <span class="actions-menu" ng-click="actionsOpen = true"></span>
         <span class="title">{{title}}</span>
         <span class="flags">
             <span class="flag play-next" ng-if="playNext"></span>
@@ -17,6 +18,7 @@
         </span>
         <span class="remover" ng-click="remove()"></span>
     </div>
+    <ul class="actions-bar bar"></ul>
 <!--<li ng-class="{'now-playing': nowPlaying, 'active': isActive, 'loading':
                 isBuffering, 'actions-open': displayActions}">
 
