@@ -1,8 +1,8 @@
 <li ng-class="{ 'actions-open': !!actionsOpen }" class="playlist-item">
     <div class="bar">
         <span class="mover"></span>
-        <span class="toggler" ng-click="toggle()"></span>
         <span class="actions-menu" ng-click="actionsOpen = true"></span>
+        <span class="toggler" ng-click="toggle()"></span>
         <span class="title">{{title}}</span>
         <span class="flags">
             <span class="flag play-next" ng-if="playNext"></span>

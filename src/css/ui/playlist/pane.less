@@ -196,6 +196,13 @@
             .flexbox(@dir:column);
         }
 
+        &.actions-open .actions-menu {
+            transform:rotatez(180deg);
+        }
+        .actions-menu {
+            .action(@fa-var-caret-down);
+            .transition(@prop:transform;@easing:ease-out);
+        }
         .remover {
             .action(@fa-var-times);
             @media (max-device-width:960px) {
