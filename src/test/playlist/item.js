@@ -66,6 +66,20 @@ describe('playlistItem directive', function () {
     });
 
     describe('action flags', () => {
+        it('removes .actions-open class on .playlist-item after .actions-menu is clicked twice', () => {
+            let html = '<div><playlist-item ' +
+                            '></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            root.find('.actions-menu').click();
+
+            expect(root.find('.playlist-item')).toHaveClass('actions-open');
+
+            root.find('.actions-menu').click();
+
+            expect(root.find('.playlist-item')).not.toHaveClass('actions-open');
+        });
+
         it('sets .actions-open class on .playlist-item when .actions-menu is clicked', () => {
             let html = '<div><playlist-item ' +
                             '></playlist-item></div>';
