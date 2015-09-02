@@ -27,30 +27,30 @@ describe('playlistItem directive', function () {
     describe('playList service integration', () => {
         beforeEach(() => {
             spyOn(playList, 'play');
-            spyOn(playList, 'pause');
+            spyOn(playList, 'togglePlay');
             spyOn(playList, 'remove');
         });
 
-        it('should call playList.play(idx) when .toggler is clicked and progress > 0', () => {
+        it('should call playList.togglePlay when .toggler is clicked and progress > 0', () => {
             let html = '<div><playlist-item ' +
                             'progress="10" ' +
+                        '></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            root.find('.toggler').click();
+
+            expect(playList.togglePlay).toHaveBeenCalled();
+        });
+
+        it('should call playList.play(idx) when .toggler is clicked', () => {
+            let html = '<div><playlist-item ' +
                             'index="1" ' +
                         '></playlist-item></div>';
             let root = createRoot(html, $rootScope);
 
             root.find('.toggler').click();
 
-            expect(playList.play).toHaveBeenCalled();
-        });
-
-        it('should call playList.pause when .toggler is clicked', () => {
-            let html = '<div><playlist-item ' +
-                        '></playlist-item></div>';
-            let root = createRoot(html, $rootScope);
-
-            root.find('.toggler').click();
-
-            expect(playList.pause).toHaveBeenCalled();
+            expect(playList.play).toHaveBeenCalledWith(1);
         });
 
         it('should call playList.remove(idx) when .remover is clicked', () => {

@@ -34,9 +34,9 @@ export default [
                 },
                 toggle: () => {
                     if ($scope.progress > 0)
-                        playList.play();
+                        playList.togglePlay();
                     else
-                        playList.pause();
+                        playList.play(parseInt($scope.index, 10));
                 },
                 remove: () => {
                     let idx = parseInt($scope.index, 10);
