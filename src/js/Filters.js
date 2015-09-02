@@ -1,29 +1,20 @@
 import 'angular';
 export default angular.module('filters', [])
-    .filter('youtubeTime', function() {
+    .filter('youtubeTime', ['$filter', function($filter) {
         return function(input) {
-            var parts = [],
-                seconds = input.match(/(\d+)S/),
-                minutes = input.match(/(\d+)M/),
-                hours = input.match(/(\d+)H/);
+            let seconds = input.match(/(\d+)S/);
+            let minutes = input.match(/(\d+)M/);
+            let hours = input.match(/(\d+)H/);
 
-            if (hours) parts.push(hours[1]);
+            if (seconds) seconds = parseInt(seconds, 10);
+            if (minutes) minutes = parseInt(minutes, 10);
+            if (hours) hours = parseInt(hours, 10);
 
-            if (!minutes) parts.push('00');
-            else if (minutes[1].length === 1 && hours)
-                parts.push('0' + minutes[1]);
-            else parts.push(minutes[1]);
+            let time = seconds + (minutes * 60) + (hours * 60 * 60);
 
-            if (!seconds) parts.push('00');
-            else if (seconds[1].length === 1) parts.push('0' + seconds[1]);
-            else parts.push(seconds[1]);
-
-            if (!hours && !minutes && !seconds)
-                return '--:--';
-
-            return parts.join(':');
+            return $filter('formatTime')(time);
         };
-    })
+    }])
     .filter('formatTime', function() {
         return function(input) {
             if (isNaN(input) || input === '') return '--:--';
