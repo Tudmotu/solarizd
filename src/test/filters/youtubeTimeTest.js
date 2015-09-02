@@ -19,11 +19,11 @@ describe("youtubeTime filter", function () {
     });
 
     it("corretly parses PT1M", function () {
-        expect(youtubeTime('PT1M')).toBe('1:00');
+        expect(youtubeTime('PT1M')).toBe('01:00');
     });
 
     it("corretly parses PT1M23S", function () {
-        expect(youtubeTime('PT1M23S')).toBe('1:23');
+        expect(youtubeTime('PT1M23S')).toBe('01:23');
     });
 
     it("corretly parses PT12M3S", function () {
@@ -31,10 +31,10 @@ describe("youtubeTime filter", function () {
     });
 
     it("corretly parses PT2H12M3S", function () {
-        expect(youtubeTime('PT2H12M3S')).toBe('2:12:03');
+        expect(youtubeTime('PT2H12M3S')).toBe('02:12:03');
     });
 
     it("corretly parses PT2H2M3S", function () {
-        expect(youtubeTime('PT2H2M3S')).toBe('2:02:03');
+        expect(youtubeTime('PT2H2M3S')).toBe('02:02:03');
     });
 });

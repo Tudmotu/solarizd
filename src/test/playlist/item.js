@@ -137,12 +137,12 @@ describe('playlistItem directive', function () {
             $rootScope.progress = 0;
             let root = createRoot(html, $rootScope);
 
-            expect(root.find('.time')).toHaveText(/^\s*3:21\s*$/);
+            expect(root.find('.time')).toHaveText(/^\s*03:21\s*$/);
 
             $rootScope.progress = 60;
             $rootScope.$apply();
 
-            expect(root.find('.time')).toHaveText(/^\s*1:00\s*\/\s*3:21\s*$/);
+            expect(root.find('.time')).toHaveText(/^\s*01:00\s*\/\s*03:21\s*$/);
             expect(root.find('.playlist-item').isolateScope().progress).toBe('60');
             expect(root.find('.playlist-item').isolateScope().getNowPlaying()).toBe(true);
         });
@@ -155,7 +155,7 @@ describe('playlistItem directive', function () {
                        '></playlist-item></div>';
             let root = createRoot(html, $rootScope);
 
-            expect(root.find('.time')).toHaveText(/^\s*3:21$/);
+            expect(root.find('.time')).toHaveText(/^\s*03:21$/);
         });
 
         it('does not display "progress" part of .time when no progress is given', () => {
@@ -165,7 +165,7 @@ describe('playlistItem directive', function () {
                        '></playlist-item></div>';
             let root = createRoot(html, $rootScope);
 
-            expect(root.find('.time')).toHaveText(/^\s*3:21$/);
+            expect(root.find('.time')).toHaveText(/^\s*03:21$/);
         });
 
         it('contains current song progress', () => {
@@ -177,7 +177,7 @@ describe('playlistItem directive', function () {
             let root = createRoot(html, $rootScope);
 
             expect(root.find('.time > .elapsed')).toHaveText('00:28');
-            expect(root.find('.time')).toHaveText(/^00:28\s*\/\s*3:21$/);
+            expect(root.find('.time')).toHaveText(/^00:28\s*\/\s*03:21$/);
             expect(root.find('.time')).toContainElement('.separator');
         });
 
@@ -188,7 +188,7 @@ describe('playlistItem directive', function () {
                        '></playlist-item></div>';
             let root = createRoot(html, $rootScope);
 
-            expect(root.find('.time > .duration')).toHaveText('3:21');
+            expect(root.find('.time > .duration')).toHaveText('03:21');
         });
     });
 

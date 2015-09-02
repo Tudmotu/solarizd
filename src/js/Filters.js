@@ -24,10 +24,15 @@ export default angular.module('filters', [])
             let seconds = Math.floor((time % 3600) % 60);
             let parts = [];
 
-            if (hours) parts.push(hours);
+            if (hours) {
+                if (hours < 10)
+                    parts.push('0' + hours);
+                else
+                    parts.push(hours);
+            }
 
             if (!minutes) parts.push('00');
-            else if (minutes < 10 && hours)
+            else if (minutes < 10)
                 parts.push('0' + minutes);
             else parts.push(minutes);
 

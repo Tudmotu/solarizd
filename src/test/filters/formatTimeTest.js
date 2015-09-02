@@ -19,11 +19,11 @@ describe("formatTime filter", function () {
     });
 
     it("corretly parses only minutes", function () {
-        expect(formatTime('60')).toBe('1:00');
+        expect(formatTime('60')).toBe('01:00');
     });
 
     it("corretly parses single-digit minute with seconds", function () {
-        expect(formatTime('83')).toBe('1:23');
+        expect(formatTime('83')).toBe('01:23');
     });
 
     it("corretly parses two-digit minute with seconds", function () {
@@ -31,10 +31,10 @@ describe("formatTime filter", function () {
     });
 
     it("corretly parses hours with two-digits minutes and seconds", function () {
-        expect(formatTime('7923')).toBe('2:12:03');
+        expect(formatTime('7923')).toBe('02:12:03');
     });
 
     it("corretly parses hours with single-digits minutes and seconds", function () {
-        expect(formatTime('7323')).toBe('2:02:03');
+        expect(formatTime('7323')).toBe('02:02:03');
     });
 });
