@@ -33,7 +33,7 @@ export default [
                     return progress > 0;
                 },
                 toggle: () => {
-                    if ($scope.progress > 0)
+                    if ($scope.getNowPlaying())
                         playList.togglePlay();
                     else
                         playList.play(parseInt($scope.index, 10));
