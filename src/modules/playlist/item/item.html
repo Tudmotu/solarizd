@@ -10,10 +10,10 @@
             <span class="flag repeat" ng-if="repeat"></span>
         </span>
         <span class="time">
-            <span class="elapsed" ng-if="getNowPlaying()">
+            <span class="elapsed" ng-if="isPlaying()">
                 {{progress | formatTime}}
             </span>
-            <span class="separator" ng-if="getNowPlaying()">/</span>
+            <span class="separator" ng-if="isPlaying()">/</span>
             <span class="duration">{{duration || '' | youtubeTime}}</span>
         </span>
         <span class="remover" ng-click="remove()"></span>

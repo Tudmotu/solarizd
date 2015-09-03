@@ -144,7 +144,7 @@ describe('playlistItem directive', function () {
 
             expect(root.find('.time')).toHaveText(/^\s*01:00\s*\/\s*03:21\s*$/);
             expect(root.find('.playlist-item').isolateScope().progress).toBe('60');
-            expect(root.find('.playlist-item').isolateScope().getNowPlaying()).toBe(true);
+            expect(root.find('.playlist-item').isolateScope().isPlaying()).toBe(true);
         });
 
         it('does not display "progress" part of .time when progress is 0', () => {

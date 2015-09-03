@@ -27,13 +27,13 @@ export default [
         },
         link: function($scope, $element, $attrs, $transclude) {
             Object.assign($scope, {
-                getNowPlaying: () => {
+                isPlaying: () => {
                     let progress = parseInt($scope.progress, 10);
 
                     return progress > 0;
                 },
                 toggle: () => {
-                    if ($scope.getNowPlaying())
+                    if ($scope.isPlaying())
                         playList.togglePlay();
                     else
                         playList.play(parseInt($scope.index, 10));
