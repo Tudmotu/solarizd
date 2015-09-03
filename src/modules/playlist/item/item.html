@@ -1,4 +1,4 @@
-<li ng-class="{ 'actions-open': !!actionsOpen }" class="playlist-item">
+<li ng-class="{ 'actions-open': !!actionsOpen, 'now-playing': isPlaying() }" class="playlist-item">
     <div class="bar">
         <span class="mover"></span>
         <span class="actions-menu" ng-click="actionsOpen = !actionsOpen"></span>
