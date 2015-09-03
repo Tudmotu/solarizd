@@ -12,6 +12,7 @@ export default [
             'title': '@',
             'duration': '@',
             'progress': '@',
+            'active': '@',
             'playNext': '@',
             'stopHere': '@',
             'repeat': '@',

@@ -193,6 +193,13 @@ describe('playlistItem directive', function () {
     });
 
     describe('general markup', () => {
+        it('has .active class when [active] exists on element', () => {
+            let html = '<div><playlist-item active="true"></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            expect(root.find('.playlist-item')).toHaveClass('active');
+        });
+
         it('has .now-playing class when progress > 0', () => {
             let html = '<div><playlist-item progress="1"></playlist-item></div>';
             let root = createRoot(html, $rootScope);
