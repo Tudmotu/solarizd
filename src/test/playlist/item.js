@@ -193,6 +193,20 @@ describe('playlistItem directive', function () {
     });
 
     describe('general markup', () => {
+        it('does not have .active class after [active] was removed', () => {
+            let html = '<div><playlist-item active="{{active}}"></playlist-item></div>';
+
+            $rootScope.active = true;
+            let root = createRoot(html, $rootScope);
+
+            expect(root.find('.playlist-item')).toHaveClass('active');
+
+            $rootScope.active = undefined;
+            $rootScope.$digest();
+
+            expect(root.find('.playlist-item')).not.toHaveClass('active');
+        });
+
         it('has .active class when [active] exists on element', () => {
             let html = '<div><playlist-item active="true"></playlist-item></div>';
             let root = createRoot(html, $rootScope);
