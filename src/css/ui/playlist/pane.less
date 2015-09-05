@@ -138,7 +138,6 @@
 
         .actions-bar {
             background:fadeout(@white,90%);
-            border-radius:@medium-border;
             margin-top:(@row-pad);
             font-size:@large-text;
             .flexbox(@justify:flex-start);
@@ -147,24 +146,22 @@
                 padding:@row-pad @column-pad;
                 margin:@row-pad @column-pad;
                 background:fadeout(@white,50%);
-                border-radius:@medium-border;
                 .flexed(0);
                 .flexbox(@align:center);
 
                 .text {
                     .flexbox(@align:center);
+                    margin:0 @column-pad;
+                    margin-bottom:@row-pad / 2; // hack
                 }
-                .text:before {
-                    padding-right:@column-pad;
-                    color:darken(desaturate(@white,100%), 25%);
-                    font-size:.75em;
-                    .text-outline(fadeout(@white,50%));
+
+                &:after {
                     .icon(@fa-var-circle);
+                    font-size:.75em;
                 }
 
                 &.active {
-                    background:fadeout(@white,50%);
-                    .text:before{
+                    &:after {
                         color:@green;
                     }
                 }

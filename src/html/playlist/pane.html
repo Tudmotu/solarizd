@@ -1,6 +1,6 @@
 <section class="playlist-pane" ng-class="{ 'active': !!items.length && ready }"
     sol-vibrate="currentlyDragging">
-    <playlist-progress data-progress="progress"></playlist-progress>
+    <playlist-progress data-progress="progress" duration="{{duration}}"></playlist-progress>
     <header class="playlist-actions">
         <span class="action" ng-click="clearPlaylist()">Clear All</span>
 
@@ -13,7 +13,7 @@
         <ul class="indices">
             <li class="index" ng-repeat="item in items track by $index"
                 ng-attr-visible="{{itemMatch(item, query)}}"
-                ng-class="{'active': item.nowPlaying, 'actions-open': $index === currentlyOpenIdx}">
+                ng-class="{'active': getItemProgress($index), 'actions-open': $index === getCurrentlyOpenIdx()}">
                 {{$index + 1}}
             </li>
         </ul>
@@ -27,17 +27,14 @@
                 sol-slide-rm-handle=".title"
                 sol-slide-rm-after="savePlaylist(); $emit('closeTrackActions')"
                 data-index="{{$index}}"
-                data-video-id="{{item.id}}"
                 data-title="{{item.snippet.title}}"
-                data-thumbnail="{{item.snippet.thumbnails.default.url}}"
-                data-description="{{item.snippet.description}}"
-                data-now-playing="item.nowPlaying"
-                data-play-next="item.playNext"
-                data-stop-here="item.stopHere"
-                data-repeat-track="item.repeatTrack"
-                data-progress="progress"
+                play-next="{{item.playNext || ''}}"
+                stop-here="{{item.stopHere || ''}}"
+                repeat="{{item.repeatTrack || ''}}"
+                active="{{isItemActive($index)}}"
+                progress="{{getItemProgress($index)}}"
                 data-duration="{{item.contentDetails.duration}}"
-                data-autoplay="{{item.autoplay}}"
+                actions-open="item.actionsOpen"
                 >
             </playlist-item>
         </ul>

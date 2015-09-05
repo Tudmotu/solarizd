@@ -38,6 +38,7 @@ export default angular.module('ui.playlist', ['services', 'filters', 'ui.sortabl
             link: function($scope, $element, $attrs) {
                 var media = window.matchMedia('(max-width:1280px),(max-device-width:1280px)');
 
+                $scope.duration = 0;
                 $scope.progress = 0;
 
                 if (media.matches) {
@@ -53,6 +54,20 @@ export default angular.module('ui.playlist', ['services', 'filters', 'ui.sortabl
                     playList.clearList();
                 };
 
+                $scope.isItemActive = (idx) => {
+                    let state = playList.getState();
+                    let playing = state === playList.st.PLAYING;
+                    let active = playing && $scope.getItemProgress(idx) > 0;
+                    return active || undefined;
+                };
+
+                $scope.getItemProgress = (idx) => {
+                    let progress = $scope.progress;
+
+                    if ($scope.nowPlayingIdx === idx)
+                        return progress;
+                };
+
                 $scope.itemMatch = function(item, query) {
                     var matches;
                     if (!query) return true;
@@ -65,18 +80,50 @@ export default angular.module('ui.playlist', ['services', 'filters', 'ui.sortabl
                 };
 
                 $rootScope.$on('playList:stateChanged', function(e, state) {
+                    let origIdx = $scope.nowPlayingIdx;
                     $scope.nowPlayingIdx = playList.getNowPlayingIdx();
+
+                    if (origIdx !== $scope.nowPlayingIdx)
+                        $scope.progress = 0;
+
                     if (!$scope.$$phase) $scope.$digest();
                 });
 
-                $rootScope.$on('closeTrackActions', function(e, idx) {
-                    $scope.currentlyOpenIdx = null;
+                $scope.$on('actions-toggled', (e, value) => {
+                    if (value === true) {
+                        let target = e.targetScope;
+                        let idx = target.idx;
+
+                        $scope.items.forEach((item, i) => {
+                            if (i === idx) return;
+                            item.actionsOpen = false;
+                        });
+                    }
                 });
 
-                $rootScope.$on('itemActionsToggled', function(e, idx) {
-                    $scope.currentlyOpenIdx = $scope.currentlyOpenIdx === idx ?
-                        null :
-                        idx;
+                Object.assign($scope, {
+                    getCurrentlyOpenIdx: () => {
+                        let idx = null;
+
+                        $scope.items.some((item, i) => {
+                            if (item.actionsOpen) {
+                                idx = i;
+                                return true;
+                            }
+                        });
+
+                        return idx;
+                    }
+                });
+
+                $rootScope.$on('youtubePlayer:infoDelivery', function(e, data) {
+                    if (data.info.duration)
+                        $scope.duration = data.info.duration;
+
+                    if (data.info.currentTime)
+                        $scope.progress = data.info.currentTime;
+
+                    if (!$scope.$$phase) $scope.$digest();
                 });
 
                 $scope.sortableOpts = {
@@ -126,7 +173,8 @@ export default angular.module('ui.playlist', ['services', 'filters', 'ui.sortabl
             templateUrl: '/html/playlist/progress.html',
             replace: true,
             scope: {
-                progress: '=progress'
+                progress: '=',
+                duration: '@'
             },
             link: function($scope, $element, $attrs) {
                 $element.on('click', function(e) {
@@ -138,20 +186,6 @@ export default angular.module('ui.playlist', ['services', 'filters', 'ui.sortabl
 
                         youtubePlayer.seek(time);
                     }
-                });
-            },
-            controller: function($scope, $element, $attrs) {
-                $scope.duration = 0;
-                $scope.progress = 0;
-
-                $rootScope.$on('youtubePlayer:infoDelivery', function(e, data) {
-                    if (data.info.duration)
-                        $scope.duration = data.info.duration;
-
-                    if (data.info.currentTime)
-                        $scope.progress = data.info.currentTime;
-
-                    if (!$scope.$$phase) $scope.$digest();
                 });
             }
         };
