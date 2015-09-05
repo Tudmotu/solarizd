@@ -18,7 +18,17 @@
         </span>
         <span class="remover" ng-click="remove()"></span>
     </div>
-    <ul class="actions-bar bar"></ul>
+    <ul class="actions-bar bar">
+        <li class="action play-next" ng-class="{'active': playNext}">
+            <span class="text">Play Next</span>
+        </li>
+        <li class="action stop-here" ng-class="{'active': stopHere}">
+            <span class="text">Stop Here</span>
+        </li>
+        <li class="action repeat" ng-class="{'active': repeat}">
+            <span class="text">Repeat</span>
+        </li>
+    </ul>
 <!--<li ng-class="{'now-playing': nowPlaying, 'active': isActive, 'loading':
                 isBuffering, 'actions-open': displayActions}">
 

@@ -193,6 +193,99 @@ describe('playlistItem directive', function () {
     });
 
     describe('general markup', () => {
+        it('.action.repeat has .active class when repeat attr set', () => {
+            let html = '<div><playlist-item repeat="true"></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            expect(root.find(
+                    '.playlist-item .actions-bar > .action.repeat')
+                ).toHaveClass('active');
+        });
+
+        it('.action.repeat contains .text element with "Repeat"', () => {
+            let html = '<div><playlist-item></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            expect(root.find(
+                    '.playlist-item .actions-bar > .action.repeat')
+                ).toHaveLength(1);
+
+            expect(root.find(
+                    '.playlist-item .actions-bar > .action.repeat')
+                ).toHaveText('Repeat');
+        });
+
+        it('contains .actions-bar > .action.repeat element', () => {
+            let html = '<div><playlist-item></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            expect(root.find(
+                    '.playlist-item .actions-bar > .action.repeat')
+                ).toHaveLength(1);
+        });
+
+        it('.action.stop-here has .active class when stopHere attr set', () => {
+            let html = '<div><playlist-item stop-here="true"></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            expect(root.find(
+                    '.playlist-item .actions-bar > .action.stop-here')
+                ).toHaveClass('active');
+        });
+
+        it('.action.stop-here contains .text element with "Stop Here"', () => {
+            let html = '<div><playlist-item></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            expect(root.find(
+                    '.playlist-item .actions-bar > .action.stop-here > .text')
+                ).toHaveLength(1);
+
+            expect(root.find(
+                    '.playlist-item .actions-bar > .action.stop-here > .text')
+                ).toHaveText('Stop Here');
+        });
+
+        it('contains .actions-bar > .action.stop-here element', () => {
+            let html = '<div><playlist-item></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            expect(root.find(
+                    '.playlist-item .actions-bar > .action.stop-here')
+                ).toHaveLength(1);
+        });
+
+        it('.action.play-next has .active class when playNext attr set', () => {
+            let html = '<div><playlist-item play-next="true"></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            expect(root.find(
+                    '.playlist-item .actions-bar > .action.play-next')
+                ).toHaveClass('active');
+        });
+
+        it('.action.play-next contains .text element with "Play Next"', () => {
+            let html = '<div><playlist-item></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            expect(root.find(
+                    '.playlist-item .actions-bar > .action.play-next > .text')
+                ).toHaveLength(1);
+
+            expect(root.find(
+                    '.playlist-item .actions-bar > .action.play-next > .text')
+                ).toHaveText('Play Next');
+        });
+
+        it('contains .actions-bar > .action.play-next element', () => {
+            let html = '<div><playlist-item></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            expect(root.find(
+                    '.playlist-item .actions-bar > .action.play-next')
+                ).toHaveLength(1);
+        });
+
         it('does not have .active class after [active] was removed', () => {
             let html = '<div><playlist-item active="{{active}}"></playlist-item></div>';
 
