@@ -2,7 +2,7 @@
     <div class="bar">
         <span class="mover"></span>
         <span class="actions-menu" ng-click="actionsOpen = !actionsOpen"></span>
-        <span class="toggler" ng-click="toggle()"></span>
+        <span class="toggler" ng-click="actions.toggle()"></span>
         <span class="title">{{title}}</span>
         <span class="flags">
             <span class="flag play-next" ng-if="playNext"></span>
@@ -16,16 +16,19 @@
             <span class="separator" ng-if="isPlaying()">/</span>
             <span class="duration">{{duration || '' | youtubeTime}}</span>
         </span>
-        <span class="remover" ng-click="remove()"></span>
+        <span class="remover" ng-click="actions.remove()"></span>
     </div>
     <ul class="actions-bar bar">
-        <li class="action play-next" ng-class="{'active': playNext}">
+        <li class="action play-next" ng-class="{'active': playNext}"
+                ng-click="actions.playNext()">
             <span class="text">Play Next</span>
         </li>
-        <li class="action stop-here" ng-class="{'active': stopHere}">
+        <li class="action stop-here" ng-class="{'active': stopHere}"
+                ng-click="actions.stopHere()">
             <span class="text">Stop Here</span>
         </li>
-        <li class="action repeat" ng-class="{'active': repeat}">
+        <li class="action repeat" ng-class="{'active': repeat}"
+                ng-click="actions.repeat()">
             <span class="text">Repeat</span>
         </li>
     </ul>

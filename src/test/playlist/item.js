@@ -24,11 +24,74 @@ describe('playlistItem directive', function () {
         playList = _playList_;
     }));
 
-    describe('playList service integration', () => {
+    describe('playList actions', () => {
         beforeEach(() => {
             spyOn(playList, 'play');
             spyOn(playList, 'togglePlay');
             spyOn(playList, 'remove');
+            spyOn(playList, 'playNext');
+            spyOn(playList, 'stopAt');
+            spyOn(playList, 'repeatTrack');
+        });
+
+        it('should call playList.repeatTrack(null) once when repeat action clicked with repeat flag', () => {
+            let html = '<div><playlist-item repeat="true"></playlist-item></div>';
+            let rootEl = createRoot(html, $rootScope);
+
+            rootEl.find('.action.repeat').click();
+            expect(playList.repeatTrack).toHaveBeenCalledWith(null);
+            expect(playList.repeatTrack.calls.count()).toBe(1);
+        });
+
+        it('should call playList.repeatTrack(idx) when .repeat action is clicked', () => {
+            let html = '<div><playlist-item ' +
+                            'index="3"' +
+                        '></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            root.find('.action.repeat').click();
+
+            expect(playList.repeatTrack).toHaveBeenCalledWith(3);
+        });
+
+        it('should call playList.stopAt(null) once when stop-here action clicked with stop-here flag', () => {
+            let html = '<div><playlist-item stop-here="true"></playlist-item></div>';
+            let rootEl = createRoot(html, $rootScope);
+
+            rootEl.find('.action.stop-here').click();
+            expect(playList.stopAt).toHaveBeenCalledWith(null);
+            expect(playList.stopAt.calls.count()).toBe(1);
+        });
+
+        it('should call playList.stopAt(idx) when .stop-here action is clicked', () => {
+            let html = '<div><playlist-item ' +
+                            'index="3"' +
+                        '></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            root.find('.action.stop-here').click();
+
+            expect(playList.stopAt).toHaveBeenCalledWith(3);
+        });
+
+        it('should call playList.playNext(null) once when play-next action clicked with play-next flag', () => {
+            let html = '<div><playlist-item play-next="true"></playlist-item></div>';
+            let rootEl = createRoot(html, $rootScope);
+
+            rootEl.find('.action.play-next').click();
+            expect(playList.playNext).toHaveBeenCalledWith(null);
+            expect(playList.playNext.calls.count()).toBe(1);
+        });
+
+        it('should call playList.playNext(idx) when .play-next action is clicked', () => {
+            let html = '<div><playlist-item ' +
+                            'index="3"' +
+                        '></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            root.find('.action.play-next').click();
+
+            expect(playList.playNext).toHaveBeenCalledWith(3);
         });
 
         it('should call playList.togglePlay when .toggler is clicked and progress > 0', () => {
