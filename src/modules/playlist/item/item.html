@@ -1,7 +1,7 @@
 <li ng-class="{ 'actions-open': !!actionsOpen, 'now-playing': isPlaying(), active: !!active }" class="playlist-item">
     <div class="bar">
-        <span class="mover"></span>
         <span class="actions-menu" ng-click="actionsOpen = !actionsOpen"></span>
+        <span class="mover"></span>
         <span class="toggler" ng-click="actions.toggle()"></span>
         <span class="title">{{title}}</span>
         <span class="flags">

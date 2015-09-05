@@ -25,6 +25,29 @@ describe('playlistItem directive', function () {
     }));
 
     describe('events', () => {
+        it('can still toggle menu when [actions-open] is interpolated attr', () => {
+            let html = '<div><playlist-item ' +
+                                'actions-open="open"' +
+                            '></playlist-item></div>';
+            $rootScope.open = true;
+            let root = createRoot(html, $rootScope);
+
+            expect(root.find('.playlist-item')).toHaveClass('actions-open');
+
+            root.find('.actions-menu').click();
+
+            expect(root.find('.playlist-item')).not.toHaveClass('actions-open');
+
+            root.find('.actions-menu').click();
+
+            expect(root.find('.playlist-item')).toHaveClass('actions-open');
+
+            $rootScope.open = false;
+            $rootScope.$digest();
+
+            expect(root.find('.playlist-item')).not.toHaveClass('actions-open');
+        });
+
         it('should $emit an actions-toggled(false) event when .actions-menu is closed', (done) => {
             let html = '<div><playlist-item ' +
                             '></playlist-item></div>';
@@ -285,6 +308,16 @@ describe('playlistItem directive', function () {
     });
 
     describe('general markup', () => {
+        it('has .actions-open class when [actions-open] attr is set', () => {
+            let html = '<div><playlist-item ' +
+                                'actions-open="open"' +
+                            '></playlist-item></div>';
+            $rootScope.open = true;
+            let root = createRoot(html, $rootScope);
+
+            expect(root.find('.playlist-item')).toHaveClass('actions-open');
+        });
+
         it('.action.repeat has .active class when repeat attr set', () => {
             let html = '<div><playlist-item repeat="true"></playlist-item></div>';
             let root = createRoot(html, $rootScope);
