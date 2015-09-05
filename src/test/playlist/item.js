@@ -24,6 +24,35 @@ describe('playlistItem directive', function () {
         playList = _playList_;
     }));
 
+    describe('events', () => {
+        it('should $emit an actions-toggled(false) event when .actions-menu is closed', (done) => {
+            let html = '<div><playlist-item ' +
+                            '></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+            root.find('.actions-menu').click();
+
+            $rootScope.$on('actions-toggled', (e, value) => {
+                expect(value).toBe(false);
+                done();
+            });
+
+            root.find('.actions-menu').click();
+        });
+
+        it('should $emit an actions-toggled(true) event when .actions-menu is opened', (done) => {
+            let html = '<div><playlist-item ' +
+                            '></playlist-item></div>';
+            let root = createRoot(html, $rootScope);
+
+            $rootScope.$on('actions-toggled', (e, value) => {
+                expect(value).toBe(true);
+                done();
+            });
+
+            root.find('.actions-menu').click();
+        });
+    });
+
     describe('playList actions', () => {
         beforeEach(() => {
             spyOn(playList, 'play');

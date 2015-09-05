@@ -66,6 +66,10 @@ export default [
                     }
                 }
             });
+
+            $scope.$watch('actionsOpen', (newVal) => {
+                $scope.$emit('actions-toggled', newVal);
+            });
             /*$rootScope.$on('youtubePlayer:infoDelivery', function(e, state) {
                 $scope.nowPlaying = playList.getNowPlayingIdx() === $scope.getIndex();
                 $scope.isActive = ($scope.nowPlaying &&
