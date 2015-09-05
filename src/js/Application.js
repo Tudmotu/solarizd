@@ -19,7 +19,8 @@ export default angular.module('Application', [
     'ui.playlist',
     'ui-kit',
     'playlist',
-    'services'
+    'services',
+    'plugins'
 ]).directive('solarizdApp', ['ApiKey', 'playList', function(ApiKey, playList) {
     return {
         restrict: 'E',
