@@ -1,0 +1,30 @@
+@import '../../../css/vars/all';
+
+.toast-notification {
+    .flexbox(@align:center);
+    height:2 * @row;
+    background:fadeout(@base02, 75%);
+    padding:0 @column-pad;
+    color:@white;
+    border-top:solid @thin-border fadeout(@base02, 50%);
+    text-align:center;
+    overflow:hidden;
+    z-index:9999;
+    transition:height .3s ease-out;
+
+    &:not(.active) {
+        height:0;
+        border:none;
+    }
+
+    .thumb {
+        width:(@column);
+        .flexed(0);
+    }
+
+    .text {
+        font-size:@huge-text;
+        .flexed(1);
+    }
+}
+
