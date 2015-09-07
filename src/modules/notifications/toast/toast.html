@@ -1,5 +1,5 @@
 <div class="toast-notification" ng-class="{ active: active }">
     <img class="thumb" ng-src="{{thumb}}" ng-if="thumb" />
     <span class="text">{{text}}</span>
-    <span class="close"></span>
+    <span class="close" ng-click="active = false"></span>
 </div>

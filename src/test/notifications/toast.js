@@ -23,6 +23,34 @@ describe('solarizdApp directive', function () {
         $timeout = _$timeout_;
     }));
 
+    it('does not automatically disappear if `persist` option was `true`', () => {
+        let html = '<div><toast-notification namespace="test"></toast-notification></div>';
+        let rootEl = createRoot(html, $rootScope);
+
+        $rootScope.$broadcast('test::notify', {
+            persist: true
+        });
+
+        $timeout.flush(1);
+        $timeout.flush(3000);
+
+        expect(rootEl.find('.toast-notification')).toHaveClass('active');
+    });
+
+    it('removes .active class when .close is clicked', () => {
+        let html = '<div><toast-notification namespace="test"></toast-notification></div>';
+        let rootEl = createRoot(html, $rootScope);
+
+        $rootScope.$broadcast('test::notify');
+        $timeout.flush(1);
+
+        expect(rootEl.find('.toast-notification')).toHaveClass('active');
+
+        rootEl.find('.close').click();
+
+        expect(rootEl.find('.toast-notification')).not.toHaveClass('active');
+    });
+
     it('removes .active class even while in $digest cycle', () => {
         let html = '<div><toast-notification namespace="test"></toast-notification></div>';
         let rootEl = createRoot(html, $rootScope);

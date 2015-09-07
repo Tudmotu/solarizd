@@ -18,9 +18,11 @@ export default ['$timeout', function ($timeout) {
                         $scope.thumb = data.thumb;
                     }
 
-                    $timeout(() => {
-                        $scope.active = false;
-                    }, 3000);
+                    if (!data || !data.persist) {
+                        $timeout(() => {
+                            $scope.active = false;
+                        }, 3000);
+                    }
                 });
             });
 
