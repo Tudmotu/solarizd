@@ -1,6 +1,7 @@
 @import '../../../css/vars/all';
 
 .toast-notification {
+    .flexed(0);
     .flexbox(@align:center);
     height:2 * @row;
     background:fadeout(@base02, 75%);
@@ -18,13 +19,35 @@
     }
 
     .thumb {
-        width:(@column);
         .flexed(0);
+        width:(@column);
+        border:solid @thin-border fadeout(@white, 50%);
+        box-shadow:@thin-border @thin-border @thick-border fadeout(@black, 25%);
+        margin-right:@column-pad;
     }
 
     .text {
-        font-size:@huge-text;
         .flexed(1);
+        font-size:@huge-text;
+        margin:0 @column-pad;
+    }
+
+    .close {
+        .flexed(0);
+        .transition(@prop:color);
+        font-size:2 * @huge-text;
+        color:fadeout(@black, 75%);
+        text-shadow:@thin-border @thin-border @medium-border fadeout(@white, 75%);
+        cursor:pointer;
+
+        &:hover {
+            color:@base00;
+            text-shadow:none;
+        }
+
+        &:before {
+            .icon(@fa-var-times);
+        }
     }
 }
 
