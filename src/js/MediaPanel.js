@@ -2,7 +2,7 @@ import './directives/sol-vibrate';
 import './Services';
 import 'angular';
 export default angular.module('ui.media-panel', ['solVibrate'])
-    .directive('mediaPanel', ['playList', function(playList) {
+    .directive('mediaPanel', ['$rootScope', 'playList', function($rootScope, playList) {
         var definitions = {
             restrict: 'E',
             templateUrl: '/html/media-panel/panel.html',
@@ -23,14 +23,17 @@ export default angular.module('ui.media-panel', ['solVibrate'])
                 });
 
                 $scope.$on('youtubePlayer:videoCued', function(e, data) {
-                    $scope.isCued = true;
-                });
+                    $rootScope.$broadcast('toast::notify', {
+                        text: 'The video should be played manually',
+                        persist: true
+                    });
 
-                $scope.$on('youtubePlayer:onStateChange', function(e, data) {
-                    if (data.info === YT.PlayerState.PLAYING) {
-                        $scope.isCued = false;
-                        if (!$scope.$$phase) $scope.$digest();
-                    }
+                    let unregister = $scope.$on('youtubePlayer:onStateChange', function(e, data) {
+                        if (data.info === YT.PlayerState.PLAYING) {
+                            $rootScope.$broadcast('toast::close');
+                            unregister();
+                        }
+                    });
                 });
             }
         };
