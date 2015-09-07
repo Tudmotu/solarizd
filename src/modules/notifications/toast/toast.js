@@ -1,6 +1,6 @@
 import 'angular';
 
-export default [function () {
+export default ['$timeout', function ($timeout) {
     return {
         restrict: 'E',
         replace: true,
@@ -10,24 +10,24 @@ export default [function () {
         },
         link: function ($scope) {
             $scope.$on(`${$scope.namespace}::notify`, (e, data) => {
-                $scope.active = true;
+                $timeout(() => {
+                    $scope.active = true;
 
-                if (data) {
-                    $scope.text = data.text;
-                    $scope.thumb = data.thumb;
-                }
+                    if (data) {
+                        $scope.text = data.text;
+                        $scope.thumb = data.thumb;
+                    }
 
-                setTimeout(() => {
-                    $scope.active = false;
-                    if (!$scope.$$phase) $scope.$digest();
-                }, 3000);
-
-                if (!$scope.$$phase) $scope.$digest();
+                    $timeout(() => {
+                        $scope.active = false;
+                    }, 3000);
+                });
             });
 
             $scope.$on(`${$scope.namespace}::close`, () => {
-                $scope.active = false;
-                if (!$scope.$$phase) $scope.$digest();
+                $timeout(() => {
+                    $scope.active = false;
+                });
             });
         }
     };

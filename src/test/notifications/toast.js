@@ -6,6 +6,7 @@ import {module, inject} from '../mocks';
 describe('solarizdApp directive', function () {
     let $compile;
     let $rootScope;
+    let $timeout;
 
     function createRoot (html, scope) {
         let el = $compile(html)(scope);
@@ -16,16 +17,40 @@ describe('solarizdApp directive', function () {
     beforeEach(module('karma.templates'));
     beforeEach(module('Application'));
 
-    beforeEach(inject((_$compile_, _$rootScope_,_$httpBackend_, _playList_) => {
+    beforeEach(inject((_$compile_, _$rootScope_, _$timeout_) => {
         $compile = _$compile_;
         $rootScope = _$rootScope_;
+        $timeout = _$timeout_;
     }));
 
-    beforeEach(() => {
-        jasmine.clock().install();
+    it('removes .active class even while in $digest cycle', () => {
+        let html = '<div><toast-notification namespace="test"></toast-notification></div>';
+        let rootEl = createRoot(html, $rootScope);
+
+        $rootScope.$broadcast('test::notify');
+        $timeout.flush(1);
+
+        expect(rootEl.find('.toast-notification')).toHaveClass('active');
+
+        $rootScope.$apply(() => {
+            $rootScope.$broadcast('test::close');
+        });
+        $timeout.flush(1);
+
+        expect(rootEl.find('.toast-notification')).not.toHaveClass('active');
     });
-    afterEach(() => {
-        jasmine.clock().uninstall();
+
+    it('applies .active class even while in $digest cycle', () => {
+        let html = '<div><toast-notification namespace="test"></toast-notification></div>';
+        let rootEl = createRoot(html, $rootScope);
+
+        $rootScope.$apply(() => {
+            $rootScope.$broadcast('test::notify');
+        });
+
+        $timeout.flush(1);
+
+        expect(rootEl.find('.toast-notification')).toHaveClass('active');
     });
 
     it('automatically closes 3 seconds after <namespace>::notify triggered', () => {
@@ -33,10 +58,11 @@ describe('solarizdApp directive', function () {
         let rootEl = createRoot(html, $rootScope);
 
         $rootScope.$broadcast('test::notify');
+        $timeout.flush(1);
 
         expect(rootEl.find('.toast-notification')).toHaveClass('active');
 
-        jasmine.clock().tick(3001);
+        $timeout.flush(3001);
 
         expect(rootEl.find('.toast-notification')).not.toHaveClass('active');
     });
@@ -46,10 +72,12 @@ describe('solarizdApp directive', function () {
         let rootEl = createRoot(html, $rootScope);
 
         $rootScope.$broadcast('test::notify');
+        $timeout.flush(1);
 
         expect(rootEl.find('.toast-notification')).toHaveClass('active');
 
         $rootScope.$broadcast('test::close');
+        $timeout.flush(1);
 
         expect(rootEl.find('.toast-notification')).not.toHaveClass('active');
     });
@@ -63,6 +91,7 @@ describe('solarizdApp directive', function () {
         $rootScope.$broadcast('test::notify', {
             thumb: 'http://www.example.com'
         });
+        $timeout.flush(1);
 
         expect(rootEl).toContainElement('.thumb');
         expect(rootEl.find('.thumb'))
@@ -78,6 +107,7 @@ describe('solarizdApp directive', function () {
         $rootScope.$broadcast('test::notify', {
             text: 'bla bla test'
         });
+        $timeout.flush(1);
 
         expect(rootEl.find('.text')).toHaveText('bla bla test');
     });
@@ -89,6 +119,7 @@ describe('solarizdApp directive', function () {
         let rootEl = createRoot(html, $rootScope);
 
         $rootScope.$broadcast('test::notify');
+        $timeout.flush(1);
 
         expect(rootEl.find('.toast-notification')).toHaveClass('active');
     });
