@@ -105,7 +105,7 @@ export default ['youtubePlayer', 'youtubeAPI', 'playListVolume', '$rootScope', f
             nowPlaying = idx;
         else if (idx === null) {
             nowPlaying = null;
-            $rootScope.$broadcast('notify', {
+            $rootScope.$broadcast('toast::notify', {
                 text: 'The playlist has ended.'
             });
             endingSound = new Audio('js/assets/indian-bell-chime.wav');
@@ -199,7 +199,7 @@ export default ['youtubePlayer', 'youtubeAPI', 'playListVolume', '$rootScope', f
                 (idx === that.playlist.length - 1 && state === st.STOPPED))
                 that.play(idx);
 
-            $rootScope.$broadcast('notify', {
+            $rootScope.$broadcast('toast::notify', {
                 thumb: thumb,
                 text: text
             });

@@ -160,27 +160,4 @@ export default angular.module('ui.topbar', ['services', 'solVibrate'])
         };
 
         return definitions;
-    }])
-    .directive('notifPopup', ['$rootScope', function($rootScope) {
-        return {
-            restrict: 'E',
-            templateUrl: '/html/topbar/notification.html',
-            replace: true,
-            scope: true,
-            controller: function($scope, $element, $attrs, $transclude) {
-                $rootScope.$on('notify', function(e, data) {
-                    $scope.isActive = true;
-                    $scope.thumb = data.thumb;
-                    $scope.text = data.text;
-
-                    setTimeout(function(e) {
-                        $scope.isActive = false;
-                        if (!$scope.$$phase) $scope.$digest();
-                    }, 3000);
-
-                    if (!$scope.$$phase) $scope.$digest();
-                });
-            }
-        };
     }]);
-
