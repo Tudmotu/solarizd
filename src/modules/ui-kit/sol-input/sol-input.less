@@ -1,0 +1,29 @@
+@import '../../../css/vars/all';
+
+.sol-input {
+    .flexbox;
+    margin:@row-pad @column-pad;
+    box-shadow:2px 3px 4px fadeout(@black, 75%);
+
+    &> .icon {
+        .flexed(0);
+        .flexbox(@align:center);
+        font-size:@large-text;
+        background:@white;
+        color:@base02;
+        padding:0 @column-pad;
+
+        &.fa-remove {
+            cursor:pointer;
+        }
+    }
+
+    &> .input {
+        .flexed(1);
+        .no_appearance;
+        background:@white;
+        padding-left:@column-pad;
+        border:none;
+    }
+
+}
