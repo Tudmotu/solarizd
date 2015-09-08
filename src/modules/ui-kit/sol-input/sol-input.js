@@ -7,6 +7,7 @@ export default [function () {
         templateUrl: '/modules/ui-kit/sol-input/sol-input.html',
         scope: {
             icon: '@',
+            placeholder: '@',
             value: '='
         },
         link: ($scope, $element) => {

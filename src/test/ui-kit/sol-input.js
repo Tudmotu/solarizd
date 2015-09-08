@@ -20,6 +20,13 @@ describe('solInput directive', function () {
         $rootScope = _$rootScope_;
     }));
 
+    it('should set the input placeholder text according to [placeholder] attr', () => {
+        let html = '<div><sol-input placeholder="holding"></sol-input></div>';
+        let rootEl = createRoot(html, $rootScope);
+
+        expect(rootEl.find('input')[0].placeholder).toBe('holding');
+    });
+
     it('clicking the .icon element clears the input', () => {
         let html = '<div><sol-input value="search" icon="search"></sol-input></div>';
         let rootEl = createRoot(html, $rootScope);
