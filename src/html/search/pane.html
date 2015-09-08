@@ -1,4 +1,7 @@
 <aside ng-class="{ 'searching': searching }">
-    <search-input autofocus></search-input>
-    <search-result-list></search-result-list>
+    <div class="sol-input-wrapper">
+        <sol-input placeholder="Search on YouTube..."
+            value="query" icon="youtube"></sol-input>
+    </div>
+    <search-result-list items="items"></search-result-list>
 </aside>

@@ -35,11 +35,16 @@
         }
     }
 
-    .search-input {
+    .sol-input-wrapper {
         height:@row;
-        padding:(2 * @row-pad) (2 * @column-pad);
+        padding:@row-pad @column-pad;
         .ui-hseparator;
         .flexed(0);
+        .flexbox(@justify:stretch);
+
+        &> .sol-input {
+            .flexed(1);
+        }
     }
 
     .result-list {

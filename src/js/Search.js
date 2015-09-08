@@ -3,41 +3,45 @@ import './Services';
 import './Filters';
 import 'angular';
 export default angular.module('ui.search', ['services', 'filters', 'solScroll2top'])
-    .directive('searchPane', ['$rootScope', '$http', function($rootScope, $http) {
-        var definitions = {
+    .directive('searchPane', ['$timeout', 'youtubeAPI', function($timeout, youtubeAPI) {
+        return {
             restrict: 'E',
             templateUrl: '/html/search/pane.html',
             replace: true,
-            scope: {
-
-            },
+            scope: true,
             link: function($scope, $element, $attrs, $transclude) {
-                $element.on('transitionend', function(e) {
-                    if (e.target === $element[0])
-                        $rootScope.$broadcast('searchPane:loaded');
-                });
+                let lastSearch = null;
+
+                $scope.query = '';
+                $scope.search = (value) => {
+                    if (lastSearch)
+                        clearTimeout(lastSearch);
+
+                    lastSearch = setTimeout(() => {
+                        $scope.searching = true;
+
+                        youtubeAPI.search($scope.query).then(function(items) {
+                            $scope.$emit('items-fetched', items);
+                            $scope.items = items;
+                            $scope.searching = false;
+                        });
+                    }, 600);
+                };
+
+                $scope.$watch('query', $scope.search);
             }
         };
-
-        return definitions;
-    }]).directive('searchResultList', ['$rootScope', '$http', 'youtubeAPI', function($rootScope, $httpi, youtubeAPI) {
-        var definitions = {
+    }]).directive('searchResultList', [() => {
+        return {
             restrict: 'E',
             templateUrl: '/html/search/result-list.html',
             replace: true,
             scope: {
-
-            },
-            controller: function($scope, $element, $attrs, $transclude) {
-                $rootScope.$on('items-fetched', function(e, data) {
-                    $scope.items = data;
-                });
+                items: '='
             }
         };
-
-        return definitions;
     }]).directive('searchResultItem', ['$rootScope', '$http', 'playList', function($rootScope, $http, playList) {
-        var definitions = {
+        return {
             restrict: 'E',
             templateUrl: '/html/search/result.html',
             replace: true,
@@ -54,49 +58,4 @@ export default angular.module('ui.search', ['services', 'filters', 'solScroll2to
                 };
             }
         };
-
-        return definitions;
-    }]).directive('searchInput', ['$rootScope', 'youtubeAPI', function($rootScope, youtubeAPI) {
-        var definitions = {
-            restrict: 'E',
-            templateUrl: '/html/search/input.html',
-            replace: true,
-            scope: {
-
-            },
-            controller: function($scope, $element, $attrs, $transclude) {
-                var lastSearch = null,
-                    search = function() {
-                        $scope.$parent.searching = true;
-                        youtubeAPI.search($scope.query)
-                            .then(function(items) {
-                                $scope.$emit('items-fetched', items);
-                                $scope.$parent.searching = false;
-                            });
-                    };
-
-                $scope.query = '';
-                $scope.search = function() {
-                    if (lastSearch) clearTimeout(lastSearch);
-                    lastSearch = setTimeout(function() {
-                        search();
-                        lastSearch = null;
-                    }, 640);
-                };
-
-                // Hack so virtual kb will disappear when hitting 'go' on search
-                $element.on('keyup', function(e) {
-                    if (e.keyCode === 13) {
-                        e.target.blur();
-                    }
-                });
-            },
-            link: function($scope, $element, $attrs) {
-                $scope.$watch('query', function(value) {
-                    $scope.search(value);
-                });
-            }
-        };
-
-        return definitions;
     }]);

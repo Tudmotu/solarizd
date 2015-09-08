@@ -4,10 +4,8 @@
     <header class="playlist-actions">
         <span class="action" ng-click="clearPlaylist()">Clear All</span>
 
-        <div class="search-input">
-            <input class="input" type="text"
-                placeholder="Search in playlist..." ng-model="query" />
-        </div>
+        <sol-input placeholder="Search in playlist..."
+            value="query" icon="search"></sol-input>
     </header>
     <section class="playlist-wrapper">
         <ul class="indices">
