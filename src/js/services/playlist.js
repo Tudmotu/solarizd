@@ -142,7 +142,8 @@ export default ['youtubePlayer', 'youtubeAPI', 'playListVolume', '$rootScope', f
     };
 
     this.clearList = function() {
-        this.stop();
+        if (state !== st.INITIAL) this.stop();
+
         this.playlist.length = 0;
         this.saveList();
     };
