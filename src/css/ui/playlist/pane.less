@@ -48,7 +48,7 @@
 
     .playlist-actions {
         .flexed(0);
-        .flexbox(@justify:space-between;@align:stretch);
+        .flexbox(@justify:flex-start;@align:stretch);
         .ui-hseparator;
         height:@row;
         padding:@row-pad 0;
@@ -59,18 +59,33 @@
             .flexed(0);
             .flexbox(@align:center);
             cursor:pointer;
+            margin-right:@column-pad;
+
+            &.clear:before {
+                .icon(@fa-var-times);
+            }
+
+            &.save:before {
+                .icon(@fa-var-cloud-upload);
+            }
 
             &:before {
-                .icon(@fa-var-times);
                 width:@indices-width;
-                padding:0 @column-pad;
                 font-size:@huge-text;
-                text-align:right;
+                text-align:center;
+            }
+
+            &:not(:first-child) {
+                margin-left:@column-pad;
+            }
+
+            &:hover .text {
+                text-decoration:underline;
             }
         }
 
-        &> .search-input {
-            margin:@row-pad @column-pad;
+        &> .sol-input {
+            margin-left:auto;
         }
     }
 

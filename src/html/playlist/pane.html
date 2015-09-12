@@ -2,7 +2,13 @@
     sol-vibrate="currentlyDragging">
     <playlist-progress data-progress="progress" duration="{{duration}}"></playlist-progress>
     <header class="playlist-actions">
-        <span class="action" ng-click="clearPlaylist()">Clear All</span>
+        <span class="action clear" ng-click="clearPlaylist()">
+            <span class="text">Clear All</span>
+        </span>
+
+        <span class="action save" ng-click="publishPlaylist()">
+            <span class="text">Save Playlist</span>
+        </span>
 
         <sol-input placeholder="Search in playlist..."
             value="query" icon="search"></sol-input>
