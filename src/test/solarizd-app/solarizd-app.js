@@ -26,7 +26,7 @@ describe('solarizdApp directive', function () {
         $httpBackend.when('GET', 'apikeys.json').respond({});
     }));
 
-    it('selects tab "1" when playlist contains items', () => {
+    xit('selects tab "1" when playlist contains items', () => {
         playList.playlist.push({});
         let html = '<div><solarizd-app></solarizd-app></div>';
         let root = createRoot(html, $rootScope);
