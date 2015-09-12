@@ -34,6 +34,9 @@
     outline:none;
     list-style:none;
 }
+.no_selection () {
+    user-select:none;
+}
 .text-outline (@color; @size: 1px) {
     text-shadow:@size 0px @color,
                 -@size 0px @color,
@@ -102,6 +105,7 @@
     cursor:pointer;
 
     .thumb {
+        .flexbox(@justify:flex-end;@align:center;);
         .ui-knob(@color;@thumb;@border;@border-radius);
     }
 }
@@ -121,6 +125,7 @@
     }
 
     &::-webkit-progress-value {
+        .flexbox(@justify:flex-end;@align:center;);
         .ui-knob(@color;@thumb;@border;@border-radius);
         box-sizing:border-box;
         position:relative;
@@ -139,10 +144,12 @@
 
     & when (iscolor(@knob)) {
         &:after {
+            .flexed(0);
             @dia:@huge-text;
-            content:"";
             width:@dia;
             height:@dia;
+            right:-(@dia / 2);
+            content:"";
             border:solid @thin-border lighten(@thumb,25%);
             border-left-width:0;
             border-top-width:0;
@@ -152,11 +159,6 @@
             box-shadow:@thin-border (2 * @thin-border) @thick-border fadeout(@black, 75%);
             display:block;
             box-sizing:border-box;
-            position:absolute;
-            right:-(@dia / 2);
-            top:0;
-            bottom:0;
-            margin:auto;
         }
     }
 }
