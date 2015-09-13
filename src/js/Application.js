@@ -11,6 +11,14 @@ import '../modules/notifications/notifications';
 import 'ng-resource';
 import 'angular';
 
+const cacheUpdated = new Promise((resolve, reject) => {
+    if (window.hasOwnProperty('applicationCache')) {
+        window.applicationCache.addEventListener('updateready', function() {
+            resolve();
+        });
+    }
+});
+
 export default angular.module('Application', [
     'ngResource',
     'ui.footer',
@@ -23,7 +31,7 @@ export default angular.module('Application', [
     'playlist',
     'services',
     'plugins'
-]).directive('solarizdApp', ['ApiKey', 'playList', function(ApiKey, playList) {
+]).directive('solarizdApp', ['$rootScope', 'ApiKey', 'playList', function($rootScope, ApiKey, playList) {
     return {
         restrict: 'E',
         templateUrl: '/html/app.html',
@@ -37,6 +45,14 @@ export default angular.module('Application', [
 
             ApiKey.fetchKeys().then(function() {
                 $element[0].classList.add('loaded');
+            });
+
+            // Notify users when there's a new version
+            cacheUpdated.then(() => {
+                $rootScope.$broadcast('toast::notify', {
+                    text: 'Reload this app to get a newer version',
+                    persist: true
+                });
             });
         }
     };

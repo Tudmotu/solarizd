@@ -16,13 +16,6 @@ if (md.mobile() !== null) {
     document.body.style.minHeight = document.body.clientHeight + 'px';
 }
 
-// Auto-reload when appcache updates
-if (window.hasOwnProperty('applicationCache')) {
-    window.applicationCache.addEventListener('updateready', function() {
-        window.location.reload();
-    });
-}
-
 if (document.readyState === 'complete') {
     bootstrapAngular();
 } else {
