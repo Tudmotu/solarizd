@@ -4,6 +4,12 @@
         <span class="text">{{appTitle}}</span>
     </h1>
 
+    <span title="Google Sign In" class="google-signin" ng-click="toggleGoogleAuth()">
+        <img src="css/assets/google-signin.svg" />
+        <span class="text" ng-if="!authenticated">Sign in with Google</span>
+        <span class="text" ng-if="authenticated">{{fullName}} (Sign out)</span>
+    </span>
+
     <a href="http://youtube.com/" title="Youtube"
         class="logo" target="_blank">
         <img src="css/assets/youtube.svg" alt="Youtube" />

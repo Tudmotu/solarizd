@@ -1,6 +1,10 @@
+import '../../modules/sol-backend/sol-backend';
+
 var hasLS = !!window.localStorage;
 
-export default ['youtubePlayer', 'youtubeAPI', 'playListVolume', '$rootScope', function(ytPlayer, ytAPI, playListVolume, $rootScope) {
+export default [
+    '$q', '$timeout', 'youtubePlayer', 'youtubeAPI', 'playListVolume', 'solBackend', '$rootScope',
+    function($q, $timeout, ytPlayer, ytAPI, playListVolume, solBackend, $rootScope) {
     var nowPlaying = null,
         st = {
             UNKNOWN: -1,
@@ -14,8 +18,14 @@ export default ['youtubePlayer', 'youtubeAPI', 'playListVolume', '$rootScope', f
         currentTime = 0,
         that = this;
 
-    this.playlist = getSavedList();
     this.st = st;
+    this.playlist = [];
+
+    getSavedList().then((list) => {
+        //that.clearList();
+        that.playlist.length = 0;
+        list.forEach((item) => that.playlist.push(item));
+    });
 
     $rootScope.$on('youtubePlayer:infoDelivery', function(e, data) {
         if (data.info.hasOwnProperty('currentTime')) {
@@ -89,14 +99,33 @@ export default ['youtubePlayer', 'youtubeAPI', 'playListVolume', '$rootScope', f
     });
 
     function getSavedList() {
-        var list = [],
-            lsVal;
-        if (hasLS) {
-            lsVal = localStorage.playlist;
-            if (lsVal) list = JSON.parse(lsVal);
-        }
+        return $q((resolve, reject) => {
+            let hash = window.location.hash;
+            if (!hash.length) {
+                reject();
+                return;
+            }
 
-        return list;
+            let matches = hash.match(/#.*?&?playlist=(.*)&?/);
+            let playlistId = matches && matches[1];
+
+            if (!playlistId) {
+                reject();
+                return;
+            }
+
+            solBackend.fetchPlaylist(playlistId).then(resolve, reject);
+        }).catch(() => {
+            let list = [];
+            let lsVal;
+
+            if (hasLS) {
+                lsVal = localStorage.playlist;
+                if (lsVal) list = JSON.parse(lsVal);
+            }
+
+            return list;
+        });
     }
 
     function setNowPlaying(idx) {
@@ -305,5 +334,19 @@ export default ['youtubePlayer', 'youtubeAPI', 'playListVolume', '$rootScope', f
             that.playlist[idx].repeatTrack = true;
 
         this.saveList();
+    };
+
+    this.publishPlaylist = function () {
+        solBackend.publishPlaylist(this.playlist).then((refKey) => {
+            $rootScope.$broadcast('toast::notify', {
+                text: `${window.location.origin}#playlist=${refKey}`,
+                persist: true
+            });
+        }).catch(() => {
+            $rootScope.$broadcast('toast::notify', {
+                text: 'Failed publishing playlist... :(',
+                persist: true
+            });
+        });
     };
 }];

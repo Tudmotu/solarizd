@@ -28,8 +28,11 @@ function mouseCoords(event) {
     };
 }
 
-export default angular.module('ui.playlist', ['services', 'filters', 'ui.sortable', 'solVibrate', 'solSlideRm', 'solScroll2top'])
-    .directive('playlistPane', ['$rootScope', '$http', 'youtubeAPI', 'playList', function($rootScope, $http, youtubeAPI, playList) {
+export default angular.module('ui.playlist',
+    ['services', 'filters', 'ui.sortable', 'solVibrate', 'solSlideRm', 'solScroll2top'])
+    .directive('playlistPane', [
+            '$rootScope', '$http', 'youtubeAPI', 'playList',
+            function($rootScope, $http, youtubeAPI, playList) {
         var definitions = {
             restrict: 'E',
             templateUrl: '/html/playlist/pane.html',
@@ -49,6 +52,10 @@ export default angular.module('ui.playlist', ['services', 'filters', 'ui.sortabl
                         if (!$scope.$$phase) $scope.$digest();
                     });
                 }
+
+                $scope.publishPlaylist = () => {
+                    playList.publishPlaylist();
+                };
 
                 $scope.clearPlaylist = function() {
                     playList.clearList();

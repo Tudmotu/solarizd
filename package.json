@@ -24,10 +24,12 @@
   },
   "homepage": "https://github.com/Tudmotu/solarizd",
   "devDependencies": {
+    "angularfire": "^1.1.2",
     "babel-core": "^5.8.22",
     "babelify": "^6.1.3",
     "browserify": "^11.0.0",
     "browserify-shim": "^3.8.10",
+    "firebase": "^2.2.9",
     "grunt": "^0.4.4",
     "grunt-autoprefixer": "^0.7.3",
     "grunt-browserify": "^3.8.0",

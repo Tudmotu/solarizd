@@ -5,9 +5,9 @@ import PlaylistVolume from './services/playlistVolume';
 import YoutubeAPI from './services/youtube-api';
 import YoutubePlayer from './services/youtube-player';
 import 'angular';
-export default angular.module('services', [])
+export default angular.module('services', ['solBackend'])
     .constant('ApiKeysConf', {
-        services: ['youtube', 'soundcloud', 'echonest']
+        services: ['youtube', 'soundcloud', 'echonest', 'firebase']
     })
     .service('ApiKey', Apikey)
     .service('echoNestAPI', EchoNest)
