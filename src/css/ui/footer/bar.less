@@ -1,7 +1,7 @@
 @import "../../vars/all";
 
 .mixin-footer () {
-    .flexbox(@justify:flex-start);
+    .flexbox(@justify:flex-start;@align:center);
     @bg:@theme-background-dark;
     @title:@base00;
     background:@bg;
@@ -47,7 +47,6 @@
     }
 
     .logo {
-        height:100%;
         padding:@row-pad @column-pad;
         .flexed(0);
         flex-shrink:1;
@@ -67,7 +66,7 @@
         color:@base00;
         background:@white;
         box-shadow:@thin-border @thin-border @medium-border fadeout(@black, 75%);
-        margin:@row-pad @column-pad;
+        margin:0 @column-pad;
         padding:@row-pad @column-pad;
         border-radius:@thick-border;
         border:solid @thin-border @base1;
@@ -83,7 +82,7 @@
 
         &> img {
             .flexed(0);
-            width:18px; // Google branding
+            width:@large-text;
             margin-right:@column-pad;
         }
 
@@ -93,10 +92,9 @@
     }
 
     .fork-me {
-        padding:@row-pad 0;
         color:#fff;
         .flexed(0);
-        .flexbox(@dir:column; @align:center; @justify:flex-start);
+        .flexbox(@dir:column; @align:center;);
 
         &:before {
             padding:0 @column-pad;
@@ -109,5 +107,26 @@
             font-size:@medium-text;
         }
     }
-}
 
+    &> * {
+        height:(@row - (@row-pad * 2));
+    }
+
+    @media (max-width: 960px), (max-device-width: 960px) {
+        justify-content:flex-end;
+
+        .title {
+            .flexed(0);
+            order:2;
+
+            &> .app-logo {
+                margin:0;
+                margin-left:@column-pad;
+            }
+        }
+
+        .title > .text {
+            display:none;
+        }
+    }
+}
