@@ -20,7 +20,6 @@ export default angular.module('ui.footer', ['services', 'filters', 'solBackend',
 
                 solBackend.getAuth().then(($auth) => {
                     $auth.$onAuth((auth) => {
-                        console.debug('bla bla', auth);
                         if (auth && auth.uid) {
                             $scope.authenticated = true;
                             $scope.fullName = auth.google.displayName;
