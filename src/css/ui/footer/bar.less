@@ -1,7 +1,7 @@
 @import "../../vars/all";
 
 .mixin-footer () {
-    .flexbox(@justify:space-between; @align:center);
+    .flexbox(@justify:flex-start);
     @bg:@theme-background-dark;
     @title:@base00;
     background:@bg;
@@ -27,7 +27,8 @@
 
         .text {
             font-style:italic;
-            font-family:'Open-Sans Light';
+            font-family:'Open Sans';
+            font-weight:300;
             font-size:(@large-text * 2);
             color:@white;
             /*text-shadow:@thin-border @thin-border @medium-border @black;*/
@@ -55,6 +56,39 @@
         img {
             max-height:100%;
             max-width:100%;
+        }
+    }
+
+    .google-signin {
+        .flexbox(@align:center);
+        font-family:Roboto, sans-serif;
+        font-size:@medium-text;
+        font-weight:bold;
+        color:@base00;
+        background:@white;
+        box-shadow:@thin-border @thin-border @medium-border fadeout(@black, 75%);
+        margin:@row-pad @column-pad;
+        padding:@row-pad @column-pad;
+        border-radius:@thick-border;
+        border:solid @thin-border @base1;
+        border-top-color:@base2;
+        /*text-transform:uppercase;*/
+        cursor:pointer;
+
+        &:active {
+            box-shadow:none;
+            top:1px;
+            left:1px;
+        }
+
+        &> img {
+            .flexed(0);
+            width:18px; // Google branding
+            margin-right:@column-pad;
+        }
+
+        &> .text {
+            padding:@row-pad @column-pad;
         }
     }
 

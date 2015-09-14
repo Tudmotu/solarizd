@@ -5,10 +5,12 @@ import 'angularfire';
 
 export default angular.module('solBackend', ['firebase'])
 .service('solBackend',
-        ['$q', '$firebaseArray', '$firebaseObject', 'ApiKey', '$rootScope',
-        function ($q, $firebaseArray, $firebaseObject, apiKey, $rootScope) {
+        ['$q', '$firebaseAuth', '$firebaseArray', '$firebaseObject', 'ApiKey', '$rootScope',
+        function ($q, $firebaseAuth, $firebaseArray, $firebaseObject, apiKey, $rootScope) {
 
-    let connector = $q((resolve, reject) => {
+    let userAuth;
+
+    const connector = $q((resolve, reject) => {
         let key = apiKey.get('firebase');
 
         if (key) {
@@ -50,4 +52,25 @@ export default angular.module('solBackend', ['firebase'])
             });
         });
     };
+
+    Object.assign(this, {
+        authenticateWithPopup () {
+            return this.getAuth().then(($auth) => {
+                return $auth.$authWithOAuthPopup('google');
+            });
+        },
+
+        unauthenticate () {
+            return this.getAuth().then(($auth) => {
+                $auth.$unauth();
+            });
+        },
+
+        getAuth () {
+            return connector.then((firebase) => {
+                return $firebaseAuth(firebase);
+            });
+        }
+    });
+
 }]);
