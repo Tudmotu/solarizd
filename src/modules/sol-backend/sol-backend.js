@@ -7,9 +7,6 @@ export default angular.module('solBackend', ['firebase'])
 .service('solBackend',
         ['$q', '$firebaseAuth', '$firebaseArray', '$firebaseObject', 'ApiKey', '$rootScope',
         function ($q, $firebaseAuth, $firebaseArray, $firebaseObject, apiKey, $rootScope) {
-
-    let userAuth;
-
     const connector = $q((resolve, reject) => {
         let key = apiKey.get('firebase');
 
@@ -27,32 +24,6 @@ export default angular.module('solBackend', ['firebase'])
         }
     });
 
-    this.publishPlaylist = function (playlist) {
-        return connector.then((firebase) => {
-            return $firebaseArray(firebase.child('playlists'));
-        }).then((record) => {
-            return record.$add({ playlist: playlist });
-        }).then((ref) => {
-            return ref.key();
-        });
-    };
-
-    this.fetchPlaylist = function (refKey) {
-        return connector.then((firebase) => {
-            return $firebaseObject(firebase.child('playlists').child(refKey));
-        }).then((record) => {
-            return $q((resolve, reject) => {
-                record.$ref().once('value', (snap) => {
-                    let val = snap.val();
-                    if (val !== null && Array.isArray(val.playlist))
-                        resolve(val.playlist);
-                    else
-                        reject();
-                });
-            });
-        });
-    };
-
     Object.assign(this, {
         authenticateWithPopup () {
             return this.getAuth().then(($auth) => {
@@ -69,6 +40,43 @@ export default angular.module('solBackend', ['firebase'])
         getAuth () {
             return connector.then((firebase) => {
                 return $firebaseAuth(firebase);
+            });
+        },
+
+        getAuthObject () {
+            return this.getAuth().then(($auth) => {
+                return $auth.$getAuth();
+            });
+        },
+
+        fetchPlaylist (refKey) {
+            return connector.then((firebase) => {
+                return $firebaseObject(firebase.child('playlists').child(refKey));
+            }).then((record) => {
+                return $q((resolve, reject) => {
+                    record.$ref().once('value', (snap) => {
+                        let val = snap.val();
+                        if (val !== null && Array.isArray(val.playlist))
+                            resolve(val.playlist);
+                        else
+                            reject();
+                    });
+                });
+            });
+        },
+
+        publishPlaylist (playlist) {
+            return connector.then((firebase) => {
+                return $firebaseArray(firebase.child('playlists'));
+            }).then((record) => {
+                return this.getAuthObject().then((auth) => {
+                    let uid = auth === null ? null : auth.uid;
+                    let data = { uid, playlist };
+
+                    return record.$add(data);
+                });
+            }).then((ref) => {
+                return ref.key();
             });
         }
     });
