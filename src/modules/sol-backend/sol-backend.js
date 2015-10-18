@@ -65,6 +65,16 @@ export default angular.module('solBackend', ['firebase'])
             });
         },
 
+        fetchUserPlaylists (uid) {
+            if (typeof uid !== 'string' || !uid) return $q.reject();
+
+            return connector.then((firebase) => {
+                let playlists = firebase.child('playlists');
+                return $firebaseArray(
+                    playlists.orderByChild('uid').equalTo(uid));
+            });
+        },
+
         publishPlaylist (playlist) {
             return connector.then((firebase) => {
                 return $firebaseArray(firebase.child('playlists'));
