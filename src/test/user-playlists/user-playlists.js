@@ -24,6 +24,38 @@ describe('userPlaylists directive', function () {
         //$httpBackend.when('GET', 'apikeys.json').respond({});
     }));
 
+    describe('playlist entry actions', () => {
+        it('should remove appropriate entry from list when .remove clicked', () => {
+            let html = '<div><user-playlists ' +
+                            'playlists="playlists"' +
+                            '></user-playlists></div>';
+            $rootScope.playlists = [
+                { playlist: [], name: '1' },
+                { playlist: [], name: '2' }
+            ];
+            let root = createRoot(html, $rootScope);
+
+            root.find('.playlist').eq(1).find('.remove').click();
+            expect($rootScope).toHaveArrayOfSize('playlists', 1);
+            expect($rootScope.playlists[0].name).toBe('1');
+        });
+
+        it('should toggle "edit-mode" class when .edit element clicked', () => {
+            let html = '<div><user-playlists ' +
+                            'playlists="playlists"' +
+                            '></user-playlists></div>';
+            $rootScope.playlists = [
+                { playlist: [] }
+            ];
+            let root = createRoot(html, $rootScope);
+
+            expect(root.find('.playlist')).not.toHaveClass('edit-mode');
+
+            root.find('.playlist .edit').click();
+            expect(root.find('.playlist')).toHaveClass('edit-mode');
+        });
+    });
+
     describe('playlists list items', () => {
         it('should contain a .edit element', () => {
             let html = '<div><user-playlists ' +
