@@ -1,0 +1,12 @@
+<div class="user-playlists">
+    <div class="header">
+        <span class="title">Playlists</span>
+    </div>
+    <ul class="playlists">
+        <li ng-repeat="playlist in playlists" class="playlist">
+            <span class="text">{{playlist.name || "New Playlist"}}</span>
+            <span class="edit"></span>
+            <span class="remove"></span>
+        </li>
+    </ul>
+</div>

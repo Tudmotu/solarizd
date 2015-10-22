@@ -8,6 +8,7 @@ import './MediaPanel';
 import '../modules/ui-kit/ui-kit';
 import '../modules/playlist/playlist';
 import '../modules/notifications/notifications';
+import '../modules/user-playlists/user-playlists';
 import 'ng-resource';
 import 'angular';
 
@@ -28,6 +29,7 @@ export default angular.module('Application', [
     'ui.playlist',
     'ui-kit',
     'notifications',
+    'user-playlists',
     'playlist',
     'services',
     'plugins'
