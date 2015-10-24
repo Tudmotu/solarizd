@@ -5,7 +5,9 @@
     <ul class="playlists">
         <li ng-repeat="playlist in playlists track by $index" class="playlist"
                 ng-class="{ 'edit-mode': editMode }">
-            <span class="text">{{playlist.name || "New Playlist"}}</span>
+            <span class="text"
+                ng-click="selectEntry($index)"
+                >{{playlist.name || "New Playlist"}}</span>
             <span class="edit" ng-click="toggleEditMode()"></span>
             <span class="remove" ng-click="removeEntry($index)"></span>
         </li>

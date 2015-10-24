@@ -24,6 +24,35 @@ describe('userPlaylists directive', function () {
         //$httpBackend.when('GET', 'apikeys.json').respond({});
     }));
 
+    describe('selecting an item', () => {
+        let root;
+        beforeEach(() => {
+            let html = '<div><user-playlists ' +
+                            'playlists="playlists"' +
+                            '></user-playlists></div>';
+            $rootScope.playlists = [
+                { playlist: [], name: '1', id: '111' },
+                { playlist: [], name: '2', id: '222' }
+            ];
+            root = createRoot(html, $rootScope);
+        });
+
+        it('should remove the "selected" class from previous selection', () => {
+            let entry1 = root.find('.playlist').eq(0);
+            let entry2 = root.find('.playlist').eq(1);
+            entry1.find('.text').click();
+            entry2.find('.text').click();
+
+            expect(entry1).not.toHaveClass('selected');
+        });
+
+        it('should add a "selected" class when selected', () => {
+            let entry = root.find('.playlist').eq(0);
+            entry.find('.text').click();
+            expect(entry).toHaveClass('selected');
+        });
+    });
+
     describe('playlist entry actions', () => {
         it('should remove appropriate entry from list when .remove clicked', () => {
             let html = '<div><user-playlists ' +
