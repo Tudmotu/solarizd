@@ -3,8 +3,24 @@ import '../../modules/sol-backend/sol-backend';
 var hasLS = !!window.localStorage;
 
 export default [
-    '$q', '$timeout', 'youtubePlayer', 'youtubeAPI', 'playListVolume', 'solBackend', '$rootScope',
-    function($q, $timeout, ytPlayer, ytAPI, playListVolume, solBackend, $rootScope) {
+    '$q',
+    '$timeout',
+    '$location',
+    'youtubePlayer',
+    'youtubeAPI',
+    'playListVolume',
+    'solBackend',
+    '$rootScope',
+    function(
+        $q,
+        $timeout,
+        $location,
+        ytPlayer,
+        ytAPI,
+        playListVolume,
+        solBackend,
+        $rootScope
+    ) {
     var nowPlaying = null,
         st = {
             UNKNOWN: -1,
@@ -21,10 +37,12 @@ export default [
     this.st = st;
     this.playlist = [];
 
-    getSavedList().then((list) => {
-        //that.clearList();
-        that.playlist.length = 0;
-        list.forEach((item) => that.playlist.push(item));
+    $rootScope.$on('$locationChangeSuccess', (e, newUrl) => {
+        getSavedList().then((list) => {
+            //that.clearList();
+            that.playlist.length = 0;
+            list.forEach((item) => that.playlist.push(item));
+        });
     });
 
     $rootScope.$on('youtubePlayer:infoDelivery', function(e, data) {
@@ -101,20 +119,19 @@ export default [
     function getSavedList() {
         return $q((resolve, reject) => {
             let hash = window.location.hash;
-            if (!hash.length) {
+            let hashMatches = hash.match(/#.*?&?playlist=(.*)&?/);
+            let locationSearch = $location.search();
+            let playlistId = locationSearch.playlist;
+
+            if (hashMatches !== null)
+                playlistId = hashMatches[1];
+
+            if (!playlistId)
                 reject();
-                return;
-            }
-
-            let matches = hash.match(/#.*?&?playlist=(.*)&?/);
-            let playlistId = matches && matches[1];
-
-            if (!playlistId) {
-                reject();
-                return;
-            }
-
-            solBackend.fetchPlaylist(playlistId).then(resolve, reject);
+            else
+                resolve(playlistId);
+        }).then((playlistId) => {
+            return solBackend.fetchPlaylist(playlistId);
         }).catch(() => {
             let list = [];
             let lsVal;
