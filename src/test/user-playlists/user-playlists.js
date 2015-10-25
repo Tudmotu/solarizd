@@ -7,6 +7,7 @@ describe('userPlaylists directive', function () {
     let $compile;
     let $rootScope;
     let $httpBackend;
+    let $location;
 
     function createRoot (html, scope) {
         let el = $compile(html)(scope);
@@ -16,10 +17,11 @@ describe('userPlaylists directive', function () {
 
     beforeEach(module('karma.templates'));
     beforeEach(module('user-playlists'));
-    beforeEach(inject((_$compile_, _$rootScope_,_$httpBackend_) => {
+    beforeEach(inject((_$compile_, _$rootScope_,_$httpBackend_,_$location_) => {
         $compile = _$compile_;
         $rootScope = _$rootScope_;
         $httpBackend = _$httpBackend_;
+        $location = _$location_;
 
         //$httpBackend.when('GET', 'apikeys.json').respond({});
     }));
@@ -35,6 +37,15 @@ describe('userPlaylists directive', function () {
                 { playlist: [], name: '2', id: '222' }
             ];
             root = createRoot(html, $rootScope);
+        });
+
+        it('should set an appropriate search param using $location.search()', () => {
+            let entry1 = root.find('.playlist').eq(0);
+
+            spyOn($location, 'search');
+            entry1.find('.text').click();
+
+            expect($location.search).toHaveBeenCalledWith('playlist', '111');
         });
 
         it('should remove the "selected" class from previous selection', () => {
