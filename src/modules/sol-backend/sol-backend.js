@@ -1,9 +1,9 @@
+import '../../js/services/apikey';
 import 'angular';
 import 'firebase';
 import 'angularfire';
 
-
-export default angular.module('solBackend', ['firebase'])
+export default angular.module('sol-backend', ['firebase', 'api-key'])
 .service('solBackend',
         ['$q', '$firebaseAuth', '$firebaseArray', '$firebaseObject', 'ApiKey', '$rootScope',
         function ($q, $firebaseAuth, $firebaseArray, $firebaseObject, apiKey, $rootScope) {

@@ -1,6 +1,6 @@
 import TopbarTemplate from './Services';
 import FooterTemplate from 'angular';
-export default angular.module('ui.footer', ['services', 'filters', 'solBackend', 'firebase'])
+export default angular.module('ui.footer', ['services', 'filters', 'sol-backend', 'firebase'])
     .directive('appFooter',
             ['$rootScope', '$http', 'solBackend', '$firebaseAuth',
             ($rootScope, $http, solBackend, $firebaseAuth) => {

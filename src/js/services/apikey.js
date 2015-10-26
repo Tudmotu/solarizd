@@ -1,4 +1,9 @@
-export default ['$rootScope', '$http', 'ApiKeysConf', function($rootScope, $http, Conf) {
+import 'angular';
+
+export default angular.module('api-key', [])
+.constant('ApiKeysConf', {
+    services: ['youtube', 'soundcloud', 'echonest', 'firebase']
+}).service('ApiKey', ['$rootScope', '$http', 'ApiKeysConf', function($rootScope, $http, Conf) {
     var KEYS = {};
 
     this.set = function(service, key) {
@@ -24,4 +29,4 @@ export default ['$rootScope', '$http', 'ApiKeysConf', function($rootScope, $http
             });
         });
     };
-}];
+}]);
