@@ -1,22 +1,26 @@
 import 'angular';
 
-export default angular.module('user-playlists', []).directive(
-'userPlaylists', ['$location', ($location) => {
+export default angular.module('user-playlists', ['sol-backend'])
+.directive('userPlaylists',
+        ['$location', 'solBackend', ($location, solBackend) => {
     return {
         restrict: 'E',
         replace: true,
         templateUrl: '/modules/user-playlists/user-playlists.html',
-        scope: {
-            playlists: '='
-        },
+        scope: {},
         link: ($scope, $element) => {
+            solBackend.fetchUserPlaylists().then((playlists) => {
+                $scope.playlists = playlists;
+            });
+
             Object.assign($scope, {
                 editMode: false,
+
                 toggleEditMode () {
                     this.editMode = !this.editMode;
                 },
                 removeEntry (idx) {
-                    this.playlists.splice(idx, 1);
+                    this.playlists.$remove(idx);
                 },
                 selectEntry (idx) {
                     this._removeClassFromCurrentSelection();
