@@ -43,7 +43,7 @@ export default angular.module('sol-backend', ['firebase', 'api-key'])
             });
         },
 
-        getAuthObject () {
+        getAuthData () {
             return this.getAuth().then(($auth) => {
                 return $auth.$getAuth();
             });
@@ -69,24 +69,45 @@ export default angular.module('sol-backend', ['firebase', 'api-key'])
             if (typeof uid !== 'string' || !uid) return $q.reject();
 
             return connector.then((firebase) => {
-                let playlists = firebase.child('playlists');
-                return $firebaseArray(
-                    playlists.orderByChild('uid').equalTo(uid));
+                let playlists = firebase.child('playlists/metadata');
+                let ref = playlists.orderByChild('uid').equalTo(uid);
+                return $firebaseArray(ref);
             });
         },
 
-        publishPlaylist (playlist) {
-            return connector.then((firebase) => {
-                return $firebaseArray(firebase.child('playlists'));
-            }).then((record) => {
-                return this.getAuthObject().then((auth) => {
-                    let uid = auth === null ? null : auth.uid;
-                    let data = { uid, playlist };
+        publishPlaylist (playlist, playlistMetadata = {}) {
+            let firebase;
+            let auth;
 
-                    return record.$add(data);
-                });
+            return connector.then((_firebase) => {
+                firebase = _firebase;
+            }).then(() => {
+                return this.getAuthData();
+            }).then((_auth) => {
+                auth = _auth;
+            }).then(() => {
+                let playlists = firebase.child('playlists');
+                let data = { playlist };
+
+                return playlists.push(data);
             }).then((ref) => {
-                return ref.key();
+                let metadata = firebase.child('playlists/metadata');
+                let uid = auth === null ? null : auth.uid;
+                let data = {
+                    uid,
+                    playlist: ref.key(),
+                    name: playlistMetadata.name || null,
+                    public: playlistMetadata.public || null
+                };
+
+                return metadata.push(data);
+            }).then((ref) => {
+                return $q((resolve) => {
+                    ref.child('playlist').once('value', (snapshot) => {
+                        let playlist = snapshot.val();
+                        resolve(playlist);
+                    });
+                });
             });
         }
     });
