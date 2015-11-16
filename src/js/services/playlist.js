@@ -194,7 +194,25 @@ export default [
         this.saveList();
     };
 
+    function formatItem (item) {
+        let newItem = {
+            contentDetails: {
+                duration: item.contentDetails.duration
+            },
+            id: item.id,
+            snippet: {
+                thumbnails: {
+                    default: item.snippet.thumbnails.default
+                },
+                title: item.snippet.title
+            }
+        };
+
+        return newItem;
+    }
+
     this.addItem = function(idx, item) {
+        item = formatItem(item);
         that.playlist.splice(idx, 0, item);
         this.saveList();
     };
