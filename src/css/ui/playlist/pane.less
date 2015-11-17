@@ -143,4 +143,47 @@
         bottom:0;
         top:auto;
     }
+
+    .user-playlists-popup {
+        position:absolute;
+        bottom:@row-pad + (@row / 2);
+        right:@column-pad + (@row / 2);
+        z-index:1;
+        width:3 * @column;
+        min-height:(6 * @row) - @row-pad;
+        border:solid @thin-border fadeout(@base02, 50%);
+        box-shadow:0px 3px 3px -2px fadeout(@black, 53%);
+        background:@white;
+    }
+
+    .user-playlists-toggler {
+        .flexbox(@align:center);
+        position:absolute;
+        bottom:@row-pad;
+        right:@column-pad;
+        z-index:2;
+        width:@row;
+        height:@row;
+        background:@white;
+        border-radius:50%;
+        border:solid @thin-border @base2;
+        box-shadow:0px 3px 3px -2px fadeout(@black, 53%);
+        color:@inactive-text-dark;
+        font-size:@huge-text;
+        cursor:pointer;
+
+        &:hover {
+            color:@active-text-dark;
+        }
+
+        &.active {
+            &:before {
+                .icon(@fa-var-times);
+            }
+        }
+
+        &:before {
+            .icon(@fa-var-list);
+        }
+    }
 }
