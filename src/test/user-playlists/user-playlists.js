@@ -87,6 +87,18 @@ describe('userPlaylists directive', function () {
     describe('selecting an item', () => {
         beforeEach(setupUserAuth);
 
+        it('should be performed automatically when $location.search() changes', () => {
+            let entry1 = root.find('.playlist').eq(0);
+            let entry2 = root.find('.playlist').eq(1);
+
+            entry1.find('.text').click();
+
+            $location.search('playlist', '--KjSAu12jD-2');
+            $rootScope.$digest();
+
+            expect(entry2).toHaveClass('selected');
+        });
+
         it('should set an appropriate search param using $location.search()', () => {
             let entry1 = root.find('.playlist').eq(0);
 

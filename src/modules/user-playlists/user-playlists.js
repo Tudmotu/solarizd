@@ -22,6 +22,11 @@ export default angular.module('user-playlists', ['sol-backend'])
                             this.playlists = playlists;
                         });
                     });
+
+                    this.$on('$locationChangeSuccess', () => {
+                        let id = $location.search().playlist;
+                        this.selectEntry(id);
+                    });
                 },
 
                 toggleEditMode () {
@@ -30,10 +35,16 @@ export default angular.module('user-playlists', ['sol-backend'])
                 removeEntry (idx) {
                     this.playlists.$remove(idx);
                 },
-                selectEntry (idx) {
+                selectEntry (id) {
+                    if (!id) return;
+
+                    let el = this._findEntryById(id);
                     this._removeClassFromCurrentSelection();
-                    this._addSelectionClassToElement(idx);
-                    this._modifyLocation(idx);
+                    this._addSelectionClassToElement(el);
+                    $location.search('playlist', id);
+                },
+                _findEntryById (id) {
+                    return $element.find(`.playlist[data-id=${id}]`).eq(0);
                 },
                 _findEntry (idx) {
                     return $element.find('.playlist').eq(idx);
@@ -46,14 +57,8 @@ export default angular.module('user-playlists', ['sol-backend'])
                     [...previous].forEach(
                         el => el.classList.remove('selected'));
                 },
-                _addSelectionClassToElement (idx) {
-                    let entry = this._findEntryAsElement(idx);
-                    entry.classList.add('selected');
-                },
-                _modifyLocation (idx) {
-                    let entry = this._findEntryAsElement(idx);
-                    let refId = entry.getAttribute('data-id');
-                    $location.search('playlist', refId);
+                _addSelectionClassToElement (el) {
+                    el[0].classList.add('selected');
                 }
             });
 

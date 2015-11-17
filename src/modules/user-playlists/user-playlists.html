@@ -7,7 +7,7 @@
                 data-id="{{playlist.playlist}}"
                 ng-class="{ 'edit-mode': editMode }">
             <span class="text"
-                ng-click="selectEntry($index)"
+                ng-click="selectEntry(playlist.playlist)"
                 >{{playlist.name || "New Playlist"}}</span>
             <span class="edit action" ng-click="toggleEditMode()"></span>
             <span class="remove action" ng-click="removeEntry($index)"></span>
