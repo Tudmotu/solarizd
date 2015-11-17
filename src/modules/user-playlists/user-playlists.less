@@ -1,0 +1,66 @@
+.user-playlists {
+    height:100%;
+    width:100%;
+
+    .header {
+        .flexbox(@justify:flex-start);
+        background:@red;
+        background:@purple;
+        background:@yellow;
+        background:@theme-background;
+        color:@white;
+        font-size:@large-text;
+        padding:@row-pad @column-pad;
+        height:@row;
+        /*box-shadow:0px 3px 3px -2px fadeout(@black, 53%);*/
+
+        .title {
+            .flexbox(@align:center);
+            .flexed(0);
+            /*text-transform:uppercase;*/
+        }
+    }
+
+    .playlists > .playlist {
+        .flexbox(@align:center; @justify:flex-start);
+        .ui-hseparator(@inactive-text-dark);
+        height:@row;
+        padding:@row-pad @column-pad;
+        color:@black;
+        color:@active-text-dark;
+        list-style:none;
+        font-size:@large-text;
+
+        &.selected {
+            &:before {
+                .icon(@fa-var-circle);
+            }
+        }
+        &:before {
+            .icon(@fa-var-circle-o);
+            padding-right:@column-pad;
+            font-size:@normal-text;
+        }
+
+        .text {
+            .flexed(1);
+        }
+
+        .action {
+            padding-left:@column-pad;
+            cursor:pointer;
+
+            &:not(:hover) {
+                color:@inactive-text-dark;
+            }
+        }
+
+        .remove:before {
+            .icon(@fa-var-times);
+        }
+
+        .edit:before {
+            .icon(@fa-var-pencil);
+        }
+    }
+}
