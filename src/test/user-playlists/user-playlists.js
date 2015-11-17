@@ -37,9 +37,9 @@ describe('userPlaylists directive', function () {
         $httpBackend.when('GET', 'apikeys.json').respond({});
 
         userPlaylists = FirebaseMock.mockArray([
-            { playlist: [], $id: '111' },
-            { playlist: [], name: 'Bla bla' },
-            { playlist: [] }
+            { playlist: '--KjSAu12jD-1' },
+            { playlist: '--KjSAu12jD-2', name: 'Bla bla' },
+            { playlist: '--KjSAu12jD-3', name: 'Awesome Playlist' }
         ]);
 
         spyOn(solBackend, 'fetchUserPlaylists').and.callFake(uid => {
@@ -93,7 +93,8 @@ describe('userPlaylists directive', function () {
             spyOn($location, 'search');
             entry1.find('.text').click();
 
-            expect($location.search).toHaveBeenCalledWith('playlist', '111');
+            expect($location.search).toHaveBeenCalledWith(
+                'playlist', '--KjSAu12jD-1');
         });
 
         it('should remove the "selected" class from previous selection', () => {
