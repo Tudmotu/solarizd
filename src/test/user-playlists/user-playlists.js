@@ -132,12 +132,12 @@ describe('userPlaylists directive', function () {
     describe('list items markup', () => {
         beforeEach(setupUserAuth);
 
-        it('should contain a .edit element', () => {
-            expect(root.find('.playlist')).toContainElement('.edit');
+        it('should contain a .edit.action element', () => {
+            expect(root.find('.playlist')).toContainElement('.edit.action');
         });
 
-        it('should contain a .remove element', () => {
-            expect(root.find('.playlist')).toContainElement('.remove');
+        it('should contain a .remove.action element', () => {
+            expect(root.find('.playlist')).toContainElement('.remove.action');
         });
 
         it('should have text as given in the "name" prop when present', () => {
