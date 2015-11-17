@@ -43,6 +43,12 @@ export default angular.module('sol-backend', ['firebase', 'api-key'])
             });
         },
 
+        onAuth (handler) {
+            this.getAuth().then(($auth) => {
+                $auth.$onAuth(handler);
+            });
+        },
+
         getAuthData () {
             return this.getAuth().then(($auth) => {
                 return $auth.$getAuth();
