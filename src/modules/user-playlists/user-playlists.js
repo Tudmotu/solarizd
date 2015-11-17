@@ -2,7 +2,7 @@ import 'angular';
 
 export default angular.module('user-playlists', ['sol-backend'])
 .directive('userPlaylists',
-        ['$location', 'solBackend', ($location, solBackend) => {
+        ['$location', '$timeout', 'solBackend', ($location, $timeout, solBackend) => {
     return {
         restrict: 'E',
         replace: true,
@@ -20,12 +20,13 @@ export default angular.module('user-playlists', ['sol-backend'])
                             return null;
                         }).then((playlists) => {
                             this.playlists = playlists;
+                        }).then(() => {
+                            this._selectEntryFromLocation();
                         });
                     });
 
                     this.$on('$locationChangeSuccess', () => {
-                        let id = $location.search().playlist;
-                        this.selectEntry(id);
+                        this._selectEntryFromLocation();
                     });
                 },
 
@@ -36,15 +37,14 @@ export default angular.module('user-playlists', ['sol-backend'])
                     this.playlists.$remove(idx);
                 },
                 selectEntry (id) {
-                    if (!id) return;
-
-                    let el = this._findEntryById(id);
-                    this._removeClassFromCurrentSelection();
-                    this._addSelectionClassToElement(el);
                     $location.search('playlist', id);
                 },
+                _selectEntryFromLocation () {
+                    let id = $location.search().playlist;
+                    this.currentPlaylist = id;
+                },
                 _findEntryById (id) {
-                    return $element.find(`.playlist[data-id=${id}]`).eq(0);
+                    return $element.find(`.playlist[data-id="${id}"]`).eq(0);
                 },
                 _findEntry (idx) {
                     return $element.find('.playlist').eq(idx);

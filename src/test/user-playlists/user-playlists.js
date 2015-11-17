@@ -34,6 +34,7 @@ describe('userPlaylists directive', function () {
     };
 
     beforeEach(() => {
+        $location.url($location.path());
         $httpBackend.when('GET', 'apikeys.json').respond({});
 
         userPlaylists = FirebaseMock.mockArray([
@@ -86,6 +87,19 @@ describe('userPlaylists directive', function () {
 
     describe('selecting an item', () => {
         beforeEach(setupUserAuth);
+
+        it('should be performed automatically when rendered, according to $location', () => {
+            $location.search('playlist', '--KjSAu12jD-2');
+            $rootScope.$digest();
+
+            let html = '<div><user-playlists></user-playlists></div>';
+            let newRoot = createRoot(html, $rootScope);
+            setupUserAuth();
+            let entry = newRoot.find('.playlist').eq(1);
+
+            expect(newRoot.find('.playlist')).toHaveLength(3);
+            expect(entry).toHaveClass('selected');
+        });
 
         it('should be performed automatically when $location.search() changes', () => {
             let entry1 = root.find('.playlist').eq(0);

@@ -5,7 +5,10 @@
     <ul class="playlists">
         <li ng-repeat="playlist in playlists track by $index" class="playlist"
                 data-id="{{playlist.playlist}}"
-                ng-class="{ 'edit-mode': editMode }">
+                ng-class="{
+                    'edit-mode': editMode,
+                    selected: currentPlaylist == playlist.playlist
+                }">
             <span class="text"
                 ng-click="selectEntry(playlist.playlist)"
                 >{{playlist.name || "New Playlist"}}</span>
