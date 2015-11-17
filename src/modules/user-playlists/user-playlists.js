@@ -9,8 +9,14 @@ export default angular.module('user-playlists', ['sol-backend'])
         templateUrl: '/modules/user-playlists/user-playlists.html',
         scope: {},
         link: ($scope, $element) => {
-            solBackend.fetchUserPlaylists().then((playlists) => {
-                $scope.playlists = playlists;
+            solBackend.onAuth((authData) => {
+                let uid = (authData && authData.uid) || null;
+
+                solBackend.fetchUserPlaylists(uid).catch(() => {
+                    return null;
+                }).then((playlists) => {
+                    $scope.playlists = playlists;
+                });
             });
 
             Object.assign($scope, {

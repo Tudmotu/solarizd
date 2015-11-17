@@ -4,7 +4,7 @@
     </div>
     <ul class="playlists">
         <li ng-repeat="playlist in playlists track by $index" class="playlist"
-                data-id="{{playlist.id}}"
+                data-id="{{playlist.$id}}"
                 ng-class="{ 'edit-mode': editMode }">
             <span class="text"
                 ng-click="selectEntry($index)"

@@ -22,28 +22,70 @@ describe('userPlaylists directive', function () {
         $location = _$location_;
         solBackend = _solBackend_;
         createRoot = createRootFactory($compile);
-
-        $httpBackend.when('GET', 'apikeys.json').respond({});
     }));
 
-    describe('selecting an item', () => {
-        let root;
-        let data;
+    let root;
+    let userPlaylists;
+    let onAuthHandlers = [];
+    let triggerOnAuth = (data) => onAuthHandlers.forEach(fn => fn(data));
+    let setupUserAuth = () => {
+        triggerOnAuth({ uid: 'test-uid' });
+        $rootScope.$digest();
+    };
 
-        beforeEach(() => {
-            data = FirebaseMock.mockArray([
-                { playlist: [], id: '111' },
-                { playlist: [], name: 'Bla bla' },
-                { playlist: [] }
-            ]);
+    beforeEach(() => {
+        $httpBackend.when('GET', 'apikeys.json').respond({});
 
-            spyOn(solBackend, 'fetchUserPlaylists').and.returnValue(
-                $q((resolve, reject) => resolve(data))
-            );
+        userPlaylists = FirebaseMock.mockArray([
+            { playlist: [], $id: '111' },
+            { playlist: [], name: 'Bla bla' },
+            { playlist: [] }
+        ]);
 
-            let html = '<div><user-playlists></user-playlists></div>';
-            root = createRoot(html, $rootScope);
+        spyOn(solBackend, 'fetchUserPlaylists').and.callFake(uid => {
+            if (uid === 'test-uid')
+                return $q((resolve, reject) => resolve(userPlaylists));
+            else
+                return $q((resolve, reject) => reject());
         });
+
+        spyOn(solBackend, 'onAuth').and.callFake(
+            handler => onAuthHandlers.push(handler));
+
+        let html = '<div><user-playlists></user-playlists></div>';
+        root = createRoot(html, $rootScope);
+    });
+
+    describe('auth events', () => {
+        it('should empty the list when auth becomes null', () => {
+            setupUserAuth();
+            expect(root.find('.playlist')).toHaveLength(3);
+            triggerOnAuth();
+            $rootScope.$digest();
+            expect(root.find('.playlist')).toHaveLength(0);
+        });
+
+        it('should fetch playlists for uid=null if non supplied', () => {
+            triggerOnAuth();
+            expect(solBackend.fetchUserPlaylists).toHaveBeenCalledWith(null);
+        });
+
+        it('should fetch playlists with the supplied uid from onAuth event', () => {
+            triggerOnAuth({
+                uid: 'aaa'
+            });
+            expect(solBackend.fetchUserPlaylists).toHaveBeenCalledWith('aaa');
+        });
+
+        it('should fetch playlists only once auth is available', () => {
+            expect(solBackend.fetchUserPlaylists).not.toHaveBeenCalled();
+            triggerOnAuth();
+            expect(solBackend.fetchUserPlaylists).toHaveBeenCalled();
+        });
+    });
+
+    describe('selecting an item', () => {
+        beforeEach(setupUserAuth);
 
         it('should set an appropriate search param using $location.search()', () => {
             let entry1 = root.find('.playlist').eq(0);
@@ -71,31 +113,14 @@ describe('userPlaylists directive', function () {
     });
 
     describe('playlist entry actions', () => {
-        let data;
-        beforeEach(() => {
-            data = FirebaseMock.mockArray([
-                { playlist: [] },
-                { playlist: [], name: 'Bla bla' },
-                { playlist: [] }
-            ]);
-
-            spyOn(solBackend, 'fetchUserPlaylists').and.returnValue(
-                $q((resolve, reject) => resolve(data))
-            );
-        });
+        beforeEach(setupUserAuth);
 
         it('should remove appropriate entry from list when .remove clicked', () => {
-            let html = '<div><user-playlists></user-playlists></div>';
-            let root = createRoot(html, $rootScope);
-
             root.find('.playlist').eq(1).find('.remove').click();
-            expect(data.$remove).toHaveBeenCalledWith(1);
+            expect(userPlaylists.$remove).toHaveBeenCalledWith(1);
         });
 
         it('should toggle "edit-mode" class when .edit element clicked', () => {
-            let html = '<div><user-playlists></user-playlists></div>';
-            let root = createRoot(html, $rootScope);
-
             expect(root.find('.playlist')).not.toHaveClass('edit-mode');
 
             let entry = root.find('.playlist').eq(0);
@@ -104,82 +129,45 @@ describe('userPlaylists directive', function () {
         });
     });
 
-    describe('playlists list items', () => {
-        beforeEach(() => {
-            let data = [
-                { playlist: [] },
-                { playlist: [], name: 'Bla bla' },
-                { playlist: [] }
-            ];
-
-            spyOn(solBackend, 'fetchUserPlaylists').and.returnValue(
-                $q((resolve, reject) => resolve(data))
-            );
-        });
+    describe('list items markup', () => {
+        beforeEach(setupUserAuth);
 
         it('should contain a .edit element', () => {
-            let html = '<div><user-playlists></user-playlists></div>';
-            let root = createRoot(html, $rootScope);
-
             expect(root.find('.playlist')).toContainElement('.edit');
         });
 
         it('should contain a .remove element', () => {
-            let html = '<div><user-playlists></user-playlists></div>';
-            let root = createRoot(html, $rootScope);
-
             expect(root.find('.playlist')).toContainElement('.remove');
         });
 
         it('should have text as given in the "name" prop when present', () => {
-            let html = '<div><user-playlists></user-playlists></div>';
-            let root = createRoot(html, $rootScope);
-
             expect(root.find('.playlist').eq(1)).toHaveText('Bla bla');
         });
 
         it('should have "New Playlist" text if no "name" prop is present in data', () => {
-            let html = '<div><user-playlists></user-playlists></div>';
-            let root = createRoot(html, $rootScope);
-
             expect(root.find('.playlist').eq(0)).toHaveText('New Playlist');
         });
 
         it('should represent the data as returned from solBackend service', () => {
-            let html = '<div><user-playlists></user-playlists></div>';
-            let root = createRoot(html, $rootScope);
-
             expect(root.find('.playlist')).toHaveLength(3);
         });
     });
 
     describe('general markup', () => {
         it('contains a .playlists element', () => {
-            let html = '<div><user-playlists></user-playlists></div>';
-            let root = createRoot(html, $rootScope);
-
             expect(root).toContainElement('.playlists');
         });
 
         it('contains a .header > .title element with text in it', () => {
-            let html = '<div><user-playlists></user-playlists></div>';
-            let root = createRoot(html, $rootScope);
-
             expect(root).toContainElement('.header > .title');
             expect(root.find('.header > .title')).toHaveText('Playlists');
         });
 
         it('contains a .header element', () => {
-            let html = '<div><user-playlists></user-playlists></div>';
-            let root = createRoot(html, $rootScope);
-
             expect(root).toContainElement('.header');
         });
 
         it('contains a .user-playlists element', () => {
-            let html = '<div><user-playlists></user-playlists></div>';
-            let root = createRoot(html, $rootScope);
-
             expect(root).toContainElement('.user-playlists');
         });
     });
