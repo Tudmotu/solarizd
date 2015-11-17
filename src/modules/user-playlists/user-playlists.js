@@ -9,18 +9,20 @@ export default angular.module('user-playlists', ['sol-backend'])
         templateUrl: '/modules/user-playlists/user-playlists.html',
         scope: {},
         link: ($scope, $element) => {
-            solBackend.onAuth((authData) => {
-                let uid = (authData && authData.uid) || null;
-
-                solBackend.fetchUserPlaylists(uid).catch(() => {
-                    return null;
-                }).then((playlists) => {
-                    $scope.playlists = playlists;
-                });
-            });
-
             Object.assign($scope, {
                 editMode: false,
+
+                init () {
+                    solBackend.onAuth((authData) => {
+                        let uid = (authData && authData.uid) || null;
+
+                        solBackend.fetchUserPlaylists(uid).catch(() => {
+                            return null;
+                        }).then((playlists) => {
+                            this.playlists = playlists;
+                        });
+                    });
+                },
 
                 toggleEditMode () {
                     this.editMode = !this.editMode;
@@ -54,6 +56,8 @@ export default angular.module('user-playlists', ['sol-backend'])
                     $location.search('playlist', refId);
                 }
             });
+
+            $scope.init();
         }
     };
 }]);
