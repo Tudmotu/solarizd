@@ -1,6 +1,7 @@
 import './directives/sol-vibrate';
 import './directives/sol-slide-rm';
 import './directives/sol-scroll2top';
+import '../modules/sol-backend/sol-backend';
 import 'ui-sortable';
 import './Services';
 import 'angular';
@@ -29,10 +30,10 @@ function mouseCoords(event) {
 }
 
 export default angular.module('ui.playlist',
-    ['services', 'filters', 'ui.sortable', 'solVibrate', 'solSlideRm', 'solScroll2top'])
+    ['sol-backend', 'services', 'filters', 'ui.sortable', 'solVibrate', 'solSlideRm', 'solScroll2top'])
     .directive('playlistPane', [
-            '$rootScope', '$http', 'youtubeAPI', 'playList',
-            function($rootScope, $http, youtubeAPI, playList) {
+            '$rootScope', '$http', 'youtubeAPI', 'playList', 'solBackend',
+            function($rootScope, $http, youtubeAPI, playList, solBackend) {
         var definitions = {
             restrict: 'E',
             templateUrl: '/html/playlist/pane.html',
@@ -52,6 +53,10 @@ export default angular.module('ui.playlist',
                         if (!$scope.$$phase) $scope.$digest();
                     });
                 }
+
+                solBackend.onAuth((authData) => {
+                    $scope.authData = authData;
+                });
 
                 $scope.publishPlaylist = () => {
                     playList.publishPlaylist();

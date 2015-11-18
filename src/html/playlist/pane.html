@@ -44,11 +44,12 @@
         </ul>
     </section>
    
-    <section class="user-playlists-popup" ng-if="userPlaylistsOpen">
+    <section class="user-playlists-popup" ng-show="userPlaylistsOpen">
         <user-playlists></user-playlists>
     </section>
 
     <div class="user-playlists-toggler"
+        ng-show="authData"
         ng-class="{ active: userPlaylistsOpen }"
         ng-click="userPlaylistsOpen = !userPlaylistsOpen"></div>
 </section>
