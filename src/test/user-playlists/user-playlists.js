@@ -25,7 +25,7 @@ describe('userPlaylists directive', function () {
     }));
 
     let root;
-    let userPlaylists;
+    let metadataList;
     let onAuthHandlers = [];
     let triggerOnAuth = (data) => onAuthHandlers.forEach(fn => fn(data));
     let setupUserAuth = () => {
@@ -37,7 +37,7 @@ describe('userPlaylists directive', function () {
         $location.url($location.path());
         $httpBackend.when('GET', 'apikeys.json').respond({});
 
-        userPlaylists = FirebaseMock.mockArray([
+        metadataList = FirebaseMock.mockArray([
             { playlist: '--KjSAu12jD-1' },
             { playlist: '--KjSAu12jD-2', name: 'Bla bla' },
             { playlist: '--KjSAu12jD-3', name: 'Awesome Playlist' }
@@ -45,7 +45,7 @@ describe('userPlaylists directive', function () {
 
         spyOn(solBackend, 'fetchUserPlaylists').and.callFake(uid => {
             if (uid === 'test-uid')
-                return $q((resolve, reject) => resolve(userPlaylists));
+                return $q((resolve, reject) => resolve(metadataList));
             else
                 return $q((resolve, reject) => reject());
         });
@@ -144,7 +144,7 @@ describe('userPlaylists directive', function () {
 
         it('should remove appropriate entry from list when .remove clicked', () => {
             root.find('.playlist').eq(1).find('.remove').click();
-            expect(userPlaylists.$remove).toHaveBeenCalledWith(1);
+            expect(metadataList.$remove).toHaveBeenCalledWith(1);
         });
 
         it('should toggle "edit-mode" class when .edit element clicked', () => {
