@@ -29,10 +29,10 @@
             padding:@row-pad @column-pad;
             margin:(2 * @row-pad) 0;
             margin-left:@column-pad;
-            background:fadeout(@white,50%);
             cursor:pointer;
             .flexed(0);
             .flexbox(@align:center);
+            color:@inactive-text-light;
 
             .text {
                 .flexbox(@align:center);
@@ -40,15 +40,8 @@
                 margin-bottom:@row-pad / 2; // hack
             }
 
-            &:after {
-                .icon(@fa-var-circle);
-                font-size:.75em;
-            }
-
             &.active {
-                &:after {
-                    color:@green;
-                }
+                color:@active-text-light;
             }
         }
     }
