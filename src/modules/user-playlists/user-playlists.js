@@ -10,8 +10,6 @@ export default angular.module('user-playlists', ['sol-backend'])
         scope: {},
         link: ($scope, $element) => {
             Object.assign($scope, {
-                editMode: false,
-
                 init () {
                     solBackend.onAuth((authData) => {
                         let uid = (authData && authData.uid) || null;
