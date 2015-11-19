@@ -37,6 +37,7 @@ export default angular.module('solSlideRm', [])
             scope: false,
             link: function($scope, $element, $attrs, $transclude) {
                 var touchStartX = null,
+                    touchStartY = null,
                     touchSlideProgress = null,
                     shouldPreventEnd = false,
                     handle = $element[0].querySelector($attrs.solSlideRmHandle),
