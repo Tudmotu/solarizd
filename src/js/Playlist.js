@@ -59,7 +59,9 @@ export default angular.module('ui.playlist',
                 });
 
                 $scope.publishPlaylist = () => {
-                    playList.publishPlaylist();
+                    playList.publishPlaylist().then((refKey) => {
+                        $location.search('playlist', refKey);
+                    });
                 };
 
                 $scope.clearPlaylist = function() {
