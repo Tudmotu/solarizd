@@ -32,8 +32,8 @@ function mouseCoords(event) {
 export default angular.module('ui.playlist',
     ['sol-backend', 'services', 'filters', 'ui.sortable', 'solVibrate', 'solSlideRm', 'solScroll2top'])
     .directive('playlistPane', [
-            '$rootScope', '$http', 'youtubeAPI', 'playList', 'solBackend',
-            function($rootScope, $http, youtubeAPI, playList, solBackend) {
+            '$rootScope', '$http', '$location', 'youtubeAPI', 'playList', 'solBackend',
+            function($rootScope, $http, $location, youtubeAPI, playList, solBackend) {
         var definitions = {
             restrict: 'E',
             templateUrl: '/html/playlist/pane.html',
@@ -64,6 +64,7 @@ export default angular.module('ui.playlist',
 
                 $scope.clearPlaylist = function() {
                     playList.clearList();
+                    $location.search('playlist', null);
                 };
 
                 $scope.isItemActive = (idx) => {
