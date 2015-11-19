@@ -147,6 +147,37 @@ describe('userPlaylists directive', function () {
             expect(metadataList.$remove).toHaveBeenCalledWith(1);
         });
 
+        it('should call .$save() on metadataList with appropriate playlist on-change', () => {
+            let entry = root.find('.playlist').eq(0);
+            entry.find('.editor').val('cba').change();
+            $rootScope.$digest();
+            expect(metadataList.$save).toHaveBeenCalledWith(metadataList[0]);
+        });
+
+        it('should be two-way bound to the metadataList variable', () => {
+            let entry = root.find('.playlist').eq(0);
+            metadataList[0].name = 'abc';
+            $rootScope.$digest();
+            expect(entry.find('.editor')).toHaveValue('abc');
+
+            entry.find('.editor').val('cba').change();
+            $rootScope.$digest();
+            expect(metadataList[0].name).toBe('cba');
+        });
+
+        it('should show the input element only when in edit-mode', () => {
+            let entry = root.find('.playlist').eq(0);
+            expect(entry.find('.editor')).toHaveClass('ng-hide');
+            entry.find('.edit').click();
+            expect(entry.find('.editor')).not.toHaveClass('ng-hide');
+        });
+
+        it('should hide .text element when in edit-mode', () => {
+            let entry = root.find('.playlist').eq(0);
+            entry.find('.edit').click();
+            expect(entry.find('.text')).toHaveClass('ng-hide');
+        });
+
         it('should toggle "edit-mode" class when .edit element clicked', () => {
             expect(root.find('.playlist')).not.toHaveClass('edit-mode');
 
@@ -165,6 +196,11 @@ describe('userPlaylists directive', function () {
 
         it('should contain a .remove.action element', () => {
             expect(root.find('.playlist')).toContainElement('.remove.action');
+        });
+
+        it('should contain an input.editor element with placeholder', () => {
+            expect(root.find('.playlist')).toContainElement('input.editor');
+            expect(root.find('.playlist .editor')).toHaveAttr('placeholder', 'New Playlist');
         });
 
         it('should have text as given in the "name" prop when present', () => {

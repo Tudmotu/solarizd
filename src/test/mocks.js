@@ -24,7 +24,8 @@ function mockMethods (data, methods) {
 export let FirebaseMock = {
     mockArray (data) {
         return mockMethods(data, [
-            '$remove'
+            '$remove',
+            '$save'
         ]);
     }
 };

@@ -56,11 +56,14 @@
         }
 
         .remove:before {
-            .icon(@fa-var-times);
+            .icon(@fa-var-trash);
         }
 
         .edit:before {
             .icon(@fa-var-pencil);
+        }
+        &.edit-mode .edit:before {
+            .icon(@fa-var-check);
         }
     }
 }

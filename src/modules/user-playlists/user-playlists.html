@@ -10,8 +10,14 @@
                     selected: currentPlaylist == playlist.playlist
                 }">
             <span class="text"
+                ng-show="!editMode"
                 ng-click="selectEntry(playlist.playlist)"
                 >{{playlist.name || "New Playlist"}}</span>
+            <input class="text editor"
+                placeholder="New Playlist"
+                ng-show="editMode"
+                ng-model="playlist.name"
+                ng-change="playlists.$save(playlist)" />
             <span class="edit action" ng-click="toggleEditMode()"></span>
             <span class="remove action" ng-click="removeEntry($index)"></span>
         </li>

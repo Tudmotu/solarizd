@@ -29,6 +29,7 @@ export default angular.module('user-playlists', ['sol-backend'])
                 },
 
                 toggleEditMode () {
+                    // This method is called on the nested scope
                     this.editMode = !this.editMode;
                 },
                 removeEntry (idx) {
