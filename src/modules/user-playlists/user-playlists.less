@@ -21,37 +21,42 @@
         }
     }
 
+    .playlists {
+        max-height:10*@row;
+        overflow:auto;
+        padding-bottom:@row/2;
+    }
+
     .playlists > .playlist {
         .flexbox(@align:center; @justify:flex-start);
         .ui-hseparator(@inactive-text-dark);
         height:@row;
         padding:@row-pad @column-pad;
         color:@black;
-        color:@active-text-dark;
+        color:@inactive-text-dark;
         list-style:none;
         font-size:@large-text;
 
         &.selected {
-            &:before {
-                .icon(@fa-var-circle);
-            }
+            color:@active-text-dark;
         }
         &:before {
-            .icon(@fa-var-circle-o);
             padding-right:@column-pad;
             font-size:@normal-text;
         }
 
         .text {
             .flexed(1);
+            cursor:pointer;
         }
 
         .action {
             padding-left:@column-pad;
             cursor:pointer;
+            color:@inactive-text-dark;
 
-            &:not(:hover) {
-                color:@inactive-text-dark;
+            &:hover {
+                color:@active-text-dark;
             }
         }
 
