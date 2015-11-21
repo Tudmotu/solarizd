@@ -6,21 +6,6 @@
     .flexbox(@dir:column);
     .transition;
 
-    &.cued {
-        z-index:10;
-        background:@black;
-
-        &:after {
-            content:"You have to play the video manually";
-            font-size:2 * @huge-text;
-            font-weight:bold;
-            text-shadow:1px 1px @black;
-            color:@white;
-            padding:@row-pad @column-pad;
-            text-align:center;
-        }
-    }
-
     .sol-tabs {
         .flexed(1);
     }

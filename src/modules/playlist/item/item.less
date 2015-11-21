@@ -6,7 +6,6 @@
     .transition(@prop:height; @easing:ease-in; @duration:.2s);
     height:@row;
     padding:0 @column-pad;
-    font-size:@large-text;
     color:@white;
     overflow:hidden;
 
@@ -22,7 +21,6 @@
 
     .actions-bar {
         background:fadeout(@white,90%);
-        font-size:@large-text;
         .flexbox(@justify:flex-start);
 
         .action {
@@ -49,13 +47,8 @@
     .action(@icon) {
         user-select:none;
         padding:0 @column-pad;
-        font-size:(1 * @huge-text);
         cursor:pointer;
         .flexed(0);
-
-        @media (max-device-width:960px) {
-            font-size:(1.5 * @huge-text);
-        }
 
         &:before {
             .icon(@icon);
@@ -67,7 +60,6 @@
         height:100%;
         text-overflow:ellipsis;
         padding-left:@column-pad;
-        font-size:@large-text;
         .flexed(1);
         .flexbox(@dir:column);
     }
@@ -105,7 +97,6 @@
     }
 
     .flag {
-        font-size:(@normal-text);
         border:solid (0.5 * @medium-border) @white;
         border-radius:50%;
         width:(0.25 * @column);

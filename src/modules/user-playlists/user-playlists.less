@@ -9,15 +9,14 @@
         background:@yellow;
         background:@theme-background;
         color:@white;
-        font-size:@large-text;
         padding:@row-pad @column-pad;
         height:@row;
-        /*box-shadow:0px 3px 3px -2px fadeout(@black, 53%);*/
 
         .title {
             .flexbox(@align:center);
             .flexed(0);
-            /*text-transform:uppercase;*/
+            text-transform:uppercase;
+            font-weight:bold;
         }
     }
 
@@ -35,14 +34,9 @@
         color:@black;
         color:@inactive-text-dark;
         list-style:none;
-        font-size:@large-text;
 
         &.selected {
             color:@active-text-dark;
-        }
-        &:before {
-            padding-right:@column-pad;
-            font-size:@normal-text;
         }
 
         .text {

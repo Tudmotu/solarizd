@@ -6,7 +6,7 @@
     @title:@white;
     background:@bg;
     padding:@row-pad 0;
-    font-size:(@huge-text * 1.5);
+    font-size:@large-text;
     z-index:1000;
     box-sizing:content-box;
     border-bottom:solid 1px fadeout(@base02, 50%);
@@ -42,7 +42,6 @@
 
     .now-playing .title {
         color:@title;
-        font-size:(@huge-text);
         padding-left:@column-pad;
         .flexed(1);
         .flexbox(@dir:column);
@@ -73,7 +72,6 @@
         }
 
         .control {
-            font-size:0.75em;
             margin:0 @column-pad;
             .ui-topbar-button;
             .flexed(0);
@@ -85,7 +83,6 @@
                 }
             }
             &[data-value="play-toggle"] {
-                font-size:1em;
                 &:after {
                     .icon(@fa-var-play);
                     margin-left:(2 * @medium-border);

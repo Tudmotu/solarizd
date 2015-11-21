@@ -1,10 +1,13 @@
 // Some measurements and sizes
-@root-font-size:10px;
 
-@row:5rem;
-@column:10rem;
-@row-pad:.5rem;
-@column-pad:.75rem;
+@grid-unit:8px;
+@font-unit:4px;
+@root-font-size:3 * @font-unit;
+
+@row:6 * @grid-unit;
+@column:12 * @grid-unit;
+@row-pad:@grid-unit;
+@column-pad:@grid-unit;
 
 @small-text:.75rem;
 @normal-text:1rem;
