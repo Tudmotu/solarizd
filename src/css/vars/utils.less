@@ -100,12 +100,11 @@
 .ui-slider(@color:@base02; @background:@base00; @border:@base01; @thumb:'') {
     @border-radius:@column-pad;
     background:@background;
-    border-radius:@border-radius;
     cursor:pointer;
 
     .thumb {
         .flexbox(@justify:flex-end;@align:center;);
-        .ui-knob(@color;@thumb;@border;@border-radius);
+        .ui-knob(@color;@thumb);
     }
 }
 
@@ -113,7 +112,6 @@
     .no_appearance;
     @border-radius:@column-pad;
     background:@background;
-    border-radius:@border-radius;
     cursor:pointer;
     padding:0;
     margin:0 @column-pad;
@@ -125,24 +123,19 @@
 
     &::-webkit-progress-value {
         .flexbox(@justify:flex-end;@align:center;);
-        .ui-knob(@color;@thumb;@border;@border-radius);
+        .ui-knob(@color;@thumb);
         box-sizing:border-box;
         position:relative;
     }
 }
 
-.ui-knob(@color;@knob;@border;@border-radius) {
+.ui-knob(@color;@knob;) {
     background:@color;
-    background-image:linear-gradient(to bottom,
-                     transparent @thin-border,
-                     fadeout(@black, 75%) @thin-border,
-                     transparent);
-    border: solid @thin-border @border;
-    border-radius:@border-radius;
 
 
     & when (iscolor(@knob)) {
         &:after {
+            visibility:hidden;
             .flexed(0);
             @dia:@huge-text;
             width:@dia;

@@ -126,20 +126,8 @@
             }
 
             &.muted:before {
-                .icon(@fa-var-volume-down);
-            }
-
-            &.muted:after {
-                content:"";
-                position:absolute;
-                top:0;
-                bottom:0;
-                left:0;
-                margin:auto;
-                height:@medium-border;
-                width:100%;
-                background:@white;
-                transform:rotateZ(-45deg);
+                color:@inactive-text-dark;
+                .icon(@fa-var-volume-off);
             }
 
             @media (max-device-width: 960px) {
@@ -149,15 +137,12 @@
 
         .toggle-mute.muted + .slider {
             opacity:.5;
-            .thumb {
-                background:@blue;
-            }
         }
 
         .slider {
             .ui-slider(@color:@cyan;@thumb:@base00);
             .flexed(1);
-            height:(2*@row-pad);
+            height:@row-pad;
             margin:0 @column-pad;
 
             .thumb {
