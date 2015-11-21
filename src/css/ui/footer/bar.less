@@ -8,11 +8,12 @@
     box-sizing:content-box;
 
     .title {
-        font-size:@huge-text;
-        padding:@row-pad 0;
         .flexed(1);
-        flex-shrink:0;
         .flexbox(@align:center; @justify:flex-start);
+        font-size:@huge-text;
+        font-weight:200;
+        padding:@row-pad 0;
+        flex-shrink:0;
 
         .app-logo {
             .flexed(0);
@@ -33,20 +34,21 @@
                 text-transform:lowercase;
                 vertical-align:super;
                 font-size:.5em;
-                padding-left:@column-pad;
+                padding-left:@column-pad / 2;
             }
         }
     }
 
     .logo {
-        padding:@row-pad @column-pad;
         .flexed(0);
-        flex-shrink:1;
         .flexbox(@dir:column; @align:center);
+        height:@row;
+        padding:@row-pad @column-pad;
+        flex-shrink:1;
+        position:relative;
 
         img {
             max-height:100%;
-            max-width:100%;
         }
     }
 
@@ -64,6 +66,7 @@
         border-top-color:@base2;
         /*text-transform:uppercase;*/
         cursor:pointer;
+        height:100%;
 
         &:active {
             box-shadow:none;
@@ -96,10 +99,6 @@
         .text {
             font-weight:bold;
         }
-    }
-
-    &> * {
-        height:(@row - (@row-pad * 2));
     }
 
     @media (max-width: 960px), (max-device-width: 960px) {
