@@ -1,6 +1,12 @@
 module.exports = function(config) {
     config.set({
-        frameworks: ['jasmine', 'browserify', 'source-map-support'],
+        frameworks: [
+            'jasmine-jquery',
+            'jasmine',
+            'jasmine-matchers',
+            'browserify',
+            'source-map-support'
+        ],
 
         reporters: ['dots'],
 

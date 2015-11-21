@@ -1,5 +1,3 @@
-import JasmineMatchers from '../../vendor/jasmine-expect/dist/jasmine-matchers';
-import JasmineJQuery from '../../vendor/jasmine-jquery/lib/jasmine-jquery';
 import $ from 'jquery';
 import {module, inject, createRootFactory, FirebaseMock} from '../mocks';
 

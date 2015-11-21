@@ -1,5 +1,3 @@
-import JasmineMatchers from '../../vendor/jasmine-expect/dist/jasmine-matchers';
-import JasmineJQuery from '../../vendor/jasmine-jquery/lib/jasmine-jquery.js';
 import $ from '../../vendor/jquery/dist/jquery.js';
 import {module, inject} from '../mocks';
 
