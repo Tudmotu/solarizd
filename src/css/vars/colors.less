@@ -1,6 +1,7 @@
 @base2:#CAD1E1; // Light background
 @base1:#8CA0CC; // Text on dark
-@base00:#616E8C;
+/*@base00:#616E8C;*/
+@base00:#B0BEC5;
 @base01:#353C4D; // Text on light
 @base02:#2C3240; // Dark background
 @white:#FFF;
@@ -8,6 +9,7 @@
 /*@red:#AE0B2A;*/
 @red:#B31217;
 @blue:#145E7B;
+@indigo:#9FA8DA;
 /*@blue:#0059BA;*/
 @green:#419D46;
 @gray:#BBB;
@@ -22,9 +24,13 @@
 @active-text-light:fadeout(@white, 0%);
 @inactive-text-light:fadeout(@white, 53%);
 
+@theme-app-background:#f2f2f2;
+@theme-app-background-stripes:#9bb5dc;
 @theme-background-light:fadeout(@base2, 50%);
 @theme-background-dark:fadeout(@black, 75%);
-@theme-background:@theme-background-dark;
-@theme-topbar-bg:fadeout(@purple, 25%);
+@theme-background:@white;
+/*@theme-topbar-bg:fadeout(@purple, 25%);*/
+@theme-topbar-background:@white;
+@theme-topbar-color:@active-text-dark;
 @theme-volume-thumb-color:@base00;
 @theme-progressbar-color:@gray;

@@ -2,13 +2,10 @@
 
 .mixin-footer () {
     .flexbox(@justify:flex-start;@align:center);
-    @bg:@theme-background-dark;
     @title:@base00;
-    background:@bg;
     height:@row;
     padding:@row-pad @column-pad;
     box-sizing:content-box;
-    border-top:solid @thin-border fadeout(@base02, 50%);
 
     .title {
         font-size:@huge-text;

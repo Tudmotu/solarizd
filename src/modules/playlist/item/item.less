@@ -6,7 +6,6 @@
     .transition(@prop:height; @easing:ease-in; @duration:.2s);
     height:@row;
     padding:0 @column-pad;
-    color:@white;
     overflow:hidden;
 
     &.actions-open {
@@ -20,7 +19,6 @@
     }
 
     .actions-bar {
-        background:fadeout(@white,90%);
         .flexbox(@justify:flex-start);
 
         .action {
@@ -30,7 +28,7 @@
             cursor:pointer;
             .flexed(0);
             .flexbox(@align:center);
-            color:@inactive-text-light;
+            color:@inactive-text-dark;
 
             .text {
                 .flexbox(@align:center);
@@ -39,7 +37,7 @@
             }
 
             &.active {
-                color:@active-text-light;
+                color:@active-text-dark;
             }
         }
     }
@@ -135,13 +133,6 @@
         &:before {
             .icon(@fa-var-pause);
         }
-    }
-    &.now-playing .title {
-        color:#fff;
-        text-shadow:0px 0px @thick-border @red;
-    }
-    &.active.now-playing .title {
-        animation:glow-red 2s infinite ease-out;
     }
 
     &:before {

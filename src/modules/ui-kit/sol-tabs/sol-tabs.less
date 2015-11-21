@@ -6,12 +6,10 @@
     & > .tabs {
         .flexed(0);
         .flexbox;
-        background:@theme-background;
-        border-bottom:solid 1px fadeout(@base02, 50%);
+        border-bottom:solid 1px currentColor;
         height:@row;
         text-transform:uppercase;
         text-align:center;
-        color:@white;
 
         & > .tab {
             .flexed(1);
@@ -19,8 +17,6 @@
             cursor:pointer;
 
             &[active] {
-                background:fadeout(@white,75%);
-
                 &:after {
                     width:100%;
                 }
@@ -39,7 +35,7 @@
                 right:0;
                 margin:auto;
                 height:@thick-border;
-                background:@base2;
+                background:currentColor;
                 width:0;
             }
         }

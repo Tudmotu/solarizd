@@ -2,8 +2,11 @@
 @import "../kit/search-input";
 
 .mixin-playlist-pane () {
+    @border-color:@purple-light;
     background:@theme-background;
-    border-right:solid 1px fadeout(@base02, 50%);
+    border-right:solid 1px @border-color;
+    border-left:solid 1px @border-color;
+    color:@active-text-dark;
     .flexbox(@dir:column);
     .no-scrollbar;
 
@@ -24,7 +27,6 @@
     .playlist-progress {
         width:100%;
         height:@row;
-        color:@white;
         .flexed(0);
         .flexbox(@align:center);
         .ui-hseparator;
@@ -52,7 +54,6 @@
         height:@row;
         padding:@row-pad @column-pad;
         padding-left:0;
-        color:@white;
 
         &> .action {
             .flexed(0);
@@ -111,14 +112,13 @@
             margin-bottom:0;
             padding:@row-pad @column-pad;
             height:@row;
-            color:@white;
 
             &.actions-open {
                 margin-bottom:@row;
             }
 
             &.active {
-                border-left:solid (@column-pad * 3 / 4) @cyan;
+                border-left:solid (@thick-border) @theme-app-background-stripes;
                 padding-left:(@column-pad / 4);
             }
         }
@@ -148,7 +148,7 @@
         z-index:1;
         width:3 * @column;
         min-height:(6 * @row) - @row-pad;
-        border:solid @thin-border fadeout(@base02, 50%);
+        border:solid @thin-border @inactive-text-dark;
         box-shadow:0px 3px 3px -2px fadeout(@black, 53%);
         background:@white;
     }
@@ -161,17 +161,17 @@
         z-index:2;
         width:@row;
         height:@row;
-        background:@white;
+        background:@yellow;
         border-radius:50%;
-        border:solid @thin-border @base2;
-        box-shadow:0px 3px 3px -2px fadeout(@black, 53%);
-        color:@inactive-text-dark;
+        border:solid @thin-border @inactive-text-light;
+        box-shadow:0px 5px 5px -3px fadeout(@black, 53%);
+        color:@active-text-light;
         font-size:@large-text;
         cursor:pointer;
 
-        &:hover {
-            color:@active-text-dark;
-        }
+        /*&:hover {*/
+            /*color:@active-text-light;*/
+        /*}*/
 
         &.active {
             &:before {

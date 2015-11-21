@@ -2,17 +2,15 @@
 
 .mixin-topbar () {
     .flexbox(@justify:space-between;@wrap:wrap);
-    @bg:@theme-topbar-bg;
-    @title:@white;
+    @bg:@theme-topbar-background;
+    color:@theme-topbar-color;
     background:@bg;
     padding:@row-pad 0;
     font-size:@large-text;
     z-index:1000;
     box-sizing:content-box;
-    border-bottom:solid 1px fadeout(@base02, 50%);
 
     @media (max-width:960px), (max-device-width:960px) {
-        box-shadow:none;
     }
 
     .now-playing {
@@ -26,10 +24,10 @@
     }
 
     .now-playing .thumbnail {
-        width:(@column / 2);
-        padding:@thick-border;
         .flexed(0);
         .flexbox(@align:center); // just for now
+        width:(@column / 2);
+        margin-left:@column-pad;
 
         .image {
             max-width:100%;
@@ -41,7 +39,6 @@
     }
 
     .now-playing .title {
-        color:@title;
         padding-left:@column-pad;
         .flexed(1);
         .flexbox(@dir:column);
@@ -85,7 +82,6 @@
             &[data-value="play-toggle"] {
                 &:after {
                     .icon(@fa-var-play);
-                    margin-left:(2 * @medium-border);
                 }
             }
             &[data-value="play-next"] {

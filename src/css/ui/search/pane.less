@@ -3,12 +3,11 @@
 @import "list";
 
 .mixin-search-pane () {
+    .flexbox(@dir:column; @justify:flex-start);
     @bg:@theme-background; // @base01; // darken(@base00, 15%);
     background:@bg;
-    background:;
-    border-right:solid 1px fadeout(@base02, 50%);
+    color:@active-text-dark;
     z-index:1;
-    .flexbox(@dir:column; @justify:flex-start);
 
     @media (max-width:960px), (max-device-width:960px) {
         box-shadow:none;
@@ -28,7 +27,7 @@
             width: 1em;
             height: 1em;
             text-align:center;
-            color:fadeout(@white, 0%);
+            color:@inactive-text-dark;
             text-shadow:0px 0px @huge-text #fff;
             .spinner;
             .icon(@fa-var-spinner);
@@ -36,11 +35,11 @@
     }
 
     .sol-input-wrapper {
-        height:@row;
-        padding:@row-pad @column-pad;
-        .ui-hseparator;
         .flexed(0);
         .flexbox(@justify:stretch);
+        height:@row;
+        padding:@row-pad @column-pad;
+        border-bottom:solid @thin-border @purple;
 
         &> .sol-input {
             .flexed(1);
