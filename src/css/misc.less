@@ -159,3 +159,20 @@ body {
         }
     }
 }
+
+.toast-notification {
+    .floating-card;
+    height:2 * @row;
+    background:@theme-background;
+    color:@active-text-dark;
+    z-index:9999;
+    transition:height .3s ease-out;
+    margin:@row-pad @column-pad;
+
+    &:not(.active) {
+        height:0;
+        margin-top:0;
+        margin-bottom:0;
+        border:none;
+    }
+}

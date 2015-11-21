@@ -3,26 +3,15 @@
 .toast-notification {
     .flexed(0);
     .flexbox(@align:center);
-    height:2 * @row;
-    background:fadeout(@base02, 75%);
     padding:0 @column-pad;
-    color:@white;
-    border-top:solid @thin-border fadeout(@base02, 50%);
     text-align:center;
     overflow:hidden;
-    z-index:9999;
-    transition:height .3s ease-out;
-
-    &:not(.active) {
-        height:0;
-        border:none;
-    }
 
     .thumb {
         .flexed(0);
         width:(@column);
-        border:solid @thin-border fadeout(@white, 50%);
-        box-shadow:@thin-border @thin-border @thick-border fadeout(@black, 25%);
+        border:solid @thin-border @inactive-text-dark;
+        /*box-shadow:@thin-border @thin-border @thick-border fadeout(@black, 25%);*/
         margin-right:@column-pad;
     }
 
@@ -30,19 +19,18 @@
         .flexed(1);
         font-size:@huge-text;
         margin:0 @column-pad;
-        text-shadow:@thin-border @thin-border @thin-border fadeout(@black, 50%);
     }
 
     .close {
         .flexed(0);
         .transition(@prop:color);
         font-size:2 * @huge-text;
-        color:fadeout(@black, 75%);
+        color:@inactive-text-dark;
         text-shadow:@thin-border @thin-border @medium-border fadeout(@white, 75%);
         cursor:pointer;
 
         &:hover {
-            color:@base00;
+            color:@active-text-dark;
             text-shadow:none;
         }
 
