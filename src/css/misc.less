@@ -81,6 +81,15 @@ body {
 .floating-card {
     border:solid @thin-border @inactive-text-dark;
     box-shadow:0px 3px 3px -1px @inactive-text-dark;
+    margin:@row-pad @column;
+
+    @media (max-width: 1280px) {
+        margin:@row-pad @column-pad;
+    }
+
+    @media (max-width: 1080px) {
+        margin:0;
+    }
 }
 #topbar {
     .floating-card;
@@ -101,18 +110,6 @@ body {
     .floating-card;
     .flexed(1);
     overflow:hidden;
-}
-
-#topbar, #main-view {
-    margin:@row-pad @column;
-
-    @media (max-width: 1280px) {
-        margin:@row-pad @column-pad;
-    }
-
-    @media (max-width: 1080px) {
-        margin:0;
-    }
 }
 
 [tab-id="search-pane"] {
@@ -178,19 +175,31 @@ body {
     }
 }
 
-.toast-notification {
+#main-app .toast-notification {
     .floating-card;
+    position:absolute;
+    width:~"calc(100% -  (2 * @{row}))";
+    bottom:@row;
+    left:0;
+    right:0;
+    margin:auto!important;
     height:2 * @row;
     background:@theme-background;
     color:@active-text-dark;
     z-index:9999;
     transition:height .3s ease-out;
-    margin:@row-pad @column-pad;
 
     &:not(.active) {
         height:0;
         margin-top:0;
         margin-bottom:0;
         border:none;
+    }
+
+    @media (max-device-width: 1280px) {
+        width:~"calc(100% -  (2 * @{column-pad}))";
+        .text {
+            font-size:@normal-text;
+        }
     }
 }
