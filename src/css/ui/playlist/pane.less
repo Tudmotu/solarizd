@@ -51,10 +51,11 @@
     .playlist-actions {
         .flexed(0);
         .flexbox(@justify:flex-start;@align:stretch);
-        .ui-hseparator;
-        height:@row;
-        padding:@row-pad @column-pad;
-        padding-left:0;
+        flex-wrap:wrap;
+
+        &> .action, &> .sol-input {
+            height:4rem;
+        }
 
         &> .action {
             .flexed(0);
