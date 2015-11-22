@@ -65,7 +65,7 @@ body {
 }
 
 #main-app {
-    .transition;
+    .transition(@prop:transform);
     .flexbox(@dir:column);
     height:100vh;
     width:100vw;
@@ -87,6 +87,14 @@ body {
     .flexed(0);
     .mixin-topbar;
     .transition(@prop:transform; @easing:ease-in; @duration:.3s);
+
+    @media (max-width: 1080px) {
+        background:@theme-app-background-stripes;
+        color:@white;
+        .volume-slider .slider .thumb {
+            background:@white;
+        }
+    }
 }
 
 #main-view {
@@ -100,6 +108,10 @@ body {
 
     @media (max-width: 1280px) {
         margin:@row-pad @column-pad;
+    }
+
+    @media (max-width: 1080px) {
+        margin:0;
     }
 }
 
