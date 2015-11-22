@@ -87,14 +87,20 @@ body {
     .flexed(0);
     .mixin-topbar;
     .transition(@prop:transform; @easing:ease-in; @duration:.3s);
-    margin:@row-pad @column-pad;
 }
 
 #main-view {
     .floating-card;
     .flexed(1);
     overflow:hidden;
-    margin:@row-pad @column-pad;
+}
+
+#topbar, #main-view {
+    margin:@row-pad @column;
+
+    @media (max-width: 1280px) {
+        margin:@row-pad @column-pad;
+    }
 }
 
 [tab-id="search-pane"] {
