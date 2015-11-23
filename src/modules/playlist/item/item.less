@@ -22,9 +22,7 @@
         .flexbox(@justify:flex-start);
 
         .action {
-            padding:@row-pad @column-pad;
-            margin:(2 * @row-pad) 0;
-            margin-left:@column-pad;
+            margin:0 @column-pad;
             cursor:pointer;
             .flexed(0);
             .flexbox(@align:center);
@@ -33,7 +31,6 @@
             .text {
                 .flexbox(@align:center);
                 margin:0 @column-pad;
-                margin-bottom:@row-pad / 2; // hack
             }
 
             &.active {
