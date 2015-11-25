@@ -40,10 +40,14 @@ export default [
     $rootScope.$on('$locationChangeSuccess', (e, newUrl) => {
         getSavedList().then((list) => {
             //that.clearList();
-            that.playlist.length = 0;
-            list.forEach((item) => that.playlist.push(item));
+            that.setPlaylist(list);
         });
     });
+
+    this.setPlaylist = list => {
+        this.playlist.length = 0;
+        list.forEach(item => this.playlist.push(item));
+    };
 
     $rootScope.$on('youtubePlayer:infoDelivery', function(e, data) {
         if (data.info.hasOwnProperty('currentTime')) {

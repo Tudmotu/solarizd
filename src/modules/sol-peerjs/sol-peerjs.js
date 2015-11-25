@@ -2,7 +2,8 @@ import 'angular';
 
 export default angular.module('sol-peerjs', ['peerjs-service'])
 .service('solPeer',
-['$q', '$timeout', 'ApiKey', 'peerJS', function ($q, $timeout, apiKey, peerJS) {
+['$q', '$timeout', '$rootScope', 'ApiKey', 'peerJS', 'playList',
+function ($q, $timeout, $rootScope, apiKey, peerJS, playList) {
     Object.assign(this, {
         peerId: null,
 
@@ -20,11 +21,10 @@ export default angular.module('sol-peerjs', ['peerjs-service'])
                         console.debug('server got data', data);
                     });
                     connection.on('open', () => {
-                        connection.send({
-                            type: 'sync',
-                            //playlist: playList.playlist,
-                            //currentTime: playList.getTime(),
-                            //nowPlaying: playList.getNowPlaying()
+                        this._sendSync(connection);
+                        $rootScope.$watchCollection(() => playList.playlist, () => {
+                            console.debug('playlist!');
+                            this._sendSync(connection);
                         });
                     });
                 });
@@ -32,18 +32,26 @@ export default angular.module('sol-peerjs', ['peerjs-service'])
         },
 
         connectToServer (remoteId) {
-            console.debug('try to connect...', remoteId);
             peerJS.getPeer().then((peer) => {
                 let connection = peer.connect(remoteId);
-                console.debug('connecting...', remoteId);
 
                 connection.on('open', () => {
-                    console.debug('connection to remote established');
-                    connection.send({ 'test': true });
                     connection.on('data', (data) => {
-                        console.debug('client got data', data);
+                        $rootScope.$apply(() => {
+                            console.debug('client got data', data);
+                            playList.setPlaylist(data.playlist);
+                        });
                     });
                 });
+            });
+        },
+
+        _sendSync (connection) {
+            connection.send({
+                type: 'sync',
+                playlist: playList.playlist,
+                //currentTime: playList.getTime(),
+                nowPlaying: playList.getNowPlayingIdx()
             });
         }
     });

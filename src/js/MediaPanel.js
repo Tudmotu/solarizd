@@ -14,7 +14,6 @@ export default angular.module('ui.media-panel', ['solVibrate', 'sol-peerjs'])
                     $scope.peerId = peerId;
                 });
                 $scope.connect = () => {
-                    console.debug('what?');
                     solPeer.connectToServer($scope.remotePeer);
                 };
 
