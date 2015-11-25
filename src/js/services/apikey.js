@@ -2,8 +2,8 @@ import 'angular';
 
 export default angular.module('api-key', [])
 .constant('ApiKeysConf', {
-    services: ['youtube', 'soundcloud', 'echonest', 'firebase']
-}).service('ApiKey', ['$rootScope', '$http', 'ApiKeysConf', function($rootScope, $http, Conf) {
+    services: ['youtube', 'soundcloud', 'echonest', 'firebase', 'peerjs']
+}).service('ApiKey', ['$rootScope', '$q', '$http', 'ApiKeysConf', function($rootScope, $q, $http, Conf) {
     var KEYS = {};
 
     this.set = function(service, key) {
@@ -16,6 +16,18 @@ export default angular.module('api-key', [])
         if (Conf.services.indexOf(service) >= 0) {
             return KEYS[service];
         }
+    };
+
+    this.fetch = service => {
+        if (KEYS.hasOwnProperty(service))
+            return $q(resolve => resolve(KEYS[service]));
+        else
+            return $q(resolve => {
+                $rootScope.$on(service + '-apikey', (e, data) => {
+                    console.debug('fetching apikye', service, data);
+                    resolve(data);
+                });
+            });
     };
 
     this.fetchKeys = function() {
