@@ -11,6 +11,8 @@ export default ['$sce', '$q', '$rootScope', function($sce, $q, $rootScope) {
         playedOnce = false,
         elId;
 
+    let turnedOff = false;
+
     this.nowPlaying = {
         id: null,
         title: null,
@@ -83,20 +85,25 @@ export default ['$sce', '$q', '$rootScope', function($sce, $q, $rootScope) {
     };
 
     this.play = function() {
+        if (!player) return;
         if (!isMobile || playedOnce) {
             player.playVideo();
         }
     };
 
     this.pause = function() {
+        if (!player) return;
         player.pauseVideo();
     };
 
     this.stop = function() {
+        if (!player) return;
         player.stopVideo();
     };
 
     this.loadVideo = function(vid) {
+        if (turnedOff) return $q((r, rj) => r());
+
         this.nowPlaying.id = vid;
         playerDfrd = $q.defer();
         playerReady = playerDfrd.promise;
@@ -114,6 +121,7 @@ export default ['$sce', '$q', '$rootScope', function($sce, $q, $rootScope) {
     };
 
     this.seek = function(sec) {
+        if (!player) return;
         player.seekTo(sec, true);
     };
 
@@ -144,5 +152,11 @@ export default ['$sce', '$q', '$rootScope', function($sce, $q, $rootScope) {
         if (player)
             player.getVolume();
     };
+
+    this.isOff = () => turnedOff;
+
+    $rootScope.$on('peer::connected_to_server', () => {
+        turnedOff = true;
+    });
 }];
 

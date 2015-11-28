@@ -68,9 +68,13 @@ export default angular.module('ui.topbar', ['services', 'solVibrate'])
                 };
 
 
+                $scope.$watch(
+                    () => 
+                        playList.getNowPlaying() &&
+                            playList.getState() === playList.st.PLAYING,
+                    val => $scope.isActive = val);
+
                 $scope.$on('playList:stateChanged', function(e, state) {
-                    $scope.isActive = playList.getNowPlaying() &&
-                        state === playList.st.PLAYING;
                     $scope.isBuffering = playList.getNowPlaying() && [
                         playList.st.PLAYING,
                         playList.st.PAUSING,

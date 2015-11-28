@@ -58,7 +58,7 @@ export default [
             if (data.info.duration)
                 currentDuration = data.info.duration;
 
-            sendSync();
+            syncClients();
         });
     });
 
@@ -99,7 +99,8 @@ export default [
             state = st.BUFFERING;
         }
         $rootScope.$broadcast('playList:stateChanged', state);
-        sendSync();
+        syncClients();
+        console.debug('state changes');
     });
 
     // Register keyboard sortcuts
@@ -160,6 +161,8 @@ export default [
 
     function setNowPlaying(idx) {
         var endingSound;
+        if (nowPlaying === idx) return;
+
         if (typeof idx === 'number')
             nowPlaying = idx;
         else if (idx === null) {
@@ -172,7 +175,7 @@ export default [
             endingSound.play();
         }
 
-        sendSync();
+        syncClients();
     }
 
     function getPlayNext() {
@@ -199,7 +202,7 @@ export default [
                 name = 'playlist';
             localStorage[name] = JSON.stringify(that.playlist);
         }
-        sendSync();
+        syncClients();
     };
 
     this.clearList = function() {
@@ -310,6 +313,7 @@ export default [
     };
 
     this.togglePlay = function() {
+        console.debug('pause?!', state === st.PLAYING);
         if (state === st.PLAYING) this.pause();
         else this.play();
     };
@@ -318,25 +322,42 @@ export default [
         var idx = typeof index === 'number' ? index : (nowPlaying || 0),
             videoId = this.playlist[idx].id;
 
+
         if (idx === nowPlaying && !force) {
+            sendActionToServer({
+                type: 'play'
+            });
+
             return ytPlayer.play();
         } else {
             return ytPlayer.loadVideo(videoId).then(function() {
                 ytPlayer.play();
                 setNowPlaying(idx);
+
+                sendActionToServer({
+                    type: 'play',
+                    index: nowPlaying
+                });
             });
         }
     };
 
     this.pause = function() {
         ytPlayer.pause();
-        //setNowPlaying(false);
+
+        sendActionToServer({
+            type: 'pause'
+        });
     };
 
     this.stop = function() {
         ytPlayer.seek(0);
         ytPlayer.stop();
         setNowPlaying(null);
+
+        sendActionToServer({
+            type: 'stop'
+        });
     };
 
     this.next = function() {
@@ -410,9 +431,28 @@ export default [
         return currentDuration;
     };
 
-    function sendSync () {
+    function syncClients () {
         $rootScope.$broadcast('peer::sync_clients');
     }
+
+    function sendActionToServer (action) {
+        $rootScope.$broadcast('peer::send_action_to_server', action);
+    }
+
+    $rootScope.$on('peer::got_action_from_client', (e, action) => {
+        console.debug('got data from client', action);
+        switch (action.type) {
+            case 'play':
+                this.play(action.index);
+                break;
+            case 'pause':
+                this.pause();
+                break;
+            case 'stop':
+                this.stop();
+                break;
+        }
+    });
 
     $rootScope.$on('peer::got_data_from_server', (e, data) => {
         $rootScope.$apply(() => {
