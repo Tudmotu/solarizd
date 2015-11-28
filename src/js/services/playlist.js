@@ -32,6 +32,7 @@ export default [
         },
         state = st.INITIAL,
         currentTime = 0,
+        currentDuration = 0,
         that = this;
 
     this.st = st;
@@ -50,10 +51,17 @@ export default [
     };
 
     $rootScope.$on('youtubePlayer:infoDelivery', function(e, data) {
-        if (data.info.hasOwnProperty('currentTime')) {
-            currentTime = data.info.currentTime;
-        }
+        $timeout(() => {
+            if (data.info.currentTime)
+                currentTime = data.info.currentTime;
+
+            if (data.info.duration)
+                currentDuration = data.info.duration;
+
+            sendSync();
+        });
     });
+
     $rootScope.$on('youtubePlayer:onStateChange', function(e, data) {
         var currentItem,
             stopAt,
@@ -91,6 +99,7 @@ export default [
             state = st.BUFFERING;
         }
         $rootScope.$broadcast('playList:stateChanged', state);
+        sendSync();
     });
 
     // Register keyboard sortcuts
@@ -163,6 +172,7 @@ export default [
             endingSound.play();
         }
 
+        sendSync();
     }
 
     function getPlayNext() {
@@ -189,6 +199,7 @@ export default [
                 name = 'playlist';
             localStorage[name] = JSON.stringify(that.playlist);
         }
+        sendSync();
     };
 
     this.clearList = function() {
@@ -390,4 +401,26 @@ export default [
             });
         });
     };
+
+    this.getProgress = () => {
+        return currentTime;
+    };
+
+    this.getDuration = () => {
+        return currentDuration;
+    };
+
+    function sendSync () {
+        $rootScope.$broadcast('peer::sync_clients');
+    }
+
+    $rootScope.$on('peer::got_data_from_server', (e, data) => {
+        $rootScope.$apply(() => {
+            this.setPlaylist(data.playlist);
+            this.setNowPlaying(data.nowPlaying);
+            state = data.playlistState;
+            currentTime = data.currentProgress;
+            currentDuration = data.currentDuration;
+        });
+    });
 }];

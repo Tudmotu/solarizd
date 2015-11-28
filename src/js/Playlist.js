@@ -94,16 +94,6 @@ export default angular.module('ui.playlist',
                     return matches || undefined;
                 };
 
-                $rootScope.$on('playList:stateChanged', function(e, state) {
-                    let origIdx = $scope.nowPlayingIdx;
-                    $scope.nowPlayingIdx = playList.getNowPlayingIdx();
-
-                    if (origIdx !== $scope.nowPlayingIdx)
-                        $scope.progress = 0;
-
-                    if (!$scope.$$phase) $scope.$digest();
-                });
-
                 $scope.$on('actions-toggled', (e, value) => {
                     if (value === true) {
                         let target = e.targetScope;
@@ -131,15 +121,17 @@ export default angular.module('ui.playlist',
                     }
                 });
 
-                $rootScope.$on('youtubePlayer:infoDelivery', function(e, data) {
-                    if (data.info.duration)
-                        $scope.duration = data.info.duration;
+                $scope.$watch(playList.getNowPlayingIdx,
+                    val => {
+                        $scope.nowPlayingIdx = val;
+                        $scope.progress = 0;
+                    });
 
-                    if (data.info.currentTime)
-                        $scope.progress = data.info.currentTime;
+                $scope.$watch(playList.getDuration,
+                    val => $scope.duration = val);
 
-                    if (!$scope.$$phase) $scope.$digest();
-                });
+                $scope.$watch(playList.getProgress,
+                    val => $scope.progress = val);
 
                 $scope.sortableOpts = {
                     axis: 'y',

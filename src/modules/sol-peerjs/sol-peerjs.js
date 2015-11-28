@@ -16,14 +16,9 @@ function ($q, $timeout, $rootScope, apiKey, peerJS, playList) {
                     });
 
                 peer.on('connection', (connection) => {
-                    console.debug('Someone connected!', connection);
-                    connection.on('data', (data) => {
-                        console.debug('server got data', data);
-                    });
                     connection.on('open', () => {
                         this._sendSync(connection);
-                        $rootScope.$watchCollection(() => playList.playlist, () => {
-                            console.debug('playlist!');
+                        $rootScope.$on('peer::sync_clients', () => {
                             this._sendSync(connection);
                         });
                     });
@@ -36,11 +31,11 @@ function ($q, $timeout, $rootScope, apiKey, peerJS, playList) {
                 let connection = peer.connect(remoteId);
 
                 connection.on('open', () => {
+                    $rootScope.$broadcast('peer::connected_to_server');
+
                     connection.on('data', (data) => {
-                        $rootScope.$apply(() => {
-                            console.debug('client got data', data);
-                            playList.setPlaylist(data.playlist);
-                        });
+                        $rootScope.$broadcast(
+                            'peer::got_data_from_server', data);
                     });
                 });
             });
@@ -50,7 +45,9 @@ function ($q, $timeout, $rootScope, apiKey, peerJS, playList) {
             connection.send({
                 type: 'sync',
                 playlist: playList.playlist,
-                //currentTime: playList.getTime(),
+                playlistState: playList.getState(),
+                currentProgress: playList.getProgress(),
+                currentDuration: playList.getDuration(),
                 nowPlaying: playList.getNowPlayingIdx()
             });
         }
