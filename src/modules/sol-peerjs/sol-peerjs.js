@@ -2,8 +2,8 @@ import 'angular';
 
 export default angular.module('sol-peerjs', ['peerjs-service'])
 .service('solPeer',
-['$q', '$timeout', '$rootScope', 'ApiKey', 'peerJS', 'playList',
-function ($q, $timeout, $rootScope, apiKey, peerJS, playList) {
+['$q', '$timeout', '$rootScope', 'ApiKey', 'peerJS', 'playList', 'playListVolume',
+function ($q, $timeout, $rootScope, apiKey, peerJS, playList, playListVolume) {
     Object.assign(this, {
         peerId: null,
 
@@ -62,7 +62,9 @@ function ($q, $timeout, $rootScope, apiKey, peerJS, playList) {
                 playlistState: playList.getState(),
                 currentProgress: playList.getProgress(),
                 currentDuration: playList.getDuration(),
-                nowPlaying: playList.getNowPlayingIdx()
+                nowPlaying: playList.getNowPlayingIdx(),
+                volumeLevel: playListVolume.get(),
+                isMuted: playListVolume.isMuted()
             });
         },
 
