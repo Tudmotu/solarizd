@@ -16,6 +16,9 @@ export default angular.module('ui.media-panel', ['solVibrate', 'sol-peerjs'])
                 $scope.connect = () => {
                     solPeer.connectToServer($scope.remotePeer);
                 };
+                $scope.disconnect = () => {
+                    solPeer.disconnectFromServer();
+                };
 
                 $scope.setIsCued = function(val) {
                     val = typeof val === 'boolean' ? val : true;
@@ -73,9 +76,13 @@ export default angular.module('ui.media-panel', ['solVibrate', 'sol-peerjs'])
                 $scope.addItem = function(videoId) {
                     playList.addLast(videoId);
                 };
-                $scope.$watch(playList.getNowPlaying, function(item) {
-                    if (item) {
-                        youtubeAPI.getRelated(item.id).then(function(items) {
+                $scope.$watch(() => {
+                    let nowPlaying = playList.getNowPlaying();
+                    if (!nowPlaying) return null;
+                    return nowPlaying.id;
+                }, function(videoId) {
+                    if (videoId) {
+                        youtubeAPI.getRelated(videoId).then(function(items) {
                             $scope.items = items;
                         });
                     }

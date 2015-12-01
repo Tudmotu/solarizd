@@ -11,7 +11,7 @@ export default ['$sce', '$q', '$rootScope', function($sce, $q, $rootScope) {
         playedOnce = false,
         elId;
 
-    let turnedOff = false;
+    let connectedToPeerHost = false;
 
     this.nowPlaying = {
         id: null,
@@ -85,6 +85,7 @@ export default ['$sce', '$q', '$rootScope', function($sce, $q, $rootScope) {
     };
 
     this.play = function() {
+        if (connectedToPeerHost) return;
         if (!player) return;
         if (!isMobile || playedOnce) {
             player.playVideo();
@@ -92,18 +93,18 @@ export default ['$sce', '$q', '$rootScope', function($sce, $q, $rootScope) {
     };
 
     this.pause = function() {
+        if (connectedToPeerHost) return;
         if (!player) return;
         player.pauseVideo();
     };
 
     this.stop = function() {
+        if (connectedToPeerHost) return;
         if (!player) return;
         player.stopVideo();
     };
 
     this.loadVideo = function(vid) {
-        if (turnedOff) return $q((r, rj) => r());
-
         this.nowPlaying.id = vid;
         playerDfrd = $q.defer();
         playerReady = playerDfrd.promise;
@@ -113,10 +114,19 @@ export default ['$sce', '$q', '$rootScope', function($sce, $q, $rootScope) {
         return this.apiReady.then(function() {
             if (!isMobile || playedOnce) {
                 player.loadVideoById(vid);
-            } else {
-                player.cueVideoById(vid);
+            }
+            else {
+                this.cueVideo(vid);
                 $rootScope.$broadcast('youtubePlayer:videoCued', vid);
             }
+        });
+    };
+
+    this.cueVideo = (videoId) => {
+        if (!this.ready) this.init();
+
+        return this.apiReady.then(function() {
+            player.cueVideoById(videoId);
         });
     };
 
@@ -126,6 +136,7 @@ export default ['$sce', '$q', '$rootScope', function($sce, $q, $rootScope) {
     };
 
     this.toggleMute = function() {
+        if (connectedToPeerHost) return;
         if (player) {
             if (player.isMuted()) player.unMute();
             else player.mute();
@@ -133,18 +144,22 @@ export default ['$sce', '$q', '$rootScope', function($sce, $q, $rootScope) {
     };
 
     this.mute = function() {
+        if (connectedToPeerHost) return;
         if (player)
             player.mute();
     };
     this.unmute = function() {
+        if (connectedToPeerHost) return;
         if (player)
             player.unMute();
     };
     this.isMuted = function() {
+        if (connectedToPeerHost) return;
         if (player)
             player.isMuted();
     };
     this.setVolume = function(val) {
+        if (connectedToPeerHost) return;
         if (player)
             player.setVolume(val);
     };
@@ -153,10 +168,30 @@ export default ['$sce', '$q', '$rootScope', function($sce, $q, $rootScope) {
             player.getVolume();
     };
 
-    this.isOff = () => turnedOff;
+    this.connectedToHost = () => connectedToPeerHost;
+
+    $rootScope.$on('peer::got_data_from_server', (e, data) => {
+        let { playlist, nowPlaying } = data;
+
+        if (typeof nowPlaying === 'number') {
+            let videoId = playlist[nowPlaying].id;
+
+            console.debug('Wha', data.currentProgress);
+            this.cueVideo({
+                videoId,
+                startSeconds: data.currentProgress
+            });
+        }
+    });
 
     $rootScope.$on('peer::connected_to_server', () => {
-        turnedOff = true;
+        this.stop();
+        connectedToPeerHost = true;
+    });
+    $rootScope.$on('peer::disconnected_from_server', () => {
+        console.debug('disconnected!');
+        connectedToPeerHost = false;
+        this.pause();
     });
 }];
 
