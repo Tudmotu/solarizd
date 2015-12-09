@@ -1,6 +1,6 @@
 import 'angular';
 
-export default angular.module('sol-peerjs', ['peerjs-service'])
+export default angular.module('sol-peerjs', ['peerjs-service', 'services'])
 .service('solPeer',
 ['$q', '$timeout', '$rootScope', 'ApiKey', 'peerJS', 'playList', 'playListVolume',
 function ($q, $timeout, $rootScope, apiKey, peerJS, playList, playListVolume) {
