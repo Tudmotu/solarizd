@@ -9,20 +9,23 @@
 
     .thumb {
         .flexed(0);
-        .flexbox(@align:center);
+        .flexbox;
         width:(@column / 2);
         height:100%;
         padding:@thick-border;
 
-        img {
-            max-width:100%;
-            max-height:100%
+        .thumb-wrapper {
+            .flexed(1);
+            .flexbox(@align:center);
+            border-radius:50%;
+            overflow:hidden;
         }
     }
 
     .title-and-actions {
         .flexed(1);
         .flexbox(@align:center;);
+        border-bottom:solid @thin-border @inactive-text-dark;
 
         .title {
             .flexed(1);
