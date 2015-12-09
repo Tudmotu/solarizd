@@ -1,8 +1,10 @@
 .user-playlists {
+    .flexbox(@dir:column;@justify:flex-start);
     height:100%;
     width:100%;
 
     .header {
+        .flexed(0);
         .flexbox(@justify:flex-start);
         background:@yellow;
         color:@white;

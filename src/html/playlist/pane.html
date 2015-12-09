@@ -43,13 +43,12 @@
             </playlist-item>
         </ul>
     </section>
-   
-    <section class="user-playlists-popup" ng-show="userPlaylistsOpen">
-        <user-playlists></user-playlists>
-    </section>
 
-    <div class="user-playlists-toggler"
-        ng-show="authData"
-        ng-class="{ active: userPlaylistsOpen }"
-        ng-click="userPlaylistsOpen = !userPlaylistsOpen"></div>
+    <section class="fabs-row">
+        <sol-popmenu
+                ng-show="authData"
+                class="user-playlists-toggler" icon="list">
+            <user-playlists></user-playlists>
+        </sol-popmenu>
+    </section>
 </section>

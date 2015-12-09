@@ -1,0 +1,8 @@
+<div class="popmenu" ng-class="{ opened: opened, closed: opened === false }">
+    <div class="popmenu-popup">
+        <div class="popmenu-content" ng-transclude></div>
+    </div>
+
+    <div class="popmenu-toggler fa fa-{{icon}}"
+        ng-click="opened = !opened"></div>
+</div>

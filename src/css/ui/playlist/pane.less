@@ -148,46 +148,17 @@
         top:auto;
     }
 
-    .user-playlists-popup {
-        position:absolute;
-        bottom:@row-pad + (@row / 2);
-        right:@column-pad + (@row / 2);
-        z-index:1;
-        width:3 * @column;
-        min-height:(6 * @row) - @row-pad;
-        border:solid @thin-border @inactive-text-dark;
-        box-shadow:0px 3px 3px -2px fadeout(@black, 53%);
-        background:@white;
+    .user-playlists-toggler {
+        color:@yellow;
     }
 
-    .user-playlists-toggler {
-        .flexbox(@align:center);
+    .fabs-row {
         position:absolute;
         bottom:@row-pad;
         right:@column-pad;
-        z-index:2;
-        width:@row;
-        height:@row;
-        background:@yellow;
-        border-radius:50%;
-        border:solid @thin-border @inactive-text-light;
-        box-shadow:0px 5px 5px -3px fadeout(@black, 53%);
-        color:@active-text-light;
-        font-size:@large-text;
-        cursor:pointer;
 
-        /*&:hover {*/
-            /*color:@active-text-light;*/
-        /*}*/
-
-        &.active {
-            &:before {
-                .icon(@fa-var-times);
-            }
-        }
-
-        &:before {
-            .icon(@fa-var-list);
+        & > * {
+            display:inline-block;
         }
     }
 }
