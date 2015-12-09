@@ -4,10 +4,8 @@
 
 .mixin-search-pane () {
     .flexbox(@dir:column; @justify:flex-start);
-    @bg:@theme-background; // @base01; // darken(@base00, 15%);
-    background:@bg;
+    background:@theme-app-background;
     color:@active-text-dark;
-    z-index:1;
 
     @media (max-width:960px), (max-device-width:960px) {
         box-shadow:none;
@@ -39,7 +37,7 @@
         .flexbox(@justify:stretch);
         height:@row;
         padding:@row-pad @column-pad;
-        border-bottom:solid @thin-border @purple;
+        border-bottom:solid @thin-border @inactive-text-dark;
 
         &> .sol-input {
             .flexed(1);
