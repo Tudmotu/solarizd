@@ -4,19 +4,25 @@ export default angular.module('sol-peerjs', ['peerjs-service', 'services'])
 .service('solPeer',
 ['$q', '$timeout', '$rootScope', 'ApiKey', 'peerJS', 'playList', 'playListVolume',
 function ($q, $timeout, $rootScope, apiKey, peerJS, playList, playListVolume) {
-    let remoteServer;
+    let remoteServerConnection;
 
     Object.assign(this, {
         peerId: null,
 
-        createServer () {
-            peerJS.getPeer().then((peer) => {
+        getPeer () {
+            return peerJS.getPeer().then((peer) => {
                 if (peer.id) this.peerId = peer.id;
                 else
                     peer.on('open', (peerId) => {
                         $timeout(() => this.peerId = peerId);
                     });
 
+                return peer;
+            });
+        },
+
+        createServer () {
+            this.getPeer().then((peer) => {
                 peer.on('connection', (connection) => {
                     connection.on('open', () => {
                         console.debug('Server got new connection');
@@ -37,13 +43,13 @@ function ($q, $timeout, $rootScope, apiKey, peerJS, playList, playListVolume) {
 
         connectToServer (remoteId) {
             this.disconnectFromServer();
-            peerJS.getPeer().then((peer) => {
+            this.getPeer().then((peer) => {
                 let connection = peer.connect(remoteId);
 
                 connection.on('open', () => {
                     console.debug('Client connected to server');
                     $rootScope.$broadcast('peer::connected_to_server');
-                    remoteServer = connection;
+                    remoteServerConnection = connection;
 
                     $rootScope.$on(
                             'peer::send_action_to_server', (e, action) => {
@@ -65,8 +71,19 @@ function ($q, $timeout, $rootScope, apiKey, peerJS, playList, playListVolume) {
         },
 
         disconnectFromServer () {
-            if (!remoteServer) return;
-            remoteServer.close();
+            if (!remoteServerConnection) return;
+            remoteServerConnection.close();
+        },
+
+        destroyPeer () {
+            this.getPeer().then((peer) => {
+                peer.destroy();
+            });
+        },
+
+        isConnectedToHost () {
+            return remoteServerConnection &&
+                !remoteServerConnection.disconnected;
         },
 
         _sendSync (connection) {

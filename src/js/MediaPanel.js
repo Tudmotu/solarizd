@@ -1,25 +1,14 @@
 import './directives/sol-vibrate';
 import './Services';
 import 'angular';
-export default angular.module('ui.media-panel', ['solVibrate', 'sol-peerjs'])
-    .directive('mediaPanel', ['$rootScope', 'playList', 'solPeer', function($rootScope, playList, solPeer) {
+export default angular.module('ui.media-panel', ['solVibrate'])
+    .directive('mediaPanel', ['$rootScope', 'playList', function($rootScope, playList) {
         var definitions = {
             restrict: 'E',
             templateUrl: '/html/media-panel/panel.html',
             replace: true,
             scope: true,
             controller: function($scope, $element, $attrs, $transclude) {
-                solPeer.createServer();
-                $scope.$watch(() => solPeer.peerId, (peerId) => {
-                    $scope.peerId = peerId;
-                });
-                $scope.connect = () => {
-                    solPeer.connectToServer($scope.remotePeer);
-                };
-                $scope.disconnect = () => {
-                    solPeer.disconnectFromServer();
-                };
-
                 $scope.setIsCued = function(val) {
                     val = typeof val === 'boolean' ? val : true;
                     $scope.isCued = val;

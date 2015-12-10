@@ -11,6 +11,7 @@ import '../modules/notifications/notifications';
 import '../modules/sol-peerjs/peerjs-service';
 import '../modules/sol-peerjs/sol-peerjs';
 import '../modules/user-playlists/user-playlists';
+import '../modules/peer-pane/peer-pane';
 import 'ng-resource';
 import 'angular';
 
@@ -34,6 +35,7 @@ export default angular.module('Application', [
     'peerjs-service',
     'sol-peerjs',
     'user-playlists',
+    'peer-pane',
     'playlist',
     'services',
     'plugins'

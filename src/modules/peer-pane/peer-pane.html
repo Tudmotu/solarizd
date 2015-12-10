@@ -1,0 +1,41 @@
+<div class="peer-pane">
+    <!--<div class="peer-pane-buttons" ng-show="!showConnectPanel && !showHostPanel">-->
+
+    <!--</div>-->
+
+    <div class="peer-pane-section"
+            ng-class="{ active: showHostPanel }">
+        <div class="button button-host"
+            ng-click="toggleHost()">Serve as Host</div>
+        <div class="peer-pane-host section-content">
+            <div class="peer-host-id">
+                <span>{{peerId}}</span>
+            </div>
+            <p>
+            <span>You can connect to this host from a different device.</span>
+            <span>To do that, insert the above Host ID in the "Connect to a Host"
+                panel</span>
+            </p>
+        </div>
+    </div>
+
+    <div class="peer-pane-section"
+            ng-class="{ active: showConnectPanel }">
+        <div class="button button-connect"
+            ng-click="toggleConnection()">Connect to a Host</div>
+
+        <div class="peer-pane-connect section-content">
+            <div class="peer-host-input">
+                <input ng-model="remotePeer" />
+            </div>
+
+            <div class="raised-button"
+                ng-click="connectToHost()"
+                ng-show="!isConnected">Connect to a Host</div>
+
+            <div class="raised-button"
+                ng-click="disconnectFromHost()"
+                ng-show="isConnected">Disconnect</div>
+        </div>
+    </div>
+</div>
