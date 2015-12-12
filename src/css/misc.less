@@ -176,13 +176,13 @@ body {
     }
 }
 
-@media (orientation: landscape) {
+@media (min-device-aspect-ratio: 16/9) {
     html {
         font-size:@root-font-size;
     }
 }
 
-@media (orientation: portrait) and (max-height: 680px) {
+@media (max-height: 680px) {
     #topbar, #footer {
         display:none;
     }
