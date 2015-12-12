@@ -11,10 +11,28 @@ export default angular.module('peerjs-service', ['api-key'])
             if (peer) return $q(resolve => resolve(peer));
 
             return apiKey.fetch('peerjs').then((key) => {
-                console.debug('fetched key', key);
-                peer = new Peer({ key });
+                peer = new Peer(generateId(), { key });
                 return peer;
             });
+        },
+
+        destroyPeer () {
+            if (!peer) return;
+            peer.destroy();
+            peer = null;
         }
     });
+
+    function generateId () {
+        let length = 5;
+        let text = "";
+        //let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        let possible = "0123456789";
+
+        for(let i = 0; i < length; i++) {
+            text += possible.charAt(
+                Math.floor(Math.random() * possible.length));
+        }
+        return text;
+    }
 }]);

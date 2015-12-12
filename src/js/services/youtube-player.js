@@ -111,7 +111,7 @@ export default ['$sce', '$q', '$rootScope', function($sce, $q, $rootScope) {
 
         if (!this.ready) this.init();
 
-        return this.apiReady.then(function() {
+        return this.apiReady.then(() => {
             if (!isMobile || playedOnce) {
                 player.loadVideoById(vid);
             }
@@ -122,17 +122,29 @@ export default ['$sce', '$q', '$rootScope', function($sce, $q, $rootScope) {
         });
     };
 
-    this.cueVideo = (videoId) => {
+    this.cueVideo = (videoId, startSeconds = 0) => {
         if (!this.ready) this.init();
+        if (this.nowPlaying.id === videoId &&
+            player.getPlayerState() === YT.PlayerState.CUED) return;
 
-        return this.apiReady.then(function() {
-            player.cueVideoById(videoId);
+        return this.apiReady.then(() => {
+            player.cueVideoById({ videoId, startSeconds });
+            this.nowPlaying.id = videoId;
         });
     };
 
     this.seek = function(sec) {
         if (!player) return;
-        player.seekTo(sec, true);
+
+        if (!this.connectedToHost()) {
+            player.seekTo(sec, true);
+        }
+        else {
+            $rootScope.$broadcast('peer::send_action_to_server', {
+                type: 'seekTo',
+                value: sec
+            });
+        }
     };
 
     this.toggleMute = function() {
@@ -170,17 +182,21 @@ export default ['$sce', '$q', '$rootScope', function($sce, $q, $rootScope) {
 
     this.connectedToHost = () => connectedToPeerHost;
 
+    $rootScope.$on('peer::got_action_from_client', (e, action) => {
+        switch (action.type) {
+            case 'seekTo':
+                player.seekTo(action.value, true);
+                break;
+        }
+    });
+
     $rootScope.$on('peer::got_data_from_server', (e, data) => {
         let { playlist, nowPlaying } = data;
 
         if (typeof nowPlaying === 'number') {
             let videoId = playlist[nowPlaying].id;
 
-            console.debug('Wha', data.currentProgress);
-            this.cueVideo({
-                videoId,
-                startSeconds: data.currentProgress
-            });
+            this.cueVideo(videoId, data.currentProgress);
         }
     });
 
@@ -189,7 +205,6 @@ export default ['$sce', '$q', '$rootScope', function($sce, $q, $rootScope) {
         connectedToPeerHost = true;
     });
     $rootScope.$on('peer::disconnected_from_server', () => {
-        console.debug('disconnected!');
         connectedToPeerHost = false;
         this.pause();
     });

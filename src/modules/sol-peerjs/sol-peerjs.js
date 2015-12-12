@@ -25,7 +25,6 @@ function ($q, $timeout, $rootScope, apiKey, peerJS, playList, playListVolume) {
             this.getPeer().then((peer) => {
                 peer.on('connection', (connection) => {
                     connection.on('open', () => {
-                        console.debug('Server got new connection');
                         this._sendSync(connection);
 
                         $rootScope.$on('peer::sync_clients', () => {
@@ -47,13 +46,11 @@ function ($q, $timeout, $rootScope, apiKey, peerJS, playList, playListVolume) {
                 let connection = peer.connect(remoteId);
 
                 connection.on('open', () => {
-                    console.debug('Client connected to server');
                     $rootScope.$broadcast('peer::connected_to_server');
                     remoteServerConnection = connection;
 
                     $rootScope.$on(
                             'peer::send_action_to_server', (e, action) => {
-                        console.debug('send an action to server', action);
                         this._sendAction(connection, action);
                     });
 
@@ -72,13 +69,19 @@ function ($q, $timeout, $rootScope, apiKey, peerJS, playList, playListVolume) {
 
         disconnectFromServer () {
             if (!remoteServerConnection) return;
+
+            remoteServerConnection.on('close', () => {
+                $timeout(() => {
+                    remoteServerConnection = null;
+                });
+            });
+
             remoteServerConnection.close();
         },
 
         destroyPeer () {
-            this.getPeer().then((peer) => {
-                peer.destroy();
-            });
+            peerJS.destroyPeer();
+            this.peerId = null;
         },
 
         isConnectedToHost () {

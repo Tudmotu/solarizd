@@ -24,7 +24,6 @@ export default angular.module('api-key', [])
         else
             return $q(resolve => {
                 $rootScope.$on(service + '-apikey', (e, data) => {
-                    console.debug('fetching apikye', service, data);
                     resolve(data);
                 });
             });

@@ -16,7 +16,7 @@ export default ['$rootScope', 'youtubePlayer', function($rootScope, youtubePlaye
         return isMuted;
     };
 
-    this.toggleMute = function(value) {
+    this.toggleMute = function() {
         youtubePlayer.toggleMute();
         syncClients();
         sendActionToServer({
@@ -67,7 +67,6 @@ export default ['$rootScope', 'youtubePlayer', function($rootScope, youtubePlaye
     }
 
     $rootScope.$on('peer::got_action_from_client', (e, action) => {
-        console.debug('got data from client', action);
         switch (action.type) {
             case 'setVolume':
                 this.set(action.level);
@@ -80,7 +79,6 @@ export default ['$rootScope', 'youtubePlayer', function($rootScope, youtubePlaye
 
     $rootScope.$on('peer::got_data_from_server', (e, data) => {
         $rootScope.$apply(() => {
-            console.debug('from volume!', data.volumeLevel);
             currentVolume = data.volumeLevel;
             isMuted = data.isMuted ? true : false;
         });

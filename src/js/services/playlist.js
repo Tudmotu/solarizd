@@ -100,7 +100,6 @@ export default [
         }
         $rootScope.$broadcast('playList:stateChanged', state);
         syncClients();
-        console.debug('state changes');
     });
 
     // Register keyboard sortcuts
@@ -313,7 +312,6 @@ export default [
     };
 
     this.togglePlay = function() {
-        console.debug('pause?!', state === st.PLAYING);
         if (state === st.PLAYING) this.pause();
         else this.play();
     };
@@ -335,7 +333,7 @@ export default [
                 setNowPlaying(idx);
 
                 sendActionToServer({
-                    type: 'play',
+                    type: 'playByIndex',
                     index: nowPlaying
                 });
             });
@@ -431,6 +429,13 @@ export default [
         return currentDuration;
     };
 
+    $rootScope.$watchCollection(() => this.playlist, (newVal) => {
+        sendActionToServer({
+            type: 'setPlaylist',
+            playlist: newVal
+        });
+    });
+
     function syncClients () {
         $rootScope.$broadcast('peer::sync_clients');
     }
@@ -440,18 +445,25 @@ export default [
     }
 
     $rootScope.$on('peer::got_action_from_client', (e, action) => {
-        console.debug('got data from client', action);
-        switch (action.type) {
-            case 'play':
-                this.play(action.index);
-                break;
-            case 'pause':
-                this.pause();
-                break;
-            case 'stop':
-                this.stop();
-                break;
-        }
+        $rootScope.$apply(() => {
+            switch (action.type) {
+                case 'play':
+                    this.play();
+                    break;
+                case 'playByIndex':
+                    this.play(action.index);
+                    break;
+                case 'pause':
+                    this.pause();
+                    break;
+                case 'stop':
+                    this.stop();
+                    break;
+                case 'setPlaylist':
+                    this.setPlaylist(action.playlist);
+                    break;
+            }
+        });
     });
 
     $rootScope.$on('peer::got_data_from_server', (e, data) => {

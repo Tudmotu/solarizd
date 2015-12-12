@@ -23,7 +23,6 @@ export default angular.module('peer-pane', ['sol-peerjs'])
                     this.showConnectPanel = !this.showConnectPanel;
                 },
                 connectToHost () {
-                    console.debug('shit',this.remotePeer);
                     if (this.remotePeer)
                         solPeer.connectToServer(this.remotePeer);
                 },

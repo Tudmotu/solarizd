@@ -31,7 +31,7 @@ function animateSlideOff(el, progress, width, callback) {
 }
 
 export default angular.module('solSlideRm', [])
-    .directive('solSlideRm', [function() {
+    .directive('solSlideRm', ['$timeout', function($timeout) {
         var definitions = {
             restrict: 'AC',
             scope: false,
@@ -89,11 +89,12 @@ export default angular.module('solSlideRm', [])
                                 var model = $parentScope[$attrs.solSlideRm];
 
                                 if (Array.isArray(model)) {
-                                    model.splice($scope.$index, 1);
-                                    if (!$parentScope.$$phase) $parentScope.$digest();
+                                    $timeout(() => {
+                                        model.splice($scope.$index, 1);
 
-                                    if ($attrs.solSlideRmAfter)
-                                        $parentScope.$eval($attrs.solSlideRmAfter);
+                                        if ($attrs.solSlideRmAfter)
+                                            $parentScope.$eval($attrs.solSlideRmAfter);
+                                    });
                                 }
 
                                 // Should bring back original el, as angular
