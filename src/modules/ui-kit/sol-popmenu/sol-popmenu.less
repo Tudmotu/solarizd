@@ -19,15 +19,26 @@
 
         .popmenu-content {
             height:100%;
+            opacity:0;
+            transition:opacity .2s ease-out;
         }
     }
 
     &.closed .popmenu-popup {
         animation:popmenu-popup-reverse .75s ease-out forwards;
+
+        .popmenu-content {
+            opacity:0;
+        }
     }
 
     &.opened .popmenu-popup {
         animation:popmenu-popup .75s ease-out forwards;
+
+        .popmenu-content {
+            opacity:1;
+            transition-delay:.55s;
+        }
     }
 
     .popmenu-toggler {
