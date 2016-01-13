@@ -58,7 +58,7 @@
         .flexbox(@align:center);
         font-family:Roboto, sans-serif;
         font-weight:bold;
-        color:@base00;
+        color:@active-text-dark;
         background:@white;
         box-shadow:@thin-border @thin-border @medium-border fadeout(@black, 75%);
         margin:0 @column-pad;
@@ -81,10 +81,22 @@
             .flexed(0);
             width:@large-text;
             margin-right:@column-pad;
+
+            &.profile-image {
+                width:@huge-text;
+                border:solid @thin-border @inactive-text-dark;
+            }
         }
 
         &> .text {
             text-align:center;
+
+            &[data-name]:before {
+                content:attr(data-name);
+                font-size:@small-text;
+                color:@inactive-text-dark;
+                display:block;
+            }
         }
     }
 
@@ -101,24 +113,6 @@
 
         .text {
             font-weight:bold;
-        }
-    }
-
-    @media (max-width: 960px), (max-device-width: 960px) {
-        justify-content:flex-end;
-
-        .title {
-            .flexed(0);
-            order:2;
-
-            &> .app-logo {
-                margin:0;
-                margin-left:@column-pad;
-            }
-        }
-
-        .title > .text {
-            display:none;
         }
     }
 }

@@ -22,7 +22,7 @@ export default angular.module('ui.footer', ['services', 'filters', 'sol-backend'
                     $auth.$onAuth((auth) => {
                         if (auth && auth.uid) {
                             $scope.authenticated = true;
-                            $scope.fullName = auth.google.displayName;
+                            $scope.authData = auth.google;
                         }
                         else {
                             $scope.authenticated = false;
