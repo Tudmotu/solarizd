@@ -137,9 +137,10 @@ body {
 }
 
 #footer {
-    .flexed(0);
     .mixin-footer;
-    .transition(@prop:transform; @easing:ease-out; @duration:.3s);
+    position:fixed;
+    bottom:0;
+    right:0;
 }
 
 #main-view.sol-tabs {

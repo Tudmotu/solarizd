@@ -1,25 +1,25 @@
 <footer>
-    <span class="title">
-        <img class="app-logo" src="css/assets/logo.svg"/>
-        <span class="text">{{appTitle}}</span>
-    </span>
-
     <span title="Google Sign In" class="google-signin" ng-click="toggleGoogleAuth()">
         <img src="css/assets/google-signin.svg" />
         <span class="text" ng-if="!authenticated">Sign in with Google</span>
         <span class="text" ng-if="authenticated">{{fullName}} (Sign out)</span>
     </span>
 
-    <a href="http://youtube.com/" title="Youtube"
-        class="logo" target="_blank">
-        <img src="css/assets/youtube.svg" alt="Youtube" />
-    </a>
+    <span class="title">
+        <img class="app-logo" src="css/assets/logo.svg"/>
+        <!--<span class="text">{{appTitle}}</span>-->
+    </span>
 
-    <a href="http://the.echonest.com/" title="Echo Nest"
-        class="logo" target="_blank">
-        <img src="css/assets/echonest.svg" alt="Echo Nest" />
-    </a>
+    <!--<a href="http://youtube.com/" title="Youtube"-->
+        <!--class="logo" target="_blank">-->
+        <!--<img src="css/assets/youtube.svg" alt="Youtube" />-->
+    <!--</a>-->
 
-    <a ng-href="https://github.com/Tudmotu/{{appTitle | machineRead}}" title="Fork me on github"
-        class="fork-me" target="_blank"><span class="text">Fork Me!</span></a>
+    <!--<a href="http://the.echonest.com/" title="Echo Nest"-->
+        <!--class="logo" target="_blank">-->
+        <!--<img src="css/assets/echonest.svg" alt="Echo Nest" />-->
+    <!--</a>-->
+
+    <!--<a ng-href="https://github.com/Tudmotu/{{appTitle | machineRead}}" title="Fork me on github"-->
+        <!--class="fork-me" target="_blank"><span class="text">Fork Me!</span></a>-->
 </footer>
