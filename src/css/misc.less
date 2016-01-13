@@ -151,14 +151,18 @@ body {
 }
 
 #main-view.sol-tabs {
-    background:@theme-background;
-    color:@purple;
+    background:@purple;
+    color:@active-text-light;
+
+    &> .tabs {
+        box-shadow:0px 3px 10px @active-text-dark;
+        z-index:2;
+    }
 }
 
 @media (min-width: 1280px) {
     #main-view.sol-tabs {
         &> .tabs {
-            .flexbox;
             display:none;
         }
 
