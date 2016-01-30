@@ -1,24 +1,30 @@
 @import "../../vars/all";
 
 .mixin-topbar () {
-    .flexbox(@justify:space-between;@wrap:wrap);
+    /*.flexbox(@justify:space-between;@wrap:wrap);*/
+    .flexbox(@dir:column);
     @bg:@theme-topbar-background;
-    color:@theme-topbar-color;
     background:@bg;
-    padding:@row-pad 0;
-    font-size:@large-text;
-    z-index:1000;
+    color:@theme-topbar-color;
+    border-bottom:solid @thin-border @theme-topbar-border-color;
+    /*padding:@row-pad 0;*/
+    /*font-size:@large-text;*/
+    /*z-index:1000;*/
     box-sizing:content-box;
+    flex:0 0 auto;
 
     @media (max-width:960px), (max-device-width:960px) {
     }
 
     .now-playing {
-        height:@row;
-        width:33%;
         .flexed(0);
         .flexbox;
-        @media (max-width: 960px), (max-device-width: 960px) {
+        height:@row;
+        /*width:33%;*/
+        /*font-size:@normal-text;*/
+
+        @media (orientation: portrait) and (max-width: 960px),
+                (orientation: portrait) and (max-device-width: 960px) {
             width:100%;
         }
     }
@@ -49,10 +55,16 @@
         }
     }
 
+    .player-controls {
+        .flexbox(@align:center);
+        flex:0 0 auto;
+    }
+
     .media-controls {
-        .flexed(1);
+        .flexed(0);
         .flexbox;
         .no_selection;
+        margin-left:@column-pad;
 
         @media (max-device-width: 960px),(max-width: 960px) {
             .flexed(0);
@@ -69,7 +81,6 @@
         }
 
         .control {
-            margin:0 @column-pad;
             .ui-topbar-button;
             .flexed(0);
             .flexbox(@dir:column);
@@ -100,9 +111,7 @@
     }
 
     .volume-slider {
-        padding:0 (@column-pad * 2);
-        width:33%;
-        .flexed(0);
+        .flexed(1);
         .flexbox(@align:center);
         .no_selection;
 
@@ -116,7 +125,6 @@
         }
 
         .toggle-mute {
-            margin:0 @column-pad;
             .ui-topbar-button;
             .flexed(0);
             .flexbox(@align:center);
