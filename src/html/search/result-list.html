@@ -1,4 +1,14 @@
 <ul class="result-list" sol-scroll2top="items">
+    <li ng-repeat="album in albums" class="result-item album-item">
+        <div class="thumb">
+            <img ng-src="{{album.image[0]['#text']}}">
+        </div>
+        <div class="title-and-actions">
+            <span class="title">
+                <span>{{album.artist}}</span> - <span>{{album.name}}</span>
+            </span>
+        </div>
+    </li>
     <search-result-item ng-repeat="item in items" class="result-item"
                         data-video-id="{{item.id}}"
                         data-title="{{item.snippet.title}}"
