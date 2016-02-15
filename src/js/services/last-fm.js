@@ -18,8 +18,6 @@ export default ['$rootScope', '$http', 'ApiKey', function($rootScope, $http, api
                     )
                 )
             ).then(albums =>
-                albums.map(o => o.album)
-            ).then(albums =>
                 albums//.filter(album => album.tracks.length > 0)
             );
         },
@@ -27,12 +25,22 @@ export default ['$rootScope', '$http', 'ApiKey', function($rootScope, $http, api
         albumInfo (mbid) {
             return get('album.getInfo',
                { mbid }
-            );
+            ).then(o =>
+                o.album
+            ).then(album => {
+                let durations = album.tracks.track.map(
+                    o => parseInt(o.duration, 10));
+
+                album.duration = durations.reduce(
+                        (prev, cur) => prev + cur, 0);
+
+                return album;
+            });
         }
     });
 
     function get (method, extra) {
-        return apiKey.fetch('lastfm').then(secrets => 
+        return apiKey.fetch('lastfm').then(secrets =>
             `${baseUrl}/?method=${method}&api_key=${secrets.api_key}&format=json&${asParams(extra)}`
         ).then(url =>
             $http.get(url)
