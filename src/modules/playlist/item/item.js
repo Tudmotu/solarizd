@@ -12,7 +12,7 @@ export default [
             'duration': '@',
             'progress': '@',
             'active': '@',
-            'actionsOpen': '=',
+            'actionsOpen': '=?',
             'playNext': '@',
             'stopHere': '@',
             'repeat': '@',
