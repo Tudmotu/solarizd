@@ -1,5 +1,7 @@
 <ul class="result-list" sol-scroll2top="items">
-    <li ng-repeat="album in albums" class="result-item album-item">
+    <li ng-repeat="album in albums"
+            class="result-item album-item"
+            ng-click="addAlbum(album)">
         <div class="thumb">
             <span class="thumb-wrapper">
                 <img ng-src="{{album.image[1]['#text']}}">

@@ -25,6 +25,7 @@ export default angular.module('ui.search', ['services', 'filters', 'solScroll2to
                             $scope.items = items;
                             $scope.searching = false;
 
+                            $scope.albums = [];
                             lastfm.albumSearch($scope.query).then(albums => {
                                 return $timeout(() => {
                                     $scope.albums = albums;
@@ -37,7 +38,7 @@ export default angular.module('ui.search', ['services', 'filters', 'solScroll2to
                 $scope.$watch('query', $scope.search);
             }
         };
-    }]).directive('searchResultList', [() => {
+    }]).directive('searchResultList', ['youtubeAPI', 'playList', 'lastfm', (youtubeAPI, playList, lastfm) => {
         return {
             restrict: 'E',
             templateUrl: '/html/search/result-list.html',
@@ -45,6 +46,26 @@ export default angular.module('ui.search', ['services', 'filters', 'solScroll2to
             scope: {
                 items: '=',
                 albums: '='
+            },
+            link: function($scope, $element, $attrs, $transclude) {
+                $scope.addAlbum = (album) => {
+                    Promise.all(album.tracks.track.map(track => {
+                        let title = track.name.replace(
+                            /\([^(]*(version|remaster(ed)?|remix).*?\)/i, '');
+                        let artist = album.artist;
+                        let videoDuration = track.duration < 260 ?
+                            'short' : (track.duration < 1200 ?
+                                'medium' : 'long');
+
+                        return youtubeAPI.search({
+                            q: `${artist} ${title}`,
+                            maxResults: 1,
+                            videoDuration
+                        }).then(items => items[0]);
+                    })).then(results => {
+                        playList.addBulk(results);
+                    });
+                };
             }
         };
     }]).directive('searchResultItem', ['$rootScope', '$http', 'playList', function($rootScope, $http, playList) {

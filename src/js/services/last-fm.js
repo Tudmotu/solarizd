@@ -14,16 +14,19 @@ export default ['$rootScope', '$http', 'ApiKey', function($rootScope, $http, api
             ).then(albums =>
                 Promise.all(
                     albums.map(album =>
-                        this.albumInfo(album.mbid)
+                        this.albumInfo(album)
                     )
                 )
             ).then(albums =>
-                albums//.filter(album => album.tracks.length > 0)
+                albums.filter(album => album.tracks.track.length > 0)
             );
         },
 
-        albumInfo (mbid) {
+        albumInfo (album) {
+            let { mbid, artist, name } = album;
+
             return get('album.getInfo',
+               //{ artist, album: name }
                { mbid }
             ).then(o =>
                 o.album
@@ -41,18 +44,16 @@ export default ['$rootScope', '$http', 'ApiKey', function($rootScope, $http, api
 
     function get (method, extra) {
         return apiKey.fetch('lastfm').then(secrets =>
-            `${baseUrl}/?method=${method}&api_key=${secrets.api_key}&format=json&${asParams(extra)}`
-        ).then(url =>
-            $http.get(url)
+            $http.get(baseUrl, {
+                params: Object.assign({
+                    method,
+                    api_key: secrets.api_key,
+                    format: 'json'
+                }, extra)
+            })
         ).then(response =>
             response.data
         );
-    }
-
-    function asParams (params) {
-        return Object.keys(params).map(
-            param => `${param}=${encodeURIComponent(params[param])}`
-        ).join('&');
     }
 }];
 
