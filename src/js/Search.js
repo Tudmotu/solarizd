@@ -38,13 +38,12 @@ export default angular.module('ui.search', ['services', 'filters', 'solScroll2to
                 $scope.$watch('query', $scope.search);
             }
         };
-    }]).directive('searchResultList', ['youtubeAPI', 'playList', 'lastfm', (youtubeAPI, playList, lastfm) => {
+    }]).directive('searchResultAlbums', ['youtubeAPI', 'playList', 'lastfm', (youtubeAPI, playList, lastfm) => {
         return {
             restrict: 'E',
-            templateUrl: '/html/search/result-list.html',
+            templateUrl: '/html/search/albums-list.html',
             replace: true,
             scope: {
-                items: '=',
                 albums: '='
             },
             link: function($scope, $element, $attrs, $transclude) {
@@ -66,6 +65,15 @@ export default angular.module('ui.search', ['services', 'filters', 'solScroll2to
                         playList.addBulk(results);
                     });
                 };
+            }
+        };
+    }]).directive('searchResultList', [() => {
+        return {
+            restrict: 'E',
+            templateUrl: '/html/search/result-list.html',
+            replace: true,
+            scope: {
+                items: '='
             }
         };
     }]).directive('searchResultItem', ['$rootScope', '$http', 'playList', function($rootScope, $http, playList) {

@@ -1,0 +1,24 @@
+<div ng-class="{active: active}" class="albums-list">
+    <div class="albums-list-title" ng-click="active = !active"
+        title="A compilation of tracks making up full albums (auto generated)">
+        <span>full albums</span>
+    </div>
+    <ul class="result-list" sol-scroll2top="albums">
+        <li ng-repeat="album in albums"
+                class="result-item album-item"
+                ng-click="addAlbum(album)">
+            <div class="thumb">
+                <span class="thumb-wrapper">
+                    <img ng-src="{{album.image[1]['#text']}}">
+                </span>
+            </div>
+            <div class="title-and-actions">
+                <span class="title">
+                    <span class="artist">{{album.artist}}</span>
+                    <span class="album">{{album.name}}</span>
+                </span>
+                <span class="duration">{{album.duration | formatTime}}</span>
+            </div>
+        </li>
+    </ul>
+</div>
