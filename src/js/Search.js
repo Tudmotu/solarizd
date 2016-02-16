@@ -38,7 +38,7 @@ export default angular.module('ui.search', ['services', 'filters', 'solScroll2to
                 $scope.$watch('query', $scope.search);
             }
         };
-    }]).directive('searchResultAlbums', ['youtubeAPI', 'playList', 'lastfm', (youtubeAPI, playList, lastfm) => {
+    }]).directive('searchResultAlbums', ['$rootScope', 'youtubeAPI', 'playList', 'lastfm', ($rootScope, youtubeAPI, playList, lastfm) => {
         return {
             restrict: 'E',
             templateUrl: '/html/search/albums-list.html',
@@ -62,7 +62,12 @@ export default angular.module('ui.search', ['services', 'filters', 'solScroll2to
                             videoDuration
                         }).then(items => items[0]);
                     })).then(results => {
-                        playList.addBulk(results);
+                        return playList.addBulk(results);
+                    }).then(() => {
+                        $rootScope.$broadcast('added_full_album', album);
+                        $rootScope.$broadcast('toast::notify', {
+                            text: `Album "${album.name}" has been added to the playlist`
+                        });
                     });
                 };
             }
