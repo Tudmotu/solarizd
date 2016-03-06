@@ -19,13 +19,13 @@ export default angular.module('ui.search', ['services', 'filters', 'solScroll2to
 
                     lastSearch = setTimeout(() => {
                         $scope.searching = true;
+                        $scope.albums = [];
 
                         youtubeAPI.search($scope.query).then(function(items) {
                             $scope.$emit('items-fetched', items);
                             $scope.items = items;
                             $scope.searching = false;
 
-                            $scope.albums = [];
                             lastfm.albumSearch($scope.query).then(albums => {
                                 return $timeout(() => {
                                     $scope.albums = albums;
@@ -47,6 +47,7 @@ export default angular.module('ui.search', ['services', 'filters', 'solScroll2to
                 albums: '='
             },
             link: function($scope, $element, $attrs, $transclude) {
+                $scope.active = true;
                 $scope.addAlbum = (album) => {
                     Promise.all(album.tracks.track.map(track => {
                         let title = track.name.replace(
