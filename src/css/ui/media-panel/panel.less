@@ -20,16 +20,16 @@
         }
     }
 	.related-videos {
-        overflow-y:auto;
         .mixin-related-videos;
         .transition(@prop:height;@easing:ease-in);
+        overflow-y:auto;
 
         @media only screen and (max-height:680px),
-            (max-width:960px), (max-device-width:960px) {
+                (max-width:960px), (max-device-width:960px) {
+            .no-scrollbar;
             min-height:(2 * @row);
             overflow-x:auto;
             white-space:nowrap;
-            .no-scrollbar;
         }
 
         .list-item {
