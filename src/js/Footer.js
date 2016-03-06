@@ -1,6 +1,6 @@
-import TopbarTemplate from './Services';
-import FooterTemplate from 'angular';
-export default angular.module('ui.footer', ['services', 'filters', 'sol-backend', 'firebase'])
+import 'angular';
+
+export default angular.module('ui.footer', ['services', 'filters', 'sol-backend', 'firebase', 'google-signin'])
     .directive('appFooter',
             ['$rootScope', '$http', 'solBackend', '$firebaseAuth',
             ($rootScope, $http, solBackend, $firebaseAuth) => {
@@ -11,24 +11,6 @@ export default angular.module('ui.footer', ['services', 'filters', 'sol-backend'
             scope: true,
             controller: function($scope, $element, $attrs, $transclude) {
                 $scope.appTitle = document.getElementsByTagName('title')[0].textContent;
-                $scope.toggleGoogleAuth = () => {
-                    if (!$scope.authenticated)
-                        solBackend.authenticateWithPopup();
-                    else
-                        solBackend.unauthenticate();
-                };
-
-                solBackend.getAuth().then(($auth) => {
-                    $auth.$onAuth((auth) => {
-                        if (auth && auth.uid) {
-                            $scope.authenticated = true;
-                            $scope.authData = auth.google;
-                        }
-                        else {
-                            $scope.authenticated = false;
-                        }
-                    });
-                });
             }
         };
 

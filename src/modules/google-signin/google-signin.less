@@ -1,0 +1,45 @@
+.google-signin {
+    .flexbox(@align:center);
+    font-family:Roboto, sans-serif;
+    font-weight:bold;
+    color:@active-text-dark;
+    background:@white;
+    box-shadow:@thin-border @thin-border @medium-border fadeout(@black, 75%);
+    margin:0 @column-pad;
+    padding:@row-pad @column-pad;
+    border-radius:@thick-border;
+    border:solid @thin-border @inactive-text-dark;
+    /*text-transform:uppercase;*/
+    /*font-size:@small-text;*/
+    cursor:pointer;
+    height:100%;
+    width:1.25 * @column;
+
+    &:active {
+        box-shadow:none;
+        top:1px;
+        left:1px;
+    }
+
+    &> img {
+        .flexed(0);
+        width:@large-text;
+        margin-right:@column-pad;
+
+        &.profile-image {
+            width:@huge-text;
+            border:solid @thin-border @inactive-text-dark;
+        }
+    }
+
+    &> .text {
+        text-align:center;
+
+        &[data-name]:before {
+            content:attr(data-name);
+            font-size:@small-text;
+            color:@inactive-text-dark;
+            display:block;
+        }
+    }
+}

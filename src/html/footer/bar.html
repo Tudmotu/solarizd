@@ -1,11 +1,5 @@
 <footer>
-    <span title="Google Sign In" class="google-signin" ng-click="toggleGoogleAuth()">
-        <img ng-if="!authenticated" src="css/assets/google-signin.svg" />
-        <span ng-if="!authenticated" class="text">Sign in with Google</span>
-
-        <img ng-if="authenticated" class="profile-image" ng-src="{{authData.profileImageURL}}" />
-        <span ng-if="authenticated" class="text" data-name="{{authData.displayName}}">Sign Out</span>
-    </span>
+    <google-signin></google-signin>
 
     <span class="title">
         <img class="app-logo" src="css/assets/logo.svg"/>
