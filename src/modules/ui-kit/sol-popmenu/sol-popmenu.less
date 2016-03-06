@@ -1,7 +1,7 @@
 @popup-width:3 * @column;
-@popup-height:6 * @row;
+@popup-height:8 * @row;
 .popmenu {
-    width:@row;
+    widt:@row;
     height:@row;
     z-index:1;
 
@@ -63,6 +63,42 @@
         }
     }
 
+    .popup-title {
+        display:flex;
+        align-items:center;
+        height:@row;
+        font-size:@large-text;
+        padding:@row-pad @column-pad;
+
+        &:after {
+            content:"";
+            width:100%;
+            height:@thin-border;
+            background:@inactive-text-dark;
+            position:absolute;
+            bottom:0; left:0;
+        }
+
+        .title {
+            flex:1;
+        }
+    }
+
+    .tag {
+        font-size:@small-text;
+        text-transform:uppercase;
+        background:@inactive-text-dark;
+        padding:@thick-border;
+        color:@white;
+
+        &.experimental-tag{
+            background:@green;
+
+            &:before {
+                content:"experimental";
+            }
+        }
+    }
 }
 
 @keyframes popmenu-popup {

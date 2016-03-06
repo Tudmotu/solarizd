@@ -2,10 +2,10 @@
     .flexbox(@dir:column);
     height:100%;
     width:100%;
-    padding:@row-pad @column-pad;
 
     .peer-pane-section {
         .flexed(1);
+        padding:@row-pad @column-pad;
 
         &.active .button:before {
             .icon(@fa-var-check-square-o);
@@ -50,7 +50,7 @@
 
     .button {
         font-size:@medium-text;
-        text-transform:uppercase;
+        text-transform:capitalize;
         margin:@row-pad 0;
         cursor:pointer;
 
@@ -62,20 +62,18 @@
 
     }
 
-    .peer-host-id {
-        font-size:@large-text;
-        height:@row;
-        border-bottom:solid @thin-border @inactive-text-dark;
-        margin-bottom:@row-pad;
-
-        & > * {
-            .flexbox(@align:center);
-            .flexed(1);
-        }
+    .peer-host-input input {
+        width:100%;
     }
 
-    .peer-host-input, .peer-host-id {
-        .flexbox(@dir:column;@justify:flex-start);
+    .peer-host-id {
+        font-size:@large-text;
+        line-height:@large-text;
+        border:solid @thin-border @inactive-text-dark;
+        padding:@thick-border @column-pad;
+        margin-bottom:@row-pad;
+        display:flex;
+        align-items:center;
 
         &:before {
             content:"Host ID";
@@ -84,6 +82,11 @@
             font-size:@small-text;
             font-weight:bold;
             color:@inactive-text-dark;
+        }
+
+        & > * {
+            .flexbox(@align:center);
+            .flexed(1);
         }
     }
 

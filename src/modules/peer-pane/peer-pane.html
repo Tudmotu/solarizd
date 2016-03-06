@@ -2,17 +2,22 @@
     <!--<div class="peer-pane-buttons" ng-show="!showConnectPanel && !showHostPanel">-->
 
     <!--</div>-->
-    <div class="peer-host-id">
-        <span>{{peerId}}</span>
+    <div class="popup-title">
+        <span class="title">Remote Control</span>
+        <span class="tag experimental-tag"></span>
     </div>
 
     <div class="peer-pane-section"
             ng-class="{ active: showHostPanel }">
 
         <div class="button button-host"
-            ng-click="toggleHost()">Serve as Host</div>
+            ng-click="toggleHost()">Allow Remote Control</div>
 
         <div class="peer-pane-host section-content">
+            <div class="peer-host-id">
+                <span>{{peerId}}</span>
+            </div>
+
             <p>
             <span>To connect to this host, open the Solarizd app on a different
                 device, and insert the above Host ID in the "Connect to a Host"
@@ -36,7 +41,7 @@
             <div class="button-row">
                 <div class="raised-button"
                     ng-click="connectToHost()"
-                    ng-show="!isConnected">Connect to a Host</div>
+                    ng-show="!isConnected">Connect</div>
 
                 <div class="raised-button"
                     ng-click="disconnectFromHost()"
