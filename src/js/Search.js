@@ -33,9 +33,15 @@ export default angular.module('ui.search', ['services', 'filters', 'solScroll2to
                             });
                         });
                     }, 600);
+
+                    localStorage.latestSearch = value;
                 };
 
                 $scope.$watch('query', $scope.search);
+
+                if (localStorage.latestSearch) {
+                    $scope.query = localStorage.latestSearch;
+                }
             }
         };
     }]).directive('searchResultAlbums', ['$rootScope', 'youtubeAPI', 'playList', 'lastfm', ($rootScope, youtubeAPI, playList, lastfm) => {
