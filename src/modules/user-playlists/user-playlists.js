@@ -14,6 +14,8 @@ export default angular.module('user-playlists', ['sol-backend'])
                     solBackend.onAuth((authData) => {
                         let uid = (authData && authData.uid) || null;
 
+                        this.uid = uid;
+
                         solBackend.fetchUserPlaylists(uid).catch(() => {
                             return null;
                         }).then((playlists) => {

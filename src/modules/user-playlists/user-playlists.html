@@ -2,7 +2,17 @@
     <div class="popup-title">
         <span class="title">Playlists</span>
     </div>
-    <ul class="playlists">
+
+    <div class="login-suggestion" ng-show="!uid">
+        <span class="text">To save playlists, you need to login</span>
+        <google-signin></google-signin>
+        <span class="text small">Once you login, you'll be able to save playlists and access them
+            from anywhere!</span>
+    </div>
+
+    <ul class="playlists"
+            ng-show="!!uid"
+            data-empty="{{playlists.length === 0}}">
         <li ng-repeat="playlist in playlists track by $index" class="playlist"
                 data-id="{{playlist.playlist}}"
                 ng-class="{

@@ -3,26 +3,41 @@
     height:100%;
     width:100%;
 
-    .header {
-        .flexed(0);
-        .flexbox(@justify:flex-start);
-        background:@yellow;
-        color:@white;
-        padding:@row-pad @column-pad;
-        height:@row;
+    .playlists {
+        flex:1;
+        overflow:auto;
+        padding-bottom:@row/2;
 
-        .title {
-            .flexbox(@align:center);
-            .flexed(0);
-            text-transform:uppercase;
-            font-weight:bold;
+        &[data-empty=true] {
+            display:flex;
+            align-items:center;
+            justify-content:center;
+
+            &:before {
+                content:"You have no saved playlists";
+                color:@inactive-text-dark;
+                font-size:@medium-text;
+            }
         }
     }
 
-    .playlists {
-        max-height:10*@row;
-        overflow:auto;
-        padding-bottom:@row/2;
+    .login-suggestion {
+        flex:1;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        flex-direction:column;
+        text-align:center;
+
+        & > .text {
+            &:not(.small) {
+                font-size:@medium-text;
+            }
+        }
+
+        .google-signin {
+            margin:@row-pad 0;
+        }
     }
 
     .playlists > .playlist {
