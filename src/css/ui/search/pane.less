@@ -48,4 +48,49 @@
         .mixin-search-list;
         .flexed(1);
     }
+
+    .albums-list {
+        box-shadow:0px -@medium-border @medium-border @inactive-text-dark;
+        background:@white;
+
+        .albums-list-title {
+            /*background:@light-yellow;*/
+            text-transform:uppercase;
+            display:flex;
+            align-items:center;
+            padding:@row-pad @column-pad;
+            border-bottom:solid @thin-border @inactive-text-dark;
+            cursor:pointer;
+            height:@row;
+
+            &:after {
+                content:"experimental";
+                background:@green;
+                font-size:@small-text;
+                color:@white;
+                padding:@thick-border;
+                margin-left:auto;
+            }
+        }
+
+        .albums-list-title:before {
+            margin-right:@column-pad;
+            margin-bottom:1px; // align hack
+            .icon(@fa-var-angle-double-down);
+        }
+
+        &:not(.active) .albums-list-title:before {
+            .icon(@fa-var-angle-double-up);
+        }
+
+        .result-list {
+            height:@row * 3;
+            overflow:auto;
+            transition:height .2s ease-out;
+        }
+
+        &:not(.active) .result-list {
+            height:0;
+        }
+    }
 }

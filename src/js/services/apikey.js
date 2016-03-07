@@ -2,7 +2,14 @@ import 'angular';
 
 export default angular.module('api-key', [])
 .constant('ApiKeysConf', {
-    services: ['youtube', 'soundcloud', 'echonest', 'firebase', 'peerjs']
+    services: [
+        'youtube',
+        'soundcloud',
+        'echonest',
+        'firebase',
+        'peerjs',
+        'lastfm'
+    ]
 }).service('ApiKey', ['$rootScope', '$q', '$http', 'ApiKeysConf', function($rootScope, $q, $http, Conf) {
     var KEYS = {};
 

@@ -81,9 +81,9 @@ describe('solTabs directive', function () {
                     '</sol-tabs></div>';
         let element = getElement(html, $rootScope);
 
-        expect(element.find('[tab-ref="one"]')).toHaveClass('fa');
-        expect(element.find('[tab-ref="two"]')).not.toHaveClass('fa');
-        expect(element.find('[tab-ref="one"]')).toHaveClass('fa-search');
+        expect(element.find('[tab-ref="one"]')).toContainElement('.fa');
+        expect(element.find('[tab-ref="two"]')).not.toContainElement('.fa');
+        expect(element.find('[tab-ref="one"]')).toContainElement('.fa-search');
     });
 
     it('has [active] attr on entry and [selected] attr on tab in sync', () => {
