@@ -14,6 +14,10 @@
         <sol-input placeholder="Search in playlist..."
             value="query" icon="search"></sol-input>
     </header>
+    <section class="playlist-statusline" ng-show="metadata">
+        <span class="playlist-title">{{metadata.name}}</span>
+        <span class="playlist-save fa fa-upload" ng-click="uploadPlaylist()">SAVE</span>
+    </section>
     <section class="playlist-wrapper">
         <ul class="indices">
             <li class="index" ng-repeat="item in items track by $index"

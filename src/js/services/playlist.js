@@ -144,10 +144,14 @@ export default [
             else
                 resolve(playlistId);
         }).then((playlistId) => {
-            return solBackend.fetchPlaylist(playlistId);
+            solBackend.fetchPlaylistMetadata(playlistId).then((playlistRef) => {
+                that.metadata = playlistRef;
+            });
+            return solBackend.getPlaylistData(playlistId);
         }).catch(() => {
             let list = [];
             let lsVal;
+            this.metadata = null;
 
             if (hasLS) {
                 lsVal = localStorage.playlist;

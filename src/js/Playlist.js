@@ -118,6 +118,10 @@ export default angular.module('ui.playlist',
                         });
 
                         return idx;
+                    },
+                    uploadPlaylist () {
+                        solBackend.savePlaylist(
+                            this.metadata, this.items);
                     }
                 });
 
@@ -167,6 +171,10 @@ export default angular.module('ui.playlist',
             },
             controller: function($scope, $element, $attrs, $transclude) {
                 $scope.items = playList.playlist;
+                $scope.$watch(() => playList.metadata, (newVal) => {
+                    if (newVal)
+                        newVal.$bindTo($scope, "metadata");
+                });
                 $scope.savePlaylist = function() {
                     playList.save();
                 };

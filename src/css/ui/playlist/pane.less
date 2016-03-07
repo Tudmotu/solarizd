@@ -91,6 +91,39 @@
         }
     }
 
+    .playlist-statusline {
+        height:@row;
+        padding:@row-pad @column-pad;
+        border-top:solid @thin-border @inactive-text-dark;
+        border-bottom:solid @thin-border @inactive-text-dark;
+        flex:0 0;
+        display:flex;
+        align-items:center;
+
+        .playlist-title {
+            display:flex;
+            flex-direction:column;
+            flex:1;
+
+            &:before {
+                content:"Playlist";
+                font-size:@small-text;
+                text-transform:uppercase;
+                color:@inactive-text-dark;
+                margin-bottom:@thick-border;
+            }
+        }
+
+        .playlist-save {
+            padding:0 @column-pad;
+            cursor:pointer;
+
+            &:before {
+                margin-right:@column-pad;
+            }
+        }
+    }
+
     .playlist-wrapper {
         .flexed(1);
         .flexbox(@justify:flex-end);

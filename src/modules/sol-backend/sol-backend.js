@@ -57,8 +57,29 @@ export default angular.module('sol-backend', ['firebase', 'api-key'])
 
         fetchPlaylist (refKey) {
             return connector.then((firebase) => {
-                return $firebaseObject(firebase.child('playlists').child(refKey));
-            }).then((record) => {
+                return $firebaseObject(
+                    firebase.child('playlists').child(refKey));
+            });
+        },
+
+        fetchPlaylistMetadata (refKey) {
+            return connector.then((firebase) => {
+                return new Promise((resolve, reject) => {
+                    let ref = firebase.child('playlists/metadata')
+                        .orderByChild('playlist')
+                            .equalTo(refKey)
+                                .limitToFirst(1);
+
+                    ref.on('child_added', (ref) => {
+                        let metadata = firebase.child('playlists/metadata');
+                        resolve(metadata.child(ref.key()));
+                    });
+                }).then((metadata) => $firebaseObject(metadata));
+            });
+        },
+
+        getPlaylistData (refKey) {
+            return this.fetchPlaylist(refKey).then((record) => {
                 return $q((resolve, reject) => {
                     record.$ref().once('value', (snap) => {
                         let val = snap.val();
@@ -78,6 +99,15 @@ export default angular.module('sol-backend', ['firebase', 'api-key'])
                 let playlists = firebase.child('playlists/metadata');
                 let ref = playlists.orderByChild('uid').equalTo(uid);
                 return $firebaseArray(ref);
+            });
+        },
+
+        savePlaylist (metadata, playlist) {
+            return connector.then((firebase) => {
+                let playlists = firebase.child('playlists');
+                let ref = playlists.child(metadata.playlist);
+
+                return ref.update({ playlist, metadata_id: metadata.$id });
             });
         },
 
