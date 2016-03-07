@@ -251,7 +251,7 @@ export default [
     this.add = function(videoId, idx) {
         var that = this;
 
-        ytAPI.getVideo(videoId).then(function(resp) {
+        return ytAPI.getVideo(videoId).then(function(resp) {
             var item = resp.data.items[0],
                 thumb = item.snippet.thumbnails.default.url,
                 title = item.snippet.title,
@@ -277,6 +277,20 @@ export default [
 
     this.addLast = function(videoId) {
         this.add(videoId, this.playlist.length);
+    };
+
+    this.addBulk = items => {
+        Promise.all(
+            items.map(vid =>
+                ytAPI.getVideo(vid.id).then(resp =>
+                      resp.data.items[0]))
+        ).then(videos => {
+            videos.forEach(item => {
+                $timeout(() => {
+                    this.addItem(this.playlist.length, item);
+                });
+            });
+        });
     };
 
     this.remove = function(idx) {

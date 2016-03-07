@@ -23,7 +23,7 @@ export default ['$rootScope', '$http', '$q', function($rootScope, $http, $q) {
             opts.q = query;
         }
 
-        opts.maxResults = maxResults;
+        if (!opts.maxResults) opts.maxResults = maxResults;
         opts.key = APIKEY;
         opts.part = 'snippet';
         opts.type = 'video';
