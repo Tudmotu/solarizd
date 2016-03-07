@@ -32,8 +32,8 @@ function mouseCoords(event) {
 export default angular.module('ui.playlist',
     ['sol-backend', 'services', 'filters', 'ui.sortable', 'solVibrate', 'solSlideRm', 'solScroll2top'])
     .directive('playlistPane', [
-            '$rootScope', '$http', '$location', 'youtubeAPI', 'playList', 'solBackend',
-            function($rootScope, $http, $location, youtubeAPI, playList, solBackend) {
+            '$rootScope', '$http', '$location', 'youtubeAPI', 'playList', 'solBackend', 'lastfm',
+            function($rootScope, $http, $location, youtubeAPI, playList, solBackend, lastfm) {
         var definitions = {
             restrict: 'E',
             templateUrl: '/html/playlist/pane.html',
@@ -122,6 +122,19 @@ export default angular.module('ui.playlist',
                     uploadPlaylist () {
                         solBackend.savePlaylist(
                             this.metadata, this.items);
+                    },
+                    changeBackground () {
+                        let nowPlayingIdx = playList.getNowPlayingIdx();
+                        let nowPlaying = playList.getNowPlaying();
+                        if (nowPlaying) {
+                            console.debug('change bg', nowPlaying);
+                            lastfm.getTrackImage(
+                                nowPlaying.snippet.title
+                            ).then(src => {
+                                $scope.backgroundImg = src;
+                            });
+                        }
+                        else $scope.backgroundImg = '';
                     }
                 });
 
@@ -129,6 +142,7 @@ export default angular.module('ui.playlist',
                     val => {
                         $scope.nowPlayingIdx = val;
                         $scope.progress = 0;
+                        $scope.changeBackground();
                     });
 
                 $scope.$watch(playList.getDuration,

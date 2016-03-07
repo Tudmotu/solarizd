@@ -4,11 +4,12 @@
 .mixin-playlist-pane () {
     @border-color:@purple-light;
     background:@theme-background;
-    border-right:solid 1px @border-color;
+    border-right:solid 1px @inactive-text-dark;
     /*border-left:solid 1px @border-color;*/
     color:@active-text-dark;
     .flexbox(@dir:column);
     .no-scrollbar;
+    z-index:1;
 
     @media (max-width:960px), (max-device-width:960px) {
         box-shadow:none;
@@ -29,7 +30,6 @@
         height:@row;
         .flexed(0);
         .flexbox(@align:center);
-        .ui-hseparator;
 
         .time, .progress {
             padding:0 @column-pad;
@@ -52,9 +52,20 @@
         .flexed(0);
         .flexbox(@justify:flex-start;@align:stretch);
         flex-wrap:wrap;
+        height:4rem;
+        align-items:center;
 
-        &> .action, &> .sol-input {
-            height:4rem;
+        &> .sol-input {
+            margin-right:2*@column-pad;
+            input {
+                color:@active-text-dark;
+                line-height:@row/2;
+                background:transparent;
+                border-bottom:solid @thin-border currentColor;
+            }
+            .icon {
+                background:transparent;
+            }
         }
 
         &> .action {
@@ -94,8 +105,7 @@
     .playlist-statusline {
         height:@row;
         padding:@row-pad @column-pad;
-        border-top:solid @thin-border @inactive-text-dark;
-        flex:0 0;
+        flex:0 0 auto;
         display:flex;
         align-items:center;
 
@@ -130,6 +140,9 @@
         overflow-y:auto;
         overflow-x:hidden;
         z-index:1;
+        background:@theme-background;
+        border-top:solid @thin-border @inactive-text-dark;
+        /*box-shadow:inset 0px 5px 7px -5px @active-text-dark;*/
     }
 
     .indices {
@@ -195,6 +208,34 @@
 
         & > * {
             display:inline-block;
+        }
+    }
+
+    &[data-background=true] {
+        background-size:100% auto;
+        background-repeat:no-repeat;
+
+        #topbar,
+        .playlist-actions,
+        .playlist-progress,
+        .playlist-statusline {
+            color:@active-text-light;
+            text-shadow:1px 1px 1px @active-text-dark;
+        }
+        .playlist-statusline .playlist-title:before {
+            color:@inactive-text-light;
+            text-shadow:none;
+        }
+
+        .sol-input {
+            input {
+                color:@active-text-light;
+            }
+        }
+
+        .playlist-progress progress,
+        .volume-slider .slider {
+            opacity:.5;
         }
     }
 }

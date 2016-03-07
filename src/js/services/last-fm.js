@@ -39,6 +39,20 @@ export default ['$rootScope', '$http', 'ApiKey', function($rootScope, $http, api
 
                 return album;
             });
+        },
+
+        getTrackImage (track) {
+            return get('track.search',
+               { track }
+            ).then(resp => {
+                let { artist } = resp.results.trackmatches.track.filter(
+                    item => item.artist !== '[unknown]')[0];
+
+                return get('artist.getInfo', { artist });
+            }).then(resp => {
+                let img = resp.artist.image[4]['#text'];
+                return img;
+            });
         }
     });
 

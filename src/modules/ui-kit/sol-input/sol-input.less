@@ -21,6 +21,11 @@
         background:@white;
         padding-left:@column-pad;
         border:none;
-    }
 
+        &::-webkit-input-placeholder,
+        &:placeholder-shown {
+            color:currentColor;
+            opacity:1;
+        }
+    }
 }

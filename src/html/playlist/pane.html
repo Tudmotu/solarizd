@@ -1,4 +1,6 @@
 <section class="playlist-pane" ng-class="{ 'active': !!items.length && ready }"
+    ng-style="{'background-image': 'url(' + backgroundImg + ')'}"
+    data-background="{{!!backgroundImg}}"
     sol-vibrate="currentlyDragging">
     <app-topbar id="topbar"></app-topbar>
     <playlist-progress data-progress="progress" duration="{{duration}}"></playlist-progress>
