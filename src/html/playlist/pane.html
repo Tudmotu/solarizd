@@ -15,8 +15,10 @@
             value="query" icon="search"></sol-input>
     </header>
     <section class="playlist-statusline" ng-show="metadata">
-        <span class="playlist-title">{{metadata.name}}</span>
-        <span class="playlist-save fa fa-upload" ng-click="uploadPlaylist()">SAVE</span>
+        <span class="playlist-title">{{metadata.name || '-'}}</span>
+        <span class="playlist-save fa fa-upload"
+            ng-show="metadata.uid === authData.uid"
+            ng-click="uploadPlaylist()">SAVE</span>
     </section>
     <section class="playlist-wrapper">
         <ul class="indices">
