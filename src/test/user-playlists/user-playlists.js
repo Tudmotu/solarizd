@@ -219,13 +219,13 @@ describe('userPlaylists directive', function () {
             expect(root).toContainElement('.playlists');
         });
 
-        it('contains a .header > .title element with text in it', () => {
-            expect(root).toContainElement('.header > .title');
-            expect(root.find('.header > .title')).toHaveText('Playlists');
+        it('contains a .popup-title > .title element with text in it', () => {
+            expect(root).toContainElement('.popup-title > .title');
+            expect(root.find('.popup-title > .title')).toHaveText('Playlists');
         });
 
-        it('contains a .header element', () => {
-            expect(root).toContainElement('.header');
+        it('contains a .popup-title element', () => {
+            expect(root).toContainElement('.popup-title');
         });
 
         it('contains a .user-playlists element', () => {
