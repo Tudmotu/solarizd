@@ -151,7 +151,7 @@ export default [
         }).catch(() => {
             let list = [];
             let lsVal;
-            this.metadata = null;
+            that.metadata = null;
 
             if (hasLS) {
                 lsVal = localStorage.playlist;
