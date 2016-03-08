@@ -185,9 +185,13 @@ export default angular.module('ui.playlist',
             },
             controller: function($scope, $element, $attrs, $transclude) {
                 $scope.items = playList.playlist;
-                $scope.$watch(() => playList.metadata, (newVal) => {
-                    if (newVal)
+                $scope.$watch(() => playList.metadata, (newVal, oldVal) => {
+                    if (newVal) {
+                        if (oldVal) {
+                            oldVal.$destroy();
+                        }
                         newVal.$bindTo($scope, "metadata");
+                    }
                 });
                 $scope.savePlaylist = function() {
                     playList.save();
