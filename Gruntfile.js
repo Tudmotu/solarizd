@@ -51,6 +51,7 @@ module.exports = function (grunt) {
             }
         },
         clean: {
+            options: { force: true },
             build: ['target/style.*.css'],
             target: ['target/']
         },
