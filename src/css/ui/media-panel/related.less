@@ -1,10 +1,11 @@
 @import "../../vars/all";
 
 .mixin-related-videos () {
-    padding:@row-pad @column-pad;
-    color:@blue;
     .no-scrollbar;
     .flexbox(@dir:row;@wrap:wrap;);
+    padding:@row-pad @column-pad;
+    color:@blue;
+    padding-bottom:2 * @row;
 
     .list-item {
         .flexbox(@justify:flex-start;@align:center;);

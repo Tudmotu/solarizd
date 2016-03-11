@@ -3,20 +3,34 @@
 
 .mixin-media-panel () {
     background:@theme-background;
-    .flexbox(@dir:column);
+    .flexbox(@dir:column;@justify:flex-start);
     .transition;
-
-    .sol-tabs {
-        .flexed(1);
-        color:@purple;
-    }
 
     .media {
         .flexbox(@align:center; @dir:column; @justify:center);
+        height:5*@row;
+        flex:0 0 auto;
 
         iframe {
             .flexed(0);
             max-width:100%;
+            max-height:100%;
+        }
+
+        &:before {
+            .icon(@fa-var-film);
+            flex:1 0 auto;
+            color:@inactive-text-dark;
+            font-size:@row;
+            background:@light-grey;
+            width:~"calc(100% - @{row-pad} - @{row-pad})";
+            height:~"calc(100% - @{row-pad} - @{row-pad})";
+            margin:@row-pad;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            position:absolute;
+            top:0;
         }
     }
 	.related-videos {
