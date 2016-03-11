@@ -22,7 +22,7 @@
             ng-show="metadata.uid === authData.uid"
             ng-click="uploadPlaylist()">SAVE</span>
     </section>
-    <section class="playlist-wrapper">
+    <section class="playlist-wrapper" ng-class="{empty: items.length === 0}">
         <ul class="indices">
             <li class="index" ng-repeat="item in items track by $index"
                 ng-attr-visible="{{itemMatch(item, query)}}"

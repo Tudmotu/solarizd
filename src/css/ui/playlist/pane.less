@@ -143,6 +143,35 @@
         background:@theme-background;
         border-top:solid @thin-border @inactive-text-dark;
         /*box-shadow:inset 0px 5px 7px -5px @active-text-dark;*/
+
+        &.empty {
+            &:before {
+                content:"Search for music and create your awesome playlist";
+                display:inline-block;
+                position:absolute;
+                height:@row;
+                top:2*@row;left:0;right:0;
+                text-align:center;
+                font-size:@huge-text;
+                color:@active-text-dark;
+                z-index:1;
+                /*text-shadow:1px 1px 0px @light-grey;*/
+            }
+            &:after {
+                @size:2 * @column;
+                content:"";
+                background-image:url('./css/assets/logo.svg');
+                background-size:cover;
+                width:@size;
+                height:@size;
+                position:absolute;
+                top:0;bottom:0;left:0;right:0;
+                margin:auto;
+                opacity:.5;
+                filter:grayscale(100%);
+                -webkit-filter:grayscale(100%);
+            }
+        }
     }
 
     .indices {
