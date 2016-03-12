@@ -1,19 +1,17 @@
 .peer-pane {
-    .flexbox(@dir:column);
+    .flexbox(@dir:column;@justify:flex-start);
     height:100%;
     width:100%;
+    text-align:justify;
 
     .peer-pane-section {
         .flexed(1);
         padding:@row-pad @column-pad;
+        display:flex;
+        flex-direction:column;
 
         &.active .button:before {
             .icon(@fa-var-check-square-o);
-        }
-
-        &> .section-content {
-            padding-left:@row / 2;
-            text-align:justify;
         }
 
         &:not(.active) > .section-content::before {
@@ -26,6 +24,10 @@
             background:fadeout(@white, 20%);
             z-index:1;
         }
+    }
+
+    .warning-text {
+        padding:@row-pad @column-pad;
     }
 
     .raised-button {
@@ -42,10 +44,16 @@
             box-shadow:0px 3px 5px -5px @active-text-dark;
             transform:translateY(3px);
         }
+
+        &.disabled {
+            box-shadow:none;
+            color:@inactive-text-dark;
+            transform:translateY(0px);
+        }
     }
 
     .button-row {
-        .flexbox(@justify:flex-end);
+        .flexbox(@justify:center);
     }
 
     .button {
@@ -62,8 +70,48 @@
 
     }
 
-    .peer-host-input input {
-        width:100%;
+    .peer-host-input {
+        margin:@row-pad 0;
+        text-align:center;
+
+        input {
+            font-size:@huge-text;
+            width:100%;
+            text-align:center;
+        }
+
+        &:after,
+        &:before {
+            z-index:1;
+            position:absolute;
+            top:0;right:0;
+            height:100%;
+            display:inline-block;
+            width:@column / 2;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:@huge-text;
+            color:@active-text-light;
+        }
+        &:before {
+            content:"";
+        }
+        &.connecting:after {
+            .icon(@fa-var-refresh);
+            .spinner;
+        }
+        &.connecting:before {
+            background:@yellow;
+        }
+        &.connected:before {
+            .icon(@fa-var-check);
+            background:@green;
+        }
+        &.connection-error:before {
+            .icon(@fa-var-check);
+            background:@red;
+        }
     }
 
     .peer-host-id {
@@ -92,5 +140,17 @@
 
     input {
         padding:@thick-border;
+    }
+
+    .peer-pane-section.host-section {
+        @media (max-device-width: 1280px) {
+            display:none;
+        }
+    }
+
+    .peer-pane-section.connect-section {
+        @media (min-device-width: 1280px) {
+            display:none;
+        }
     }
 }

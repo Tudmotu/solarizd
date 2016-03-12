@@ -42,26 +42,37 @@ function ($q, $timeout, $rootScope, apiKey, peerJS, playList, playListVolume) {
 
         connectToServer (remoteId) {
             this.disconnectFromServer();
-            this.getPeer().then((peer) => {
-                let connection = peer.connect(remoteId);
+            console.debug('connecting to server');
+            return this.getPeer().then((peer) => {
+                return new Promise((resolve, reject) => {
+                    let connection = peer.connect(remoteId);
 
-                connection.on('open', () => {
-                    $rootScope.$broadcast('peer::connected_to_server');
-                    remoteServerConnection = connection;
+                    console.debug('trying peerjs');
+                    connection.on('open', () => {
+                        $rootScope.$broadcast('peer::connected_to_server');
+                        remoteServerConnection = connection;
 
-                    $rootScope.$on(
-                            'peer::send_action_to_server', (e, action) => {
-                        this._sendAction(connection, action);
+                        $rootScope.$on(
+                                'peer::send_action_to_server', (e, action) => {
+                            this._sendAction(connection, action);
+                        });
+
+                        connection.on('data', (data) => {
+                            $rootScope.$broadcast(
+                                'peer::got_data_from_server', data);
+                        });
+
+                        connection.on('close', (data) => {
+                            $rootScope.$broadcast(
+                                'peer::disconnected_from_server');
+                        });
+
+                        resolve();
                     });
 
-                    connection.on('data', (data) => {
-                        $rootScope.$broadcast(
-                            'peer::got_data_from_server', data);
-                    });
-
-                    connection.on('close', (data) => {
-                        $rootScope.$broadcast(
-                            'peer::disconnected_from_server');
+                    connection.on('error', (e) => {
+                        console.debug('errors in peerjs', e);
+                        reject(e);
                     });
                 });
             });

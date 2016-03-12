@@ -7,13 +7,17 @@
         <span class="tag experimental-tag"></span>
     </div>
 
-    <div class="peer-pane-section"
-            ng-class="{ active: showHostPanel }">
+    <p class="warning-text"><span>This is highly experimental technology - some features might
+        not work, the app might crash, etc. Give it a try.</span></p>
 
-        <p><span>This is highly experimental technology - some features might
-            not work, the app might crash, etc. Give it a try.</span></p>
-        <div class="button button-host"
-            ng-click="toggleHost()">Allow Remote Control</div>
+    <div class="peer-pane-section host-section"
+            ng-class="{ active: showHostPanel }">
+            <div class="button-row">
+                <div class="raised-button button-host" ng-show="!showHostPanel"
+                    ng-click="toggleHost()">Allow Remote Control</div>
+                <div class="raised-button button-host" ng-show="showHostPanel"
+                    ng-click="toggleHost()">Disable Remote Control</div>
+            </div>
 
         <div class="peer-pane-host section-content">
             <div class="peer-host-id">
@@ -21,7 +25,7 @@
             </div>
 
             <p>
-            <span>To connect to this host, open the Solarizd app on a different
+            <span>To connect to this host, open the Solarizd app on your mobile
                 device, and insert the above Host ID in the "Connect to a Host"
                 field. This will allow you to control the playlist from any
                 device.</span>
@@ -29,21 +33,17 @@
         </div>
     </div>
 
-    <div class="peer-pane-section"
-            ng-class="{ active: showConnectPanel }">
-
-        <div class="button button-connect"
-            ng-click="toggleConnection()">Connect to a Host</div>
-
+    <div class="peer-pane-section connect-section active">
         <div class="peer-pane-connect section-content">
-            <div class="peer-host-input">
-                <input type="number" ng-model="remotePeer" />
+            <div class="peer-host-input {{connectStatus}}">
+                <input type="number" max="99999" ng-model="remotePeer" />
             </div>
 
             <div class="button-row">
                 <div class="raised-button"
-                    ng-click="connectToHost()"
-                    ng-show="!isConnected">Connect</div>
+                     ng-class="{disabled: !remotePeer || remotePeer < 10000}"
+                     ng-click="remotePeer >= 10000 ? connectToHost() : null"
+                    ng-show="!isConnected">Connect to a Host</div>
 
                 <div class="raised-button"
                     ng-click="disconnectFromHost()"
