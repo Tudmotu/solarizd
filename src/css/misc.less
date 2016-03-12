@@ -105,7 +105,6 @@ body {
 
 #main-view {
     .flexed(1);
-    border-bottom:solid @thin-border @active-text-dark;
     overflow:hidden;
 }
 
@@ -146,6 +145,8 @@ body {
     @media (max-width: 1280px), (max-device-width: 1280px) {
         flex-direction:row-reverse;
         position:relative;
+        background:@purple;
+        border-top:solid @row-pad @purple-light;
 
         .google-signin {
             margin:0;
