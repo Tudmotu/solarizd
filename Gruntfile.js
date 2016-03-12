@@ -183,8 +183,7 @@ module.exports = function (grunt) {
         'autoprefixer:build',
         'cssmin:build',
         'browserify:build',
-        'clean:build',
-        'manifest:build'
+        'clean:build'
     ]);
 
     grunt.registerTask('release', [
