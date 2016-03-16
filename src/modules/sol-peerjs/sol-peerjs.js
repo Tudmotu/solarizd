@@ -42,12 +42,10 @@ function ($q, $timeout, $rootScope, apiKey, peerJS, playList, playListVolume) {
 
         connectToServer (remoteId) {
             this.disconnectFromServer();
-            console.debug('connecting to server');
             return this.getPeer().then((peer) => {
                 return new Promise((resolve, reject) => {
                     let connection = peer.connect(remoteId);
 
-                    console.debug('trying peerjs');
                     connection.on('open', () => {
                         $rootScope.$broadcast('peer::connected_to_server');
                         remoteServerConnection = connection;
@@ -71,7 +69,7 @@ function ($q, $timeout, $rootScope, apiKey, peerJS, playList, playListVolume) {
                     });
 
                     connection.on('error', (e) => {
-                        console.debug('errors in peerjs', e);
+                        console.error('errors in peerjs', e);
                         reject(e);
                     });
                 });

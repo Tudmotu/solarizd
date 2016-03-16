@@ -1,3 +1,4 @@
+import deepEqual from 'deep-equal';
 import '../../modules/sol-backend/sol-backend';
 
 var hasLS = !!window.localStorage;
@@ -447,11 +448,13 @@ export default [
         return currentDuration;
     };
 
-    $rootScope.$watchCollection(() => this.playlist, (newVal) => {
-        sendActionToServer({
-            type: 'setPlaylist',
-            playlist: newVal
-        });
+    $rootScope.$watchCollection(() => this.playlist, (newVal, oldVal) => {
+        if (!deepEqual(newVal, oldVal)) {
+            sendActionToServer({
+                type: 'setPlaylist',
+                playlist: newVal
+            });
+        }
     });
 
     function syncClients () {
