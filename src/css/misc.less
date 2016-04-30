@@ -208,29 +208,3 @@ body {
         display:none;
     }
 }
-
-#main-app .toast-notification {
-    .floating-card;
-    position:absolute;
-    width:~"calc(100% -  (2 * @{row}))";
-    bottom:@row;
-    left:0;
-    right:0;
-    margin:auto!important;
-    height:2 * @row;
-    background:@theme-background;
-    color:@active-text-dark;
-    z-index:9999;
-    transition:bottom .2s ease-out;
-
-    &:not(.active) {
-        bottom:-2 * @row;
-    }
-
-    @media (max-device-width: 1280px) {
-        width:~"calc(100% -  (2 * @{column-pad}))";
-        .text {
-            font-size:@normal-text;
-        }
-    }
-}

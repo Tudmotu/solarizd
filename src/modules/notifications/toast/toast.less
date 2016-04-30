@@ -3,36 +3,39 @@
 .toast-notification {
     .flexed(0);
     .flexbox(@align:center);
-    padding:0 @column-pad;
+    color:@white;
+    padding:@row-pad @column-pad;
     text-align:center;
     overflow:hidden;
+    position:absolute;
+    bottom:0;
+    left:0; right:0;
+    margin:auto;
+    background:fadeout(@black, 10%);
+    z-index:10;
+    width:50vh;
+    transition:transform .25s ease-out;
+
+    &:not(.active) {
+        transform:translateY(100%);
+    }
 
     .thumb {
         .flexed(0);
         width:(@column);
         border:solid @thin-border @inactive-text-dark;
-        /*box-shadow:@thin-border @thin-border @thick-border fadeout(@black, 25%);*/
         margin-right:@column-pad;
     }
 
     .text {
         .flexed(1);
-        font-size:@huge-text;
         margin:0 @column-pad;
     }
 
     .close {
         .flexed(0);
-        .transition(@prop:color);
-        font-size:2 * @huge-text;
-        color:@inactive-text-dark;
-        text-shadow:@thin-border @thin-border @medium-border fadeout(@white, 75%);
+        font-size:@large-text;
         cursor:pointer;
-
-        &:hover {
-            color:@active-text-dark;
-            text-shadow:none;
-        }
 
         &:before {
             .icon(@fa-var-times);
