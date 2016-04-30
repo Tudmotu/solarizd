@@ -55,19 +55,6 @@
         height:4rem;
         align-items:center;
 
-        &> .sol-input {
-            margin-right:2*@column-pad;
-            input {
-                color:@active-text-dark;
-                line-height:@row/2;
-                background:transparent;
-            }
-            .icon {
-                background:transparent;
-                margin-bottom:2px;
-            }
-        }
-
         &> .action {
             .flexed(0);
             .flexbox(@align:center);
@@ -104,10 +91,6 @@
                 text-decoration:underline;
             }
         }
-
-        &> .sol-input {
-            margin-left:auto;
-        }
     }
 
     .playlist-statusline {
@@ -138,6 +121,21 @@
             &:before {
                 margin-right:@column-pad;
             }
+        }
+    }
+
+    .playlist-search {
+        margin-right:2*@column-pad;
+        margin-left:auto;
+
+        input {
+            color:@active-text-dark;
+            line-height:@row/2;
+            background:transparent;
+        }
+        .icon {
+            background:transparent;
+            margin-bottom:2px;
         }
     }
 

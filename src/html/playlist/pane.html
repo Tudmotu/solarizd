@@ -17,14 +17,15 @@
             <span class="text" ng-show="!shuffled">Shuffle</span>
             <span class="text" ng-show="shuffled">Shuffle is ON</span>
         </span>
+    </header>
+    <section class="playlist-statusline">
+        <span class="playlist-title" ng-show="metadata">{{metadata.name || '-'}}</span>
 
         <sol-input placeholder="Search in playlist..."
-            value="query" icon="search"></sol-input>
-    </header>
-    <section class="playlist-statusline" ng-show="metadata">
-        <span class="playlist-title">{{metadata.name || '-'}}</span>
+            value="query" icon="search" class="playlist-search"></sol-input>
+
         <span class="playlist-save fa fa-upload"
-            ng-show="metadata.uid === authData.uid"
+            ng-show="metadata && (metadata.uid === authData.uid)"
             ng-click="uploadPlaylist()">SAVE</span>
     </section>
     <section class="playlist-wrapper" ng-class="{empty: items.length === 0}">
