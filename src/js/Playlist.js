@@ -64,6 +64,13 @@ export default angular.module('ui.playlist',
                     });
                 };
 
+                $scope.$watch(() => playList.isShuffled(), (newVal) => {
+                    $scope.shuffled = newVal;
+                });
+                $scope.toggleShuffle = () => {
+                    playList.toggleShuffle();
+                };
+
                 $scope.clearPlaylist = function() {
                     $rootScope.$broadcast('app::confirm', {
                         title: 'Clear Playlist',

@@ -35,6 +35,7 @@ export default [
         currentTime = 0,
         currentDuration = 0,
         that = this;
+    let isShuffled = false;
 
     this.st = st;
     this.playlist = [];
@@ -378,7 +379,11 @@ export default [
     };
 
     this.next = function() {
-        if (this.hasNext())
+        if (isShuffled) {
+            let nextIdx = Math.floor(Math.random() * this.playlist.length);
+            this.play(nextIdx);
+        }
+        else if (this.hasNext())
             this.play(nowPlaying + 1);
     };
 
@@ -446,6 +451,14 @@ export default [
 
     this.getDuration = () => {
         return currentDuration;
+    };
+
+    this.toggleShuffle = () => {
+        isShuffled = !isShuffled;
+    };
+
+    this.isShuffled = () => {
+        return isShuffled;
     };
 
     $rootScope.$watchCollection(() => this.playlist, (newVal, oldVal) => {

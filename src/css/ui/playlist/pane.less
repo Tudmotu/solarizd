@@ -83,6 +83,14 @@
                 .icon(@fa-var-cloud-upload);
             }
 
+            &.shuffle:before {
+                .icon(@fa-var-random);
+            }
+
+            &.shuffle:not(.active) {
+                opacity:.5;
+            }
+
             &:before {
                 width:@indices-width;
                 text-align:center;

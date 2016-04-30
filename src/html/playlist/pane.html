@@ -13,6 +13,11 @@
             <span class="text">Save As New</span>
         </span>
 
+        <span class="action shuffle" ng-click="toggleShuffle()" ng-class="{active: shuffled}">
+            <span class="text" ng-show="!shuffled">Shuffle</span>
+            <span class="text" ng-show="shuffled">Shuffle is ON</span>
+        </span>
+
         <sol-input placeholder="Search in playlist..."
             value="query" icon="search"></sol-input>
     </header>
