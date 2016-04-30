@@ -1,4 +1,5 @@
 import 'angular';
+import 'angular-sanitize';
 
 export default ['$timeout', function ($timeout) {
     return {
@@ -11,14 +12,10 @@ export default ['$timeout', function ($timeout) {
         link: function ($scope) {
             $scope.$on(`${$scope.namespace}::confirm`, (e, data = {}) => {
                 $scope.active = true;
-
-                if (data.text) {
-                    $scope.text = data.text;
-                }
-
-                if (data.title) {
-                    $scope.title = data.title;
-                }
+                $scope.text = data.text;
+                $scope.html = data.html;
+                $scope.title = data.title;
+                $scope.confirmOnly = data.confirmOnly;
 
                 $scope.onConfirm = () => {
                     if (data.onConfirm)

@@ -6,9 +6,11 @@
         <div class="dialog-text">
             {{text}}
         </div>
+        <div class="dialog-text" ng-bind-html="html"></div>
         <div class="dialog-actions">
             <div class="dialog-confirm" ng-click="onConfirm()">Confirm</div>
-            <div class="dialog-cancel" ng-click="onCancel()">Cancel</div>
+            <div class="dialog-cancel" ng-click="onCancel()"
+                ng-if="!confirmOnly">Cancel</div>
         </div>
     </div>
 </div>

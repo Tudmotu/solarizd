@@ -5,17 +5,17 @@
     <app-topbar id="topbar"></app-topbar>
     <playlist-progress data-progress="progress" duration="{{duration}}"></playlist-progress>
     <header class="playlist-actions">
+        <span class="action shuffle" ng-click="toggleShuffle()" ng-class="{active: shuffled}">
+            <span class="text" ng-show="!shuffled">Shuffle</span>
+            <span class="text" ng-show="shuffled">Shuffle is ON</span>
+        </span>
+
         <span class="action clear" ng-click="clearPlaylist()">
             <span class="text">Clear Playlist</span>
         </span>
 
         <span class="action save" ng-click="publishPlaylist()">
-            <span class="text">Save As New</span>
-        </span>
-
-        <span class="action shuffle" ng-click="toggleShuffle()" ng-class="{active: shuffled}">
-            <span class="text" ng-show="!shuffled">Shuffle</span>
-            <span class="text" ng-show="shuffled">Shuffle is ON</span>
+            <span class="text">Create Link</span>
         </span>
     </header>
     <section class="playlist-statusline">

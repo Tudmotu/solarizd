@@ -60,7 +60,14 @@ export default angular.module('ui.playlist',
 
                 $scope.publishPlaylist = () => {
                     playList.publishPlaylist().then((refKey) => {
-                        $location.search('playlist', refKey);
+                        let url = `${window.location.origin}/#playlist=${refKey}`;
+                        $rootScope.$broadcast('app::confirm', {
+                            title: 'Share URL',
+                            confirmOnly: true,
+                            html: `A link to this playlist has been created:
+                                    <br/>
+                                    <a href="${url}" target="_blank">${url}</a>`
+                        });
                     });
                 };
 

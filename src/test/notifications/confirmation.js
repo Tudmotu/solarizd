@@ -101,6 +101,20 @@ describe('confirmation-dialog directive', function () {
         expect(spy).toHaveBeenCalled();
     });
 
+    it('contains html as passed to event', () => {
+        let html = '<div><confirmation-dialog ' +
+                            'namespace="test"' +
+                        '></confirmation-dialog></div>';
+        let rootEl = createRoot(html, $rootScope);
+
+        $rootScope.$broadcast('test::confirm', {
+            html: '<span class="test-aaa"></span>'
+        });
+        $rootScope.$digest();
+
+        expect(rootEl).toContainElement('.test-aaa');
+    });
+
     it('contains title as passed to event', () => {
         let html = '<div><confirmation-dialog ' +
                             'namespace="test"' +
@@ -129,6 +143,19 @@ describe('confirmation-dialog directive', function () {
 
         expect(rootEl).toContainElement('.dialog-text');
         expect(rootEl.find('.dialog-text')).toHaveText('testing text');
+    });
+
+    it('contains only a .dialog-confirm element when confirmOnly = true is passed to event', () => {
+        let html = '<div><confirmation-dialog namespace="test"></confirmation-dialog></div>';
+        let rootEl = createRoot(html, $rootScope);
+
+        $rootScope.$broadcast('test::confirm', {
+            confirmOnly: true
+        });
+        $rootScope.$digest();
+
+        expect(rootEl).not.toContainElement('.dialog-cancel');
+        expect(rootEl).toContainElement('.dialog-confirm');
     });
 
     it('contains a .dialog-cancel element', () => {

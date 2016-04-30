@@ -431,18 +431,8 @@ export default [
 
     this.publishPlaylist = function () {
         return solBackend.publishPlaylist(this.playlist).then((refKey) => {
-            $rootScope.$broadcast('toast::notify', {
-                text: `${window.location.origin}#playlist=${refKey}`,
-                persist: true
-            });
-
             return refKey;
-        }).catch(() => {
-            $rootScope.$broadcast('toast::notify', {
-                text: 'Failed publishing playlist... :(',
-                persist: true
-            });
-        });
+        }).catch(() => {});
     };
 
     this.getProgress = () => {
