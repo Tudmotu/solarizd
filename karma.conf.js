@@ -33,7 +33,7 @@ module.exports = function(config) {
             // strip this from the file path
             cacheIdFromPath: function (path) {
                 var newPath = path.replace(/^src/, '');
-                console.log('Processing template', newPath);
+                //console.log('Processing template', newPath);
                 return newPath;
             },
 

@@ -1,0 +1,62 @@
+@import '../../../css/vars/all';
+
+.confirmation-dialog {
+    position:absolute;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    z-index:10;
+    background:fadeout(@black, 75%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:opacity .2s ease-out;
+
+    &:not(.active) {
+        opacity:0;
+        z-index:-1;
+
+        .dialog-container {
+            opacity:0;
+            transform:translateY(-50%);
+        }
+    }
+
+    .dialog-container {
+        background:@white;
+        border:solid 1px @light-grey;
+        min-width:420px;
+        min-height:140px;
+        border-radius:@medium-border;
+        box-shadow:0px 5px 10px fadeout(@black, 75%);
+        display:flex;
+        flex-direction:column;
+        transition:transform .2s ease-out .2s, opacity .2s ease-out .2s;
+        opacity:1;
+        transform:translateY(0);
+    }
+
+    .dialog-title {
+        font-size:@large-text;
+        color:@active-text-dark;
+        padding:@row-pad @column-pad;
+        flex:0 0 auto;
+    }
+
+    .dialog-text {
+        padding:@row-pad @column-pad;
+        flex:1 1 auto;
+    }
+
+    .dialog-actions {
+        padding:@row-pad @column-pad;
+        flex:0 0 auto;
+        display:flex;
+        justify-content:flex-end;
+
+        > * {
+            .raised-button;
+            margin-left:@column-pad;
+        }
+    }
+}

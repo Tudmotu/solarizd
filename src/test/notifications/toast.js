@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import {module, inject} from '../mocks';
 
-describe('solarizdApp directive', function () {
+describe('toas-notification directive', function () {
     let $compile;
     let $rootScope;
     let $timeout;

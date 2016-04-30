@@ -65,8 +65,14 @@ export default angular.module('ui.playlist',
                 };
 
                 $scope.clearPlaylist = function() {
-                    playList.clearList();
-                    $location.search('playlist', null);
+                    $rootScope.$broadcast('app::confirm', {
+                        title: 'Clear Playlist',
+                        text: 'You are about to clear your entire playlist. Are you sure?',
+                        onConfirm: () => {
+                            playList.clearList();
+                            $location.search('playlist', null);
+                        }
+                    });
                 };
 
                 $scope.isItemActive = (idx) => {
