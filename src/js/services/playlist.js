@@ -430,7 +430,9 @@ export default [
     };
 
     this.publishPlaylist = function () {
-        return solBackend.publishPlaylist(this.playlist).then((refKey) => {
+        return solBackend.publishPlaylist(this.playlist, {
+            name: `New Playlist (${(new Date()).toISOString().slice(0,10)})`
+        }).then((refKey) => {
             return refKey;
         }).catch(() => {});
     };
