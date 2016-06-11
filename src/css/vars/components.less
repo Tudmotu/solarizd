@@ -1,7 +1,7 @@
 .raised-button () {
     display:inline-block;
     text-transform:uppercase;
-    box-shadow:0px 3px 5px -2px @active-text-dark;
+    box-shadow:0px 3px 5px -2px @shadow-color;
     border:solid @thin-border @inactive-text-dark;
     padding:@row-pad @column-pad;
     margin:@row-pad 0;
@@ -9,7 +9,7 @@
     transition:transform .1s ease-out, box-shadow .1s ease-out;
 
     &:active {
-        box-shadow:0px 3px 5px -5px @active-text-dark;
+        box-shadow:0px 3px 5px -5px @shadow-color;
         transform:translateY(3px);
     }
 

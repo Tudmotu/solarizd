@@ -80,7 +80,7 @@ body {
 
 .floating-card {
     border:solid @thin-border @inactive-text-dark;
-    box-shadow:0px 3px 3px -1px @inactive-text-dark;
+    box-shadow:0px 3px 3px -1px @shadow-color;
     margin:@row-pad @column-pad;
 
     @media (max-width: 1280px) {
@@ -93,14 +93,6 @@ body {
 }
 #topbar {
     .mixin-topbar;
-    /*box-shadow:0px 3px 3px -1px @inactive-text-dark;*/
-    /*border-bottom:solid @thin-border @inactive-text-dark;*/
-    /*position:absolute;*/
-    /*bottom:@row;*/
-    /*right:0;*/
-    /*left:0;*/
-    /*margin:auto;*/
-    /*width:5 * @column;*/
 }
 
 #main-view {
@@ -114,7 +106,7 @@ body {
     .transition(@prop:transform; @easing:ease-in; @duration:.3s;
     @delay:.4s);
     z-index:2;
-    box-shadow:3px 0px 3px -1px @inactive-text-dark;
+    box-shadow:3px 0px 3px -1px @shadow-color;
     border:solid @thin-border @inactive-text-dark;
 
     @media (max-width: 1280px) {
@@ -159,7 +151,7 @@ body {
     color:@active-text-light;
 
     &> .tabs {
-        box-shadow:0px 3px 10px @active-text-dark;
+        box-shadow:0px 3px 10px @shadow-color;
         z-index:2;
     }
 }

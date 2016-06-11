@@ -148,7 +148,6 @@
         z-index:1;
         background:@theme-background;
         border-top:solid @thin-border @inactive-text-dark;
-        /*box-shadow:inset 0px 5px 7px -5px @active-text-dark;*/
 
         &.empty {
             &:before {
@@ -255,7 +254,7 @@
         .playlist-progress,
         .playlist-statusline {
             color:@active-text-light;
-            text-shadow:1px 1px 0px @inactive-text-dark;
+            background:fadeout(@black, 50%);
         }
         .playlist-statusline .playlist-title:before {
             color:@inactive-text-light;

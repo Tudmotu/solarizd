@@ -11,7 +11,7 @@
         width:0;
         height:0;
         border:solid @thin-border @inactive-text-dark;
-        box-shadow:0px 3px 3px -2px fadeout(@black, 53%);
+        box-shadow:0px 3px 3px -2px @shadow-color;
         background:@white;
         overflow:hidden;
         color:@active-text-dark;
@@ -47,7 +47,8 @@
         background:currentColor;
         border-radius:50%;
         border-bottom:solid @thin-border @inactive-text-dark;
-        box-shadow:0px 10px 7px -4px @active-text-dark;
+        box-shadow:-2px 10px 7px -4px @shadow-color,
+            2px 10px 7px -4px @shadow-color;
         font-size:@large-text;
         cursor:pointer;
         z-index:1;
