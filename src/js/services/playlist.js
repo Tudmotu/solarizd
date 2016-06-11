@@ -379,9 +379,28 @@ export default [
         });
     };
 
+    function hasNextShuffle () {
+        return that.playlist.some(item => !item.wasShuffled);
+    }
+
+    function cleanShuffle () {
+        return that.playlist.forEach(item => delete item.wasShuffled);
+    }
+
+    function getNextShuffleIdx () {
+        let nextIdx = Math.floor(Math.random() * that.playlist.length);
+        if (!hasNextShuffle) return null;
+        if (!that.playlist[nextIdx].wasShuffled) return nextIdx;
+        else return getNextShuffleIdx();
+    }
+
     this.next = function() {
         if (isShuffled) {
-            let nextIdx = Math.floor(Math.random() * this.playlist.length);
+            if (!hasNextShuffle()) {
+                cleanShuffle();
+            }
+            let nextIdx = getNextShuffleIdx();
+            this.playlist[nextIdx].wasShuffled = true;
             this.play(nextIdx);
         }
         else if (this.hasNext())
