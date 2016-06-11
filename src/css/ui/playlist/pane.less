@@ -152,7 +152,7 @@
 
         &.empty {
             &:before {
-                content:"Search for music and create your awesome playlist";
+                content:"Add tracks to your new playlist!";
                 display:inline-block;
                 position:absolute;
                 height:@row;
@@ -161,7 +161,7 @@
                 font-size:@huge-text;
                 color:@active-text-dark;
                 z-index:1;
-                /*text-shadow:1px 1px 0px @light-grey;*/
+                margin:0 (0.5 * @column);
             }
             &:after {
                 @size:2 * @column;
