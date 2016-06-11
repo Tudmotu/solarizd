@@ -126,6 +126,8 @@ export default angular.module('ui.playlist',
                     }
                 });
 
+                let backgroundSet = false;
+
                 Object.assign($scope, {
                     getCurrentlyOpenIdx: () => {
                         let idx = null;
@@ -146,12 +148,16 @@ export default angular.module('ui.playlist',
                     changeBackground () {
                         let nowPlayingIdx = playList.getNowPlayingIdx();
                         let nowPlaying = playList.getNowPlaying();
+                        backgroundSet = false;
+
                         if (nowPlaying) {
-                            console.debug('change bg', nowPlaying);
                             lastfm.getTrackImage(
                                 nowPlaying.snippet.title
                             ).then(src => {
-                                $scope.backgroundImg = src;
+                                if (!backgroundSet) {
+                                    $scope.backgroundImg = src;
+                                    backgroundSet = true;
+                                }
                             });
                         }
                         else $scope.backgroundImg = '';
