@@ -214,6 +214,7 @@ export default [
         if (state !== st.INITIAL) this.stop();
 
         this.playlist.length = 0;
+        this.metadata = null;
         this.saveList();
     };
 
