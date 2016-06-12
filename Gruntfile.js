@@ -170,7 +170,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-browserify');
 
     grunt.registerTask('test', [
-        'jshint:all',
+        //'jshint:all',
         'karma:test'
         //'karma:ci'
     ]);

@@ -2,9 +2,9 @@ import './directives/sol-vibrate';
 import './directives/sol-slide-rm';
 import './directives/sol-scroll2top';
 import '../modules/sol-backend/sol-backend';
-import 'ui-sortable';
 import './Services';
 import 'angular';
+import 'angular-ui-sortable';
 
 function mouseCoords(event) {
     var totalOffsetX = 0,
@@ -212,7 +212,7 @@ export default angular.module('ui.playlist',
             controller: function($scope, $element, $attrs, $transclude) {
                 $scope.items = playList.playlist;
                 $scope.$watch(() => playList.metadata, (newVal, oldVal) => {
-                    if (newVal !== null) {
+                    if (!!newVal) {
                         newVal.$bindTo($scope, "metadata");
                     }
                     else {

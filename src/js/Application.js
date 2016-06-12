@@ -1,4 +1,3 @@
-import 'babel-core/polyfill';
 import '../plugins/plugins';
 import './Footer';
 import './Topbar';
@@ -13,7 +12,6 @@ import '../modules/sol-peerjs/sol-peerjs';
 import '../modules/user-playlists/user-playlists';
 import '../modules/google-signin/google-signin';
 import '../modules/peer-pane/peer-pane';
-import 'ng-resource';
 import 'angular';
 
 const cacheUpdated = new Promise((resolve, reject) => {
@@ -25,7 +23,6 @@ const cacheUpdated = new Promise((resolve, reject) => {
 });
 
 export default angular.module('Application', [
-    'ngResource',
     'ui.footer',
     'ui.topbar',
     'ui.search',

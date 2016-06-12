@@ -1,4 +1,4 @@
-import MobileDetect from '../../vendor/mobile-detect/mobile-detect';
+import MobileDetect from 'mobile-detect';
 
 export default ['$sce', '$q', '$rootScope', function($sce, $q, $rootScope) {
     var that = this,

@@ -1,4 +1,3 @@
-import $ from '../../vendor/jquery/dist/jquery.js';
 import {module, inject} from '../mocks';
 
 describe('solTabs directive', function () {

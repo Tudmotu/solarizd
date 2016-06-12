@@ -22,17 +22,8 @@
     "tests"
   ],
   "devDependencies": {
-    "angular": "~1.4.x",
     "less.js": "~2.5.x",
-    "ng-resource": "~0.0.2",
-    "prefixfree": "*",
-    "fontawesome": "4.3.0",
-    "mobile-detect": "hgoebl/mobile-detect.js#~1.2.x",
-    "jquery-ui": "~1.11.x",
-    "angular-ui-sortable": "~0.13.x",
-    "jquery-ui-touch-punch": "furf/jquery-ui-touch-punch"
-  },
-  "resolutions": {
-    "angular": "~1.4.x"
+    "fontawesome": "~4.6.3",
+    "prefixfree": "*"
   }
 }

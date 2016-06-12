@@ -1,7 +1,7 @@
+import 'babel-polyfill';
+import MobileDetect from 'mobile-detect';
 import Appliction from './js/Application';
-import MobileDetect from './vendor/mobile-detect/mobile-detect';
-import 'ng-resource';
-import 'angular';
+import 'jquery-ui-touch-punch';
 
 function bootstrapAngular() {
     var htmlElem = document.getElementsByTagName('html')[0],

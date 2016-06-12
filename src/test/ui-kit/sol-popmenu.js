@@ -1,4 +1,3 @@
-import $ from '../../vendor/jquery/dist/jquery.js';
 import {module, inject, createRootFactory} from '../mocks';
 
 describe('solPopmenu directive', function () {
