@@ -146,6 +146,20 @@ module.exports = function (grunt) {
                 browsers: ['PhantomJS']
             }
         },
+        svgstore: {
+            options: {
+                prefix : 'icon-', // This will prefix each ID
+                svg: { // will add and overide the the default xmlns="http://www.w3.org/2000/svg" attribute to the resulting SVG
+                    viewBox : '0 0 100 100',
+                    xmlns: 'http://www.w3.org/2000/svg'
+                }
+            },
+            icons: {
+                files: {
+                    'src/css/assets/icons.svg': 'src/css/icons/*.svg'
+                }
+            },
+        },
         jshint: {
             options: {
                 esnext: true
@@ -168,6 +182,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-manifest-ext');
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-browserify');
+    grunt.loadNpmTasks('grunt-svgstore');
 
     grunt.registerTask('test', [
         //'jshint:all',
