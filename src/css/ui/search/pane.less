@@ -37,11 +37,20 @@
         .flexbox(@justify:stretch);
         height:@row;
         padding:@row-pad @column-pad;
-        border-bottom:solid @thin-border @inactive-text-dark;
+        position:absolute;
+        top:0; left:0;
+        width:100%;
+        z-index:1;
 
         &> .sol-input {
             .flexed(1);
+            .floating;
+            background:#fff;
         }
+    }
+
+    > .result-list {
+        padding-top:@row;
     }
 
     .result-list {
