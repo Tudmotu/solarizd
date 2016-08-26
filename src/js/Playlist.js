@@ -4,6 +4,9 @@ import './directives/sol-scroll2top';
 import '../modules/sol-backend/sol-backend';
 import './Services';
 import 'angular';
+import 'jquery-ui/ui/widget';
+import 'jquery-ui/ui/widgets/mouse';
+import 'jquery-ui/ui/widgets/sortable';
 import 'angular-ui-sortable';
 
 function mouseCoords(event) {
