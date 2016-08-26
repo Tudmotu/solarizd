@@ -21,7 +21,7 @@ html {
     font-family:"Roboto", sans-serif;
     font-size:@root-font-size;
 
-    @media (max-device-width: 1280px) {
+    @media (max-device-width: 1279px) {
         font-size:(@root-font-size * 2);
     }
 }
@@ -83,11 +83,11 @@ body {
     box-shadow:0px 3px 3px -1px @shadow-color;
     margin:@row-pad @column-pad;
 
-    @media (max-width: 1280px) {
+    @media (max-width: 1279px) {
         margin:@row-pad @column-pad;
     }
 
-    @media (max-width: 1080px) {
+    @media (max-width: 1079px) {
         margin:0;
     }
 }
@@ -109,7 +109,7 @@ body {
     box-shadow:3px 0px 3px -1px @shadow-color;
     border:solid @thin-border @inactive-text-dark;
 
-    @media (max-width: 1280px) {
+    @media (max-width: 1279px) {
         margin:0;
         box-shadow:none;
         background:@white;
@@ -134,7 +134,7 @@ body {
     right:0;
     z-index:10;
 
-    @media (max-width: 1280px), (max-device-width: 1280px) {
+    @media (max-width: 1279px), (max-device-width: 1279px) {
         flex-direction:row-reverse;
         position:relative;
         background:@purple;
