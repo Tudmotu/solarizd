@@ -54,10 +54,22 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-1028.3622)">
-    <path
-       style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#353535;stroke-width:0.83927399;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
-       d="m 3.7352502,1030.0242 0.055,20.676 12.5245008,-8.1963 -0.071,8.1571 3.949,0.01 0.072,-20.5224 -3.8418,-0.095 -0.072,8.2686 -12.6157008,-8.298 z"
-       id="path4676"
-       inkscape:connector-curvature="0" />
+    <g
+       transform="matrix(0.07509903,0,0,0.07509903,-172.51184,1104.7077)"
+       id="g5058"
+       style="fill:none;stroke:#353535;stroke-opacity:1">
+      <path
+         style="fill:none;fill-opacity:1;stroke:#353535;stroke-width:9;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 2528.5792,-742.92702 0.4869,-272.97148"
+         id="path5060"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+      <path
+         sodipodi:nodetypes="cccc"
+         inkscape:connector-curvature="0"
+         id="path5062"
+         d="m 2520.9161,-878.84155 -136.1547,-134.55545 0.4734,267.96042 z"
+         style="fill:none;fill-opacity:1;stroke:#353535;stroke-width:9;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
   </g>
 </svg>
