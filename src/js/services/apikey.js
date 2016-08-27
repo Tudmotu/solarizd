@@ -29,22 +29,29 @@ export default angular.module('api-key', [])
         if (KEYS.hasOwnProperty(service))
             return $q(resolve => resolve(KEYS[service]));
         else
-            return $q(resolve => {
-                $rootScope.$on(service + '-apikey', (e, data) => {
-                    resolve(data);
+            return $q((resolve, reject) => {
+                this.request.then(function (data) {
+                    var key = data[service];
+                    if (key) resolve(key);
+                    else throw new ReferenceError(
+                        `No API key for a service named ${service}`);
                 });
             });
     };
 
     this.fetchKeys = function() {
         var that = this;
-        return $http.get('apikeys.json').then(function(resp) {
+        this.request = $http.get('apikeys.json').then(function(resp) {
             var data = resp.data;
             Object.keys(data).forEach(function(service) {
                 var key = data[service];
                 that.set(service, key);
                 $rootScope.$emit(service + '-apikey', key);
             });
+
+            return data;
         });
+
+        return this.request;
     };
 }]);
