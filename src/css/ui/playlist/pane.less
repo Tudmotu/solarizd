@@ -55,6 +55,32 @@
         height:4rem;
         align-items:center;
 
+        @media @media-mobile {
+            position:absolute;
+            bottom:@row-pad;
+            left:@column-pad;
+            z-index:2;
+
+            &> .action {
+                .raised-button(3px);
+                font-size:@medium-text;
+                border-radius:50%;
+                width:2.5em;
+                height:2.5em;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                background:@white;
+                .text {
+                    display:none;
+                }
+
+                &:first-child {
+                    margin-left:@column-pad;
+                }
+            }
+        }
+
         &> .action {
             .flexed(0);
             .flexbox(@align:center);
@@ -74,7 +100,7 @@
                 .icon(@fa-var-random);
             }
 
-            &.shuffle:not(.active) {
+            &.shuffle:not(.active):before {
                 opacity:.5;
             }
 
@@ -89,24 +115,6 @@
 
             &:hover .text {
                 text-decoration:underline;
-            }
-
-            @media @media-mobile {
-                font-size:@medium-text;
-                .raised-button;
-                border-radius:50%;
-                width:2.5em;
-                height:2.5em;
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                .text {
-                    display:none;
-                }
-
-                &:first-child {
-                    margin-left:@column-pad;
-                }
             }
         }
     }
