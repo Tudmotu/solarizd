@@ -11,7 +11,7 @@
     .no-scrollbar;
     z-index:1;
 
-    @media (max-width:960px), (max-device-width:960px) {
+    @media @media-mobile {
         box-shadow:none;
         border-right:none;
     }
@@ -90,6 +90,24 @@
             &:hover .text {
                 text-decoration:underline;
             }
+
+            @media @media-mobile {
+                font-size:@medium-text;
+                .raised-button;
+                border-radius:50%;
+                width:2.5em;
+                height:2.5em;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                .text {
+                    display:none;
+                }
+
+                &:first-child {
+                    margin-left:@column-pad;
+                }
+            }
         }
     }
 
@@ -161,6 +179,10 @@
                 color:@active-text-dark;
                 z-index:1;
                 margin:0 (0.5 * @column);
+
+                @media @media-mobile {
+                    font-size:@large-text;
+                }
             }
             &:after {
                 @size:2 * @column;
@@ -175,6 +197,11 @@
                 opacity:.5;
                 filter:grayscale(100%);
                 -webkit-filter:grayscale(100%);
+
+                @media @media-mobile {
+                    width:@size * 0.5;
+                    height:@size * 0.5;
+                }
             }
         }
     }
