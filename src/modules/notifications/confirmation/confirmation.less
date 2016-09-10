@@ -34,6 +34,11 @@
         transition:transform .2s ease-out .2s, opacity .2s ease-out .2s;
         opacity:1;
         transform:translateY(0);
+
+        @media @media-mobile {
+            min-width:0;
+            width:90vw;
+        }
     }
 
     .dialog-title {

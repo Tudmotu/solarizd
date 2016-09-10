@@ -1,7 +1,10 @@
-.raised-button () {
+.raised-button (@shadow-depth:2px) {
+    @shadow-blur:4px;
+    @shadow-offset:2px;
     display:inline-block;
     text-transform:uppercase;
-    box-shadow:0px 3px 5px -2px @shadow-color;
+    box-shadow:@shadow-offset @shadow-depth @shadow-blur @shadow-color,
+                -@shadow-offset @shadow-depth @shadow-blur @shadow-color;
     border:solid @thin-border @inactive-text-dark;
     padding:@row-pad @column-pad;
     margin:@row-pad 0;
@@ -9,7 +12,8 @@
     transition:transform .1s ease-out, box-shadow .1s ease-out;
 
     &:active {
-        box-shadow:0px 3px 5px -5px @shadow-color;
+        box-shadow:@shadow-offset 1px @shadow-blur @shadow-color,
+                    -@shadow-offset 1px @shadow-blur @shadow-color;
         transform:translateY(3px);
     }
 

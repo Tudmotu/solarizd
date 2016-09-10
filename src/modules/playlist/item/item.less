@@ -68,13 +68,13 @@
     }
     .remover {
         .action(@fa-var-times);
-        @media (max-device-width:960px) {
+        @media @media-mobile {
             display:none;
         }
     }
     .mover {
         .action(@fa-var-arrows);
-        @media (max-device-width:960px) {
+        @media @media-mobile {
             order:1;
         }
     }
@@ -86,7 +86,7 @@
 
     .time {
         .flexed(0);
-        @media (max-device-width:960px) {
+        @media @media-mobile {
             display:none;
         }
     }
@@ -112,7 +112,7 @@
     .toggler {
         color:@green;
         .action(@fa-var-play);
-        @media (max-device-width:960px) {
+        @media @media-mobile {
             padding-left:0;
             padding-right:0;
         }

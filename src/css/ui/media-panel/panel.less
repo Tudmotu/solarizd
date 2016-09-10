@@ -37,8 +37,7 @@
         .transition(@prop:height;@easing:ease-in);
         overflow-y:auto;
 
-        @media only screen and (max-height:680px),
-                (max-width:960px), (max-device-width:960px) {
+        @media @media-mobile {
             .no-scrollbar;
             min-height:(2 * @row);
             overflow-x:auto;
@@ -46,8 +45,7 @@
         }
 
         .list-item {
-            @media only screen and (max-height:680px),
-                (max-width:960px), (max-device-width:960px) {
+            @media @media-mobile {
                 white-space:normal;
                 display:inline-flex;
             }
