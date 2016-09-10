@@ -60,7 +60,7 @@
     font-family:FontAwesome;
 }
 
-.new-icon () {
+.sol-icon (@url) {
     content:"";
     width:100%;
     height:100%;
@@ -68,36 +68,65 @@
     min-width:1.2em;
     display:inline-block;
     vertical-align:middle;
-    background-position:center;
-    background-size:1.2em;
-    background-repeat:no-repeat;
+    mask-position:center;
+    mask-size:1.2em;
+    mask-repeat:no-repeat;
     margin:0 .2em;
     flex:0 0 1.2em;
+    background-color:currentColor;
+    mask-image:url("/css/icons/@{url}.svg");
 }
 
-.icon(@content) when (@content = '\f04c'){
-    .new-icon;
-    background-image:url('/css/icons/pause.svg');
+.icon(@content) when (@content = '\f04c') {
+    .sol-icon('pause');
 }
 
-.icon(@content) when (@content = '\f04b'){
-    .new-icon;
-    background-image:url('/css/icons/play.svg');
+.icon(@content) when (@content = '\f04d') {
+    .sol-icon('stop');
 }
 
-.icon(@content) when (@content = '\f051'){
-    .new-icon;
-    background-image:url('/css/icons/next.svg');
+.icon(@content) when (@content = '\f04b') {
+    .sol-icon('play');
 }
 
-.icon(@content) when (@content = '\f048'){
-    .new-icon;
-    background-image:url('/css/icons/previous.svg');
+.icon(@content) when (@content = '\f051') {
+    .sol-icon('next');
 }
 
-.icon(@content) when (@content = '\f00d'){
-    .new-icon;
-    background-image:url('/css/icons/remove.svg');
+.icon(@content) when (@content = '\f048') {
+    .sol-icon('previous');
+}
+
+.icon(@content) when (@content = '\f00d') {
+    .sol-icon('remove');
+}
+
+.icon(@content) when (@content = '\f074') {
+    .sol-icon('shuffle');
+}
+
+.icon(@content) when (@content = '\f047') {
+    .sol-icon('draggable');
+}
+
+.icon(@content) when (@content = '\f0d7') {
+    .sol-icon('caret-down');
+}
+
+.icon(@content) when (@content = '\f0c1') {
+    .sol-icon('link');
+}
+
+.icon(@content) when (@content = '\f002') {
+    .sol-icon('search');
+}
+
+.fa.fa-search:before {
+    .sol-icon('search');
+}
+
+.fa.fa-remove:before {
+    .sol-icon('close');
 }
 
 // UI

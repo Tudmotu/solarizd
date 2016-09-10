@@ -26,17 +26,17 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="22.4"
-     inkscape:cx="5.7721661"
+     inkscape:cx="13.65163"
      inkscape:cy="12.725313"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      units="px"
-     inkscape:window-width="3200"
+     inkscape:window-width="1600"
      inkscape:window-height="1671"
-     inkscape:window-x="0"
+     inkscape:window-x="1600"
      inkscape:window-y="55"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="0" />
   <metadata
      id="metadata3504">
     <rdf:RDF>
@@ -55,9 +55,9 @@
      id="layer1"
      transform="translate(0,-1028.3622)">
     <path
-       style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#353535;stroke-width:0.84189963;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
-       d="m 4.6175506,1047.6196 c 3.9193,4.0772 10.4018014,4.2052 14.4790014,0.2858 4.0771,-3.9193 4.2051,-10.4017 0.2859,-14.4788 l -2.2428,2.1559 c 2.7284,2.8386 2.6393,7.3514 -0.1991,10.08 -2.8385,2.7286 -7.3515014,2.6396 -10.0801014,-0.1989 -2.6488,-2.7554 -2.6421,-7.0884 -0.043,-9.8357 l 2.0474,2.1188 1.7637004,-7.7898 -7.8963004,1.4435 1.9222,1.9893 c -3.83089999,3.94 -3.87429999,10.2377 -0.037,14.2299 z"
-       id="path4684"
+       style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#585555;stroke-width:1.01444519;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:0.99215686"
+       d="m 4.7217897,1046.2742 c 3.8639002,4.0196 10.2548013,4.1457 14.2743013,0.2817 4.0195,-3.8638 4.1457,-10.2546 0.2819,-14.2741 l -2.2112,2.1255 c 2.6899,2.7984 2.6021,7.2475 -0.1962,9.9375 -2.7984,2.69 -7.2476011,2.6022 -9.9377012,-0.1961 -2.6113001,-2.7165 -2.6047001,-6.9883 -0.042,-9.6967 l 2.0185001,2.0888 1.7387001,-7.6796 -7.7847004,1.4231 1.8950001,1.9611 c -3.7767002,3.8844 -3.8195002,10.093 -0.036,14.0288 z"
+       id="path5430"
        inkscape:connector-curvature="0" />
   </g>
 </svg>

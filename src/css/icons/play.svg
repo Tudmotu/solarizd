@@ -26,17 +26,17 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="22.4"
-     inkscape:cx="5.7721661"
+     inkscape:cx="13.65163"
      inkscape:cy="12.725313"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      units="px"
-     inkscape:window-width="3200"
+     inkscape:window-width="1600"
      inkscape:window-height="1671"
-     inkscape:window-x="0"
+     inkscape:window-x="1600"
      inkscape:window-y="55"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="0" />
   <metadata
      id="metadata3504">
     <rdf:RDF>
@@ -57,8 +57,8 @@
     <path
        sodipodi:nodetypes="cccc"
        inkscape:connector-curvature="0"
-       id="path5042"
-       d="m 17.16275,1038.7076 -10.2251013,-10.105 0.035,20.1236 z"
-       style="fill:none;fill-opacity:1;stroke:#353535;stroke-width:0.67589128;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+       id="path5498"
+       d="m 19.949821,1039.1638 -15.6708009,-10.3756 0.055,20.6626 z"
+       style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#585555;stroke-width:1.02175009;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:0.99215686" />
   </g>
 </svg>
