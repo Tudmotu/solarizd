@@ -89,15 +89,15 @@
             text-transform:uppercase;
 
             &.clear:before {
-                .icon(@fa-var-times);
+                .sol-icon('remove');
             }
 
             &.save:before {
-                .icon(@fa-var-link);
+                .sol-icon('link');
             }
 
             &.shuffle:before {
-                .icon(@fa-var-random);
+                .sol-icon('shuffle');
             }
 
             &.shuffle:not(.active):before {
@@ -110,6 +110,10 @@
             }
 
             &:not(:first-child) {
+                margin-left:@column-pad;
+            }
+
+            .text {
                 margin-left:@column-pad;
             }
 
@@ -216,9 +220,14 @@
 
     .indices {
         width:@indices-width;
+        height:100%;
         list-style:none;
         user-select:none;
         .flexed(0);
+
+        @media @media-mobile {
+            border-right:solid @thin-border @inactive-text-dark;
+        }
 
         .index {
             .list-item;

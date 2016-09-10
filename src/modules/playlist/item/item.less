@@ -5,7 +5,7 @@
     .flexbox(@dir:column;@justify:flex-start;);
     .transition(@prop:height; @easing:ease-in; @duration:.2s);
     height:@row;
-    padding:0 @column-pad;
+    padding-right:@column-pad;
     overflow:hidden;
 
     &.actions-open {
@@ -54,7 +54,6 @@
         overflow:hidden;
         height:100%;
         text-overflow:ellipsis;
-        padding-left:@column-pad;
         .flexed(1);
         .flexbox(@dir:column);
     }
