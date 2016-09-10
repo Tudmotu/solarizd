@@ -91,8 +91,6 @@
     }
 
     .flag {
-        border:solid (0.5 * @medium-border) @white;
-        border-radius:50%;
         width:(0.25 * @column);
         height:(0.25 * @column);
         margin-left:@column-pad;
@@ -100,21 +98,17 @@
         .flexbox(@align:center);
     }
     .play-next:before {
-        .icon(@fa-var-play);
+        .sol-icon('play');
     }
     .stop-here:before {
-        .icon(@fa-var-stop);
+        .sol-icon('stop');
     }
     .repeat:before {
-        .icon(@fa-var-repeat);
+        .sol-icon('repeat');
     }
     .toggler {
         color:@green;
         .action(@fa-var-play);
-        @media @media-mobile {
-            padding-left:0;
-            padding-right:0;
-        }
     }
     &.loading .toggler {
         color:@base00;
