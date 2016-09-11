@@ -112,11 +112,9 @@ export default ['$sce', '$q', '$rootScope', function($sce, $q, $rootScope) {
         if (!this.ready) this.init();
 
         return this.apiReady.then(() => {
-            if (!isMobile || playedOnce) {
-                player.loadVideoById(vid);
-            }
-            else {
-                this.cueVideo(vid);
+            player.loadVideoById(vid);
+
+            if (isMobile && !playedOnce) {
                 $rootScope.$broadcast('youtubePlayer:videoCued', vid);
             }
         });
