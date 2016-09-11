@@ -15,8 +15,14 @@ function mouseCoords(event, targetElement) {
     }
     while (currentElement);
 
-    canvasX = event.pageX - totalOffsetX;
-    canvasY = event.pageY - totalOffsetY;
+    if (event.touches) {
+        canvasX = event.touches[0].pageX - totalOffsetX;
+        canvasY = event.touches[0].pageY - totalOffsetY;
+    }
+    else {
+        canvasX = event.pageX - totalOffsetX;
+        canvasY = event.pageY - totalOffsetY;
+    }
 
     return {
         x: canvasX,
@@ -98,7 +104,7 @@ export default angular.module('ui.topbar', ['services', 'solVibrate'])
             },
             controller: function($scope, $element, $attrs, $transclude) {
                 var _slider = $element[0].querySelector('.slider'),
-                    _thumb = _slider.querySelector('.thumb'),
+                    $slider = angular.element(_slider),
                     active = false,
                     getCoordsPercent = function(e, ctx) {
                         var coords = mouseCoords(e, ctx),
@@ -136,7 +142,7 @@ export default angular.module('ui.topbar', ['services', 'solVibrate'])
                     playListVolume.toggleMute();
                 };
 
-                _slider.addEventListener('mousewheel', function(e) {
+                $slider.on('mousewheel', function(e) {
                     var deltaY = e.wheelDeltaY;
                     if (deltaY > 0) {
                         setRelativeVolume(5);
@@ -145,20 +151,34 @@ export default angular.module('ui.topbar', ['services', 'solVibrate'])
                     }
                 });
 
-                _slider.addEventListener('mousedown', function(e) {
+                $slider.on('mousedown', function(e) {
                     setWidth(e);
                     active = true;
+
+                    angular.element(document).one('mouseup', function(e) {
+                        active = false;
+                    });
                 });
 
+                $slider.on('touchstart', function(e) {
+                    setWidth(e);
+                    active = true;
 
-                document.addEventListener('mousemove', function(e) {
+                    angular.element(document).one('touchend', function(e) {
+                        active = false;
+                    });
+                });
+
+                angular.element(document).on('mousemove', function(e) {
                     if (active) {
                         setWidth(e);
                     }
                 });
 
-                document.addEventListener('mouseup', function(e) {
-                    active = false;
+                angular.element(document).on('touchmove', function(e) {
+                    if (active) {
+                        setWidth(e);
+                    }
                 });
             }
         };

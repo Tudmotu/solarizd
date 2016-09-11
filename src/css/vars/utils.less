@@ -98,61 +98,55 @@
     /*.ui-hseparator;*/
 }
 
-.ui-slider(@color:@base02; @background:@base00; @border:@base01; @thumb:'') {
-    @border-radius:@column-pad;
-    background:@background;
-    background:currentColor;
+.ui-slider(@color:@base02) {
+    @thumb-dia:@normal-text;
+    background:@base00;
     cursor:pointer;
+    display:flex;
+    align-items:center;
+    margin-right:(@column-pad + @thumb-dia/2);
 
     .thumb {
-        .flexbox(@justify:flex-end;@align:center;);
-        .ui-knob(@color;@thumb);
+        .ui-knob(@color;@thumb-dia);
+    }
+
+    &:active .thumb:after {
+        transform:scale(2);
     }
 }
 
-.ui-progressbar(@color:@base00, @background:@base2, @border:@base01, @thumb:@base00) {
+.ui-progressbar(@color:@base00) {
     .no_appearance;
-    @border-radius:@column-pad;
-    background:@background;
+    @thumb-dia:@normal-text;
     cursor:pointer;
-    padding:0;
-    margin:0 @column-pad;
+    display:flex;
+    align-items:center;
+    margin-right:(@column-pad + @thumb-dia/2);
 
     &::-webkit-progress-inner-element,
     &::-webkit-progress-bar {
-        background:transparent;
+        background:@base00;
+        height:2px;
     }
 
     &::-webkit-progress-value {
-        .flexbox(@justify:flex-end;@align:center;);
-        .ui-knob(@color;@thumb);
-        box-sizing:border-box;
-        position:relative;
+        .ui-knob(@color;@thumb-dia);
     }
 }
 
-.ui-knob(@color;@knob;) {
+.ui-knob(@color;@thumb-dia;) {
     background:@color;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    height:2px;
 
-
-    & when (iscolor(@knob)) {
-        &:after {
-            visibility:hidden;
-            .flexed(0);
-            @dia:@huge-text;
-            width:@dia;
-            height:@dia;
-            right:-(@dia / 2);
-            content:"";
-            border:solid @thin-border lighten(@thumb,25%);
-            border-left-width:0;
-            border-top-width:0;
-            border-radius:50%;
-            background:radial-gradient(circle at (-@thick-border * 2) -@thick-border,
-                lighten(@thumb, 50%), @thumb);
-            box-shadow:@thin-border (2 * @thin-border) @thick-border @shadow-color;
-            display:block;
-            box-sizing:border-box;
-        }
+    &:after {
+        content:"";
+        left:@thumb-dia;
+        width:@thumb-dia*2;
+        height:@thumb-dia*2;
+        background:radial-gradient(@color @thumb-dia/2, transparent @thumb-dia/2, transparent);
+        transition:transform .1s ease-out;
     }
 }

@@ -133,21 +133,8 @@
         }
 
         .slider {
-            .ui-slider(@color:@cyan;@thumb:@base00);
             .flexed(1);
-            height:@row-pad;
-            margin:0 @column-pad;
-
-            .thumb {
-                position:absolute;
-                left:0;
-                top:0;
-                bottom:0;
-                margin:auto;
-                width:50%;
-                height:100%;
-                box-sizing:content-box;
-            }
+            .ui-slider(@color:@cyan);
         }
     }
 }
