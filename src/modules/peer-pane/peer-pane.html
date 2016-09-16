@@ -36,13 +36,13 @@
     <div class="peer-pane-section connect-section active">
         <div class="peer-pane-connect section-content">
             <div class="peer-host-input {{connectStatus}}">
-                <input type="number" max="99999" ng-model="remotePeer" />
+                <input ng-model="remotePeer" />
             </div>
 
             <div class="button-row">
                 <div class="raised-button"
-                     ng-class="{disabled: !remotePeer || remotePeer < 10000}"
-                     ng-click="remotePeer >= 10000 ? connectToHost() : null"
+                     ng-class="{disabled: !isValidId()}"
+                     ng-click="isValidId() ? connectToHost() : null"
                     ng-show="!isConnected">Connect to a Host</div>
 
                 <div class="raised-button"

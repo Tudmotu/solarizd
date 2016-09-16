@@ -16,6 +16,10 @@ export default angular.module('peerjs-service', ['api-key'])
             });
         },
 
+        isValidId (peerId) {
+            return /^[0-9]{6}$/.test(peerId);
+        },
+
         destroyPeer () {
             if (!peer) return;
             peer.destroy();
@@ -24,15 +28,20 @@ export default angular.module('peerjs-service', ['api-key'])
     });
 
     function generateId () {
-        let length = 5;
+        let length = 6;
         let text = "";
-        //let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         let possible = "0123456789";
+        //let possible = "abcdefghijklmnopqrstuvwxyz0123456789";
+
+        if (localStorage.peerjsId) return localStorage.peerjsId;
 
         for(let i = 0; i < length; i++) {
             text += possible.charAt(
                 Math.floor(Math.random() * possible.length));
         }
+
+        localStorage.peerjsId = text;
+
         return text;
     }
 }]);

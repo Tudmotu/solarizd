@@ -1,6 +1,6 @@
-export default angular.module('peer-pane', ['sol-peerjs'])
+export default angular.module('peer-pane', ['sol-peerjs', 'peerjs-service'])
 .directive('peerPane',
-        ['solPeer', (solPeer) => {
+        ['solPeer', 'peerJS', (solPeer, peerJS) => {
     return {
         restrict: 'E',
         replace: true,
@@ -10,6 +10,11 @@ export default angular.module('peer-pane', ['sol-peerjs'])
             Object.assign($scope, {
                 showHostPanel:false,
                 showConnectPanel: false,
+                remotePeer: localStorage.peerjsRemotePeer,
+
+                isValidId () {
+                    return peerJS.isValidId(this.remotePeer);
+                },
 
                 toggleHost () {
                     this.showHostPanel = !this.showHostPanel;
@@ -27,6 +32,7 @@ export default angular.module('peer-pane', ['sol-peerjs'])
                         this.connectStatus = 'connecting';
                         solPeer.connectToServer(this.remotePeer).then(() => {
                             this.connectStatus = 'connected';
+                            localStorage.peerjsRemotePeer = this.remotePeer;
                         }).catch(() => {
                             this.connectStatus = 'connection-error';
                         });
@@ -35,8 +41,13 @@ export default angular.module('peer-pane', ['sol-peerjs'])
                 disconnectFromHost () {
                     solPeer.disconnectFromServer();
                     this.connectStatus = 'disconnected';
+                    delete localStorage.peerjsRemotePeer;
                 }
             });
+
+            if ($scope.isValidId()) {
+                $scope.connectToHost();
+            }
 
             $scope.$watch(
                 () => solPeer.peerId,
