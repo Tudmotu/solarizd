@@ -202,11 +202,14 @@ export default [
     }
 
     this.saveList = function(name) {
+        if (this.remoteControl) return; // do not save in case of remote-control
+
         if (hasLS) {
             if (typeof name !== 'string')
                 name = 'playlist';
             localStorage[name] = JSON.stringify(that.playlist);
         }
+
         syncClients();
     };
 
@@ -489,6 +492,17 @@ export default [
     function sendActionToServer (action) {
         $rootScope.$broadcast('peer::send_action_to_server', action);
     }
+
+    $rootScope.$on('peer::connected_to_server', () => {
+        this.remoteControl = true;
+    });
+
+    $rootScope.$on('peer::disconnected_from_server', () => {
+        this.remoteControl = false;
+        getSavedList().then((list) => {
+            that.setPlaylist(list);
+        });
+    });
 
     $rootScope.$on('peer::got_action_from_client', (e, action) => {
         $rootScope.$apply(() => {
