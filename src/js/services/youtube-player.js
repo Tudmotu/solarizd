@@ -114,7 +114,7 @@ export default ['$sce', '$q', '$rootScope', function($sce, $q, $rootScope) {
         return this.apiReady.then(() => {
             player.loadVideoById(vid);
 
-            if (isMobile && !playedOnce) {
+            if (isMobile && !playedOnce && !connectedToPeerHost) {
                 $rootScope.$broadcast('youtubePlayer:videoCued', vid);
             }
         });

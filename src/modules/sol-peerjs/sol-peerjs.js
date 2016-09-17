@@ -42,6 +42,7 @@ function ($q, $timeout, $rootScope, apiKey, peerJS, playList, playListVolume) {
 
         connectToServer (remoteId) {
             this.disconnectFromServer();
+
             return this.getPeer().then((peer) => {
                 return new Promise((resolve, reject) => {
                     let connection = peer.connect(remoteId);
@@ -49,11 +50,6 @@ function ($q, $timeout, $rootScope, apiKey, peerJS, playList, playListVolume) {
                     connection.on('open', () => {
                         $rootScope.$broadcast('peer::connected_to_server');
                         remoteServerConnection = connection;
-
-                        $rootScope.$on(
-                                'peer::send_action_to_server', (e, action) => {
-                            this._sendAction(connection, action);
-                        });
 
                         connection.on('data', (data) => {
                             $rootScope.$broadcast(
@@ -63,6 +59,7 @@ function ($q, $timeout, $rootScope, apiKey, peerJS, playList, playListVolume) {
                         connection.on('close', (data) => {
                             $rootScope.$broadcast(
                                 'peer::disconnected_from_server');
+                            remoteServerConnection = null;
                         });
 
                         resolve();
@@ -78,13 +75,6 @@ function ($q, $timeout, $rootScope, apiKey, peerJS, playList, playListVolume) {
 
         disconnectFromServer () {
             if (!remoteServerConnection) return;
-
-            remoteServerConnection.on('close', () => {
-                $timeout(() => {
-                    remoteServerConnection = null;
-                });
-            });
-
             remoteServerConnection.close();
         },
 
@@ -111,8 +101,18 @@ function ($q, $timeout, $rootScope, apiKey, peerJS, playList, playListVolume) {
             });
         },
 
+        _setupClientEvents () {
+            $rootScope.$on('peer::send_action_to_server', (e, action) => {
+                if (!remoteServerConnection) return;
+
+                this._sendAction(remoteServerConnection, action);
+            });
+        },
+
         _sendAction (connection, action) {
             connection.send(action);
         }
     });
+
+    this._setupClientEvents();
 }]);
