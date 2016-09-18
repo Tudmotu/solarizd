@@ -100,11 +100,11 @@
 
 .ui-slider(@color:@base02) {
     @thumb-dia:@normal-text;
-    background:@base00;
     cursor:pointer;
     display:flex;
     align-items:center;
     margin-right:(@column-pad + @thumb-dia/2);
+    align-self:stretch;
 
     .thumb {
         .ui-knob(@color;@thumb-dia);
@@ -112,6 +112,17 @@
 
     &:active .thumb:after {
         transform:scale(2);
+    }
+
+    &:before {
+        content:"";
+        height:2px;
+        width:100%;
+        position:absolute;
+        top:0; bottom:0;
+        left:0;
+        margin:auto;
+        background:@base00;
     }
 }
 
@@ -122,8 +133,13 @@
     display:flex;
     align-items:center;
     margin-right:(@column-pad + @thumb-dia/2);
+    height:100%;
 
-    &::-webkit-progress-inner-element,
+    &::-webkit-progress-inner-element {
+        display:flex;
+        align-items:center;
+    }
+
     &::-webkit-progress-bar {
         background:@base00;
         height:2px;
