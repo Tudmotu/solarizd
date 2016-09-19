@@ -1,4 +1,5 @@
-<section class="playlist-pane" ng-class="{ 'active': !!items.length && ready }"
+<section class="playlist-pane"
+    ng-class="{ 'active': !!items.length && ready, 'search-focused': searchFocused }"
     ng-style="{'background-image': 'url(' + backgroundImg + ')'}"
     data-background="{{!!backgroundImg}}"
     sol-vibrate="currentlyDragging">
@@ -22,6 +23,8 @@
         <span class="playlist-title" ng-show="metadata">{{metadata.name || '-'}}</span>
 
         <sol-input placeholder="Search in playlist..."
+            on-focus="searchFocused = true"
+            on-blur="searchFocused = false"
             value="query" icon="search" class="playlist-search"></sol-input>
 
         <span class="playlist-save fa fa-upload"

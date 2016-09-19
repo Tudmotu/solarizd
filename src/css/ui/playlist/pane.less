@@ -307,4 +307,47 @@
             }
         }
     }
+
+    @media @media-mobile {
+        #topbar {
+            height:2*@row;
+        }
+
+        .playlist-search {
+            transition:margin, padding, width .2s ease-out;
+            width:2.5em;
+        }
+
+        .playlist-progress,
+        #topbar {
+            transition:opacity .2s ease-out, height .2s linear .1s;
+        }
+
+        &.search-focused {
+            .playlist-progress,
+            #topbar {
+                height:0;
+                opacity:0;
+            }
+
+            .playlist-search {
+                width:100%;
+
+                .input {
+                    width:100%;
+                }
+            }
+        }
+
+        &:not(.search-focused) {
+            .playlist-search {
+                margin-right:0;
+            }
+
+            .playlist-search .input {
+                width:0;
+                padding:0;
+            }
+        }
+    }
 }

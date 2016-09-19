@@ -24,6 +24,28 @@ describe('solInput directive', function () {
         expect(rootEl.find('input')[0].placeholder).toBe('holding');
     });
 
+    it('should invoke the callback supplied in ng-blur attr', () => {
+        let html = '<div><sol-input on-blur="onBlur()"></sol-input></div>';
+        $rootScope.onBlur = jasmine.createSpy('onBlur');
+        let rootEl = createRoot(html, $rootScope);
+
+        rootEl.find('input').triggerHandler('blur');
+        $rootScope.$digest();
+
+        expect($rootScope.onBlur).toHaveBeenCalled();
+    });
+
+    it('should invoke the callback supplied in ng-focus attr', () => {
+        let html = '<div><sol-input on-focus="onFocus()"></sol-input></div>';
+        $rootScope.onFocus = jasmine.createSpy('onFocus');
+        let rootEl = createRoot(html, $rootScope);
+
+        rootEl.find('input').triggerHandler('focus');
+        $rootScope.$digest();
+
+        expect($rootScope.onFocus).toHaveBeenCalled();
+    });
+
     it('clicking the .icon element clears the input', () => {
         let html = '<div><sol-input value="search" icon="search"></sol-input></div>';
         let rootEl = createRoot(html, $rootScope);

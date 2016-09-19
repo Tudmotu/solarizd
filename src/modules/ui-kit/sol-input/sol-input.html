@@ -1,4 +1,7 @@
 <div class="sol-input">
     <span class="icon fa fa-{{getIconClass()}}" ng-click="clear()"></span>
-    <input class="input" ng-model="value" placeholder="{{placeholder}}" />
+    <input class="input"
+        ng-focus="onFocus()"
+        ng-blur="onBlur()"
+        ng-model="value" placeholder="{{placeholder}}" />
 </div>

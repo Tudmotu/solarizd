@@ -8,6 +8,8 @@ export default [function () {
         scope: {
             icon: '@',
             placeholder: '@',
+            onFocus: '&',
+            onBlur: '&',
             value: '='
         },
         link: ($scope, $element) => {
