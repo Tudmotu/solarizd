@@ -46,6 +46,31 @@ describe('solInput directive', function () {
         expect($rootScope.onFocus).toHaveBeenCalled();
     });
 
+    it('should call .focus() on the .input when .icon is clicked while it has value', () => {
+        let html = '<div><sol-input value="search" icon="search"></sol-input></div>';
+        let rootEl = createRoot(html, $rootScope);
+
+        spyOn(rootEl.find('.input')[0], 'focus').and.callThrough();
+        $rootScope.search = "test";
+        $rootScope.$digest();
+
+        rootEl.find('.icon').click();
+        $rootScope.$digest();
+
+        expect(rootEl.find('.input')[0].focus).toHaveBeenCalled();
+    });
+
+    it('should call .focus() on the .input when .icon is clicked', () => {
+        let html = '<div><sol-input value="search" icon="search"></sol-input></div>';
+        let rootEl = createRoot(html, $rootScope);
+
+        spyOn(rootEl.find('.input')[0], 'focus').and.callThrough();
+        rootEl.find('.icon').click();
+        $rootScope.$digest();
+
+        expect(rootEl.find('.input')[0].focus).toHaveBeenCalled();
+    });
+
     it('clicking the .icon element clears the input', () => {
         let html = '<div><sol-input value="search" icon="search"></sol-input></div>';
         let rootEl = createRoot(html, $rootScope);

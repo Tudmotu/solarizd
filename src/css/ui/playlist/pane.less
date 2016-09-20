@@ -80,6 +80,10 @@
             }
         }
 
+        @media @media-mobile-keyboard {
+            display:none;
+        }
+
         &> .action {
             .flexed(0);
             .flexbox(@align:center);
@@ -273,9 +277,14 @@
         position:absolute;
         bottom:@row-pad;
         right:@column-pad;
+        z-index:3;
 
         & > * {
             display:inline-block;
+        }
+
+        @media @media-mobile-keyboard {
+            display:none;
         }
     }
 
@@ -309,21 +318,43 @@
     }
 
     @media @media-mobile {
+        @search-transition:.3s;
+
+        .playlist-statusline {
+            transition:box-shadow @search-transition ease-out,
+                background-color @search-transition ease-out;
+            z-index:2;
+        }
+
         #topbar {
             height:2*@row;
         }
 
         .playlist-search {
-            transition:margin, padding, width .2s ease-out;
+            transition:color @search-transition ease-out,
+                width @search-transition ease-out;
             width:2.5em;
+
+            .input {
+                transition:color @search-transition ease-out,
+                           margin @search-transition ease-out,
+                           padding @search-transition ease-out,
+                           opacity @search-transition ease-out;
+            }
         }
 
         .playlist-progress,
         #topbar {
-            transition:opacity .2s ease-out, height .2s linear .1s;
+            transition:opacity @search-transition ease-out,
+                       height @search-transition linear (@search-transition/2);
         }
 
         &.search-focused {
+            .playlist-statusline {
+                .floating;
+                background-color:@white;
+            }
+
             .playlist-progress,
             #topbar {
                 height:0;
@@ -332,9 +363,11 @@
 
             .playlist-search {
                 width:100%;
+                color:@active-text-dark;
 
                 .input {
                     width:100%;
+                    color:@active-text-dark;
                 }
             }
         }
@@ -347,6 +380,7 @@
             .playlist-search .input {
                 width:0;
                 padding:0;
+                opacity:0;
             }
         }
     }

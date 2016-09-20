@@ -14,13 +14,16 @@ export default [function () {
         },
         link: ($scope, $element) => {
             Object.assign($scope, {
-                getIconClass: () => {
+                getIconClass () {
                     if (!$scope.value)
                         return $scope.icon;
                     else
                         return 'remove';
                 },
-                clear: () => {
+                setFocus () {
+                    $element.find('.input').focus();
+                },
+                clear () {
                     $scope.value = '';
                 }
             });

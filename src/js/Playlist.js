@@ -10,6 +10,10 @@ import 'jquery-ui/ui/widget';
 import 'jquery-ui/ui/widgets/mouse';
 import 'jquery-ui/ui/widgets/sortable';
 import 'angular-ui-sortable';
+import MobileDetect from 'mobile-detect';
+
+const _md = new MobileDetect(window.navigator.userAgent);
+const isMobile = _md.mobile() !== null;
 
 function mouseCoords(event) {
     var totalOffsetX = 0,
@@ -134,6 +138,8 @@ export default angular.module('ui.playlist',
                 let backgroundSet = false;
 
                 Object.assign($scope, {
+                    searchFocused: false,
+
                     getCurrentlyOpenIdx: () => {
                         let idx = null;
 
@@ -166,6 +172,26 @@ export default angular.module('ui.playlist',
                             });
                         }
                         else $scope.backgroundImg = '';
+                    },
+                    focusSearch () {
+                        this.searchFocused = true;
+                        let notInState = !history.state || !history.state.playlistSearch;
+
+                        if (isMobile && notInState) {
+                            history.pushState({ playlistSearch: true }, '');
+                        }
+                    }
+                });
+
+                window.addEventListener('popstate', (e) => {
+                    if (e.state && e.state.playlistSearch) {
+                        $scope.searchFocused = true;
+                        $scope.$digest();
+                    }
+                    else {
+                        $scope.searchFocused = false;
+                        $scope.query = '';
+                        $scope.$digest();
                     }
                 });
 
