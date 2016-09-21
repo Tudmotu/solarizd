@@ -152,10 +152,6 @@ export default angular.module('ui.playlist',
 
                         return idx;
                     },
-                    uploadPlaylist () {
-                        solBackend.savePlaylist(
-                            this.metadata, this.items);
-                    },
                     changeBackground () {
                         let nowPlayingIdx = playList.getNowPlayingIdx();
                         let nowPlaying = playList.getNowPlaying();
