@@ -466,6 +466,10 @@ export default [
     };
 
     this.publishPlaylist = function () {
+        if (this.metadata) {
+            return $q.resolve(this.metadata.playlist);
+        }
+
         return solBackend.publishPlaylist(this.playlist, {
             name: `New Playlist (${(new Date()).toISOString().slice(0,10)})`
         }).then((refKey) => {
