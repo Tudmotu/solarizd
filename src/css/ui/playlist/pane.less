@@ -132,7 +132,8 @@
         .playlist-title {
             display:flex;
             flex-direction:column;
-            flex:1;
+            flex:1 0 auto;
+            white-space:nowrap;
 
             &:before {
                 content:"Playlist";
@@ -340,6 +341,12 @@
                        height @search-transition linear (@search-transition/2);
         }
 
+        .fabs-row,
+        .playlist-actions,
+        .playlist-title {
+            transition:opacity @search-transition ease-out;
+        }
+
         &.search-focused {
             .playlist-statusline {
                 .floating;
@@ -350,6 +357,17 @@
             #topbar {
                 height:0;
                 opacity:0;
+            }
+
+            .playlist-title {
+                width:0;
+            }
+
+            .fabs-row,
+            .playlist-actions,
+            .playlist-title {
+                opacity:0;
+                pointer-events:none;
             }
 
             .playlist-search {
