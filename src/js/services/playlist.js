@@ -131,7 +131,9 @@ export default [
         }
     });
 
+    let latestFirebaseWatch;
     function getSavedList() {
+        if (latestFirebaseWatch) latestFirebaseWatch();
         return $q((resolve, reject) => {
             let hash = window.location.hash;
             let hashMatches = hash.match(/#.*?&?playlist=(.*)&?/);
@@ -148,6 +150,13 @@ export default [
         }).then((playlistId) => {
             solBackend.fetchPlaylistMetadata(playlistId).then((playlistRef) => {
                 that.metadata = playlistRef;
+            });
+            solBackend.fetchPlaylist(playlistId).then(($record) => {
+                latestFirebaseWatch = $record.$watch(() => {
+                    solBackend.getPlaylistData(playlistId).then(playlist => {
+                        that.setPlaylist(playlist);
+                    });
+                });
             });
             return solBackend.getPlaylistData(playlistId);
         }).catch(() => {
@@ -204,10 +213,14 @@ export default [
     this.saveList = function(name) {
         if (this.remoteControl) return; // do not save in case of remote-control
 
-        if (hasLS) {
+        if (!this.metadata && hasLS) {
             if (typeof name !== 'string')
                 name = 'playlist';
             localStorage[name] = JSON.stringify(that.playlist);
+        }
+
+        if (this.metadata) {
+            solBackend.savePlaylist(this.metadata, this.playlist);
         }
 
         syncClients();
