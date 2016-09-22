@@ -33,24 +33,17 @@
     }
 
     .sol-input-wrapper {
-        .flexed(0);
         .flexbox(@justify:stretch);
+        .floating;
+        flex:0 0 auto;
         height:@row;
-        padding:@row-pad @column-pad;
-        position:absolute;
-        top:0; left:0;
         width:100%;
         z-index:1;
 
         &> .sol-input {
             .flexed(1);
-            .floating;
             background:#fff;
         }
-    }
-
-    > .result-list {
-        padding-top:@row;
     }
 
     .result-list {
