@@ -1,3 +1,4 @@
+aws-profile
 node_modules/*
 src/plugins/**/*
 src/vendor/*
